@@ -5,8 +5,15 @@
 Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
 
 
+## Project Name here
+project description here.
+
+## Features List here
+- list of features
+
+
 ## Minimum Requirements
-- Features List & Users Stories(shared as a link to document or added as a file).
+- User Stories(shared as a link to document or added as a file).
 - Wireframe (shared as link or uploaded as a file) - You can use Figma or similar online wireframing/design software.
 - UML (shared as a link or uploaded as a file) - You can use Lucid Charts or similar online UML design tool.
 - Use Templates & Template Inheritance.

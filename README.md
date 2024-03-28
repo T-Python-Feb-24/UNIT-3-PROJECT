@@ -11,6 +11,11 @@ project description here.
 ## Features List here
 - list of features
 
+## User Stories, Wireframes & UML links
+- User stories document link here.
+- wireframe link here.
+- UML link here.
+
 
 ## Minimum Requirements
 - User Stories(shared as a link to document or added as a file).
@@ -141,5 +146,13 @@ project description here.
 - Project Name
 - Project Description
 - Features list.
+
+## Wireframe / Design tools
+- https://www.figma.com/templates/wireframe-kits/
+- https://www.mockflow.com/
+
+## UML design tools
+- https://www.lucidchart.com/pages/examples/uml_diagram_tool
+- https://app.diagrams.net/
 
  

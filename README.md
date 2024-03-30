@@ -5,11 +5,13 @@
 Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
 
 
-## Project Name here
-project description here.
-
+##  Camputer Store
+A store that sells computers and accessories.
 ## Features List here
-- list of features
+- Product catalog
+- Order processing and tracking.
+- User accounts with saved cart
+- Add to list of want prodect
 
 ## User Stories, Wireframes & UML links
 - User stories document link here.

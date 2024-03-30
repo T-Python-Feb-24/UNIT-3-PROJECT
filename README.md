@@ -13,8 +13,8 @@ project description here.
 
 ## User Stories, Wireframes & UML links
 - User stories document link here.
-- wireframe link here.
-- UML link here.
+- [wireframe link](https://www.figma.com/file/UfJOJ89Fk7VzpBYc50GOt2/%D9%85%D8%AA%D8%AC%D8%B1-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D8%A8?type=design&node-id=6%3A3&mode=design&t=U1rlkkqOE4CFVt0l-1).
+- [UML link](https://lucid.app/lucidchart/cb069725-3eff-4cca-b79e-920daf5e068e/edit?viewport_loc=-1962%2C-708%2C2846%2C1238%2C0_0&invitationId=inv_24811427-2df5-4710-8046-6f5e1f24a7a9).
 
 
 ## Minimum Requirements

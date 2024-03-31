@@ -23,17 +23,26 @@
     height: 2px;
     background-color: black;
   } */
+
+
 body {
     background-color: #F7F6F4;
 } 
 
+/* 
+.btn{
+  background-color: #e2a675;
+} */
 
-  .sidebar {
-    width: 200px;
-    background: #FFFFFF;
-    position: fixed;
-    height: 100%;
-  }
+.sidebar {
+  width: 200px;
+  background: #FFFFFF;
+  position: fixed;
+  height: 100%;
+  border-radius: 30px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
   
   .sidebar ul {
     list-style-type: none;
@@ -57,43 +66,46 @@ body {
     background: #FFAF88;
     color: beige;
   }
-  
+
+
   .logout button:hover{
-    background: #dfa395;
-  }
-
-  .content {
-    margin-left: 200px;
-    margin-right: 200px;
-    padding: 30px; 
+    background: #905e53;
   }
 
 
 
+            /* navbar  */
 
+.navbar {
+  background-color: #FFFFFF;
+  color: rgb(135, 118, 45);
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 20px;
+  margin: 20px;
+}
 
+.search-bar {
+  float: right;
+  border-color: #FFAF88;
+}
 
-  .avatar-selection {
-    text-align: center;
-  }
-  
-  .avatar-list {
-    margin-bottom: 20px;
-  }
-  
-  .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  #select-avatar-btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.search-bar input[type="text"] {
+  padding: 6px;
+  border-radius: 4px;
+  border: none;
+}
+
+.search-bar button{
+  padding: 6px 12px;
+  background-color: #FFAF88;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-bar button:hover{
+  color: #af744c;
+}

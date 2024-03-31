@@ -15,7 +15,7 @@ A task management project is designed to help individuals or teams organize, tra
 ## User Stories, Wireframes & UML links
 - User stories https://drive.google.com/file/d/1XJ90WkcmdJwDFH_svSfNu-5yzb3jCBo8/view?usp=sharingdocument 
 - Wireframe https://drive.google.com/file/d/1ahLSK0RDc5aatMrIvBhE6s068AZ-cXfr/view?usp=sharing 
-- UML link here.
+- UML https://drive.google.com/file/d/1ArY_ObPLSYrVPnu2YzwmWo0thF5GsNSN/view?usp=sharing
 
 
 ## Minimum Requirements

@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title %} {{user_object.username }} profile {% endblock %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>{{user_object.username }} Profile</h1>
+        {% if request.user == user_object %}
+            <a href="{% url 'accounts:update_profile' %}" class="btn btn-primary">Update</a>
+        {% endif %}
+    </div>
+    
+
+    <div class="row">
+        <div class="col-2">
+
+            <img src="{{user_object.profile.avatar.url}}" class="avatar w-100 rounded-4" />
+            <h5>@{{user_object.username}}</h5>
+
+        </div>
+
+        <div class="col">
+
+            <div class="d-flex flex-column">
+                <h3>{{user_object.first_name}} {{ user_object.last_name}}</h3>
+                <a href="mailto:{{user_object.email}}">{{ user_object.email }}</a>
+                <p class="mt-2">{{ user_object.profile.about }}</p>
+                <div class="d-flex gap-2">
+                    <a href="{{user_object.profile.projects_link}}" target="_blank"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+
+            <hr/>
+            <h2>{{user_object.username}} Comments</h2>
+            <div class="d-flex flex-column gap-4">
+                {% for comment in user_object.comment_set.all %}
+                    <div class="d-flex flex-column gap-1 p-3 shadow">
+                        <h5>{{comment.user.username}}</h5>
+                        <a href="{% url 'main:post_detail_view' comment.post.id %}#commentsDiv"><h6 class="text-muted">{{comment.post.title}}</h6></a>
+                        <p>{{comment.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+*{
+    top: 0%;
+    left: 0%;
+    
+}
+
+.container  .width{
+   overflow-x: hidden;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/codemaster-960c5.appspot.com/o/pexels-photo-5380664.jpeg?alt=media&token=7c90888b-66ec-4c75-8de1-e1165034bb3d);
+    background-repeat: no-repeat;
+    background-size:cover;
+
+}
+.container  .width h1{
+ font-size: 60px;
+}
+
+.container{
+    justify-content: center;
+}
+.container   .width p{
+    font-size: 22px;
+    padding: 7vh;
+    
+}
+
+.container  .width a{
+    width: 17vh;
+    border: 2px white solid;
+    font-size: 17px;
+    margin-bottom: 2vw;
+    border-radius: 30px;
+    text-align: center;
+    margin-left: 5vw;
+   }
+   
+
+

@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block title %}Add Recipes{% endblock %}
+
+{% block style %}
+
+
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row g-4">
+
+            <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px;">
+                <h2>All Recipes</h2>
+                <div class="d-flex gap-0.1">
+                    <a href="{% url 'main:all_recipes' %}" class="p-2 ps-3 pe-3 rounded-pill cat  text-decoration-none">All</a>
+                    
+                    {% for val, key in Category %}
+                        <a href="?cat={{val}}" class="p-2 ps-3 pe-3 rounded-pill cat {% if request.GET.cat == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock%}

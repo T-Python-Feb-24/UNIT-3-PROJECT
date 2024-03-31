@@ -1,0 +1,131 @@
+{# djlint:off H030,H031 #}
+{% load static %}
+{% load tags %}
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% block title %}
+      {% endblock title %}
+    </title>
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet" />
+    <link href="{% static "css/stayle.css" %}" rel="stylesheet" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link
+      href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@100..900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    {% block form_js %}
+    {% endblock form_js %}
+    <link rel="icon" href="{% static "icon/computer_icon.svg" %}" sizes="any" type="image/svg+xml">
+  </head>
+  <body>
+ <body>
+   <main>
+      <header>
+         <div class="d-flex gap-3 top-nav-bar">
+            <select class="form-select select" name="currency-selector" aria-label="Lang">
+               <option value="العربية" selected>العربية</option>
+               <option value="English">English</option>
+            </select>
+            <select class="form-select select" aria-label="currncy">
+               <option value="العربية" selected>SAR-ريال</option>
+               <option value="English">USD-دولار</option>
+            </select>
+         </div>
+         
+         <nav class="navbar navbar-expand-sm">
+            <div class="container-fluid d-flex flex-row-reverse">
+               <a class="navbar-brand ps-4" href="#">متجر الحاسب</a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <div class="d-flex justify-content-center">
+                     <ul class="navbar-nav align-items-center flex-row gap-2 ">
+                        <li class="nav-item">
+                           <a class="nav-link active" aria-current="page" href="#">
+                              <div class="d-flex flex-column border align-items-center header-user"><span
+                                    class="material-symbols-outlined">
+                                    <span class="material-symbols-outlined">
+                                       shopping_cart
+                                    </span>
+                                 </span><span>السلة</span></div>
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link active" aria-current="page" href="#">
+                              <div class="d-flex flex-column border align-items-center header-user"><span
+                                    class="material-symbols-outlined">
+                                    <span class="material-symbols-outlined">
+                                       favorite
+                                    </span>
+                                 </span><span>الرغبات</span></div>
+                           </a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link active" aria-current="page" href="#">
+                              <div class="d-flex flex-column border align-items-center header-user"><span
+                                    class="material-symbols-outlined">
+                                    person
+                                 </span><span>الحساب</span></div>
+                           </a>
+                        </li>
+                  </div>
+
+                  <div class="input-group d-grid align-items-center">
+                     <input type="search" placeholder="عما تبحث" id="example-search-input">
+                     <a href="#" id="search">
+                        <span class="material-symbols-outlined">
+                           search
+                        </span>
+                     </a>
+                  </div>
+                  </ul>
+               </div>
+            </div>
+         </nav>
+         <div class="d-flex gap-3 top-nav-bar">
+            <select class="form-select select" name="currency-selector" aria-label="Lang">
+               <option value="العربية" selected>العربية</option>
+               <option value="English">English</option>
+            </select>
+            <select class="form-select select" aria-label="currncy">
+               <option value="العربية" selected>SAR-ريال</option>
+               <option value="English">USD-دولار</option>
+            </select>
+         </div>
+      </header>
+      <section>
+         {% block content %}
+         {% endblock content %}
+      </section>
+      <footer class="py-0 my-0">
+         <ul class="nav justify-content-center border-bottom pb-1 mb-1">
+            <li class="nav-item">
+               <a href="#" class="nav-link px-2">Home</a>
+            </li>
+            <li class="nav-item">
+               <a href="#" class="nav-link px-2">Random
+                  Prodect</a>
+            </li>
+            <li class="nav-item">
+               <a href="#" class="nav-link px-2">Contact Us</a>
+            </li>
+            <li class="nav-item">
+               <a href="#" class="nav-link px-2">About</a>
+            </li>
+         </ul>
+         <p class="text-center">© 2024 computer store, Inc</p>
+      </footer>
+   
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static "js/index.js" %}"></script>
+  </body>
+</html>

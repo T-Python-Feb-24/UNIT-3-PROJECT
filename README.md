@@ -6,7 +6,7 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 
 ##  Camputer Store
-A store that sells computers and accessories.
+A store that sells computers and there accessories.
 ## Features List here
 - Product catalog
 - Order processing and tracking.

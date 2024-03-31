@@ -4,8 +4,10 @@ import json , requests
 
 # Create your views here.
 
-def home(request: HttpRequest):
- 
+def home(request:HttpRequest):
+
+  if request.user.is_authenticated:
+     print(request.user.first_name)
   return render(request,"main/Home.html")
 
  

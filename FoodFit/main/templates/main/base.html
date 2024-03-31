@@ -22,7 +22,24 @@
 <a href="/" class="">About</a>
 <a href="/" class="">Foods</a>
 <a href="/" class="">Contact us</a>
-<a href="/" class="">signin</a>
+
+
+{% if request.user.is_authenticated %} 
+<div>
+<a href="/" class="">Welcome {{ request.user.username }}</a>
+<a  href="{% url 'accounts:logout_user_view' %}" class="">Logout </a>
+</div>
+{% else %}
+<div class="dropdown">
+<button class=" dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sign up</button>
+<ul class="dropdown-menu">
+<li><a href="{% url 'accounts:register_user_view' %}" class="">Sign up</a></li>
+<li><a href="{% url 'accounts:login_user_view' %}" class="">Login</a></li>
+
+</ul>
+</div>
+
+{% endif %}
 </nav>
 
 

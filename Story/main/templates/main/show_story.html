@@ -1,0 +1,14 @@
+{% extends 'main/S1.html' %}
+{% load static %}
+{% block title %}Story Detail{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ story.name }}</h5>
+            <p class="card-text">{{ story.content }}</p>
+            <img src="{{ story.image.url }}" class="card-img-top" alt="{{ story.name }}">
+        </div>
+    </div>
+</div>
+{% endblock %}

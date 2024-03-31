@@ -1,0 +1,24 @@
+{% extends 'main/S1.html' %}
+{% load static %}
+{% block title %} <title> All Stories</title>{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>All Stories</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for story in stories %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ story.name }}</h5>
+                <p class="card-text">{{ story.content }}</p>
+                {% if story.image %}
+                    <img src="{{ story.image.url }}" alt="{{ story.name }}" class="card-img-top">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    
+    </div>
+</div>
+{% endblock %}

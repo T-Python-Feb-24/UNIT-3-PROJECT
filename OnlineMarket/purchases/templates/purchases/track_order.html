@@ -1,0 +1,20 @@
+{% extends 'product/base.html' %}
+{% block title %} {{user.username }}TRACK ORDER {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="p-3">Track order</h1>
+            <form action="#" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+                 <!-- هنا الاسم لازم يكون زي حق المودل -->
+                <input name="text" class="form-control" type="text" minlength="3"  placeholder="Enter Order Number" />
+                
+                <button type="submit" class="btn btn-dark" value="Login"> SEARCH</button> 
+            </form>
+            
+        </div>
+    </div>
+</div>
+ {%endblock%}

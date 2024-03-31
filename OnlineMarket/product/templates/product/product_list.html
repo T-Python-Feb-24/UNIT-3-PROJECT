@@ -1,0 +1,61 @@
+{% extends 'product/base.html' %}
+{% block title %} Product List {% endblock %}
+{% block content %}
+ <div class="container">
+    <div class="row g-4 p-2">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>{% if 'cat' in request.GET %} {{request.GET.cat}} {% else %} All {% endif %}Product ({{ products.count }}) </h2>
+
+            <div class="d-flex gap-2">
+                <a href="{% url 'product:product_list_view' %}" class="p-2 ps-3 pe-3 rounded-pill cat  text-decoration-none  {% if 'cat' not in request.GET %} All  {% endif %}">All</a>
+                {% for val, key in categories %}
+                    <a href="?cat={{val}}" class="p-2 ps-3 pe-3 rounded-pill cat {% if request.GET.cat == val %} {{ val }}{% endif %} text-decoration-none">{{val}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-1 g-4 p-3">
+
+        {% for product in products %}
+            <div class="col-3 product-container">
+                <div class="d-flex flex-column gap-2 p-3">
+                    <img src="{{ product.image.url }}"  class="w-100 rounded-4 card-poster "/>
+                   
+                    <h2 style="margin-left: 30px; color: black;">{{product.name}}</h2>
+                    <h6 class="cat rounded-pill {{product.category}} "  style="margin-left: 30px;" >{{ product.category }}</h6>
+                    <p class="rounded-pill {{product.price}}" style="margin-left: 30px;">{{product.price}} sr</p>
+                    
+                
+                    <h6><a href="{% url 'product:product_detail_view' product.id  %}"class="text-decoration-none" style="background-color: black; color: azure; border-radius: 44px; margin: 20px; padding: 3px 75px; text-align: center;">More</a></h6>
+                
+                </div>
+            </div>
+            
+        {% endfor %}
+
+    </div>
+ </div>
+ <div class="container">
+    <div class="raw">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+    </div>
+ </div>
+    
+
+
+{%endblock%}

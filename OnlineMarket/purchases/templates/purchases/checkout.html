@@ -1,0 +1,32 @@
+{% extends 'product/base.html' %}
+{% block title %} {{user.username }} CHECKOUT {% endblock %}
+{% block content %}
+
+<!-- باقي اعدل-->
+<div clas="container ">
+    <h3 class="p-2">CHECKOUT</h3>
+    <div class="col-md-6">
+        <form>
+            <div class="form-group p-2">
+            <label for="exampleInputEmail1" class="form-label">First Name</label>
+            <input type="text" class="form-control" >
+            </div>
+
+            <div class="form-group p-2">
+            <label for="exampleInputPassword1" class="form-label">Last name</label>
+            <input type="text" class="form-control" >
+            </div>
+            
+            <div class="form-group p-2">
+            <label for="exampleInputPassword1" class="form-label">Country</label>
+            <input type="text" class="form-control" >
+            </div>
+            <div class="form-group p-2">
+            <label for="exampleInputPassword1" class="form-label">City</label>
+            <input type="text" class="form-control" >
+            </div>
+            <button type="submit" class="btn btn-primary m-2">Confirm Order</button>
+        </form>
+   </div>         
+</div>
+{%endblock%}

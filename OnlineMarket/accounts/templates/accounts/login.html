@@ -1,0 +1,28 @@
+{% extends 'product/base.html' %}
+
+{% block title %}Login User{% endblock %}
+
+{% block content %}
+
+    
+    {% if msg %}
+    <div class="alert alert-danger">{{msg}}</div>
+    {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="p-3">Login</h1>
+            <form action="{% url 'accounts:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+
+                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+
+                <input type="submit" class="btn btn-dark" value="Login" />
+
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

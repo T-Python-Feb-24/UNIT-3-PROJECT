@@ -1,0 +1,31 @@
+{% extends 'product/base.html' %}
+{% block title %} {{user.username }} cart {% endblock %}
+{% block content %}
+<div class="container p-2">
+    <h1>{{ user.username }} Carts</h1>
+    <div class="row">
+        {% for cart_item in user.cart_set.all %}
+        <div class="col-12 mb-3">
+            <div class="d-flex flex-row align-items-center border border-1 shadow p-3 rounded-4">
+                <div class="w-25">
+                    <img src="{{ cart_item.product.image.url }}" class="w-50 rounded-4 card-poster" />
+                </div>
+                <div class="w-75 ps-3">
+                    <h6 class="cat pt-1 pb-1 rounded-pill {{ cart_item.product.category }}">{{ cart_item.product.category }}</h6>
+                    
+                    <h2><a href="{% url 'product:product_detail_view' cart_item.product.id  %}" class="text-decoration-none text-black">{{ cart_item.product.name }}</a></h2>
+                    <h6 class="text-muted">Added at: {{ cart_item.created_at }}</h6>
+                    <h4>TOTAL:</h4>
+                    <a href="{% url 'purchases:delete_product_view' cart_item.product.id  %}"><span class="material-symbols-outlined text-black" style="margin-left: 600px;">delete</span></a>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        <div class="row">
+        <a href="{% url 'purchases:checkout_view' %}">ChecOut</a>
+        </div>
+            </div>
+</div>
+{% endblock %}

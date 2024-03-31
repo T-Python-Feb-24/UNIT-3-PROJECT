@@ -6,15 +6,24 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 
 ## Project Name here
-project description here.
-
+Online Learning Platform
+A distance learning platform that helps the beneficiary develop his creative and professional skills by providing many training courses
 ## Features List here
 - list of features
-
+1-Relatively low financial cost.
+2- Taking advantage of modern technology to link education to life and achieve the learner’s control and independence over what he learns, the teaching method, teaching times, and freedom of decision in this, with the aim of overcoming the negatives of the traditional educational system.
+3- A flexible and alternative system for direct education.
+4- It provides an opportunity for those who missed university education and targets many social segments.
+5- It transcends time, place, and social status, as education reaches the learner without regard to age, residential location, or social status.
+6- Education takes place while the student is away from his teacher for most of his studies.
+7- A system that frees the participating individual from the restrictions imposed by distance and strict attendance times.
+8- Most activities in distance education are based on self-learning.
+9- Improving qualitative competence and upgrading it in terms of capabilities.
+10- Achieving the slogan (the productive student). The student, whether an employee, worker, or otherwise, learns and develops in his position
 ## User Stories, Wireframes & UML links
 - User stories document link here.
 - wireframe link here.
-- UML link here.
+- UML link here.   https://ibb.co/748ZYb4
 
 
 ## Minimum Requirements

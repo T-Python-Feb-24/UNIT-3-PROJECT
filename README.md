@@ -16,6 +16,10 @@ project description here.
 - wireframe link here.
 - UML link here.
 
+-https://1drv.ms/w/s!AmLkjMApMNK3glABVJYcJlJvB6TK
+-https://www.figma.com/file/wropAs8kNC27hPjBa7W5YA/Untitled?type=whiteboard&node-id=0%3A1&t=MJiPqm49YOB5UxoH-1
+-https://drawsql.app/teams/rahaf-2/diagrams/art
+
 
 ## Minimum Requirements
 - User Stories(shared as a link to document or added as a file).

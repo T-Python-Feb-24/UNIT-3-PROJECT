@@ -1,19 +1,20 @@
 # UNIT-3-PROJECT
 
-## Create a Project of your own choosing
-
-Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
-
-
-## Project Name here
-project description here.
+## TaskMinder
+A task management project is designed to help individuals or teams organize, track, and complete tasks efficiently. It provides a centralized platform for managing tasks, enabling users to effectively plan, collaborate, and monitor progress.
 
 ## Features List here
-- list of features
+- Task Creation
+- Task Prioritization
+- Task Status Tracking
+- Task Comments and Discussions
+- Task Attachments
+- Task Reminders and Notifications
+- Task Filtering and Sorting
 
 ## User Stories, Wireframes & UML links
-- User stories document link here.
-- wireframe link here.
+- User stories https://drive.google.com/file/d/1XJ90WkcmdJwDFH_svSfNu-5yzb3jCBo8/view?usp=sharingdocument 
+- Wireframe https://drive.google.com/file/d/1ahLSK0RDc5aatMrIvBhE6s068AZ-cXfr/view?usp=sharing 
 - UML link here.
 
 

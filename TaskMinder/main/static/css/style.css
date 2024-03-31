@@ -1,0 +1,99 @@
+
+/* checkbox  */
+
+/* label {
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  input[type="checkbox"]:checked + #myText {
+    position: relative;
+  }
+  
+  input[type="checkbox"]:checked + #myText::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: black;
+  } */
+body {
+    background-color: #F7F6F4;
+} 
+
+
+  .sidebar {
+    width: 200px;
+    background: #FFFFFF;
+    position: fixed;
+    height: 100%;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: rgb(15, 62, 52);
+    font-weight: bold;
+  }
+  
+  .sidebar ul li button:hover {
+    /* background: rgb(58, 125, 110); */
+    background: #FFAF88;
+    color: beige;
+  }
+  
+  .logout button:hover{
+    background: #dfa395;
+  }
+
+  .content {
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 30px; 
+  }
+
+
+
+
+
+
+  .avatar-selection {
+    text-align: center;
+  }
+  
+  .avatar-list {
+    margin-bottom: 20px;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  #select-avatar-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }

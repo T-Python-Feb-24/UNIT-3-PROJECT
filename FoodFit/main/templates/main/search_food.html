@@ -1,0 +1,89 @@
+
+{% extends 'main/base.html' %}
+{%load mathfilters %}
+
+
+
+ {% block content %}
+
+ <div class="row">
+ 
+ <form method="POST" actions= "{% url 'main:search_food_page'%}"class="d-flex" role="search">
+{% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Search" name="query" >
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+ 
+ 
+ </div>
+ <div class="row mt-5">
+ <div class="col">
+
+
+            {% if api %}
+            {% if api == "error"%}
+            <div class="alert alert-warning "> Error </div>
+            {% else%}
+               
+             <h1>{{api.0.name}} has a total of {{api.0.calories}} calories </h1>
+             <ul class="list-group">
+             <li class="list-group-item d-flex justify-content-between align-items-center">
+                    total grams 
+                    <span class="badge text-bg-primary rounded-pill">{{api.0.serving_size_g}} g</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    carbohydrates
+                    <span class="badge text-bg-primary rounded-pill">{{api.0.carbohydrates_total_g}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    protein
+                    <span class="badge text-bg-primary rounded-pill">{{api.0.protein_g}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    sodium
+                    <span class="badge text-bg-primary rounded-pill">{{api.0.sodium_mg}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    sugar
+                    <span class="badge text-bg-primary rounded-pill">{{api.0.sugar_g}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    potassium
+                    <span class="badge text-bg-primary rounded-pill">{{api.0.potassium_mg}}</span>
+                </li>
+                </ul>
+
+             {% endif %}
+             {% endif %}
+             </div>
+
+
+              <div class="col">
+                <h1>to burn {{api.0.calories}} calories you have to </h1>
+                <ul class="list-group">
+             <li class="list-group-item d-flex justify-content-between align-items-center">
+                    you have to jog for <strong>{{ api.0.calories | div:223 | mul:60 | floatformat:0}}</strong>minutes 
+                    </li>
+
+                 <li class="list-group-item d-flex justify-content-between align-items-center">
+                    you have to yoga for <strong>{{api.0.calories | div:270 | mul:60 | floatformat:0}}</strong>minutes 
+                    </li>
+
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    you have to gym workout for <strong>{{ api.0.calories | div:449 | mul:60 | floatformat:0}}</strong>minutes 
+                    </li>
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    you have to walk for <strong>{{ api.0.calories | div:293 | mul:60 | floatformat:0}}</strong>minutes 
+                    </li>
+
+                </ul>
+
+
+
+              </div>
+        
+        
+        </div>
+ {% endblock %}

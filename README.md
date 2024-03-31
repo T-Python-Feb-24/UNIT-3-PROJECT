@@ -5,16 +5,18 @@
 Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
 
 
-## Project Name here
-project description here.
+## Project Name :DreamDwellings
+My project briefly talks about DreamDwellings, which deals with real estate such as apartments, villas, lands, offices for sale or rent, and it depends on a client and a merchant. The merchant adds advertisements, while the client browses and bids.
 
 ## Features List here
 - list of features
 
 ## User Stories, Wireframes & UML links
 - User stories document link here.
-- wireframe link here.
-- UML link here.
+
+- wireframe: https://drive.google.com/file/d/1-H-L3lT2c8kqJdyDFwqQRPjY_9lYM0eU/view?usp=sharing.
+
+- UML:  https://lucid.app/lucidchart/171df5c2-e9fd-46ea-914e-f162f0a7018c/edit?    viewport_loc=-1242%2C-870%2C2232%2C1227%2C0_0&invitationId=inv_14c8a245-4db5-4563-a94e-76e78ecce452.
 
 
 ## Minimum Requirements

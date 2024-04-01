@@ -1,0 +1,38 @@
+{% extends 'main/S1.html' %}
+{% block title %}<title>Update Story</title>{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 style="margin-bottom: 20px;">Update Story</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ story.name }}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="3">{{ story.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select class="form-control" id="category" name="category">
+                {% for category_choice in story.CATEGORY_CHOICES %}
+                    <option value="{{ category_choice.0 }}" {% if story.category == category_choice.0 %}selected{% endif %}>{{ category_choice.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="image">Image (leave blank to keep current image):</label>
+            {% if story.image %}
+                <img src="{{ story.image.url }}" alt="{{ story.name }}" style="max-width: 100%; height: auto;">
+            {% endif %}
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea class="form-control" id="content" name="content" rows="5">{{ story.content }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}

@@ -11,5 +11,7 @@ urlpatterns = [
     path('add/', views.add_story, name='add_story'),
     path('story/<int:pk>/', views.show_story, name='show_story'), 
     path('all_stories/', views.all_stories, name='all_stories'),
+    path('story/<int:pk>/update/', views.update_story, name='update_story'),
+    path('story/<int:pk>/delete/', views.delete_story, name='delete_story'),
 
 ]

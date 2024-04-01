@@ -31,7 +31,6 @@ def register_user(request: HttpRequest):
                 password=request.POST["password"]
             )
             new_user.save()
-            # Redirect to login page
             return redirect("user_info:user_login")
         except IntegrityError:
             msg = "Username already exists. Please choose a different username."
@@ -44,11 +43,9 @@ def user_login(request:HttpRequest):
     msg = None
 
     if request.method == "POST":
-        #authenticat user
         user = authenticate(request, username=request.POST["username"], password=request.POST["password"])
 
         if user:
-            #login user
             login(request, user)
             return redirect("main:home")
         else:

@@ -1,20 +1,24 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-# Create your models here.
 
 class Story(models.Model):
     CATEGORY_CHOICES = [
-        ('Fun','Fun'),
-        ('Fair','Fair'),
-
+        ('Fun', 'Fun'),
+        ('Fair', 'Fair'),
+        ('Adventure', 'Adventure'),
+        ('Romance', 'Romance'),
+        ('Mystery', 'Mystery'),
+        ('Sci-Fi', 'Science Fiction'),
+        ('Horror', 'Horror'),
     ]
 
     name = models.CharField(max_length=200)
-    content= models.TextField()
+    description = models.TextField(blank=True, null=True)  # Added description field
+    content = models.TextField()
     image = models.ImageField(upload_to="images/")
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
-    create_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.name

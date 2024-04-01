@@ -1,8 +1,8 @@
 {% extends 'main/S1.html' %}
 {% load static %}
-{% block title %}  {% endblock %}
+{% block title %}Add New Story{% endblock %}
 {% block content %}
-    <h1 style="padding: 20px;">Add New Plant</h1>
+    <h1 style="padding: 20px;">Add New Story</h1>
 
 <div class="container">
     <form method="post" action="{% url 'main:add_story' %}" enctype="multipart/form-data">
@@ -12,10 +12,9 @@
             <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
         </div>
         <div class="mb-3">
-            <label for="about" class="form-label">content</label>
-            <textarea name="content" class="form-control" id="content" placeholder="Enter about"></textarea>
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Enter description"></textarea>
         </div>
-
         <div class="mb-3">
             <label for="category" class="form-label">Category</label>
             <select name="category" class="form-select" id="category">
@@ -25,10 +24,9 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input type="file" name="image" class="form-control" id="image" accept="image/*">
+            <label for="content" class="form-label">Story Content</label>
+            <textarea class="form-control" id="content" name="content" placeholder="Enter story content or leave blank to generate automatically based on the description"></textarea>
         </div>
-        
         
         <button type="submit" class="btn btn-primary">Submit</button>
         <a href="{% url 'main:home' %}" class="btn btn-secondary">Back to Home</a>

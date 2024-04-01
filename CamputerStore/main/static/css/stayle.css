@@ -31,17 +31,88 @@ main {
   align-items: center;
 }
 
+.justify-self-center {
+  justify-self: center;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.navbar-nav {
+  --bs-nav-link-padding-y: 0
+}
+
+.navbar-nav .nav-item>* {
+  height: 5rem;
+}
+
+.myalart {
+  margin-top: 3rem;
+  height: 3rem !important;
+  align-items: center;
+
+  .dager-svg {
+    height: 2rem !important;
+    width: 2rem !important;
+    fill: rgb(128, 2, 27);
+  }
+}
+
+.form-grid {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 2fr;
+  grid-template-rows: 1fr;
+  /* place-items: center; */
+
+}
+
+input[type=number] {
+  appearance: textfield;
+}
+
 header>* {
   color: white !important;
 }
 
 .input-group {
   grid-template-columns: 1fr 4rem;
-  min-width: 50svw !important;
+  min-width: 40svw !important;
 }
+
+.form-grid input:not([type="submit"]),
+.form-grid textarea,
+.form-grid select {
+  background-color: var(--dark-theme-card) !important;
+  color: var(--text) !important;
+  text-align: end;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.462) !important;
+
+
+  }
+
+  &:focus {
+    outline: 1px solid gray !important;
+  }
+
+  &+a:hover {
+    box-shadow: 1px 1px 3px black;
+  }
+}
+
+.form-grid .form-label,
+.form-grid div:has(>label:first-child) {
+  place-self: end !important;
+
+}
+
 
 input[type="search"] {
   background-color: var(--dark-theme-card);
+  height: 100%;
   color: var(--text);
   text-align: end;
   border-radius: 20px 0px 0px 20px;
@@ -110,6 +181,14 @@ input[type="search"] {
 
 .header-user {
   padding: 1svh;
+  height: 100%;
+  width: 5rem;
+  justify-content: space-around;
+  text-align: center;
+
+  & span:nth-child(2) {
+    font-size: small
+  }
 }
 
 section {
@@ -120,6 +199,36 @@ section {
     margin: 1rem;
 
   }
+}
+
+.account:hover .popover_bottom {
+  display: block !important;
+
+}
+
+.popover_bottom {
+  display: none;
+  position: absolute;
+  background-color: var(--dark-theme-card);
+  top: 5rem;
+  align-content: center;
+  border-radius: 15px;
+  z-index: 1;
+
+
+  & li {
+    list-style: none;
+    text-align: end;
+  }
+
+  & a {
+    text-decoration: none;
+  }
+}
+
+/* banner */
+.carousel-item img {
+  height: 430px !important;
 }
 
 footer {

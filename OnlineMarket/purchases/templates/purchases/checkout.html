@@ -2,31 +2,41 @@
 {% block title %} {{user.username }} CHECKOUT {% endblock %}
 {% block content %}
 
-<!-- باقي اعدل-->
-<div clas="container ">
-    <h3 class="p-2">CHECKOUT</h3>
-    <div class="col-md-6">
-        <form>
-            <div class="form-group p-2">
-            <label for="exampleInputEmail1" class="form-label">First Name</label>
-            <input type="text" class="form-control" >
-            </div>
 
-            <div class="form-group p-2">
-            <label for="exampleInputPassword1" class="form-label">Last name</label>
-            <input type="text" class="form-control" >
-            </div>
+<div class="row m-3">
+    <h1 class="text-body-secondary">Checkout</h1>
+    <div class="col">
+
+        {% if  not request.user.is_authenticated %}
+        <h5 class="alert alert-warning"> yoy must be <a href="{%url 'accounts:login_user_view' %}">logged in</a></h5>
+        {% elif not order %}
+        <h4 class="alert alert-warning"> no order here</h4>
+        {% if is_added == True %}
+        <form method="POST" style="display:none;">
+        {% endif %}
+        <form action="{% url 'purchases:checkout_view' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+            {% csrf_token %}
+             <label for="inputshipment_address">Shipment address</label>
+            <input name="shipment_address" id="inputshipment_address" type="text" class="form-control" required value="{{shipment_address}}" />
             
-            <div class="form-group p-2">
-            <label for="exampleInputPassword1" class="form-label">Country</label>
-            <input type="text" class="form-control" >
-            </div>
-            <div class="form-group p-2">
-            <label for="exampleInputPassword1" class="form-label">City</label>
-            <input type="text" class="form-control" >
-            </div>
-            <button type="submit" class="btn btn-primary m-2">Confirm Order</button>
+            <label for="inputshipment_phone">Shipment phone</label>
+            <input name="shipment_phone" id="inputshipment_phone" type="text"  class="form-control" required value="{{shipment_phone}}" />
+
+            <label for="inputcard_number">Card number</label>
+            <input name="card_number" id="inputcard_number" type="text"  class="form-control" placeholder="2222 2222 2222 2222" required value="{{card_number}}" />
+
+            <label for="inputexpire">Expire</label>
+            <input name="expire" id="inputexpire" type="number"  class="form-control" placeholder="mm/yy" required value="{{expire}}" />
+
+            <label for="inputsecurity_code">Security code</label>
+            <input name="security_code"  id="inputsecurity_code" type="text"  class="form-control" placeholder="333" required value="{{security_code}}" />
+
+            
+            <button type="submit" name="btnpayment" class="btn"  style="background-color: rgb(101, 100, 99);">Payment</button>
         </form>
-   </div>         
+
+    </div>
+
+
 </div>
 {%endblock%}

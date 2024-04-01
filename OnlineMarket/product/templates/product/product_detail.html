@@ -11,13 +11,9 @@
                     <h6 class="text-muted">{{ product.published_at }}</h6>
                     <p class="">{{ product.price }} sr</p>
                    
-                        <form>
-                        <!--<a href="{% url 'purchases:product_cart_view' product.id %}" class="btn btn-dark text-decoration-none add-to-cart-btn" id="addToCartModal">ADD TO CART<i class="bi cart material-symbols-outlined shopping_cart"></i></a>-->
-                        <div class="form-group p-3">
-                            <input type="value" class="form-control" placeholder="1">
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="padding: 2px 180px ;background-color: #000; ">ADD TO THE CART</button>
-                        </form>
+                        
+                    <a href="{% url 'purchases:product_cart_view' product.id %}" class="btn btn-dark text-decoration-none add-to-cart-btn" id="addToCartModal">ADD TO CART<i class="bi cart material-symbols-outlined shopping_cart"></i></a>
+                        
                   
                      <a href="{% url 'product:product_list_view'  %}" class="btn btn-dark">SEARCH ON THE STORE</a>
             </div>

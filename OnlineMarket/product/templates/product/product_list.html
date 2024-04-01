@@ -22,7 +22,7 @@
         {% for product in products %}
             <div class="col-3 product-container">
                 <div class="d-flex flex-column gap-2 p-3">
-                    <img src="{{ product.image.url }}"  class="w-100 rounded-4 card-poster "/>
+                    <img src="{{ product.image.url }}" class="w-100 rounded-4 card-poster " style="height: 200px;"/>
                    
                     <h2 style="margin-left: 30px; color: black;">{{product.name}}</h2>
                     <h6 class="cat rounded-pill {{product.category}} "  style="margin-left: 30px;" >{{ product.category }}</h6>

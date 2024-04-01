@@ -5,16 +5,22 @@
 Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
 
 
-## Project Name here
-project description here.
+## barbar shop
+a platform for claints to make appointments.
 
 ## Features List here
-- list of features
+- claint can make personal account.
+- barber can make accounts.
+- manager can manage accounts.
+- clint can choose a service.
+- clint can choose a barber.
 
 ## User Stories, Wireframes & UML links
 - User stories document link here.
-- wireframe link here.
-- UML link here.
+
+- wireframe link here: https://www.figma.com/file/XSCX0ysWYgy4EwM6RbofOH/Wireframing-(Copy)?type=design&node-id=0-1&mode=design&t=wZsKJhbinb7YbunS-0
+
+- UML link here: https://lucid.app/lucidchart/3c2cb493-189e-4bbe-9436-93c84f98c25c/edit?beaconFlowId=A84703D4815EB80C&invitationId=inv_81be11d2-c4e1-443e-8c4b-554e988961d8&page=HWEp-vi-RSFO#
 
 
 ## Minimum Requirements

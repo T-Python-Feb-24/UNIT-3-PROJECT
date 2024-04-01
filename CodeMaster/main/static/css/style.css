@@ -33,6 +33,19 @@
     text-align: center;
     margin-left: 5vw;
    }
-   
+
+
+
+.pragraph p{
+    font-size: 18px;
+}
+
+.text-style{
+    color: black;
+    
+}
+.text-style:hover{
+    color: black;
+}
 
 

@@ -1,0 +1,149 @@
+{% extends 'main/base.html' %}
+{% load static%}
+
+
+
+
+ {% block content %}
+ 
+
+ <div class="row mt-5 ">
+ <div class="d-flex justify-content-center align-items-center">
+ <h1>{{recipe.title}}</h1>
+ </div>
+  </div>
+
+
+<div class="row mt-5">
+
+    <div class="col md-6">
+    <img src="{{ recipe.image.url }}"  class="w-100 rounded-4"/>
+    </div>
+
+
+    <div class="col mt-1 md-6 ">
+        {% if request.user.is_staff %}
+        <a href="/" class="btn btn-primary">update</a>
+        <a href="/" class="btn btn-danger">Delete</a>
+        {% endif %}
+        <h4 class="mt-5">{{recipe.title}}</h4>
+        <h6>Category :{{recipe.category}}</h6>
+        <p>How to prepare :<br>{{recipe.about}}</p>
+        <p>Quantity : {{recipe.quantity}} Grams</p>
+        <p>Calories :{{recipe.calories}}</p>
+        <br>
+        <hr>
+        <h6>Nutritions</h6>
+        <br>
+        <p>Fat :</p>
+        <div class="progress form-group col-md-12" style="height:25px;" role="progressbar" aria-label="Animated striped example" aria-valuenow="{{recipe.fat}}" aria-valuemin="0" aria-valuemax="100">
+        <div name ="fat" class="progress-bar bg-success" style="width: {{recipe.fat}}%">{{recipe.fat}}%</div>
+        </div>
+        <br>
+        <p>Protien :</p>
+        <div class="progress" role="progressbar" style="height:25px;" aria-label="Info example" aria-valuenow="{{recipe.protien}}" aria-valuemin="0" aria-valuemax="100">
+        <div name ="protien" class="progress-bar bg-info text-dark" style="width: {{recipe.protien}}%">{{recipe.protien}}%</div>
+        </div>
+        <br>
+        <p>Carb :</p>
+        <div class="progress" role="progressbar" style="height:25px;" aria-label="Warning example" aria-valuenow="{{recipe.carb}}" aria-valuemin="0" aria-valuemax="100">
+        <div name ="carb" class="progress-bar bg-warning text-dark" style="width: {{recipe.carb}}%">{{recipe.carb}}%</div>
+        </div>
+        <br>
+        <hr>
+        
+    </div>
+</div>
+
+
+
+
+<hr>
+<div class="row mt-5">
+
+    <div class="col md-6">
+    <h1> Leave a comment</h1>
+    <br><br>
+    
+ <form action="{% url 'main:comments_view' recipe.id %}" method="post" class="d-flex flex-column gap-2">
+    {% csrf_token %}
+    <textarea name="content"  placeholder="text your comment here" style="height:200px;" class="form-control hight-100" required></textarea>
+
+    <input type="submit" value="Add Comment" class="btn btn-primary"/>
+    </form>
+    
+    </div>
+
+
+
+
+<div class="col md-6">
+
+<section >
+  <div class="container text-dark">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="d-flex justify-content-between align-items-center ">
+          <div class="card">
+          </div>
+        </div>
+        {% for comment in comments %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex flex-start">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="{% static 'images/user.png'%}" alt="avatar" width="40"
+                height="40" />
+              <div class="w-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="text-primary fw-bold mb-0">
+                    <a href="{% url 'accounts:user_info_view' comment.user.id %}" >{{ comment.user.username }}</a>
+                    <p class="text-dark ms-2">{{ comment.content }}</p>
+                  </h6>
+                  <p class="">{{ comment.created_at}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        </section >
+
+</div>
+
+</div>
+
+
+
+
+<br>
+<hr>
+<br>
+{% if recipes.count != 0%}
+ <h1>Read More</h1>
+{% endif %}
+<div class="row mt-2 g-5">
+<div class="col md-6">
+
+        {% for recipe in recipes %}
+        <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+      <img src="" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'main:detail_recipe_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h5>
+        <p class="card-text">For: {{recipe.quantity}} Grams </p>
+        <p class="card-text">Calories :{{recipe.calories}} </p>
+        <p class="card-text">Category:{{recipe.category}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<br><br>
+     
+       {% endfor %}
+ {% endblock %}

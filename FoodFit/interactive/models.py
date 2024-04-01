@@ -12,3 +12,7 @@ class UserRecipe(models.Model):
     calories=models.IntegerField()
     image=models.ImageField(upload_to="images/", default="images/default.jpg")
     category=models.CharField(max_length = 64 , choices=categories.choices)
+
+
+
+

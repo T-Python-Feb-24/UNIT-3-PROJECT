@@ -28,22 +28,6 @@
         </div>
 </div>
 
-{% if user.comment_set.all.count != 0%}
-<h2>{{user.username}} Comments</h2>
-{% endif %}
 
-     <div class=" d-flex flex-column gap-2">    
-      {% for comment in user.comment_set.all %}
-        <div class=" comment d-flex flex-column gap-2 border border-1 p-3 rounded-3">
-        <h4>{{ comment.user.username }}</h4>
-        <a href="{% url 'main:detail_page' comment.plant.id %}#commentsDiv"><h6 class="text-muted">{{comment.post.title}}</h6></a>
-        <p>{{ comment.content }}</p>
-        <p>{{ comment.created_at }}</p>
-        </div>
-        {% endfor %}
-
-     </div> 
-     </div>  
-</div>
 
   {% endblock %}

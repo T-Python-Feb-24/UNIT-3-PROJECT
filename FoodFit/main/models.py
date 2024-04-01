@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User 
-from .models import UserRecipe
+
 
 # Create your models here.
 
 class Recipe(models.Model):
     
-    categories = models.TextChoices("Category", ["All", "Carbs", "Vegetarian" , "Protien"])
+    categories = models.TextChoices("Category", ["Carbs", "Vegetarian" , "Protien"])
 
     title=models.CharField(max_length = 64)
     about= models.TextField()
+    quantity=models.IntegerField()
     fat=models.IntegerField()
     protien=models.IntegerField()
     carb=models.IntegerField()
@@ -22,7 +23,6 @@ class Recipe(models.Model):
 
 
 class Comment(models.Model):
-    user_recipe=models.ForeignKey(UserRecipe, on_delete=models.CASCADE)
     recipe= models.ForeignKey(Recipe, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

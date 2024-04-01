@@ -7,11 +7,12 @@ class Recipes(models.Model):
     categories = models.TextChoices("Category", ["Breakfast","Lunch", "Dinner"])
   
     name = models.CharField(max_length=2048)
+    chef_name = models.CharField(max_length=2048)
     content = models.TextField()
     published_at = models.DateTimeField(auto_now_add=True)
     category = models.CharField(max_length=64,choices=categories.choices)
-    time_coocking=models.IntegerField()
-    number_people=models.IntegerField(max_length=2048)
+    time_coocking=models.CharField(max_length=2048)
+    number_people=models.CharField(max_length=2048)
     image=models.ImageField(upload_to="images/",default="")
     
 class Comment(models.Model):

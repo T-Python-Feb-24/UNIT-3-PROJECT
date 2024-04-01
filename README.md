@@ -6,7 +6,7 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 
 ## Project Name here
-Culinary Chronicles
+FoodRecipes
 
 ## Features List here
 - list of features
@@ -16,6 +16,7 @@ Delete and edit recipes
 Add recipes to favorites
 Repost and add a comment
 Add suggestions for recipes
+Recipes search
 
 ## User Stories, Wireframes & UML links
 - User Stories https://docs.google.com/document/d/1OWBLfkYnMpsWCKgPGX0R4PnXw1wbTpcI/edit?usp=sharing&ouid=115239235101092813614&rtpof=true&sd=true

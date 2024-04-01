@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from .models import Recipes,Comment,Suggestions
+from django.contrib.auth.models import User
+from accounts.models import ProfileUser
+
 
 def home(requset:HttpRequest):
 
@@ -16,13 +19,13 @@ def add_recipes(requset:HttpRequest):
             new_recipes=Recipes(
                 name=requset.POST["name"], 
                 content=requset.POST["content"],
-                time_coockin=requset.POST["time_coockin"],  
+                time_coocking=requset.POST["time_coocking"],  
                 image=requset.FILES["image"],
                 category=requset.POST["category"],
                 number_people=requset.POST["number_people"],
             )
             new_recipes.save()
-            return redirect("main:home")
+            return redirect("main:all_recipes")
         except Exception as e:
             print(e)
  
@@ -31,11 +34,12 @@ def add_recipes(requset:HttpRequest):
 
 def all_recipes(requset:HttpRequest):
     if "cat" in requset.GET:
-        recipes= Recipes.objects.filter(categroy = requset.GET["cat"])
+        recipes= Recipes.objects.filter(category = requset.GET["cat"])
     else:
         recipes = Recipes.objects.all().order_by("-published_at")
     
     return render(requset,"main/all_recipes.html", {"recipes" : recipes, "Category":Recipes.categories.choices})
+
 
 def detail_recipes(requset:HttpRequest,recipes_id):
     try:
@@ -45,12 +49,67 @@ def detail_recipes(requset:HttpRequest,recipes_id):
         pass
     except Exception as e:
         print(e)
-    return render(requset ,"main/detail_plants.html", {"recipes":recipes,})
+    return render(requset ,"main/detail_recipes.html", {"recipes":recipes})
 
+
+def update_recipes(requset:HttpRequest,recipes_id):
+
+    recipes=Recipes.objects.get(pk=recipes_id)
+    if requset.method== 'POST':
+        try:
+            recipes.name=requset.POST["name"], 
+            recipes.content=requset.POST["about"],
+            recipes.time_coocking=requset.POST["time_coocking"], 
+            recipes.number_people=requset.POST["number_people"], 
+            recipes.image=requset.FILES["image"],
+            recipes.category=requset.POST['category']
+            recipes.save()
+            return redirect("main:detail_recipes", plant_id=recipes.id)
+        except Exception as e:
+            print(e)
+
+    return render(requset, "main/update_plants.html", {"recipes":recipes, "Category":Recipes.categories.choices})
+
+
+def delete_recipes(requset:HttpRequest,recipes_id):
+    try:
+        recipes= Recipes.objects.get(pk=recipes_id)
+        recipes.delete()
+    except Exception as e:
+        print(e)
+    return redirect('main:home')
+
+# def repost_recipe(requset:HttpRequest,recipes_id):
+#     recipe =Recipes.objects.all(Recipes, id=recipes_id)
+#     user_profile = requset.user.ProfileUser
+    
+#     user_profile.reposted_recipes.add(recipe)
+    
+#     return render(requset,"main/detail_plants.html",{"recipe":recipe,"user_profile":user_profile})
 
 
 def recipes_search(requset:HttpRequest):
+    recipes= []
+
+    if "search" in requset.GET:
+        recipes= Recipes.objects.filter(name__contains=requset.GET["search"])
+
+
+    return render(requset, "main/recipes_search.html", {"recipes" :  recipes})
+
+def suggestions(requset:HttpRequest):
     pass
 
-def Suggestions(requset:HttpRequest):
-    pass
+def add_comment(request:HttpRequest, recipes_id):
+    # if not request.user.is_authenticated:
+    #     return redirect("")
+    
+    if request.method == "POST":
+        try:
+            recipes= Recipes.objects.get(pk=recipes_id)
+            new_comment = Comment(recipes=recipes,uesr=request.user, content=request.POST["content"])
+            new_comment.save()
+        except Exception as e:
+                print(e)
+    
+    return redirect("main:detail_recipes", recipes_id)

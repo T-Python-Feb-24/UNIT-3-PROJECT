@@ -11,20 +11,43 @@
 <section>
     <div class="container">
         <div class="row g-4">
-
-            <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px;">
-                <h2>All Recipes</h2>
-                <div class="d-flex gap-0.1">
-                    <a href="{% url 'main:all_recipes' %}" class="p-2 ps-3 pe-3 rounded-pill cat  text-decoration-none">All</a>
-                    
-                    {% for val, key in Category %}
-                        <a href="?cat={{val}}" class="p-2 ps-3 pe-3 rounded-pill cat {% if request.GET.cat == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
-                    {% endfor %}
-                    
+            <div class="col-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center mt-4" style="">
+                    <h2>All Recipes</h2>
+                    <div class="d-flex gap-0.1">
+                        <a href="{% url 'main:all_recipes' %}" class="p-2 ps-3 pe-3 rounded-pill cat  text-decoration-none">All</a>
+                        
+                        {% for val, key in Category %}
+                            <a href="?cat={{val}}" class="p-2 ps-3 pe-3 rounded-pill cat {% if request.GET.cat == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
+                        {% endfor %}
+                        
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
+</section>
+<section>
+        <div class="container p-2">
+            
+            <div class="row">
+                {% for rec in recipes %}
+                <div class="col-12 mb-3">
+                    <div class="d-flex flex-row align-items-center border border-1 shadow p-3 ">
+                        <div class="w-40">
+                            <img src="{{  rec.image.url }}" class="w-100  card-poster"  style="height: 300px;" />
+                        </div>
+                        <div class="w-75 ps-3">
+                            <h2><a href="{% url 'main:detail_recipes' rec.id  %}" class="text-decoration-none text-black">{{rec.name }}</a></h2>
+                            <h3>{{rec.chef_name}}</h3>
+                            <h6 class="cat pt-1 pb-1 rounded-pill {{ rec.category }}">{{ rec.category }}</h6>
+                            <h6 class="text-muted">{{ rec.published_at }}</h6>
+                           
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    
 </section>
 {% endblock%}

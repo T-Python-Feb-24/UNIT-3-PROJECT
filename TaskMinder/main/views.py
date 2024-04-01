@@ -95,3 +95,10 @@ def task_detail(request:HttpRequest, project_id):
 
 
     return render(request, "main/task_detail.html", {"task" : task, "comments" : comments })
+
+
+
+
+def dashboard(request:HttpRequest):
+
+    return render(request, "main/dashboard.html" )

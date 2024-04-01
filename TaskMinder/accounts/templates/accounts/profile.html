@@ -37,8 +37,8 @@
                 {% for comment in user_object.comment_set.all %}
                     <div class="d-flex flex-column gap-1 p-3 shadow">
                         <h5>{{comment.user.username}}</h5>
-                        <a href="{% url 'main:post_detail_view' comment.post.id %}#commentsDiv"><h6 class="text-muted">{{comment.post.title}}</h6></a>
-                        <p>{{comment.content }}</p>
+                        <a href="{% url 'main:task_detail' comment.project.id %}#commentsDiv"><h6 class="text-muted">{{comment.project.title}}</h6></a>
+                        <p>{{comment.context }}</p>
                     </div>
                 {% endfor %}
             </div>

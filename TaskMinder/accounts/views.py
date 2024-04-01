@@ -44,8 +44,8 @@ def sign_in(request:HttpRequest):
         user = authenticate(request, username=request.POST["username"], password=request.POST["password"])
 
         if user:
-            sign_in(request, user)
-            return redirect("main:home_page")
+            login(request, user)
+            return redirect("main:dashboard")
         else:
             msg = "Username or Password is wrong. Try again..."
     

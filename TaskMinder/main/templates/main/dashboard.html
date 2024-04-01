@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} TaskMinder {% endblock %}
+
+
+{% block content %}
+
+    <!-- Checkbox -->
+
+<!-- <section>
+
+checkbox 
+
+        <label>
+            <input type="checkbox" id="myCheckbox">
+            <span id="myText">Text</span>
+        </label>
+
+</section> -->
+
+
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <button type="submit" class="px-3">Go</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SideBar  -->
+
+
+    <div class="sidebar">
+        <ul>
+            <li><button class="btn mt-3"><a href="{% url 'main:home_page' %}">HOME</a></button></li>
+            <li><button class="btn"><a href="#">PROJECTS</a></button></li>
+            <li><button class="btn"><a href="#">MY TASKS</a></button></li>
+            <li><button class="btn"><a href="#">CALENDAR</a></button></li>
+            <hr class="m-3">
+            <li><button class="btn"><a href="#">SETTING</a></button></li>
+            <li><button class="btn logout"><a href="#">LOGOUT</a></button></li>
+        </ul>
+    </div>
+
+
+
+
+    <!-- Avatar 
+
+<section>
+
+    <div class="avatar-selection col-8">
+        <h2>Choose Your Avatar</h2>
+        <div class="avatar-list">
+        <img src="bluewoman.jpeg" alt="Avatar 1" class="avatar">
+        <img src="bluewoman.jpeg" alt="Avatar 2" class="avatar">
+        <img src="bluewoman.jpeg" alt="Avatar 3" class="avatar">
+        </div>
+        <button id="select-avatar-btn">Select Avatar</button>
+    </div>
+
+</section> -->
+
+
+
+
+{% endblock %}

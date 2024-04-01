@@ -1,17 +1,17 @@
 {% extends 'main/base.html' %}
 
-{% block title %}update {{request.user.usernamae}} profile {% endblock %}
+{% block title %}Update {{request.user.usernamae}} profile {% endblock %}
 
 {% block content %}
 
-    <h1>Register New User</h1>
+    <h1>Sign Up</h1>
 
     {% if msg %}
         <div class="alert alert-danger">{{msg}}</div>
     {% endif %}
     <div class="row">
         <div class="col">
-            <form action="{% url 'accounts:update_profile_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+            <form action="{% url 'accounts:update_profile' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <input name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" value="{{user.first_name}}"/>
@@ -19,7 +19,7 @@
                 <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" value="{{user.email}}"/>
 
                 <textarea name="about" class="form-control" placeholder="about yourself">{{user.profile.about}}</textarea>
-                <input name="projects_link" class="form-control" type="text"   placeholder="@instagram link" value="{{user.profile.projects_link}}" />
+                <input name="projects_link" class="form-control" type="text"   placeholder="project link" value="{{user.profile.projects_link}}" />
 
                 <h4>Choose Avatar:</h4>
                 <img src="{{user.profile.avatar.url}}" class="avatar" />

@@ -1,0 +1,91 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Add New Event {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-5">
+        <h2>Add New Event</h2>
+        <div class="row">
+            <div class="col-12 ">
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container mt-5 px-5">
+       
+        <div class="row g-5">
+            <div class="col">
+                <h2>Add New Event</h2>
+                <form action="{% url 'main:add_event_view' %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+                    {% csrf_token %}
+
+                    <div class="row my-3">
+                        <div class="col-md-4 mb-4">
+                            <img src="#" class=" w-100 h-100 object-fit-cover rounded-4" alt="event">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row my-3">
+                                <div class="col-6">
+                                    <label for="event_title" class="form-label">event title</label>
+                                    <input name="event_title" type="text" placeholder="event_title" class="form-control" minlength="5" required/>
+        
+                                </div>
+                                <div class="col-6">
+                                    <label for="theme" class="form-label">Theme</label>
+                                    <select name="theme" class="form-select" required>
+                                        {% for val, th in themes %}
+                                            <option value="{{val}}">{{th}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="event_description" class="form-label">Event Description</label>
+                                    <textarea name="event_description" class="form-control" minlength="20" required></textarea>
+                                </div>
+                            </div>
+        
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="objective" class="form-label">Objective</label>
+                                    <textarea name="objective" class="form-control" minlength="20" required></textarea>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-6">
+                                   
+                                </div>
+                                <div class="col-6">
+                                    <label for="flexSwitchCheckDefault" class="form-label">on_site</label>
+                                    <div class="form-check form-switch">
+                                        <input name="on_site" value="True" class="form-check-input pt-3 pb-2 px-4" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="event_img" class="form-label">Upload Image:</label>
+                                    <input name="event_img" type="file"  accept="Image/*" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-12 ">
+                                    <input type="submit" class="btn btn-success w-100 " value="Add Event" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

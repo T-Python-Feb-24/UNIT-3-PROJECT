@@ -3,6 +3,8 @@ from django.http import HttpRequest, HttpResponse
 from datetime import datetime, timedelta , date
 from .models import Task , Comment , Project
 from django.db.models import Q
+from django.core.mail import send_mail
+from django.http import JsonResponse
 
 
 
@@ -102,3 +104,19 @@ def task_detail(request:HttpRequest, project_id):
 def dashboard(request:HttpRequest):
 
     return render(request, "main/dashboard.html" )
+
+
+
+
+def send_email(request:HttpRequest):
+    
+    if request.method == 'POST':
+        recipient_email = request.POST.get('recipient_email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        send_mail(subject, message, 'your-email@example.com', [recipient_email])
+
+        return JsonResponse({'success': True})
+
+    return render(request, 'dashboard.html')

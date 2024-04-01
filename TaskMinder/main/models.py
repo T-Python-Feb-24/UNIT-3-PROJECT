@@ -4,10 +4,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-
 class Task(models.Model):
 
-    pririty_choices = [
+    PRIORITY_CHOICES = [
         ('high', 'High'),
         ('medium', 'Medium'),
         ('low', 'Low'),
@@ -17,7 +16,7 @@ class Task(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField()
-    priority = models.CharField(max_length=20, choices=pririty_choices)
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
 
     def __str__(self):
         return self.title
@@ -63,3 +62,11 @@ class Note(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class SentEmail(models.Model):
+    
+    recipient_email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    sent_timestamp = models.DateTimeField(auto_now_add=True)

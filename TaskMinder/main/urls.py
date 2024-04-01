@@ -10,5 +10,6 @@ urlpatterns = [
     path("task/detail/", views.task_detail, name="task_detail"),
     path("add/comment/", views.add_comment, name="add_comment"),
     path("dashboard/", views.dashboard, name="dashboard"),
+    path('send/email/', views.send_email, name='send_email'),
 
 ]

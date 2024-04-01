@@ -15,7 +15,7 @@
       <div class="container py-3">
         <div class="logo-s">
           <img src="#" alt="logo" class="logo mx-2">
-          <a class="navbar-brand" href="#"><strong>AcademicToRealWord Clubs</strong></a>
+          <a class="navbar-brand" href="#"><strong>AcademicToRealWord Club</strong></a>
         </div>
         <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -26,20 +26,17 @@
               <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item px-1">
-              <a class="nav-link" href="#">All Clubs</a>
-            </li>
-            <li class="nav-item px-1">
-              <a class="nav-link" href="#">Search Club</a>
+              <a class="nav-link" href="#">Search Event</a>
             </li>
             <li class="nav-item">
               {% if request.user.is_authenticated %} 
-              <div class="d-flex gap-1">
+              <div class="d-flex gap-1 justify-content-center">
                 <a class="nav-link" href="#">welcome, {{request.user.username }}</a>
                 <a class="nav-link" href="{% url 'accounts:logout_user_view' %}">Logout</a>
               </div>
 
               {% else %}
-                <div class="dropdown">
+                <div class="  dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sign up</button>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{% url 'accounts:register_user_view' %}">Sign up</a></li>
@@ -57,8 +54,7 @@
                   <li><a class="dropdown-item" href="#">Event detail</a></li>
                 </ul>
               </div>
-            </li>
-            
+            </li>   
           </ul>
         </div>
       </div>

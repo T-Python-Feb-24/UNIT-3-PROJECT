@@ -6,7 +6,7 @@ from .models import Event
 #customizing the admin panel for a Model
 class EventAdmin(admin.ModelAdmin):
     #list to customize the columns
-    list_display = ['event_title', 'on_site', 'event_date_time', '']
+    list_display = ['event_title', 'on_site', 'event_date']
     #adding fliters
     list_filter =  ['theme']
 

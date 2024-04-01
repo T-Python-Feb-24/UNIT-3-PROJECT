@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Event Detail {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-5 px-5">  
+        <div class="row g-5">
+            <div class="col">
+                <h2>{{ event.event_title }} Detail</h2>
+                <div class="row my-3">
+                    <div class="col-md-4 mb-4">
+                        <img src="{{ event.event_img.url }}" class=" w-100 h-100 object-fit-cover rounded-4" alt="event img">
+                    </div>
+                    <div class="col-md-8">
+                        <h2>{{ event.event_title }}</h2>
+                        <p class="form-label">{{ event.event_date }}</p>
+                        <p class="form-label">{{ event.time_start }} - {{ event.time_end}}</p>
+
+
+                        <div class="row my-3">
+                            <div class="col-4">
+                                <label class="form-label">Event Theme:</label>
+                                <span style="font-size: 20px; padding-left: 5px;">{{ event.theme }}</span>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">on site: </label>
+                                <span style="font-size: 20px; padding-left: 5px;">{% if event.on_site == True %} On site {% else %} Online {% endif %}</span>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">Event type:</label>
+                                <span style="font-size: 20px; padding-left: 5px;">{{ event.event_type }}</span>
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-12">
+                                <label class="form-label">Description:</label>
+                                <p style="font-size: 20px; padding-left: 5px;">{{ event.event_description }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row my-3">
+                            <div class="col-12">
+                                <label class="form-label">Objective:</label>
+                                <p style="font-size: 20px; padding-left: 5px;">{{ event.objective }}</p>
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <div class="col-12 d-flex gap-2">
+                                
+                                <a href="{% url 'main:edit_event_view' event.id %}" class="btn btn-warning w-100 ">Edit</a>
+                                <a href="{% url 'main:delete_event_view' event.id %}" class="btn btn-danger w-100 ">Delete</a>      
+                                <a href="#" class="btn btn-success w-100 ">Reserve your seat</a>  <!--like favorits-->   
+
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

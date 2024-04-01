@@ -5,11 +5,119 @@
 {% block content %}
 <section>
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-12 ">
-               
+    
+        <div class="row g-5">
+            <div class="col">
+                <h2>Edit Event</h2>
+                <form action="{% url 'main:edit_event_view' event.id %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+                    {% csrf_token %}
+
+                    <div class="row my-3">
+                        <div class="col-md-4 mb-4">
+                            <img src="#" class=" w-100 h-100 object-fit-cover rounded-4" alt="event">
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="row my-3">
+                                <div class="col-6">
+                                    <label for="event_title" class="form-label">event title</label>
+                                    <input name="event_title" value="{{ event.event_title }}" type="text" placeholder="event_title" class="form-control" minlength="5"/>
+        
+                                </div>
+                                <div class="col-6">
+                                    <label for="theme" class="form-label">Theme</label>
+                                    <select name="theme" class="form-select" >
+                                        {% for val, th in themes %}
+                                            <option value="{{val}}" {% if event.theme == val %} selected {% endif %}>{{th}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="event_description" class="form-label">Event Description</label>
+                                    <textarea name="event_description" class="form-control" minlength="20" >{{ event.event_description }}</textarea>
+                                </div>
+                            </div>
+        
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="objective" class="form-label">Objective</label>
+                                    <textarea name="objective" class="form-control" minlength="20" >{{ event.objective }}</textarea>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-6">
+                                    <label for="event_type" class="form-label">Event type</label>
+                                    <select name="event_type" class="form-select" >
+                                        {% for val, t in types %}
+                                            <option value="{{val}}" {% if event.event_type == val %} selected {% endif %}>{{t}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label for="flexSwitchCheckDefault" class="form-label">on_site</label>
+                                    <div class="form-check form-switch">
+                                        <input name="on_site" value="True" class="form-check-input pt-3 pb-2 px-4" type="checkbox" role="switch" id="flexSwitchCheckDefault" {% if event.on_site %} checked {% endif %}>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="date"
+                                            style="display: block; margin-bottom: 10px;">
+        
+                                            Date :
+                                        </label>
+                                        <input type="date" name="event_date" id="date"
+                                            value="{{ event.event_date }}" 
+                                            style="padding: 5px; border-radius: 5px; 
+                                            border: 1px solid #ccc; margin-bottom: 10px;"
+                                        />
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="time"
+                                            style="display: block; margin-bottom: 10px;">
+                                            From:
+                                        </label>
+                                        <input type="time" name="time_start" id="time"
+                                        value="event.time_start" 
+                                        style="padding: 5px; border-radius: 5px; 
+                                            border: 1px solid #ccc; margin-bottom: 10px;"
+                                        />
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="time"
+                                            style="display: block; margin-bottom: 10px;">
+                                            To:
+                                        </label>
+                                        <input type="time" name="time_end" id="time"
+                                        value="event.time_end" 
+                                        style="padding: 5px; border-radius: 5px; 
+                                            border: 1px solid #ccc; margin-bottom: 10px;"
+                                        />      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="event_img" class="form-label">Upload Image:</label>
+                                    <img src="{{ event.event_img.url }}" alt="previus img plant" class="my-2 rounded-3" style="width:50px; height:30px;">
+                                    <input name="event_img" type="file"  accept="Image/*" class="form-control"  />
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-12 ">
+                                    <input type="submit" class="btn btn-success w-100 " value="Save Edit" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+
     </div>
 </section>
 {% endblock %}

@@ -5,17 +5,6 @@
 {% block content %}
 <section>
     <div class="container mt-5">
-        <h2>Add New Event</h2>
-        <div class="row">
-            <div class="col-12 ">
-               
-            </div>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="container mt-5 px-5">
        
         <div class="row g-5">
             <div class="col">
@@ -59,12 +48,54 @@
                             </div>
                             <div class="row my-3">
                                 <div class="col-6">
-                                   
+                                    <label for="event_type" class="form-label">Event type</label>
+                                    <select name="event_type" class="form-select" required>
+                                        {% for val, t in types %}
+                                            <option value="{{val}}">{{t}}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                                 <div class="col-6">
                                     <label for="flexSwitchCheckDefault" class="form-label">on_site</label>
                                     <div class="form-check form-switch">
                                         <input name="on_site" value="True" class="form-check-input pt-3 pb-2 px-4" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="date"
+                                            style="display: block; margin-bottom: 10px;">
+        
+                                            Date (YYYY-MM-DD):
+                                        </label>
+                                        <input type="date" name="event_date" id="date"
+                                            placeholder="YYYY-MM-DD" required
+                                            style="padding: 5px; border-radius: 5px; 
+                                            border: 1px solid #ccc; margin-bottom: 10px;"
+                                        />
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="time"
+                                            style="display: block; margin-bottom: 10px;">
+                                            From:
+                                        </label>
+                                        <input type="time" name="time_start" id="time"
+                                            placeholder="YYYY-MM-DD" required
+                                            style="padding: 5px; border-radius: 5px; 
+                                            border: 1px solid #ccc; margin-bottom: 10px;"
+                                        />
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="time"
+                                        style="display: block; margin-bottom: 10px;">
+                                        To:
+                                    </label>
+                                    <input type="time" name="time_end" id="time"
+                                        placeholder="YYYY-MM-DD" required
+                                        style="padding: 5px; border-radius: 5px; 
+                                        border: 1px solid #ccc; margin-bottom: 10px;"
+                                    />
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} New Student Register {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+
+        <h2>New Student Register</h2>
+
+        {% if msg %}
+        <div class="alert alert-danger">{{msg}}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col">
+                <form action="{% url 'accounts:register_user_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    
+                    <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                    <input name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" />
+                    <input name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
+                    <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" />
+    
+                    <input name="city" class="form-control" type="text" minlength="3" required placeholder="City" />
+                    <input name=" university" class="form-control" type="text" minlength="3" required placeholder="University" />
+
+                    <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+    
+                    <input type="submit" class="btn btn-primary" value="Register" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+

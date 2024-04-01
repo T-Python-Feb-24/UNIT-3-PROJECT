@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Academic To the RealWord Club {% endblock %}
+<section class="bg-img hero-section">
+    <div class="container text-white">
+        <div class="row">
+            <div class="col-12 ">
+                <div class="overlay"></div>
+                <div class="d-flex  flex-column align-items-center">
+                    <h1 class="hero-h1 mb-1">Club</h1>
+                    <p class="hero-p mt-1 mb-3">about</p>
+                    <form action="#" class="d-flex w-50" role="search" method="get">
+                        <input class="form-control me-2 rounded-pill p-2" type="search" placeholder="Search" aria-label="Search" name="search" required>
+                        <button class="btn btn-success rounded-pill" type="submit">Search</button>
+                    </form>
+                </div>  
+            </div>
+        </div>
+    </div>
+</section>
+{% block content %}
+{% endblock %}

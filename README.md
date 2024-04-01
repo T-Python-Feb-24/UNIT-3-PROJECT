@@ -6,16 +6,27 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 
 ## Project Name here
-project description here.
+**academic-to-realWorld Club**
+    Develop a platform for Students Club that aim to fill the gap between academic skills and real world skills
 
 ## Features List here
-- list of features
+- User registration and profile management.
+- Club creation.
+- Event creation.
+- Book event.
+- List of events creation.
+- Manage members club.
+- Notifications of event date and time
+- Serach events.
+- Browse events.
 
 ## User Stories, Wireframes & UML links
-- User stories document link here.
-- wireframe link here.
-- UML link here.
+- User stories document link here:
 
+- wireframe link here:
+
+- UML link here:
+    https://drive.google.com/file/d/1q__cllOwRcqK1YfZsAIUk0b5zDXL7xX1/view
 
 ## Minimum Requirements
 - User Stories(shared as a link to document or added as a file).

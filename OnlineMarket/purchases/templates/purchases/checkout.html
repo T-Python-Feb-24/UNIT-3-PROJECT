@@ -1,42 +1,54 @@
 {% extends 'product/base.html' %}
 {% block title %} {{user.username }} CHECKOUT {% endblock %}
+{% load static%}
 {% block content %}
 
-
-<div class="row m-3">
-    <h1 class="text-body-secondary">Checkout</h1>
-    <div class="col">
-
-        {% if  not request.user.is_authenticated %}
-        <h5 class="alert alert-warning"> yoy must be <a href="{%url 'accounts:login_user_view' %}">logged in</a></h5>
-        {% elif not order %}
-        <h4 class="alert alert-warning"> no order here</h4>
-        {% if is_added == True %}
-        <form method="POST" style="display:none;">
-        {% endif %}
-        <form action="{% url 'purchases:checkout_view' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
-            {% csrf_token %}
-             <label for="inputshipment_address">Shipment address</label>
-            <input name="shipment_address" id="inputshipment_address" type="text" class="form-control" required value="{{shipment_address}}" />
-            
-            <label for="inputshipment_phone">Shipment phone</label>
-            <input name="shipment_phone" id="inputshipment_phone" type="text"  class="form-control" required value="{{shipment_phone}}" />
-
-            <label for="inputcard_number">Card number</label>
-            <input name="card_number" id="inputcard_number" type="text"  class="form-control" placeholder="2222 2222 2222 2222" required value="{{card_number}}" />
-
-            <label for="inputexpire">Expire</label>
-            <input name="expire" id="inputexpire" type="number"  class="form-control" placeholder="mm/yy" required value="{{expire}}" />
-
-            <label for="inputsecurity_code">Security code</label>
-            <input name="security_code"  id="inputsecurity_code" type="text"  class="form-control" placeholder="333" required value="{{security_code}}" />
-
-            
-            <button type="submit" name="btnpayment" class="btn"  style="background-color: rgb(101, 100, 99);">Payment</button>
-        </form>
-
+<div class="container">
+    <div class="row m-3">
+        <h1 class="text-body-blak">Checkout</h1>
     </div>
-
-
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card border-1 shadow p-5 rounded-4">
+                <div class="card-body">
+                    <h5 class="card-title">Shipping Address</h5>
+                    <form action="{% url 'purchases:checkout_view' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="shipment_address" class="form-label">Address</label>
+                            <input type="text" id="shipment_address" name="shipment_address" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="payment_method" class="form-label">Payment Method</label>
+                            <select id="payment_method" name="payment_method" class="form-select" required>
+                                <option value="credit_card">Credit Card</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Proceed to Payment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-1 shadow p-5 rounded-4">
+                <div class="card-body">
+                    <h5 class="card-title">Cart</h5>
+                    <ul class="list-group">
+                        {% for item in cart_items %}
+                            <li class="list-group-item">
+                                {{ item.product.price }} SR 
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <h6 style="color: brown;">Total: {{ total_price }} SR</h6>
+                    <!--<img src="{% static 'images/cart.jpg'%}" class="rounded-4" style="width: 400px; height: 165px;"/>-->
+                    <h5>Thank you for choosing our services!<br> We appreciate your preference and trust in us Looking forward to serving you again soon.</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
+
 {%endblock%}

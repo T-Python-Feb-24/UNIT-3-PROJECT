@@ -13,7 +13,7 @@
                    
                         
                     <a href="{% url 'purchases:product_cart_view' product.id %}" class="btn btn-dark text-decoration-none add-to-cart-btn" id="addToCartModal">ADD TO CART<i class="bi cart material-symbols-outlined shopping_cart"></i></a>
-                        
+                       
                   
                      <a href="{% url 'product:product_list_view'  %}" class="btn btn-dark">SEARCH ON THE STORE</a>
             </div>
@@ -24,10 +24,12 @@
                 <img src="{{ product.image.url }}"  class="w-100 rounded-4" style="height: 400px;"/>
                     <div class="d-flex justify-content-between">
                         <div class="d-flex gap-2 p-4">
+                            
                             {% if request.user.is_staff %}
                                 <a href="{% url 'product:product_edit_view' product.id %}" class="btn btn-dark">update</a>
                                 <a href="{% url 'product:product_delete_view' product.id %}" class="btn btn-dark">Delete</a>
                             {%endif%}
+                            <a href="{% url 'favorites:add_remove_favorites_view' product.id %}" class="text-decoration-none text-black p-1"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
                         </div>
                     </div>
             </div>

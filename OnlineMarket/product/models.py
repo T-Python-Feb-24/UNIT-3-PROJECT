@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Product(models.Model):
 
     #catergories choices
-    categories = models.TextChoices("Category", ["Electronics", "Clothing and Fashion", "Health and Beauty", "Sports"])
+    categories = models.TextChoices("Category", ["Iphone", "Airbods", "Mackbook", "Ipad","Apple watch"])
 
     name = models.CharField(max_length=2048)
     description = models.TextField()

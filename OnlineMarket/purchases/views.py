@@ -20,9 +20,7 @@ def product_cart_view(request: HttpRequest, product_id):
         if not product_cart:
             cart = Cart(user=request.user, product=product)
             cart.save()
-        else:
-            #delete favorite if already exists
-            pass
+            return redirect("purchases:cart_view")
     
     except Exception as e:
         print(e)
@@ -31,7 +29,10 @@ def product_cart_view(request: HttpRequest, product_id):
 
 
 def cart_view(request:HttpRequest):
-    return render(request,"purchases/cart.html")
+    user=request.user
+    cart_item= user.cart_set.all()
+    total_price=sum(item.product.price for item in cart_item)
+    return render(request,"purchases/cart.html",{"user":user,"cart_item":cart_item,"total_price":total_price})
 
 def delete_product_view(request:HttpRequest,product_id):
      
@@ -43,39 +44,18 @@ def delete_product_view(request:HttpRequest,product_id):
      return redirect('purchases:cart_view')
 
 def checkout_view(request:HttpRequest):
-    context=None
-    ship_address=None
-    card_phone=None
-    card_number=None
-    exoire=None
-    security_code=None
-    is_added=None
-
-    if request.method=='POST' and 'btnpayment' in request.POST:
-        #هنا عملية الدفع
-         context={
-             "ship_address":ship_address,
-             "card_phone":card_phone,
-             "card_number":card_number,
-             "exoire":exoire,
-             "security_code":security_code,
-             "is_added":is_added
-            }
+    if request.method == 'POST':
+        # Process checkout form
+        # Perform payment processing and order creation here
+        return render(request, 'purchases/order_success.html')
     else:
-     #  تطلع اكسبشن اشوفها هنا قبل عملية الدفع
-     if request.user.is_authenticated:
-        new_order=Order.objects.get(user=request.user,is_finished=False)
-        if (new_order):
-            orderdetail=OrderDetail.objects.all().filter(order=new_order)
-            new_order.is_finished=True
-            new_order.save()
-        context={
-        'order':new_order,
-        'orderdetail':orderdetail,
-        }
-
-    return render(request,'purchases/checkout.html',context)
+        # Display checkout form
+        # Retrieve cart items and calculate total here
+        user=request.user
+        cart_item = user.cart_set.all()  # Example, replace with actual retrieval logic
+        total_price=sum(item.product.price for item in cart_item)
+        return render(request, 'purchases/checkout.html', {'cart_item': cart_item, 'total_price': total_price})
 
 
 #def order_complete_view(request:HttpRequest):
-    return render(request,'purchases/order_success.html')
+   # return render(request,'purchases/order_success.html')

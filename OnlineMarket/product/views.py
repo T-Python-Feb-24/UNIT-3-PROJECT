@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from .models import Product,Comment,Review
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 
@@ -14,14 +15,23 @@ def home_view(request:HttpRequest):
 
 # عرض المنتجات مع امكانية اضافتها للسله
 def product_list_view(request:HttpRequest):
-    
-    if "cat" in request.GET:
-        products = Product.objects.filter(category=request.GET["cat"])
-    else:
-        products = Product.objects.all()
 
-    return render(request, "product/product_list.html", {"products" : products, "categories" : Product.categories.choices})
-   
+    if "cat" in request.GET:
+        products_list = Product.objects.filter(category=request.GET["cat"])
+    else:
+        products_list = Product.objects.all()
+
+    paginator = Paginator(products_list, 4)  # عرض 4 منتجات في كل صفحة
+    page_number = request.GET.get('page')
+
+    try:
+        products = paginator.page(page_number)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    return render(request, "product/product_list.html", {"products": products, "categories": Product.categories.choices})
 
 
 # تشمل محتوى العنصر والكومنت والريلايتد

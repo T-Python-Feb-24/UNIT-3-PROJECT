@@ -2,11 +2,9 @@
 {% block title %} Product List {% endblock %}
 {% block content %}
  <div class="container">
-    <div class="row g-4 p-2">
+    <div class="row g-4 p-3">
 
         <div class="d-flex justify-content-between align-items-center">
-            <h2>{% if 'cat' in request.GET %} {{request.GET.cat}} {% else %} All {% endif %}Product ({{ products.count }}) </h2>
-
             <div class="d-flex gap-2">
                 <a href="{% url 'product:product_list_view' %}" class="p-2 ps-3 pe-3 rounded-pill cat  text-decoration-none  {% if 'cat' not in request.GET %} All  {% endif %}">All</a>
                 {% for val, key in categories %}
@@ -17,44 +15,50 @@
 
     </div>
 
-    <div class="row mt-1 g-4 p-3">
-
-        {% for product in products %}
-            <div class="col-3 product-container">
-                <div class="d-flex flex-column gap-2 p-3">
-                    <img src="{{ product.image.url }}" class="w-100 rounded-4 card-poster " style="height: 200px;"/>
-                   
-                    <h2 style="margin-left: 30px; color: black;">{{product.name}}</h2>
-                    <h6 class="cat rounded-pill {{product.category}} "  style="margin-left: 30px;" >{{ product.category }}</h6>
-                    <p class="rounded-pill {{product.price}}" style="margin-left: 30px;">{{product.price}} sr</p>
-                    
-                
-                    <h6><a href="{% url 'product:product_detail_view' product.id  %}"class="text-decoration-none" style="background-color: black; color: azure; border-radius: 44px; margin: 20px; padding: 3px 75px; text-align: center;">More</a></h6>
-                
-                </div>
-            </div>
-            
-        {% endfor %}
-
+   <div class="row mt-1 g-4 p-3">
+    {% for product in products %}
+    <div class="col-3 product-container">
+        <div class="d-flex flex-column gap-2 p-3">
+            <img src="{{ product.image.url }}" class="w-100 rounded-4 card-poster " style="height: 200px;" />
+            <h2 style="margin-left: 30px; color: black;">{{product.name}}</h2>
+            <h6 class="cat rounded-pill {{product.category}}" style="margin-left: 30px;">{{ product.category }}</h6>
+            <p class="rounded-pill {{product.price}}" style="margin-left: 30px;">{{product.price}} sr</p>
+            <h6><a href="{% url 'product:product_detail_view' product.id  %}" class="text-decoration-none" style="background-color: black; color: azure; border-radius: 44px; margin: 20px; padding: 3px 75px; text-align: center;">More</a></h6>
+        </div>
     </div>
- </div>
- <div class="container">
+    {% endfor %}
+</div>
+
+<!-- قائمة التنقل بين الصفحات -->
+<div class="container">
     <div class="raw">
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example text-black">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
+                {% if products.has_previous %}
+                <li class="page-item text-black">
+                    <a class="page-link text-black" href="?page=1">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link text-black" href="?page={{ products.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in products.paginator.page_range %}
+                <li class="page-item {% if num == products.number %}active{% endif %}">
+                    <a class="page-link text-black" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                {% if products.has_next %}
+                <li class="page-item">
+                    <a class="page-link text-black" href="?page={{ products.next_page_number }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link text-black" href="?page={{ products.paginator.num_pages }}">prvious</a>
+                </li>
+                {% endif %}
             </ul>
-          </nav>
+        </nav>
     </div>
- </div>
+</div>
     
 
 

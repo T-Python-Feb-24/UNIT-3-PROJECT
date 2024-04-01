@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+
+
+h1{ color: rebeccapurple;
+    text-align: center;
+    text-indent: 50px
+    font-family: 50px;
+
+}
+
+body 
+{
+    background-image: url("/static/images/nnn.png"); no-repeat;
+    
+}

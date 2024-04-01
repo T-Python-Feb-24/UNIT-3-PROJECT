@@ -21,8 +21,8 @@ A distance learning platform that helps the beneficiary develop his creative and
 9- Improving qualitative competence and upgrading it in terms of capabilities.
 10- Achieving the slogan (the productive student). The student, whether an employee, worker, or otherwise, learns and develops in his position
 ## User Stories, Wireframes & UML links
-- User stories document link here.
-- wireframe link here.
+- User stories document link here.  sign in. Add courses. Follow up educational courses. Upon completion, receive a certificate
+- wireframe link here. https://www.figma.com/file/dCQydCQsdp9XoSPIuB4KcH/Untitled?type=design&node-id=0%3A1&mode=design&t=ooMGKklA6ef94hQd-1
 - UML link here.   https://ibb.co/748ZYb4
 
 

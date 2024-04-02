@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ place.name }} Details
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h1 class="mb-4">{{ place.name }} Details</h1>
+            <!-- Carousel -->
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in place.images.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image.image.url }}" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="{{ place.name }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <!-- Place details -->
+            <div class="mt-4">
+                <p>Neighborhood: {{ place.neighborhood }}</p>
+                <p>Price: {{ place.price }}</p>
+                <!-- <p>Latitude: {{ place.latitude }}</p>
+                <p>Longitude: {{ place.longitude }}</p> -->
+            </div>
+        </div>
+
+        <!-- Map column -->
+        <div class="col-md-5">
+            <div id="map" style="height: 400px;margin-top: 100px; border-radius: 20px;"></div>
+
+            <!-- Update and delete buttons -->
+            <div class="mt-3">
+                <a href="#" class="btn btn-outline-dark me-2">Update</a>
+                <a href="#" class="btn btn-outline-dark">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+    var map = L.map('map').setView([{{ place.latitude }}, {{ place.longitude }}], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+    L.marker([{{ place.latitude }}, {{ place.longitude }}]).addTo(map).bindPopup("{{ place.name }}").openPopup();
+</script>
+{% endblock %}

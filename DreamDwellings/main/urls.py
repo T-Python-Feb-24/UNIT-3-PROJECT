@@ -6,5 +6,10 @@ app_name = "main"
 urlpatterns  = [
     path("", views.index_view, name="index_view"),
     path('about/', views.about, name='about'),
-#     path('contact/success/', views.contact_success, name='contact_success'),
+    path('contact/', views.contact_view, name='contact'),
+    path("place/add/", views.add_place, name="add_place_view"),
+    path('place/<int:place_id>/', views.place_detail, name='place_detail'),
+    path('place/add/main/success_page/', views.success_page_view, name='success_page'),
+    path('services/', views.services_page, name='services_page'),
+    path('places/', views.all_places_view, name='all_places'),
 ]

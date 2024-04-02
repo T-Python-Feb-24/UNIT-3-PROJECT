@@ -1,0 +1,18 @@
+
+
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Successfully Added - DreamDwellings{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <img src="{% static 'images/pexels-kampus-production-8815878.jpg' %}" class="img-fluid mt-0 w-50" alt="Success Icon">
+            <h1 class="mt-4">Success!</h1>
+            <p class="lead">Your action was successful.</p>
+            <a href="{% url 'main:index_view' %}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

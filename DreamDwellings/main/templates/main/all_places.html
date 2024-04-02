@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+
+{% block title %}All Places{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">All Places</h1>
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="neighborhood" class="form-label">Neighborhood:</label>
+                <select class="form-select" name="neighborhood" id="neighborhood">
+                    <option value="">All Neighborhoods</option>
+                    {% for neighborhood in neighborhoods %}
+                    <option value="{{ neighborhood }}" {% if request.GET.neighborhood == neighborhood %}selected{% endif %}>{{ neighborhood }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="category" class="form-label">Category:</label>
+                <select class="form-select" name="category" id="category">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}" {% if request.GET.category == category %}selected{% endif %}>{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-outline-dark mt-md-4 mt-4">Apply Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        {% for place in filtered_places %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                {% if place.placeimage_set.all %}
+                    <img src="{{ place.placeimage_set.first.image.url }}" class="card-img-top" alt="{{ place.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ place.name }}</h5>
+                    <p class="card-text">Neighborhood: {{ place.neighborhood }}</p>
+                    <p class="card-text">Category: {{ place.category }}</p>
+                    <p class="card-text">Price: {{ place.price }}</p>
+                    <a href="{% url 'main:place_detail' place_id=place.id %}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12">
+            <p>No places found.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,22 +1,74 @@
-from django.db import models
-from django.contrib.auth.models import User
+# from django.conf import settings
+# from django.db import models
 
-# Create your models here.
-class Property(models.Model):
-    
-    # categories = models.TextChoices("Category", ["rent", "buy", "Flower", "Herb","Tree"])
-       
-    # agent = models.ForeignKey()
-    name = models.CharField(max_length=2048)
-    about = models.TextField()
+# from django.db import models
+
+
+
+# class Place(models.Model):
+#     CATEGORY_CHOICES = (
+#         ('For Sale', 'For Sale'),
+#         ('For Rent', 'For Rent'),
+#     )
+#     RIYADH_NEIGHBORHOOD_CHOICES = (
+#         ('Downtown', 'Downtown'),
+#         ('Al-Murabba', 'Al-Murabba'),
+#         ('Al-Olaya', 'Al-Olaya'),
+#         ('Al-Malaz', 'Al-Malaz'),
+#         ('Al-Wadi', 'Al-Wadi'),
+#     )
+
+#     name = models.CharField(max_length=100)
+#     neighborhood = models.CharField(max_length=50, choices=RIYADH_NEIGHBORHOOD_CHOICES)
+#     latitude = models.DecimalField(max_digits=9, decimal_places=6)
+#     longitude = models.DecimalField(max_digits=9, decimal_places=6)
+#     price = models.DecimalField(max_digits=10, decimal_places=2)
+#     address = models.CharField(max_length=255)
+#     image = models.ImageField(upload_to="images/")  
+#     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+#     for_rent = models.BooleanField(default=False)  
+#     for_sale = models.BooleanField(default=False)  
+
+#     def __str__(self):
+#         return self.name
+from django.db import models
+
+
+class Place(models.Model):
+    CATEGORY_CHOICES = (
+        ('For Sale', 'For Sale'),
+        ('For Rent', 'For Rent'),
+    )
+    RIYADH_NEIGHBORHOOD_CHOICES = (
+        ('Downtown', 'Downtown'),
+        ('Al-Murabba', 'Al-Murabba'),
+        ('Al-Olaya', 'Al-Olaya'),
+        ('Al-Malaz', 'Al-Malaz'),
+        ('Al-Wadi', 'Al-Wadi'),
+    )
+
+    name = models.CharField(max_length=100)
+    neighborhood = models.CharField(max_length=50, choices=RIYADH_NEIGHBORHOOD_CHOICES)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to="images/", default="images/pexels-photo-1423600.jpeg")
-    # category = models.CharField(max_length=64, choices=categories.choices)
-    agent_id = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    address = models.CharField(max_length=255)
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    for_rent = models.BooleanField(default=False)
+    for_sale = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
+
+
+class PlaceImage(models.Model):
+    place = models.ForeignKey(Place, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="images/")
+
+    def __str__(self):
+        return f"Image for {self.place.name}"
+
+
     
 # class Contact(models.Model):
 #     first_name = models.CharField(max_length=100)

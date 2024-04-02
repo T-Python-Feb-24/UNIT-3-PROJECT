@@ -1,8 +1,10 @@
 
 body {
-     background-color: #340606;
+font-family: "Playfair Display", serif;
+  
 }
  header {
+    font-family: "Playfair Display", serif;
     background-color: #303030;
     color: #ffffff; 
     padding: 10px;
@@ -49,4 +51,20 @@ footer {
     font-size: 16px; 
     color: #000000; 
     line-height: 1.5; 
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 10px;
 }

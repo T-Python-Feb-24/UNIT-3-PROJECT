@@ -36,11 +36,12 @@
                 Please enter your message.
             </div>
         </div>
-        <button type="submit" class="btn-2 btn-primary">Submit</button>
+        <button type="submit" class="btn btn-outline-dark">Submit</button>
        
     </form>
     {% if request.user.is_staff %}
     <a href="{% url 'main:message_view'  %}" class=""> View messages</a> 
     {% endif %}
 </div>
+
 {% endblock %}

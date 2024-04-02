@@ -1,7 +1,77 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Barbar shop {% endblock %}
+{% block title %} Barber shop {% endblock %}
 
 {% block content %}
-
+<div class="index_content">
+    <section class="page-part phrase" id="home">
+        <div class="content">
+            <h2 class="text-center" id="center">Are you ready for the smoothest shave you’ll ever get?</h2>
+        </div>
+    </section>
+    <section class="page-part" id="about">
+        <div class="content ">
+            <h2>ABOUT</h2>
+            <p>We are third generation barbers with a high level experience and expertise in all aspects of our craft. The reason to our success is the overall experience we have working and learning from a diverse cultures.</p>
+        </div>
+    </section>
+    <section class="page-part" id="services">
+        <div class="content">
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="card">
+                        <img src="/static/images/haircut.jpg" class="card__img">
+                        <span class="card__footer">
+                          <span>Haircut</span>
+                        </span>
+                        <span class="card__action">
+                          <svg viewBox="0 0 448 512" title="play">
+                            <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+                          </svg>
+                        </span>
+                      </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="card">
+                        <img src="/static/images/beard.jpg" class="card__img">
+                        <span class="card__footer">
+                          <span>Beard</span>
+                        </span>
+                        <span class="card__action">
+                          <svg viewBox="0 0 448 512" title="play">
+                            <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+                          </svg>
+                        </span>
+                      </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="card">
+                        <img src="/static/images/razor.jpg" class="card__img">
+                        <span class="card__footer">
+                          <span>Razor blade</span>
+                        </span>
+                        <span class="card__action">
+                          <svg viewBox="0 0 448 512" title="play">
+                            <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+                          </svg>
+                        </span>
+                      </a>
+                </div>
+                <div class="col">
+                    <a href="#" class="card">
+                        <img src="/static/images/shaving.jpg" class="card__img">
+                        <span class="card__footer">
+                          <span>Shaving</span>
+                        </span>
+                        <span class="card__action">
+                          <svg viewBox="0 0 448 512" title="play">
+                            <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+                          </svg>
+                        </span>
+                      </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}

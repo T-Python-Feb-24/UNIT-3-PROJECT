@@ -25,4 +25,12 @@ class Comments(models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE)
    prodect = models.ForeignKey(Prodect, on_delete=models.CASCADE)
    content = models.TextField(blank=False)
-   commented_date = models.DateTimeField(auto_now_add=True)
+   commented_at = models.DateTimeField(auto_now_add=True)
+
+
+class Contactus(models.Model):
+   name = models.CharField(max_length=50)
+   email = models.EmailField(null=False)
+   phone = models.CharField(max_length=10)
+   content = models.TextField(blank=False)
+   created_at = models.DateTimeField(auto_now_add=True)

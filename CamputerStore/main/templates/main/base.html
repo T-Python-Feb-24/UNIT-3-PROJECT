@@ -39,17 +39,17 @@
                <option value="English">USD-دولار</option>
             </select>
          </div>
-         <nav class="navbar navbar-expand-sm">
-            <div class="container-fluid d-flex flex-row-reverse">
+         <nav class="navbar navbar-expand-sm flex-row-reverse">
+            <div class="container-fluid d-flex">
                <a class="ps-4 title text-decoration-none" href="{% url "main:index_view" %}">متجر الحاسب</a>
                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                   aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                </button>
-               <div class="collapse gap-5 navbar-collapse" id="navbarNavDropdown">
+               <div class="collapse gap-5 navbar-collapse flex-row-reverse" id="navbarNavDropdown">
                   <div class="d-flex justify-content-center">
-                     <ul class="navbar-nav align-items-center flex-row gap-2 ">
+                     <ul class="navbar-nav align-items-center flex-row gap-2 flex-row-reverse">
                         <li class="nav-item">
                            <a class="nav-link active" aria-current="page" href="#">
                               <div class="d-flex flex-column border align-items-center header-user">
@@ -98,7 +98,6 @@
                               {% endif %}
                            </a>
                         </li>
-                        
                         {% if request.user.is_authenticated %}
                         <li class="nav-item">
                            <a class="nav-link active" href="{% url "account:logout_view" %}">
@@ -110,14 +109,18 @@
                         {% endif %}
                      </ul>
                   </div>
-                  <div class="input-group d-grid align-items-center">
+
+                  <form class="input-group d-grid align-items-center" action="{% url "main:search_prodact_view" %}"
+                     method="post">
+
                      <input type="search" placeholder="عما تبحث" id="example-search-input">
-                     <a href="#" id="search">
+                     <button type="submit" value="submit" id="search">
                         <span class="material-symbols-outlined">search</span>
-                     </a>
-                  </div>
+                     </button>
+                  </form>
                </div>
             </div>
+
          </nav>
          <div class="d-flex gap-3 top-nav-bar">
             <select class="form-select select" name="currency-selector" aria-label="Lang">
@@ -137,20 +140,16 @@
       <footer class="py-0 my-0">
          <ul class="nav justify-content-center border-bottom pb-1 mb-1">
             <li class="nav-item">
-               <a href="#" class="nav-link px-2">Home</a>
+               <a href="{% url "main:index_view" %}" class="nav-link px-2">الرئيسية</a>
             </li>
             <li class="nav-item">
-               <a href="#" class="nav-link px-2">Random
-                  Prodect</a>
+               <a href="{% url "main:contactus_view" %}" class="nav-link px-2">اتصل بنا</a>
             </li>
             <li class="nav-item">
-               <a href="#" class="nav-link px-2">Contact Us</a>
-            </li>
-            <li class="nav-item">
-               <a href="#" class="nav-link px-2">About</a>
+               <a href="{% url "main:about_view" %}" class="nav-link px-2">حول الموقع</a>
             </li>
          </ul>
-         <p class="text-center">© 2024 computer store, Inc</p>
+         <p class="text-center">© 2024 متجر الحاسب, Inc</p>
       </footer>
    </main>
    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

@@ -1,11 +1,11 @@
 {% extends "main/base.html" %}
 {% block title %}
-   Login
+   تسجيل دخول
 {% endblock title %}
 {% block content %}
    <div class="d-flex h-100 justify-content-center">
       <div class="d-flex flex-column w-25 align-self-center">
-         <h1>Login</h1>
+         <h1 class="text-end">تسجيل الدخول</h1>
          {% if msg %}
             <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
                <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -24,7 +24,7 @@
             </div>
          {% endif %}
          <div class="row mt-2">
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column rtl">
                <form action="{% url 'account:login_view' %}"
                      method="post"
                      class="d-flex flex-column gap-2">
@@ -44,7 +44,7 @@
                   {% if "next" in request.GET %}<input type="hidden" name="next" id="next" value="{{ next }}">{% endif %}
                   <input type="submit" class="btn btn-dark m-3" value="Login" />
                </form>
-               <span>ليس لديك حساب  <a href="{% url "account:sign_up_view" %}">التسجيل من هنا</a> </span>
+               <span class="text-center">ليس لديك حساب  <a href="{% url "account:sign_up_view" %}">التسجيل من هنا</a> </span>
             </div>
          </div>
       </div>

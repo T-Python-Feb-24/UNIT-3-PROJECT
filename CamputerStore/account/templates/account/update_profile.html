@@ -1,58 +1,72 @@
 {% extends "main/base.html" %}
 {% block title %}
-   Update MyPofile
+   تعديل الملف الشخصي
 {% endblock title %}
 {% block content %}
-   <div class="d-flex flex-column justify-self-center align-self-center w-50">
-      <h1>Update Profile</h1>
-      <div class="row mt-2 mb-5">
-         <div class="d-flex flex-column">
+   <div class="d-flex flex-column justify-content-center align-items-center w-100">
+      <h1 class="mt-4">تعديل الملف الشخصي</h1>
+      <div class="row mt-2 mb-5 w-50">
+         <div class="d-flex flex-column justify-self-center">
             <form action="{% url 'account:update_profile_view' user.username %}"
                   method="post"
                   class="d-flex flex-column gap-2"
                   enctype="multipart/form-data">
                {% csrf_token %}
-               <label class="form-label mb-0 ms-1 mt-2">User Name:</label>
-               <input name="username"
-                      class="form-control"
-                      type="text"
-                      disabled
-                      minlength="3"
-                      required
-                      value="{{ request.user.username }}" />
-               <label class="form-label mb-0 ms-1 mt-2">First Name:</label>
-               <input name="first_name"
-                      class="form-control"
-                      type="text"
-                      minlength="3"
-                      required
-                      value="{{ request.user.first_name }}" />
-               <label class="form-label mb-0 ms-1 mt-2">Last Name</label>
+               <fieldset disabled>
+                  <label class="form-label mb-0 ms-1 mt-2">اسم المستخدم</label>
+                  <input name="username"
+                         class="form-control opacity-50"
+                         type="text"
+                         minlength="3"
+                         required
+                         value="{{ request.user.username }}" />
+                  <label class="form-label mb-0 ms-1 mt-2">الاسم الأول</label>
+                  <input name="first_name"
+                         class="form-control"
+                         type="text"
+                         minlength="3"
+                         value="{{ request.user.first_name }}" />
+               </fieldset>
+               <label class="form-label mb-0 ms-1 mt-2">اسم العائلة</label>
                <input name="last_name"
                       class="form-control"
                       type="text"
                       minlength="3"
-                      required
                       value="{{ request.user.last_name }}" />
-               <label class="form-label mb-0 ms-1 mt-2">Email:</label>
+               <label class="form-label mb-0 ms-1 mt-2">البريد الالكتروني</label>
                <input name="email"
                       class="form-control"
                       type="email"
                       minlength="3"
                       disabled
-                      required
                       value="{{ user.email }}" />
-               <label class="form-label mb-0 ms-1 mt-2">About yourself:</label>
+               <label class="form-label mb-0 ms-1 mt-2">الجوال</label>
+               <input name="phone"
+                      class="form-control"
+                      type="text"
+                      length="10"
+                      value="{{ user.profile.phone }}"
+                      placeholder="05XXXXXXXX" />
+               <label class="form-label mb-0 ms-1 mt-2">الجنس</label>
+               <select id="gender" name="gender" class="form-select">
+                  {% for val,key in genders %}
+                     <option {% if val == user.profile.gender %}selected{% endif %}
+                             value="{{ key }}">{{ val }}</option>
+                  {% endfor %}
+               </select>
+               <label class="form-label mb-0 ms-1 mt-2">العنوان</label>
+               <textarea name="address" class="form-control">{{ user.profile.address }}</textarea>
+               <label class="form-label mb-0 ms-1 mt-2">نبذة عنك</label>
                <textarea name="about" class="form-control">{{ user.profile.about }}</textarea>
                <div class="form-outline mb-4">
-                  <label class="form-label mb-0 ms-1 mt-2">Nationality:</label>
+                  <label class="form-label mb-0 ms-1 mt-2">الجنسية</label>
                   <select id="nationality" name="nationality" class="form-select">
                      {% for val,n in nationality %}
                         <option {% if val == user.profile.nationality %}selected{% endif %}
                                 value="{{ val }}">{{ val }}</option>
                      {% endfor %}
                   </select>
-                  <label class="form-label mb-0 ms-1 mt-2">Upload Avatar:</label>
+                  <label class="form-label mb-0 ms-1 mt-2">رفع صورة شخصية:</label>
                   <img src="{{ user.profile.avatar.url }}"
                        height="110px"
                        width="100px"
@@ -60,7 +74,7 @@
                        alt="">
                   <input type="file" class="form-control" name="avatar" />
                </div>
-               <input type="submit" class="btn btn-dark mt-3" value="Sign Up" />
+               <input type="submit" class="btn btn-dark mt-3" value="تعديل" />
             </form>
          </div>
       </div>

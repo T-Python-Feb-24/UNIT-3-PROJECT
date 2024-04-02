@@ -1,11 +1,11 @@
 {% extends "main/base.html" %}
 {% block title %}
-   Sign UP
+   انشاء حساب
 {% endblock title %}
 {% block content %}
    <div class="d-flex mb-5 justify-content-center">
       <div class="signup w-50">
-         <h1 class="text-center pt-4">Sign UP</h1>
+         <h1 class="text-center text-end pt-4">انشاء حساب</h1>
          {% if msg %}
             <svg xmlns="http://www.w3.org/2000/svg" class="d-none h-100">
                <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
@@ -13,16 +13,14 @@
                </symbol>
             </svg>
             <div class="d-flex w-100 justify-content-center myalart">
-               <div class="alert alert-danger d-flex align-items-center w-50"
+               <div class="alert alert-danger d-flex align-items-center w-75"
                     role="alert">
                   <svg class="bi flex-shrink-0 me-2 dager-svg"
                        role="img"
                        aria-label="Danger:">
                      <use xlink:href="#exclamation-triangle-fill" />
                   </svg>
-                  <div>
-                     <div>{{ msg }}</div>
-                  </div>
+                  <span class="px-3 text-danger-emphasis">{{ msg }}</span>
                </div>
             </div>
          {% endif %}
@@ -38,14 +36,20 @@
                       type="text"
                       minlength="3"
                       required
-                      placeholder="اسم المستخدم" />
+                      placeholder="ahmad" />
                <label class="form-label mb-0 ms-1 mt-2">البريد الالكتروني</label>
                <input name="email"
                       class="form-control"
                       type="email"
-                      minlength="3"
                       required
-                      placeholder="البريد الالكتروني" />
+                      placeholder="example@example.com" />
+               <label class="form-label mb-0 ms-1 mt-2">الجوال</label>
+               <input name="phone"
+                      class="form-control"
+                      type="number"
+                      length="10"
+                      required
+                      placeholder="05XXXXXXXX" />
                <label class="form-label mb-0 ms-1 mt-2">كلمة السر</label>
                <input name="password"
                       id="password"
@@ -66,7 +70,7 @@
                       required
                       placeholder="تأكيد كلمة السر" />
                <span id="message" class="text-end"></span>
-               <input type="submit" class="btn btn-dark mt-3" value="Sign Up" />
+               <input type="submit" class="btn btn-dark my-2" value="Sign Up" />
             </form>
             <span>لديك بالفعل حساب؟ <a href="{% url "account:login_view" %}">تسجيل الدخول هنا</a> </span>
          </div>

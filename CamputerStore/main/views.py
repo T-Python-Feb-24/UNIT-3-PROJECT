@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, QueryDict
+from .models import Contactus, Prodect, Comments
 from django.core.paginator import Paginator
 
 
@@ -8,6 +9,12 @@ def index_view(request: HttpRequest):
    return render(request, "main/index.html")
 
 
+def about_view(request: HttpRequest):
+   return render(request, "main/about.html")
+
+
+def search_prodact_view(request: HttpRequest):
+   return render(request, "main/search_prodect.html")
 # def new_plant_view(request: HttpRequest):
 #    if not request.user.is_staff or request.user.is_superuser:
 #       return render(request, "main/no_permission.html")
@@ -113,18 +120,20 @@ def index_view(request: HttpRequest):
 #                   "categories": Plant.category_choices.choices})
 
 
-# def contact_view(request: HttpRequest):
-#    if request.method == "POST":
-#       contact = Contact.objects.create(
-#           first_name=request.POST.get("first_name"),
-#           last_name=request.POST.get("last_name"),
-#           email=request.POST.get("email"),
-#           message=request.POST.get("message"),
-#       )
-#       contact.save()
-#       redirect("main:index_view")
-
-#    return render(request, "main/contact.html")
+def contactus_view(request: HttpRequest):
+   try:
+      msg = None
+      if request.method == "POST":
+         contact = Contactus.objects.create(
+            name=request.POST.get("name"),
+            email=request.POST.get("email"),
+            phone=request.POST.get("phone"),
+            content=request.POST.get("content"),
+         )
+         redirect("main:index_view", context={"msg", msg})
+   except Exception as e:
+      print(e)
+   return render(request, "main/contactus.html")
 
 
 # def contactUs_messages_view(request: HttpRequest):

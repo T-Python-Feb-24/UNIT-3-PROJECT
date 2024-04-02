@@ -14,42 +14,29 @@ def sign_up_view(request: HttpRequest):
       if request.method == "POST":
          with transaction.atomic():
             # create new user
-            full_name = request.POST.get("full_name").split(" ")
-            first_name, last_name = full_name[0], full_name[1] if len(
-               full_name) > 1 else ""
             if request.POST.get("password") != request.POST.get("confirm_password"):
                msg = "Invalid password"
                raise IntegrityError(msg)
             new_user = User.objects.create_user(
                 username=request.POST.get("username"),
                 email=request.POST.get("email"),
-                first_name=first_name,
-                last_name=last_name,
                 password=request.POST.get("password")
             )
 
-            new_user.save()
             profile = Profile.objects.create(user=new_user,
-                                             phone=request.POST.get("phone"),
-                                             gender=request.POST.get("gender"),
-                                             about=request.POST.get("about"),
-                                             avatar=request.FILES.get(
-                                                 "avatar", Profile.avatar.field.get_default()),
-                                             nationality=request.POST.get("nationality"))
-            profile.save()
-         redirect("account:login_view")
+                                             phone=request.POST.get("phone"))
+
+         return redirect("account:login_view")
 
    except IntegrityError as e:
-      msg = msg = "Username or Email already exist. Try again..."
+      msg = msg = "اسم المستخدم أو الايميل مستخدم بالفعل. حاول مرة اخرى..."
       print(e)
 
    except Exception as e:
       msg = "Something went wrong. Please try again."
-      print(e)
+      print(e.__class__)
 
-   return render(request, "account/sign_up.html", {"nationality": Profile.nationality_choices.choices,
-                                                   "genders": Profile.gender_choices.choices,
-                                                   "msg": msg})
+   return render(request, "account/sign_up.html", {"msg": msg})
 
 
 def login_view(request: HttpRequest):
@@ -103,7 +90,8 @@ def update_profile_view(request: HttpRequest, user_name):
    if request.method == "POST":
       user.first_name = request.POST.get('first_name', user.first_name)
       user.last_name = request.POST.get('last_name', user.last_name)
-      user.profile.gender = request.POST.get('about', user.profile.gender)
+      user.profile.phone = request.POST.get('phone', user.profile.phone)
+      user.profile.gender = request.POST.get('gender', user.profile.gender)
       user.profile.about = request.POST.get('about', user.profile.gender)
       user.profile.address = request.POST.get('about', user.profile.gender)
       user.profile.nationality = request.POST.get(
@@ -114,7 +102,8 @@ def update_profile_view(request: HttpRequest, user_name):
       return redirect("account:user_profile_view", user_name=user.username)
 
    return render(request, "account/update_profile.html", {"user": user,
-                                                          "nationality": Profile.nationality_choices.choices, })
+                                                          "nationality": Profile.nationality_choices.choices,
+                                                          "genders": Profile.gender_choices.choices, })
 
 
 def user_favorite_view(request: HttpRequest):

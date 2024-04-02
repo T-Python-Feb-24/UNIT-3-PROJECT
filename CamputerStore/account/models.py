@@ -14,8 +14,9 @@ class Profile(models.Model):
       UAE = "United Arab Emirates"
 
    class gender_choices(models.TextChoices):
-      Male = "Male"
-      Female = "Female"
+      null = ""
+      Male = "ذكر"
+      Female = "انثى"
 
    user = models.OneToOneField(User, on_delete=models.CASCADE)
    phone = models.CharField(max_length=10, unique=True)
@@ -23,7 +24,7 @@ class Profile(models.Model):
        upload_to=group_based_upload_to, default="images/profiles/user-defualt.svg")
    gender = models.CharField(max_length=22,
                              choices=gender_choices.choices,
-                             default=gender_choices.Male)
+                             default=gender_choices.null)
    nationality = models.CharField(max_length=20,
                                   choices=nationality_choices.choices,
                                   default=nationality_choices.SA)

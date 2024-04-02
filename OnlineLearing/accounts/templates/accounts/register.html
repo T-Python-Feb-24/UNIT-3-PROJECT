@@ -4,31 +4,61 @@
 
 {% block content %}
 
-    <h1>Register New User</h1>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Register New User</h1>
 
-    {% if msg %}
-        <div class="alert alert-danger">{{msg}}</div>
-    {% endif %}
-    <div class="row">
-        <div class="col">
-            <form action="{% url 'accounts:register_user_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
-                {% csrf_token %}
+        {% if msg %}
+            <div class="alert alert-danger">{{msg}}</div>
+        {% endif %}
 
-                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
-                <input name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" />
-                <input name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
-                <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" />
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form action="{% url 'accounts:register_user_view' %}" method="post" class="border p-4 rounded shadow-sm" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-                <textarea name="about" class="form-control" placeholder="about yourself"></textarea>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input name="username" id="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                    </div>
 
-                <h4>Choose Avatar:</h4>
-                <input type="file" class="form-control" name="avatar" />
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input name="first_name" id="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" />
+                    </div>
 
-                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input name="last_name" id="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
+                    </div>
 
-                <input type="submit" class="btn btn-primary" value="Sign Up" />
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input name="email" id="email" class="form-control" type="email" minlength="3" required placeholder="Email" />
+                    </div>
 
-            </form>
+                    <div class="mb-3">
+                        <label for="about" class="form-label">About Yourself</label>
+                        <textarea name="about" id="about" class="form-control" placeholder="About yourself"></textarea>
+                    </div>
+
+                    
+
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Choose Avatar</label>
+                        <input name="avatar" id="avatar" type="file" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input name="password" id="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+
+                </form>
+            </div>
         </div>
     </div>
+
 {% endblock %}
+<!--لاتحوسين فيها-->

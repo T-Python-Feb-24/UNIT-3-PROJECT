@@ -25,15 +25,16 @@
                 <a class="nav-link active" aria-current="page" href="{% url 'main:add_about_view' %}">About</a>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'main:add_courses_view' %}">courses</a>
+                    <li><a class="nav-link active" aria-current="page" href="{% url 'accounts:register_user_view' %}">Sign up</a></li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">services</a>
+
               </li>
             </ul>
              
             <form class="d-flex" role="search">
-              
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sign up</button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{% url 'accounts:register_user_view' %}">Sign up</a></li>
                   <li><a class="dropdown-item" href="{% url 'accounts:login_user_view' %}">Login</a></li>

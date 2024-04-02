@@ -1,0 +1,30 @@
+{% extends 'main/index.html' %}
+
+{% block content %}
+    <div class="row">
+        
+        <div class="col">
+            <div class="d-flex flex-column gap-2">
+                <h1>{{ post.coursename  }}</h1>
+                <img src="{{ post.poster.url }}"  class="w-100 rounded-4"/>
+                <div class="d-flex justify-content-between">
+                    <h6>{{ post.numberhours }}</h6>
+                    <h5>{{post.price}}</h5>
+                    <h2>{{post.startdate}}</h2>
+                    <h2>{{post.expirydate}}</h2>
+                    <h2>{{post.poster}}</h2>
+                    <h2>{{post.categories}}</h2>                    <div class="d-flex gap-2">
+                        <a href="{% url 'main:update_post_view' post.id %}" class="btn btn-primary">update</a>
+                        <a href="{% url 'main:delete_post_view' post.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                    
+                </div>
+                
+                <p>{{ post.content }}</p>
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}

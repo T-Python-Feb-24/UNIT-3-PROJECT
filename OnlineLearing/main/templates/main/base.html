@@ -1,36 +1,62 @@
 {% extends 'main/index.html' %}
 
-{% block title %} onlineLearing {% endblock%}
-
+{% block title %}Online Learning{% endblock %}
 
 {% block content %}
-
-    <div class="row g-4">
-
-        <div class="col">
-            <div class="d-flex align-items-baseline gap-2">
-                <h1>Elearning programs and courses</h1>
-                <h4>We offer local & global courses and professional certificates to enable institutions to build their employees skills</h4>
-           
-    </div>
-    <!--
-    <div class="card mb-3 container" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="/static/images/nick-morrison-FHnnjk1Yj7Y-unsplash.png" class="img-fluid rounded-start" alt="...">
-          </div>
-          
-          <div class="col-md-8 ">
-            <div class="card-body">
-              <h5 class="card-title">E-Learning Management System</h5>
-              <p class="card-text">E-Learning Management System ELMS The Blackboard ELMS allows the student and faculty member to access an e-copy of the enlisted courses and to follow up on the efficiency of the educational process.
-                 It offers various course tools such as lessons, assignments and tests, besides viewing and managin</p>
-                 <input type="submit" class="btn btn-primary" value="Sign Up" />
-
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-8">
+                <h1 class="text-center">E-learning Programs and Courses</h1>
+                <h4 class="text-center mb-4">We offer local & global courses and professional certificates to enable institutions to build their employees' skills</h4>
             </div>
-          </div>
         </div>
-      </div>
-    -->
 
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Latest Posts</h2>
+            <a class="btn btn-primary" href="{% url 'main:add_courses_view' %}">Add Post</a>
+        </div>
+
+        {% for post in posts %}
+
+        div class="col-4">
+        <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
+            <img src="{{ post.poster.url }}"  class="w-100 rounded-4"/>
+            <h2><a href="{% url 'main:post_detail_view' post.id  %}" class="text-decoration-none">{{post.coursename'}}</a></h2>
+            <h6>{{ post.numberhours }}</h6>
+            <h5>{{post.price}}</h5>
+            <h2>{{post.startdate}}</h2>
+            <h2>{{post.expirydate}}</h2>
+            <h2>{{post.poster}}</h2>
+            <h2>{{post.categories}}</h2>
+
+
+
+        </div>
+    </div>
+    
+{% endfor %}
+
+</div>
+
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">E-Learning Management System</h5>
+                                    <p class="card-text">E-Learning Management System (ELMS) allows students and faculty members to access e-copies of enlisted courses and monitor the efficiency of the educational process. It offers various course tools such as lessons, assignments, tests, and more.</p>
+                                    <a href="{% url 'accounts:register_user_view' %}" class="btn btn-primary">Sign Up</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 {% endblock %}

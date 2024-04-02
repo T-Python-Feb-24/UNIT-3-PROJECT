@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static%}
-
+{%load mathfilters %}
 
 
 
@@ -18,13 +18,16 @@
 
     <div class="col md-6">
     <img src="{{ recipe.image.url }}"  class="w-100 rounded-4"/>
+    <br><br>
+    <a href="{% url 'favorites:recipe_favorites_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+    
     </div>
 
 
     <div class="col mt-1 md-6 ">
         {% if request.user.is_staff %}
-        <a href="/" class="btn btn-primary">update</a>
-        <a href="/" class="btn btn-danger">Delete</a>
+        <a href="{% url 'main:update_recipe_page' recipe.id %}" class="btn btn-primary">update</a>
+        <a href="{% url 'main:delete_recipe_view' recipe.id %}" class="btn btn-danger">Delete</a>
         {% endif %}
         <h4 class="mt-5">{{recipe.title}}</h4>
         <h6>Category :{{recipe.category}}</h6>
@@ -61,58 +64,45 @@
 <hr>
 <div class="row mt-5">
 
-    <div class="col md-6">
-    <h1> Leave a comment</h1>
-    <br><br>
-    
- <form action="{% url 'main:comments_view' recipe.id %}" method="post" class="d-flex flex-column gap-2">
-    {% csrf_token %}
-    <textarea name="content"  placeholder="text your comment here" style="height:200px;" class="form-control hight-100" required></textarea>
-
-    <input type="submit" value="Add Comment" class="btn btn-primary"/>
-    </form>
-    
-    </div>
-
-
-
-
-<div class="col md-6">
-
-<section >
-  <div class="container text-dark">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10 col-xl-8">
-        <div class="d-flex justify-content-between align-items-center ">
-          <div class="card">
-          </div>
-        </div>
-        {% for comment in comments %}
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="d-flex flex-start">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="{% static 'images/user.png'%}" alt="avatar" width="40"
-                height="40" />
-              <div class="w-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h6 class="text-primary fw-bold mb-0">
-                    <a href="{% url 'accounts:user_info_view' comment.user.id %}" >{{ comment.user.username }}</a>
-                    <p class="text-dark ms-2">{{ comment.content }}</p>
-                  </h6>
-                  <p class="">{{ comment.created_at}}</p>
-                </div>
-              </div>
+             </div>
+              <div class="col">
+            <h1 class="cal-title2">To burn {{recipe.calories}} calories </h1>
+            <ol class=" xx list-group ">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="">You have to Run for</div>
+            <span class=" -icon material-symbols-outlined">directions_run</span>
             </div>
-          </div>
+            <p class="mt-4"><strong>{{ recipe.calories | div:223 | mul:60 | floatformat:0}} </strong>minutes</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="">You have to yoga for</div>
+            <span class=" -icon material-symbols-outlined">self_improvement</span>
+            </div>
+            <p class="mt-4"><strong>{{ recipe.calories | div:270 | mul:60 | floatformat:0}}</strong> minutes</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="">You have to workout for</div>
+            <span class=" -icon material-symbols-outlined">fitness_center</span>
+            </div>
+            <p class="mt-4"><strong>{{ recipe.calories | div:449 | mul:60 | floatformat:0}}</strong> minutes</p>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+            <div class="">You have to walk for</div>
+            <span class=" -icon material-symbols-outlined">directions_walk</span>
+            </div>
+            <p class="mt-4"><strong>{{ recipe.calories| div:293 | mul:60 | floatformat:0}}</strong> minutes</p>
+        </li>
+        </ol>
+                    
+          </div> 
         </div>
-        {% endfor %}
-        </section >
-
-</div>
-
-</div>
-
+        </div>
+   
+</div> 
 
 
 

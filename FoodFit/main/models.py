@@ -31,7 +31,7 @@ class Comment(models.Model):
 
 
 class Contact(models.Model):
-    user=models.ForeignKey(User , on_delete=models.CASCADE)
+    name=models.CharField(max_length = 64)
     email=models.EmailField(max_length=254)
     message=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)

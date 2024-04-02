@@ -5,4 +5,23 @@
 
  {% block content %}
  
+<div class="row mt-2 g-5">
+
+ {% for message in messages %}
+        <div class="col-4">
+            <div class="d-flex flex-column gap-2 border border-1 p-3 mt-3 rounded-4 h-100">
+                <img src="{{ message.image.url }}" class="w-50  h-40  rounded-4"/>
+                <h2>{{ message.name }}</h2> 
+                <h3>{{ message.email }}</h3>
+                <p> {{ message.message }}</p>
+                <p> {{ message.created_at }}</p>
+            </div> 
+        </div>    
+     
+       {% endfor %}
+
+</div>
+
+
+
  {% endblock %}

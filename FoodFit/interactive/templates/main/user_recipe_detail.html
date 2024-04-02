@@ -5,4 +5,136 @@
 
  {% block content %}
  
+
+
+ <div class="row mt-5 ">
+ <div class="d-flex justify-content-center align-items-center">
+ <h1>{{recipe.title}}</h1>
+ </div>
+  </div>
+
+
+<div class="row mt-5">
+
+    <div class="col md-6">
+    <img src="{{ recipe.image.url }}"  class="w-100 rounded-4"/>
+    <br><br>
+    <a href="{% url 'favorites:add_remove_favorites_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+    </div>
+
+
+    <div class="col mt-1 md-6 ">
+        
+        <a href="{% url 'interactive:update_recipe_page' recipe.id %}" class="btn btn-primary">update</a>
+        <a href="{% url 'interactive:delete_recipe_view' recipe.id %}" class="btn btn-danger">Delete</a>
+        
+        <h4 class="mt-5">{{recipe.title}}</h4>
+        <h4>By :</h4><a href="{% url 'accounts:user_profile_page' user.id %}" ><h4>@{{ request.user.username }}</h4></a>
+        <br>
+        <h6>Category :{{recipe.category}}</h6>
+        <br>
+        <p>Quantity : {{recipe.quantity}} Grams</p>
+        <p>Calories :{{recipe.calories}}</p>
+        <h6>How to prepare :<br>{{recipe.about}}</h6>
+        
+       
+       
+        <br>
+        <hr>
+        
+    </div>
+</div>
+
+
+
+<div class="row mt-5">
+
+    <div class="col md-6">
+    <h1> Leave a comment for {{ request.user.username }} recipe</h1>
+    <br><br>
+    
+ <form action="{% url 'interactive:comments_view' recipe.id %}" method="post" class="d-flex flex-column gap-2">
+    {% csrf_token %}
+    <textarea name="content"  placeholder="text your comment here" style="height:200px;" class="form-control hight-100" required></textarea>
+
+    <input type="submit" value="Add Comment" class="btn btn-primary"/>
+    </form>
+    
+    </div>
+
+
+
+
+<div class="col md-6">
+
+<section >
+  <div class="container text-dark">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="d-flex justify-content-between align-items-center ">
+          <div class="card">
+          </div>
+        </div>
+        {% for comment in comments %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex flex-start">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="{{ request.user.avatar.url }}" alt="avatar" width="40"
+                height="40" />
+              <div class="w-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="text-primary fw-bold mb-0">
+                    <a href="{% url 'accounts:user_profile_page' comment.user.id %}" >{{ comment.user.username }}</a>
+                    <p class="text-dark ms-2">{{ comment.content }}</p>
+                  </h6>
+                  <p class="">{{ comment.created_at}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        </section >
+
+</div>
+
+</div>
+
+
+
+<br>
+<hr>
+<br>
+{% if recipes.count != 0%}
+ <h1>Read More For {{ request.user.username }}</h1>
+{% endif %}
+<div class="row mt-2 g-5">
+<div class="col md-6">
+
+        {% for recipe in recipes %}
+        <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+      <img src="" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'interactive:user_recipe_detail_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h5>
+        <p class="card-text">For: {{recipe.quantity}} Grams </p>
+        <p class="card-text">Calories :{{recipe.calories}} </p>
+        <p class="card-text">Category:{{recipe.category}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<br><br>
+     
+       {% endfor %}
+
+
+
+
  {% endblock %}

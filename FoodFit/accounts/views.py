@@ -67,17 +67,17 @@ def logout_user_view(request:HttpRequest ):
     return redirect('accounts:login_user_view')
 
 
-def user_info(request:HttpRequest , user_id):
+def user_profile(request:HttpRequest , user_id):
     try:
         user=User.objects.get(id=user_id)
     except:
         user=None
 
-    return render(request, "main/user_info.html", {"user":user})
+    return render(request, "main/user_profile.html", {"user":user})
 
 
 
-def update_info(request:HttpRequest , user_id):
+def update_user_profile(request:HttpRequest , user_id):
     if not request.user.is_authenticated:
         return redirect('accounts:login_user_view')
 
@@ -93,7 +93,7 @@ def update_info(request:HttpRequest , user_id):
                 info.about=request.POST["about"]
                 info.avatar=request.FILES.get("avatar", info.avatar)
                 info.save()
-                return redirect("accounts:user_info_view", user_id=acc.id )
+                return redirect("accounts:user_profile_page", user_id=acc.id )
         except Exception as e:
             print(e)
 

@@ -5,4 +5,45 @@
 
  {% block content %}
  
+ <div class="row g-4">
+
+        <div class="d-flex flex-column gap-2">
+            
+            <h1>Search</h1>
+            <form action="{% url 'main:search_recipe_page' %}"  method="get" class="d-flex gap-2" name='search'>
+                <input type="search" class="form-control" name="search" value="{{request.GET.search}}"/>
+                <input type="submit" value="search" class="btn btn-primary" />
+            </form> 
+
+            <h2>Search results for {{ request.GET.search }} ({{ recipes.count }}) </h2>
+        </div>
+
+    </div>
+
+
+
+ <div class="row mt-2 g-5">
+
+        {% for recipe in recipes %}
+        <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+      <img src="" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{recipe.title}}</h5>
+        <p class="card-text">For: {{recipe.quantity}} Grams </p>
+        <p class="card-text">Calories :{{recipe.calories}} </p>
+        <p class="card-text">Category:{{recipe.category}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+     
+       {% endfor %}
+
+    </div>
+ 
+
  {% endblock %}

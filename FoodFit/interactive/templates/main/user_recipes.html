@@ -4,5 +4,46 @@
 
 
  {% block content %}
+ <div class="row"></div>
+    <div class="row g-4">
+
+        <div class="d-flex justify-content-center align-items-center">
+            <div class=" c d-flex gap-2">
+                <a href="{% url 'interactive:users_recipe_page' %}" class="p-2 ps-3 pe-3   text-decoration-none  {% if 'categories' not in request.GET %} All  {% endif %}">All</a>
+                {% for val, key in category %}
+                    <a href="?categories={{val}}" class=" p-2 ps-3 pe-3  {% if request.GET.categories == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-2 g-5">
+
+        {% for recipe in recipes %}
+        <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+      <img src="{{recipe.image.url}}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+      <img class="rounded-circle shadow-1-strong me-3"
+        src="{{ request.user.avatar }}" alt="avatar" width="40"
+         height="40" />
+      <h5 class="card-title"> @{{ request.user.username }}</h5>
+        <h5 class="card-title"><a href="{% url 'interactive:user_recipe_detail_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h5>
+        <p class="card-text">For: {{recipe.quantity}} Grams </p>
+        <p class="card-text">Calories :{{recipe.calories}} </p>
+        <p class="card-text">Category:{{recipe.category}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+     
+       {% endfor %}
+
  
+
  {% endblock %}
+

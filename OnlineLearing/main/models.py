@@ -25,8 +25,10 @@ class Course(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     startdate = models.DateTimeField(auto_now_add=True)
     expirydate = models.DateTimeField()
-    poster = models.ImageField(upload_to="images/", default="images/default.jpeg")
+    poster = models.ImageField(upload_to="images/")
     categories = models.CharField(max_length=20, choices=COURSE_CATEGORIES)
+    content = models.TextField()
+
 
     def _str_(self):
         return self.coursename

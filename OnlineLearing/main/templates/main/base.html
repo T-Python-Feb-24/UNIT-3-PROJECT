@@ -1,62 +1,61 @@
-{% extends 'main/index.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/css-style.css' %}" class="css">
+</head>
+<body>
 
-{% block title %}Online Learning{% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-8">
-                <h1 class="text-center">E-learning Programs and Courses</h1>
-                <h4 class="text-center mb-4">We offer local & global courses and professional certificates to enable institutions to build their employees' skills</h4>
-            </div>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'main:index_view' %}">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'main:add_about_view' %}">About</a>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'main:all_courses_view' %}">courses</a>
+                    <li><a class="nav-link active" aria-current="page" href="{% url 'accounts:register_user_view' %}">Sign up</a></li>
+                    <li><a class="nav-link active" aria-current="page" href="{% url 'accounts:login_user_view' %}">Login</a></li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">services</a>
+
+              </li>
+            </ul>
+             
+            <form class="d-flex" role="search">
+              <div class="dropdown">
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'accounts:register_user_view' %}">Sign up</a></li>
+                  <li><a class="dropdown-item" href="{% url 'accounts:login_user_view' %}">Login</a></li>
+                </ul>
+              </div>
+          
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
         </div>
-
-        <div class="d-flex justify-content-between align-items-center">
-            <h2>Latest Posts</h2>
-            <a class="btn btn-primary" href="{% url 'main:add_courses_view' %}">Add Post</a>
-        </div>
-
-        {% for post in posts %}
-
-        div class="col-4">
-        <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
-            <img src="{{ post.poster.url }}"  class="w-100 rounded-4"/>
-            <h2><a href="{% url 'main:post_detail_view' post.id  %}" class="text-decoration-none">{{post.coursename'}}</a></h2>
-            <h6>{{ post.numberhours }}</h6>
-            <h5>{{post.price}}</h5>
-            <h2>{{post.startdate}}</h2>
-            <h2>{{post.expirydate}}</h2>
-            <h2>{{post.poster}}</h2>
-            <h2>{{post.categories}}</h2>
+      </nav>
 
 
 
-        </div>
-    </div>
-    
-{% endfor %}
 
-</div>
+      
+      {% block content %}
 
-
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">E-Learning Management System</h5>
-                                    <p class="card-text">E-Learning Management System (ELMS) allows students and faculty members to access e-copies of enlisted courses and monitor the efficiency of the educational process. It offers various course tools such as lessons, assignments, tests, and more.</p>
-                                    <a href="{% url 'accounts:register_user_view' %}" class="btn btn-primary">Sign Up</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-{% endblock %}
+      {% endblock %}
+</body>
+</html>

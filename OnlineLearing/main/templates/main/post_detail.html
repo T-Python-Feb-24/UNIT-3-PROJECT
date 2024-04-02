@@ -1,26 +1,32 @@
-{% extends 'main/index.html' %}
+{% extends 'main/base.html' %}
 
 {% block content %}
     <div class="row">
         
         <div class="col">
-            <div class="d-flex flex-column gap-2">
-                <h1>{{ post.coursename  }}</h1>
-                <img src="{{ post.poster.url }}"  class="w-100 rounded-4"/>
-                <div class="d-flex justify-content-between">
-                    <h6>{{ post.numberhours }}</h6>
-                    <h5>{{post.price}}</h5>
-                    <h2>{{post.startdate}}</h2>
-                    <h2>{{post.expirydate}}</h2>
-                    <h2>{{post.poster}}</h2>
-                    <h2>{{post.categories}}</h2>                    <div class="d-flex gap-2">
+            
+            <div class="d-flex gap-2 border border-1 shadow p-3 rounded-4 m-4 col-5">
+                <div class="card p-1">
+                    <img src="{{ post.poster.url }}" class="w-100 rounded-4 h-50" style="object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ post.coursename }}</h4>
+                        <p class="card-text">Number of Hours: {{ post.numberhours }}</p>
+                        <p class="card-text">Price: {{ post.price }}</p>
+                        <p class="card-text">Start Date: {{ post.startdate }}</p>
+                        <p class="card-text">Expiry Date: {{ post.expirydate }}</p>
+                        <p class="card-text">Content: {{ post.content }}</p>
+                        <p class="card-text">Categories: {{ post.categories }}</p>
+                    </div>
+                </div>
+            </div>
+                              
+                    <div class="d-flex gap-2">
                         <a href="{% url 'main:update_post_view' post.id %}" class="btn btn-primary">update</a>
                         <a href="{% url 'main:delete_post_view' post.id %}" class="btn btn-danger">Delete</a>
                     </div>
                     
                 </div>
                 
-                <p>{{ post.content }}</p>
             </div>
 
         </div>

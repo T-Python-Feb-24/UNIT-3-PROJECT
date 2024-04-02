@@ -8,27 +8,28 @@
 
 {% block content %}
 <div class="home ">
-        <div class="row">
+        <div class="row" style="text-align: center; margin-top: 200px;  background-color: rgba(249, 249, 255, 0.7); padding: 33px; margin-left: 250px; margin-right: 250px;">
             <div class="col" >
-                <h2 style="text-align: center; margin-top: 200px;  background-color: rgba(249, 249, 255, 0.7); padding: 33px; margin-left: 250px; margin-right: 250px; ">Culinary Chronicles</h2>
-
+                <h1>Flavors of the World</h1>
+                <h3>Exploring Culinary Diversity Through Food Recipes</h3>
             </div>
         </div>
 </div>
 <section>
     <div class="container">
-        <div class="justify-content-between align-items-center ">
-            <div class="col-11 ">
-              <h2 class="fw-light text-blak mb-0 ">About</h2>
-              <h2 class="lead text-blak mt-2"></h2>
-            </div>
-            <!-- <div class="col padding-right-100px">
-              <a href="{% url 'main:all_recipes' %}" style="text-decoration: none; color: #000;" class="d-inline-block ">More<span class="material-symbols-outlined align-middle">
-                arrow_forward</span>
-              </a>
-            </div> -->
+      <div class="d-flex justify-content-center align-items-center mt-5" style="padding-left: 450px;">
+        <div class="col-11 ">
+          <h1 class="fw-light text-blak mb-0 ">About</h1>
+          
         </div>
         
+      </div>
+      <h2 class="lead text-blak mt-3 ">Food recipes offer a window into the fascinating world of culinary arts, reflecting the diversity,creativity,and cultural richness of various cuisines worldwide.Whether it's exploring traditional dishes passed down through generations or experimenting with modern fusion recipes, food recipes serve as a gateway to discovering new flavors, ingredients, and cooking techniques.They provide an opportunity to explore different cultures,traditions,and culinary histories while inviting individuals to express their creativity and share their love for food with others.In essence, food recipes embody the joy of cooking,the pleasure of sharing meals, and the endless possibilities of culinary exploration.</h2>
+      <div class="col padding-right-100px mt-3">
+        <a href="{% url 'main:all_recipes' %}" style="text-decoration: none; color: #000;" class="d-inline-block ">View Recipes<span class="material-symbols-outlined align-middle">
+          arrow_forward</span>
+        </a>
+      </div>
           
     </div>
 </section>

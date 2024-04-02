@@ -10,11 +10,11 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-7">
                 <form action="{% url 'main:update_recipes' %}" method="POST" enctype="multipart/form-data" class="action d-flex flex-column gap-2">
                 
                     {% csrf_token %}
-                    <h1>Update </h1>
+                    <h1 style="margin-top: 10px;">Update </h1>
                     
                     <input name="name" type="text" placeholder="recipes name" class="form-control" required>
                     <textarea name="content" type="text" placeholder="recipes .." class="form-control" required></textarea>

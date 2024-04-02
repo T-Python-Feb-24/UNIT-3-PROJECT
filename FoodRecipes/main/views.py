@@ -11,8 +11,8 @@ def home(requset:HttpRequest):
 
 
 def add_recipes(requset:HttpRequest):
-    # if not requset.user.is_staff:
-    #  return render(requset,"main:not_found.html")
+    if not requset.user.is_staff:
+        return render(requset,"main:not_found.html")
  
     if requset.method== 'POST':
         try:
@@ -64,11 +64,11 @@ def update_recipes(requset:HttpRequest,recipes_id):
             recipes.image=requset.FILES["image"],
             recipes.category=requset.POST['category']
             recipes.save()
-            return redirect("main:detail_recipes", plant_id=recipes.id)
+            return redirect("main:detail_recipes",recipes_id=recipes.id)
         except Exception as e:
             print(e)
 
-    return render(requset, "main/update_plants.html", {"recipes":recipes, "Category":Recipes.categories.choices})
+    return render(requset, "main/update_recipes.html", {"recipes":recipes, "Category":Recipes.categories.choices})
 
 
 def delete_recipes(requset:HttpRequest,recipes_id):
@@ -97,8 +97,25 @@ def recipes_search(requset:HttpRequest):
 
     return render(requset, "main/recipes_search.html", {"recipes" :  recipes})
 
-def suggestions(requset:HttpRequest):
-    pass
+def suggestions(request: HttpRequest):
+    if request.method == "POST":
+        try:
+            new_suggestions = Suggestions(uesr=request.user, content=request.POST["content"])
+            new_suggestions.save()
+        except Exception as e:
+                print(e)
+        return redirect("main:home")  #msg
+    return render(request, 'main/suggestions.html')
+
+def suggestions_msg(request: HttpRequest):
+    if not request.user.is_staff:
+     return redirect("main:home")
+    try:
+        msg=Suggestions.objects.all()
+    except Exception as e:
+            print(e)
+    return render( request,'main/suggestions_msg.html',{"msg":msg})
+    
 
 def add_comment(request:HttpRequest, recipes_id):
     # if not request.user.is_authenticated:

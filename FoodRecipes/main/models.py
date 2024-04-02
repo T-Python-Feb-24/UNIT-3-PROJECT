@@ -13,7 +13,7 @@ class Recipes(models.Model):
     category = models.CharField(max_length=64,choices=categories.choices)
     time_coocking=models.CharField(max_length=2048)
     number_people=models.CharField(max_length=2048)
-    image=models.ImageField(upload_to="images/",default="")
+    image=models.ImageField(upload_to="images/",default="images/kagyana-2955466_1280.jpg")
     
 class Comment(models.Model):
 
@@ -28,3 +28,5 @@ class Suggestions(models.Model):
     content = models.TextField()
     published_at = models.DateTimeField(auto_now_add=True)
     
+def __str__(self):
+    return self

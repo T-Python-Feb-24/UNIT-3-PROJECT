@@ -97,25 +97,32 @@ input[type="radio"] {
     align-self: flex-start;
 }
 
-.Tree {
+.Pasta {
     background-color: rgba(255, 0, 0, 0.473);
 }
-.Tree:hover {
+.Pasta:hover {
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.473);
 }
 
-.Fruit {
+.Soup {
     background-color: rgba(228, 183, 37, 0.473);
 }
-.Fruit:hover {
+.Soup:hover {
     box-shadow: 0 0 20px rgba(228, 183, 37, 0.473);
 }
 
-.Vegetables {
-    background-color: rgba(0, 128, 0, 0.473);
+.Chicken {
+    background-color: rgba(131, 32, 2, 0.664);
 }
-.Vegetables:hover {
-    box-shadow: 0 0 20px rgba(0, 128, 0, 0.473);
+.Chicken:hover {
+    box-shadow: 0 0 20px rgba(131, 32, 2, 0.664);
+}
+
+.Salad {
+  background-color: rgba(0, 128, 0, 0.473);
+}
+.Salad:hover {
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.473);
 }
 
 /* Profile */

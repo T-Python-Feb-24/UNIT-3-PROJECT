@@ -16,9 +16,9 @@
     <div class="row">
         <div class="col">
             <div class="d-flex gap-2 justify-content-center">
-                <a href="{% url 'main:all_recipes' %}" class="p-2 ps-3 pe-3 rounded-pill cat  text-decoration-none  {% if 'cat' not in request.GET %} All  {% endif %}">All</a>
+                <a href="{% url 'main:all_recipes' %}" class="p-2 ps-3 pe-3 rounded-pill cat text-decoration-none  {% if 'cat' not in request.GET %} All  {% endif %}">All</a>
                 {% for val, key in category %}
-                    <a href="?cat={{val}}" class="p-2 ps-3 pe-3 rounded-pill cat {% if request.GET.cat == val %} {{ val }}{% endif %} text-decoration-none">{{val}}</a>
+                    <a href="?cat={{val}}" class="p-2 ps-3 pe-3 rounded-pill cat {% if request.GET.cat == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
                 {% endfor %}
             </div>
         </div>

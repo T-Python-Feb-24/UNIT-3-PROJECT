@@ -63,7 +63,6 @@ def recipe_detail(request:HttpRequest, recipe_id):
         message = None
         try:
             recipe = Recipe.objects.get(pk=recipe_id)
-            related = Recipe.objects.filter(category =  recipe.category).exclude(pk=recipe_id)[:4]
 
             reviews = Review.objects.filter(recipe=recipe) #this is to get the comments on the above post using filter
             is_saved = request.user.is_authenticated and  Saved.objects.filter(user=request.user, recipe=recipe).exists()
@@ -74,7 +73,7 @@ def recipe_detail(request:HttpRequest, recipe_id):
             print(e)
         
 
-        return render(request, "main/recipe_detail.html", {"recipe" : recipe, "related": related, "reviews": reviews, "is_saved" : is_saved, "message" : message})
+        return render(request, "main/recipe_detail.html", {"recipe" : recipe, "reviews": reviews, "is_saved" : is_saved, "message" : message})
 
 def update_recipe(request:HttpRequest, recipe_id):
         message = None
@@ -92,7 +91,7 @@ def update_recipe(request:HttpRequest, recipe_id):
                 recipe.ingredients = request.POST["ingredients"]
                 recipe.instructions = request.POST["instructions"]
                 recipe.time_estimate = request.POST["time_estimate"]
-                recipe.image = request.FILES.get("image", Recipe.image)
+                recipe.image = request.FILES.get("image", recipe.image)
                 recipe.category = request.POST['category']
                 recipe.save()
             except Recipe.DoesNotExist:

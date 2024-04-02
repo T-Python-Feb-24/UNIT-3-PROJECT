@@ -13,5 +13,8 @@ urlpatterns = [
     path('all_stories/', views.all_stories, name='all_stories'),
     path('story/<int:pk>/update/', views.update_story, name='update_story'),
     path('story/<int:pk>/delete/', views.delete_story, name='delete_story'),
-
+    path('story/<int:story_id>/comment/', views.add_comment, name='add_comment'),
+    path('contact_us/', views.contact_us, name='contact_us'),
+    path('contact_us_messages/', views.contact_us_messages, name='contact_us_messages'),
+    path('save_contact_message/', views.save_contact_message, name='save_contact_message'),
 ]

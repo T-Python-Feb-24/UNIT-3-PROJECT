@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
-from .models import Story
+from .models import Story,Comment,ContactMessage
 import openai
 from dotenv import load_dotenv
 import os
@@ -43,7 +43,6 @@ def add_story(request):
         return render(request, 'main/add_story.html', {'CATEGORY_CHOICES': Story.CATEGORY_CHOICES})
 
 
-
 def get_completion(prompt, model="gpt-3.5-turbo"):
 
     messages = [{"role": "user", "content": prompt}]
@@ -56,22 +55,25 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     return response.choices[0].message["content"]
 
 
-
-
-
-
 def show_story(request, pk):
     story = get_object_or_404(Story, pk=pk)
     lines = story.content.split('\n')  
-    
-    segments = ['\n'.join(lines[i:i + 20]) for i in range(0, len(lines), 3)]
-    
+
+    lines_per_page = 20
+    segments = ['\n'.join(lines[i:i + lines_per_page]) for i in range(0, len(lines), lines_per_page)]
+
     paginator = Paginator(segments, 1)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'main/show_story.html', {'story': story, 'page_obj': page_obj})
 
+    comments = story.comment_set.all()  
+
+    return render(request, 'main/show_story.html', {
+        'story': story,
+        'page_obj': page_obj,
+        'comments': comments  
+    })
 
 
 
@@ -103,3 +105,53 @@ def delete_story(request, pk):
 def all_stories(request):
     stories = Story.objects.all()
     return render(request, 'main/all_stories.html', {'stories': stories})
+
+def add_comment(request, story_id):
+    if request.method == "POST":
+        try:
+            story_object = get_object_or_404(Story, pk=story_id)
+            content = request.POST.get('content')
+            user = request.user  
+            new_comment = Comment.objects.create(Story=story_object, user=user, content=content)
+            return redirect('main:show_story', pk=story_id)
+        except KeyError:
+            pass
+    
+    return redirect('main:show_story', pk=story_id)
+
+def contact_us(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        
+        return redirect('contact_us_messages')
+
+    return render(request, 'main/contact_us.html')
+
+def save_contact_message(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        ContactMessage.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            message=message
+        )
+        return redirect('main:home')
+    else:
+        pass
+
+def contact_us_messages(request):
+
+    if not request.user.is_superuser:
+        return render(request, "main/no_access.html")  
+
+    messages = ContactMessage.objects.all()
+    return render(request, 'main/contact_us_messages.html', {'messages': messages})

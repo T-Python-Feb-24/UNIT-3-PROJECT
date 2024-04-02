@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'user_info',
+    'bookmarks_likes',
 ]
 
 MIDDLEWARE = [

@@ -1,8 +1,3 @@
-*{
-    top: 0%;
-    left: 0%;
-    
-}
 
 .container  .width{
    overflow-x: hidden;
@@ -15,9 +10,7 @@
  font-size: 60px;
 }
 
-.container{
-    justify-content: center;
-}
+
 .container   .width p{
     font-size: 22px;
     padding: 7vh;

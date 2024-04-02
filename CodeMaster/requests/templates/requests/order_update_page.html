@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="fs-1">Update</h1>
+    <br>
+    <form action="{% url 'requests:order_update_page' order.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if not request.user.is_staff %}   
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Subject</label>
+            <input name="subject" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg. BlogWebsite" value="{{ order.subject }}">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description of the required service:</label>
+            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ order.description }}</textarea>
+        </div>
+        {% else %}
+        
+        <h3>{{ order.subject }}</h3>
+        <hr>
+        <br>
+        <h5 style="font-size: 17px;">Description of the required service:</h5><p>{{ order.description }}</p>
+        {% endif %}
+
+        {% if request.user.is_staff %}   
+        <div class="mb-3">
+            <label for="exampleFormControlSelect1" class="form-label">State</label>
+            <select name="state" class="form-select" id="exampleFormControlSelect1">
+                <option value="Under review" {% if order.state == 'Under review' %}selected{% endif %}>Under review</option>
+                <option value="Accepted" {% if order.state == 'Accepted' %}selected{% endif %}>Accepted</option>
+                <option value="Rejected" {% if order.state == 'Rejected' %}selected{% endif %}>Rejected</option>
+            </select>
+        </div>
+        {% endif %}
+        
+        <div class="mb-3">
+            <label for="formFile" class="form-label">File: </label>
+            {% if order.file %}
+            <a href="{{ order.file.url }}" target="_blank">{{ order.file.name }}</a>
+            {% if not request.user.is_staff %}   
+            <input name="file" class="form-control" type="file" id="formFile">
+            {% endif %}
+        </div>  
+        {% endif %}
+        <div class="mb-3">
+            <button class="btn bg-dark text-white" type="submit">Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -3,9 +3,9 @@ from django.http import HttpRequest,HttpResponse
 from django.db import transaction, IntegrityError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from requests.models import Order
 from main.models import Contact
 
-# Create your views here.
 
 def register_page(request:HttpRequest):
     if request.user.is_authenticated:
@@ -61,5 +61,9 @@ def dashborad_page(request:HttpRequest):
         return redirect("main:index_page")
    
     messages = Contact.objects.all().order_by('-created_at')
+    if request.user.is_staff:
+        orders = Order.objects.all()
+    else:
+        orders = Order.objects.filter(user=request.user)
 
-    return render(request,"accounts/dashborad_page.html", {'messages': messages})
+    return render(request,"accounts/dashborad_page.html", {'messages': messages,'orders': orders})

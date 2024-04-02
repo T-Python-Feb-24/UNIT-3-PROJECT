@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %} {{user.username }} saved recipes {% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row" style="margin-top: 100px;">
+        <h1>{{user.username }} Saved Recipes</h1>
+    
+            {% for favorite in user.saved_set.all %}
+            <div class="col-4">
+                <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
+                    <img src="{{ favorite.recipe.image.url }}"  class="w-100 rounded-4 card-poster "/>
+                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{favorite.recipe.category}} ">{{ favorite.recipe.category }}</h6>
+                    <h6 class="text-muted">{{ favorite.recipe.created_at }}</h6>
+                    <h2><a href="{% url 'main:recipe_detail' favorite.recipe.id  %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);">{{favorite.recipe.title}}</a></h2>   
+                </div>
+            </div>
+            
+        {% endfor %}
+    
+    </div>
+</div>
+
+{% endblock %}

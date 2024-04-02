@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block title %} TASTY RECIPES | ADD RECIPE {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top: 100px;">
+        <h1>Add New Recipe</h1>
+        <div class="col">
+    
+            <form action="{% url 'main:add_recipe' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+    
+                <input name="title" type="text" placeholder="Title" class="form-control" required minlength="5"/>
+                <textarea name="ingredients" class="form-control" placeholder="Ingredients"></textarea>
+                <textarea name="instructions" placeholder="Instructions" class="form-control"></textarea>
+                <input type="text" id="time" name="time_estimate" placeholder="ex. 20 min" class="form-control" required minlength="5"/>    
+    
+                <h5>Category:</h5>
+                <select name="category" class="form-select" aria-label="Default select example">
+                    {% for val, cat in category %}
+                        <option value={{val}}>{{cat}}</option>
+                    {% endfor %}
+                </select>
+    
+                <h5>Choose Image:</h5>
+                <input name="image" type="file" accept="image/*" class="form-control"/>
+    
+                <input type="submit" class="btn btn-dark" value="Add Recipe" style="background: linear-gradient(#082211, #05160b, #020b04);"/>
+            </form>
+        </div>
+    
+    </div>
+</div>
+{% endblock %}

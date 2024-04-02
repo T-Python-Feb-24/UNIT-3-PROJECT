@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block title %} TASTY RECIPES | UPDATE RECIPE {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top: 100px;">
+        <h1>Update Recipe</h1>
+        {% if message %}
+            <div class="alert alert-warning">{{message}}</div>
+        {% endif %}
+        <div class="col">
+
+            <form action="{% url 'main:update_recipe' recipe.id %}" enctype="multipart/form-data" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+
+                <input name="title" type="text" placeholder="Title" class="form-control" minlength="5" value="{{ recipe.title }}" />
+                <textarea name="ingredients" placeholder="Ingredients" class="form-control">{{recipe.ingredients}}</textarea>
+                <textarea name="instructions" placeholder="Instructions" class="form-control">{{recipe.instructions}}</textarea>
+                <input type="text" name="time_estimate" placeholder="ex. 20 min" class="form-control" minlength="5" value="{{recipe.time_estimate}}"/>
+                
+                <h5>Category:</h5>
+                <select name="category" class="form-select" aria-label="Default select example">
+                    {% for val, cat in category %}
+                        <option value={{val}} {% if recipe.category == val %} selected {% endif %}>{{cat}}</option>
+                    {% endfor %}
+                </select>
+
+                <h5>Choose Image:</h5>
+                <img src="{{ recipe.image.url }}" class="thumb" />
+                <input name="image"  type="file" accept="image/*" class="form-control"/>
+
+                <input type="submit" class="btn btn-dark" value="Update" style="background: linear-gradient(#082211, #05160b, #020b04);"/>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

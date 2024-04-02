@@ -2,47 +2,61 @@
 {% block title %}Update {% endblock %}
 
 {% block style %}
+<style>
+    .img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
 
+</style>
 
 {% endblock %}
 
 {% block content %}
 <section>
     <div class="container">
-        <div class="row">
-            <div class="col-7">
-                <form action="{% url 'main:update_recipes' %}" method="POST" enctype="multipart/form-data" class="action d-flex flex-column gap-2">
+        <div class="row mt-3">
+            <div class="col-6 mt-5">
+                <h1 class="fw-dark text-blak">Update Recipes</h1>
+                <form action="{% url 'main:update_recipes' recipes.id %}" method="POST" enctype="multipart/form-data" class="action d-flex flex-column gap-2" style="margin-top: 30px;">
                 
                     {% csrf_token %}
-                    <h1 style="margin-top: 10px;">Update </h1>
                     
-                    <input name="name" type="text" placeholder="recipes name" class="form-control" required>
-                    <textarea name="content" type="text" placeholder="recipes .." class="form-control" required></textarea>
-                    <input name="time_coocking" type="text" placeholder="time coockin" class="form-control" required>
-                    <input name="number_people" type="text" placeholder="Quantity serves people" class="form-control" required>
-                    <input name="chef_name" type="text" placeholder="chef name" class="form-control" required>
+                    
+                    <input name="name" type="text" placeholder="recipes name" class="form-control" value="{{ recipes.name}}">
+                    <textarea name="content" type="text" placeholder="recipes .." class="form-control">{{recipes.content}}</textarea>
+                    <input name="time_coocking" type="text" placeholder="time coockin" class="form-control" value="{{ recipes.time_coocking}}">
+                    <input name="number_people" type="text" placeholder="Quantity serves people" class="form-control" value="{{ recipes.number_people}}">
+                    
 
-                    <h5>Choose Image:</h5>
-                    <input name="image"  type="file"  accept="image/*" class="form-control" required />
+                    <h5 class="mt-3">Choose Image:</h5>
+                    <img src="{{ recipes.image.url }}" class="img" />
+                    <input name="image" type="file"  accept="image/*" class="form-control"  />
 
                     
                     
-                    <h5>Category</h5>
+                    <h5 class="mt-3">Category</h5>
                     {% for val, cat in Category %}
-                        <div class="form-check">
+                        <div class="form-check" value="{{val}}">
                             
-                            <input class="form-check-input" type="radio" name="category" id="exampleRadios1" value="{{val}}" checked>
+                            <input class="form-check-input" type="radio" name="category" id="exampleRadios1" value="{{val}}" {% if recipes.category == val %} checked {% endif %}>
                             <label class="form-check-label" for="exampleRadios1">
                                 {{cat}}
                             </label>
                             
                           </div>
-                    {% endfor %}
+                          {% endfor %}
 
-                    <input type="submit" class="btn btn-primary" value="Update Recipes" />
+                    <input type="submit" class="btn btn mt-3" value="Update Recipes" style="background-color: rgb(161, 215, 145);" />
                 </form>
             </div>
+            <div class="col-6">
+                <img src="/static/image/chef.png" class="mp-5 rounded-4" style="width: 500px; height: 500x; margin-top: 70px; margin-left: 20px; margin-bottom: 20px;">
+            </div>
         </div>
+        
     </div>
 </section>
 

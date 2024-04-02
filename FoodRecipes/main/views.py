@@ -17,6 +17,7 @@ def add_recipes(requset:HttpRequest):
     if requset.method== 'POST':
         try:
             new_recipes=Recipes(
+                user=requset.user,
                 name=requset.POST["name"], 
                 content=requset.POST["content"],
                 time_coocking=requset.POST["time_coocking"],  
@@ -44,24 +45,26 @@ def all_recipes(requset:HttpRequest):
 def detail_recipes(requset:HttpRequest,recipes_id):
     try:
         recipes= Recipes.objects.get(pk=recipes_id)
+        comments=Comment.objects.filter(Recipes=recipes)
+        suggestions=Suggestions.objects.filter(Recipes=recipes)
+        
         
     except Recipes.DoesNotExist:
         pass
     except Exception as e:
         print(e)
-    return render(requset ,"main/detail_recipes.html", {"recipes":recipes})
+    return render(requset ,"main/detail_recipes.html", {"recipes":recipes,'comments':comments ,"suggestions":suggestions})
 
 
 def update_recipes(requset:HttpRequest,recipes_id):
-
     recipes=Recipes.objects.get(pk=recipes_id)
-    if requset.method== 'POST':
+    if requset.method == "POST":
         try:
-            recipes.name=requset.POST["name"], 
-            recipes.content=requset.POST["about"],
-            recipes.time_coocking=requset.POST["time_coocking"], 
-            recipes.number_people=requset.POST["number_people"], 
-            recipes.image=requset.FILES["image"],
+            recipes.name=requset.POST["name"]
+            recipes.content=requset.POST["content"]
+            recipes.time_coocking=requset.POST["time_coocking"] 
+            recipes.number_people=requset.POST["number_people"] 
+            recipes.image= requset.FILES.get("image",recipes.image)
             recipes.category=requset.POST['category']
             recipes.save()
             return redirect("main:detail_recipes",recipes_id=recipes.id)
@@ -97,15 +100,17 @@ def recipes_search(requset:HttpRequest):
 
     return render(requset, "main/recipes_search.html", {"recipes" :  recipes})
 
-def suggestions(request: HttpRequest):
+def suggestions(request: HttpRequest,recipes_id ):
     if request.method == "POST":
         try:
-            new_suggestions = Suggestions(uesr=request.user, content=request.POST["content"])
+            recipes= Recipes.objects.get(pk=recipes_id)
+            new_suggestions = Suggestions(Recipes=recipes,uesr=request.user, content=request.POST["content"])
             new_suggestions.save()
         except Exception as e:
                 print(e)
         return redirect("main:home")  #msg
-    return render(request, 'main/suggestions.html')
+    return redirect(request, 'main:detail_recipes',recipes_id=recipes.id)
+
 
 def suggestions_msg(request: HttpRequest):
     if not request.user.is_staff:
@@ -124,9 +129,11 @@ def add_comment(request:HttpRequest, recipes_id):
     if request.method == "POST":
         try:
             recipes= Recipes.objects.get(pk=recipes_id)
-            new_comment = Comment(recipes=recipes,uesr=request.user, content=request.POST["content"])
+            new_comment = Comment(Recipes=recipes,
+                                  user=request.user, 
+                                  content=request.POST["content"])
             new_comment.save()
         except Exception as e:
                 print(e)
     
-    return redirect("main:detail_recipes", recipes_id)
+    return redirect("main:detail_recipes", recipes_id=recipes.id)

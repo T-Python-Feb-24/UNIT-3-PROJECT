@@ -2,18 +2,29 @@
 {% block title %}All Recipes{% endblock %}
 
 {% block style %}
-
+<style>
+    .all{
+    height: 100vh;
+    padding: 0;
+    background: url('/static/image/imag2.png') no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+    overflow: hidden;
+    
+}
+</style>
 
 {% endblock %}
 
 
 {% block content %}
-<section>
+<section class="all">
     <div class="container">
         <div class="row g-4">
             <div class="col-12 mb-3">
-                <div class="d-flex justify-content-between align-items-center mt-4" style="">
-                    <h2>All Recipes</h2>
+                <h1 class="fw-light text-blak " style="text-align: center; margin-top: 200px;  background-color: rgba(249, 249, 255, 0.7); padding: 33px; margin-left: 200px; margin-right: 200px; width: 700px;">All Recipes</h1>
+                <div class="d-flex justify-content-between align-items-center mt-4">
                     <div class="d-flex gap-0.1">
                         <a href="{% url 'main:all_recipes' %}" class="p-2 ps-3 pe-3 rounded-pill cat  text-decoration-none">All</a>
                         
@@ -39,7 +50,7 @@
                         </div>
                         <div class="w-75 ps-3">
                             <h2><a href="{% url 'main:detail_recipes' rec.id  %}" class="text-decoration-none text-black">{{rec.name }}</a></h2>
-                            <h3>{{rec.chef_name}}</h3>
+                            <h3><a href="{% url 'accounts:user_profile' user.id %}" class="text-decoration-none text-black"> {{request.user.username}}</a></h3>
                             <h6 class="cat pt-1 pb-1 rounded-pill {{ rec.category }}">{{ rec.category }}</h6>
                             <h6 class="text-muted">{{ rec.published_at }}</h6>
                            

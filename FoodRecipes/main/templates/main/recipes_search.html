@@ -2,29 +2,44 @@
 {% block title %}Srearch Recipes{% endblock %}
 
 {% block style %}
-
+<style>
+    .search{
+    height: 100vh;
+    padding: 0;
+    background: url('/static/image/sug.png') no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+    overflow: hidden;
+    
+}
+</style>
 
 {% endblock %}
 {% block content %}
-<section>
+<section class="search">
     <div class="container">
-        <div class="row g-4">
-
+        <div class="row g-4" style="text-align: center; margin-top: 200px;  background-color: rgba(249, 249, 255, 0.7); padding: 33px; margin-left: 200px; margin-right: 200px; width: 700px;">
+            <h1 class="fw-dark text-blak mb-0">Search Recipes</h1>
             <div class="d-flex flex-column gap-2">
                 
-                <h1>Search</h1>
-                <form action="{% url 'main:recipes_search' %}"  method="get" class="d-flex gap-2" style="width: 50%; ">
+                
+                <form action="{% url 'main:recipes_search' %}"  method="get" class="d-flex gap-2" style="width: 600px; ">
                     <input type="search" class="form-control" name="search" value="{{request.GET.search}}"/>
-                    <input type="submit" value="search" class="btn btn-primary" />
+                    <input type="submit" value="search" class="btn btn" style="background-color:rgb(161, 215, 145);" />
                 </form> 
 
-                <h2>Search results for {{ request.GET.search }} {{ recipes.count}} </h2>
+                
             </div>
 
         </div>
-
+    </div>
+</section>
+<section>
+    <div class="container">
+        
         <div class="row mt-2 g-5">
-
+            <h2>Search results for {{ request.GET.search }} {{ recipes.count}} </h2>
             {% if recipes.count == 0 %}
                 <h3>No results for your search '{{request.GET.search}}' </h3>
             {% endif %}

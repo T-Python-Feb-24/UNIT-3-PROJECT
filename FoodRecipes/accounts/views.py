@@ -67,10 +67,11 @@ def logout_user(request:HttpRequest):
 
 
 
-def user_profile(request:HttpRequest, user_name):
+def user_profile(request:HttpRequest, user_id):
 
     try:
-        user_profile = User.objects.get(username=user_name)
+        user=User.objects.get(id=user_id)
+        user_profile = ProfileUser.objects.get(user=user)
         
     except:
         return render(request, "main/not_found.html")
@@ -108,10 +109,10 @@ def update_profile(request:HttpRequest):
 
                 profile.save()
 
-                return redirect("accounts:user_profile", user_name=user.username)
+                return redirect("accounts:user_profile", user_id=user.id)
 
         except Exception as e:
             msg = f"Something went wrong {e}"
             print(e)
 
-    return render(request, "accounts/update.html", {"msg" : msg})
+    return render(request, "accounts/update_profile.html", {"msg" : msg})

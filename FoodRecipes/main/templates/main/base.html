@@ -32,12 +32,10 @@
               <li class="nav-item">
                 <a class="nav-link " aria-disabled="true" href="{% url 'main:add_recipes' %}">Add Recipes</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " aria-disabled="true" href="">suggestions</a>
-              </li>
+              
               {% endif %}
               <li class="nav-item">
-                <a class="nav-link " aria-disabled="true" href="">Add suggestions</a>
+                <a class="nav-link " aria-disabled="true"href="{% url 'main:suggestions_msg' %}">suggestions</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " aria-disabled="true" href="{% url 'main:recipes_search' %}">Search</a>
@@ -48,8 +46,8 @@
             
             <ul class="nav-item"> 
             {% if request.user.is_authenticated %} 
-              <div class="d-flex gap-1">
-                <a class="nav-link" href="{% url 'accounts:user_profile' request.user.username %}">welcome {{request.user.username }}</a>
+              <div class="d-flex gap-1 mt-2 text-center ">
+                <a class="nav-link" href="{% url 'accounts:user_profile' request.user.id %}">welcome {{request.user.username }}</a>
                 <a class="nav-link" href="{% url 'accounts:logout_user' %}">Logout</a>
               </div>
               
@@ -71,16 +69,17 @@
       {% block content %}
       {% endblock content %}
     <!-- footr -->
-    <div class="container">
-      <footer class="py-3 my-4">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-        </ul>
-        <p class="text-center text-body-secondary">© 2024 Blogger, Inc</p>
+    <div class="container-fluid" >
+      <footer class="row py-3 my-4 mt-5" style="background-color: rgba(191, 120, 58, 0.998);">
+        
+        <div class="col-6">
+          <p class="text-body-secondary ">Contact Us</p>
+          <p class="contact_detiles"> TELEPHONE : <span><a href="/">+996 57263883764</a></span></p>
+          <p class="contact_detiles"> EMAIL : <span><a href="/">foodrecipes@realeastate.com</a></span></p>
+        </div>
+          <div class="col-6">
+            <a href="" target="_blank"><i class="bi bi-instagram"></i></a>
+          </div>
       </footer>
   </div>
 

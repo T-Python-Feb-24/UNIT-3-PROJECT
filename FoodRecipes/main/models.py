@@ -7,7 +7,7 @@ class Recipes(models.Model):
     categories = models.TextChoices("Category", ["Breakfast","Lunch", "Dinner"])
   
     name = models.CharField(max_length=2048)
-    chef_name = models.CharField(max_length=2048)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     published_at = models.DateTimeField(auto_now_add=True)
     category = models.CharField(max_length=64,choices=categories.choices)
@@ -21,9 +21,10 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     published_at = models.DateTimeField(auto_now_add=True)
-    evaluation = models.PositiveIntegerField( validators=[MinValueValidator(1), MaxValueValidator(5)]) 
+    evaluation = models.PositiveIntegerField( validators=[MinValueValidator(1), MaxValueValidator(5)],null=True) 
     
 class Suggestions(models.Model):
+    Recipes= models.ForeignKey(Recipes, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     published_at = models.DateTimeField(auto_now_add=True)

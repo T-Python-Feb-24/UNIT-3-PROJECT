@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <img src="{{ recipes.image.url }}"  class="  mp-5" style="width: 500px; margin-top: 20px; margin-left: 20px; margin-bottom: 20px;"/>
+                <img src="{{ recipes.image.url }}"  class="mp-5" style="width: 500px; margin-top: 20px; margin-left: 20px; margin-bottom: 20px;"/>
                 
 
             </div>
@@ -25,9 +25,11 @@
                     <h6>{{recipes.published_at}}</h6>
                     
                     <div class="d-flex gap-2">
+                        <a href="{% url 'favorites:add_remove_favorites' recipes.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
                         {% if request.user.is_staff %} 
-                            <a href="{% url 'main:update_recipes' recipes.id %}" class="btn btn-primary mt-3 mp-5">update</a>
-                            <a href="{% url 'main:delete_recipes' recipes.id %}" class="btn btn-danger mt-3 mp-5">Delete</a>
+                            <a href="{% url 'main:update_recipes' recipes.id %}" class="btn btn mt-3 mp-5" style="background-color: rgb(51, 150, 24);">update</a>
+                            <a href="{% url 'main:delete_recipes' recipes.id %}" class="btn btn mt-3 mp-5"  style="background-color: rgb(51, 150, 24);">Delete</a>
+
                         {% endif %}
                        
                     </div>
@@ -35,10 +37,10 @@
                 </div>
             </div>
 
-            <hr>
+            
             
 
-    <h2>Comments:</h2>
+    
 
     <div class="row" id="comments">
         <div class="col-7 d-flex flex-column gap-4">
@@ -46,7 +48,7 @@
             
             {% for comment in comments %} 
                 <div class="d-flex flex-column gap-2 shadow p-3 ">
-                    <a href="{% url 'accounts:user_profile' comment.user.username %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
+                    <a href="{% url 'accounts:user_profile' comment.user.id %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
                     <p>{{ comment.content }}</p>
                 </div>
             {% endfor %}
@@ -57,13 +59,15 @@
     <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
+
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">Add Favorite</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              Please Login to add a Favorite
-            </div>
+
+            <span class="material-symbols-outlined">
+                favorite
+                </span>
             <div class="modal-footer">
               <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
     
@@ -75,14 +79,31 @@
     <div class="row mt-4">
         <div class="col">
             {% if request.user.is_authenticated %}
-            <form action="{% url 'main:add_comment' recipes.id %}" method="post" class="d-flex flex-column gap-2">
+            <form action="{% url 'main:add_comment' recipes.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data" >
                 {% csrf_token %}
-                <textarea name="content" class="form-control" placeholder="comment"></textarea>
+                <label for="content mt-5">Enter your comment:</label><br>
+                <input type="text" name="content" class="form-control" placeholder="comment">
 
-                <input type="submit" value="Add Comment" class="btn btn-primary"/>
+                <input type="submit" value="Add Comment" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
             </form>
             {% else %}
-            <div class="alert alert-warning">You must <a href="{% url 'accounts:login_user' %}">Sign in</a> to comment.</div>
+            <div class="alert alert-warning">You must <a href="{% url 'accounts:login_user' %}">Sign in</a></div>
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'main:suggestions' recipes.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <label for="content mt-5">Enter your suggestion:</label><br>
+                <input type="text" name="content" class="form-control" placeholder="suggestions" />
+
+                <input type="submit" value="Add Comment" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
+            </form>
+            {% else %}
+            <div class="alert alert-warning">You must <a href="{% url 'accounts:login_user' %}">Sign in</a></div>
             {% endif %}
 
         </div>

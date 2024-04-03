@@ -176,7 +176,9 @@ section{
 /* #sign_up_btn{
   background-color: rgb(174, 124, 57);
 } */
-
+.highlight ::selection {
+  background-color: rgb(255, 213, 0);
+}
 
 /* about section  */
 
@@ -214,9 +216,28 @@ section{
 
 
 /* dashboard  */
-
-
-
-section .dashboard-navbar{
-  margin: 20px;
+.all-comments{
+  position: relative;
+  overflow-y: scroll;
+  height: 400px;
+  right: 15px;
+  padding-left: 20px;
 }
+
+
+.all-comments::-webkit-scrollbar {
+  width: 8px;
+}
+
+.all-comments::-webkit-scrollbar-track {
+  box-shadow: 0;
+  border-radius: 0;
+}
+
+.all-comments::-webkit-scrollbar-thumb {
+  background:#198754;
+  border-radius: 15px;
+}
+
+
+

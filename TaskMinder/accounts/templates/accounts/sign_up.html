@@ -14,9 +14,8 @@
     </div>
 </nav>
 
-
+<!-- Sign Up  -->
 <section>
-
 
     {% if msg %}
         <div class="alert alert-danger">{{msg}}</div>
@@ -35,14 +34,14 @@
                 <input name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
                 <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" />
                 <textarea name="about" class="form-control" placeholder="about yourself"></textarea>
-                <input name="projects_link" class="form-control" type="text"   placeholder="@projects link" />
 
                 <h4 class="text-center mb-2 mt-2">Choose Avatar</h4>
                 <input type="file" class="form-control" name="avatar" />
 
                 <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
 
-                <input type="submit" class="btn btn-warning" value="Sign Up" />
+                <input type="submit" class="btn btn-warning" value="Sign Up" /> 
+                <p>Already have an account? <a href="{% url 'main:sign_in' %" style="text-decoration: none;">Sign in</a></p>
 
             </form>
         </div>

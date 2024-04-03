@@ -109,3 +109,5 @@ def update_profile(request:HttpRequest):
             print(e)
 
     return render(request, "accounts/update.html", {"msg" : msg})
+
+

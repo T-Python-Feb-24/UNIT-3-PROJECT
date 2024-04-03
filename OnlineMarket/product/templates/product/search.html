@@ -1,0 +1,46 @@
+{% extends 'product/base.html' %}
+
+{% block title %} Search product {% endblock %}
+
+
+{% block content %}
+
+    <div class="row ">
+
+        <div class="d-flex flex-column gap-1 p-4 m-1">
+            
+            <h1>Search</h1>
+            <form action="{% url 'product:product_search_view' %}"  method="get" class="d-flex gap-2">
+                <input type="search" class="form-control" name="search" value="{{request.GET.search}}"/>
+                <input type="date" class="form-control" name="date" value="{{request.GET.date}}"/>
+                
+                <input type="submit" value="search" class="btn btn-dark" />
+                </div>
+            </form> 
+
+            
+        </div>
+
+    </div>
+
+    <div class="row d-flex flex-row border border-4 shadow p-3 rounded-4 mt-4 m-4">
+         <h2 class=>Search results for {{ request.GET.search }} ({{ products.count }}) </h2>
+        {% if products.count == 0 %}
+            <h3>Sorry! No results for your search '{{request.GET.search}}' </h3>
+        {% endif %}
+
+        {% for product in products %}
+    <div class="col-3 product-container">
+        <div class="d-flex flex-column gap-2 p-3">
+            <img src="{{ product.image.url }}" class="w-100 rounded-4 card-poster " style="height: 200px;" />
+            <h2 style="margin-left: 30px; color: black;">{{product.name}}</h2>
+            <h6 class="cat rounded-pill {{product.category}}" style="margin-left: 30px;">{{ product.category }}</h6>
+            <p class="rounded-pill {{product.price}}" style="margin-left: 30px;">{{product.price}} sr</p>
+            <h6><a href="{% url 'product:product_detail_view' product.id  %}" class="text-decoration-none" style="background-color: black; color: azure; border-radius: 44px; margin: 20px; padding: 3px 75px; text-align: center;">More</a></h6>
+        </div>
+    </div>
+    {% endfor %}
+
+    </div>
+
+{% endblock %}

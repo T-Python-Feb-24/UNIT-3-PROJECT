@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from .models import Product,Comment,Review
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import date, timedelta
 # Create your views here.
 
 
@@ -142,3 +143,18 @@ def add_rating_view(request:HttpRequest,product_id):
         new_review.save()
 
     return redirect('product:product_detail_view', product_id=product_object.id)
+
+
+def product_search_view(request:HttpRequest):
+    products = []
+
+    if "search" in request.GET:
+        products = Product.objects.filter(name__contains=request.GET["search"])
+
+    if "date" in request.GET and len(request.GET["date"]) > 4:
+        first_date = date.fromisoformat(request.GET["date"])
+        end_date = first_date + timedelta(days=1)
+        products = products.filter(published_at__gte=first_date, published_at__lt=end_date)
+
+
+    return render(request, "product/search.html", {"products" : products})

@@ -12,7 +12,10 @@
                 {% endfor %}
             </div>
         </div>
-
+        <form action="{% url 'product:product_search_view' %}" class="d-flex" role="search" method="get">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" >
+            <button class="btn btn-outline-dark" type="submit">Search</button>
+          </form>
     </div>
 
    <div class="row mt-1 g-4 p-3">

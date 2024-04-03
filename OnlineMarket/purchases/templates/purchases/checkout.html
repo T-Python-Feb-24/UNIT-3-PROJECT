@@ -15,40 +15,115 @@
                     <form action="{% url 'purchases:checkout_view' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="mb-3">
+                            <label for="first_name" class="form-label">Name</label>
+                            <input type="text" name="first_name" class="form-control" value="{{user.username}}">
+                        </div>
+                        <div class="mb-3">
                             <label for="shipment_address" class="form-label">Address</label>
                             <input type="text" id="shipment_address" name="shipment_address" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="payment_method" class="form-label">Payment Method</label>
                             <select id="payment_method" name="payment_method" class="form-select" required>
-                                <option value="credit_card">Credit Card</option>
-                                <option value="paypal">PayPal</option>
+                               <option value="credit_card">Credit Card</option>
+                                
+                                <option value="cash">Cash on delivery</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-dark">Proceed to Payment</button>
+                        <button type="submit" class="btn btn-dark">Proccess</button>
                     </form>
+                    
                 </div>
             </div>
+            
         </div>
-        <div class="col-md-6">
-            <div class="card border-1 shadow p-5 rounded-4">
-                <div class="card-body">
-                    <h5 class="card-title">Cart</h5>
-                    <ul class="list-group">
-                        {% for item in cart_items %}
-                            <li class="list-group-item">
-                                {{ item.product.price }} SR 
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <h6 style="color: brown;">Total: {{ total_price }} SR</h6>
-                    <!--<img src="{% static 'images/cart.jpg'%}" class="rounded-4" style="width: 400px; height: 165px;"/>-->
-                    <h5>Thank you for choosing our services!<br> We appreciate your preference and trust in us Looking forward to serving you again soon.</h5>
+      <div class="col-md-6">
+        <img src="{% static 'images/cart3.jpg'%}" class="w-100 rounded-4" style="height: 450px;"/>
+      </div>
+    
+</div>
+<div class="container">
+    <div class="row justify-content-center m-3">
+        <div class=" col-lg-6 col-md-6">
+            <div class="card p-3 card border-1 shadow p-5 rounded-4">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h2 class="heading text-center">Checkout</h2>
+                    </div>
                 </div>
+                <form onsubmit="event.preventDefault()" class="form-card">
+                    <div class="row justify-content-center mb-4 radio-group">
+                        <div class="col-sm-3 col-5">
+                            <div class='radio selected mx-auto' data-value="dk"> <img class="fit-image" src="https://i.imgur.com/5TqiRQV.jpg" width="105px" height="55px"> </div>
+                        </div>
+                        <div class="col-sm-3 col-5">
+                            <div class='radio mx-auto' data-value="visa"> <img class="fit-image" src="https://i.imgur.com/OdxcctP.jpg" width="105px" height="55px"> </div>
+                        </div>
+                        <div class="col-sm-3 col-5">
+                            <div class='radio mx-auto' data-value="master"> <img class="fit-image" src="https://i.imgur.com/WIAP9Ku.jpg" width="105px" height="55px"> </div>
+                        </div>
+                        <div class="col-sm-3 col-5">
+                            <div class='radio mx-auto' data-value="paypal"> <img class="fit-image" src="https://i.imgur.com/cMk1MtK.jpg" width="105px" height="55px"> </div>
+                        </div> <br>
+                    </div>
+                    <div class="row justify-content-center form-group">
+                        <div class="col-12 px-auto">
+                            <div class="custom-control custom-radio custom-control-inline"> <input id="customRadioInline1" type="radio" name="customRadioInline1" class="custom-control-input" checked="true"> <label for="customRadioInline1" class="custom-control-label label-radio">Private</label> </div>
+                            <div class="custom-control custom-radio custom-control-inline"> <input id="customRadioInline2" type="radio" name="customRadioInline1" class="custom-control-input"> <label for="customRadioInline2" class="custom-control-label label-radio">Business</label> </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <label>Name</label>
+                            <div class="input-group"> <input type="text" name="Name" value="{{ user.username }}" placeholder="John Doe">  </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <label>Card Number</label>
+                            <div class="input-group"> <input type="text" id="cr_no" name="card-no" placeholder="0000 0000 0000 0000" minlength="19" maxlength="19">  </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Expiry Date</label>
+                                    <div class="input-group"> <input type="text" id="exp" name="expdate" placeholder="MM/YY" minlength="5" maxlength="5">  </div>
+                                </div>
+                                <div class="col-6">
+                                    <label>CVV</label>
+                                    <div class="input-group"> <input type="password" name="cvv" placeholder="&#9679;&#9679;&#9679;" minlength="3" maxlength="3"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-md-12"> 
+                            <input type="submit" value="Payment {{ total_price }} SR" class="btn btn-dark "> </div>
+                        </div>
+                </form>
             </div>
         </div>
     </div>
-    
 </div>
-
+<div class="col p-3">
+    <div class="card border-1 shadow p-5 rounded-4">
+        <div class="card-body">
+            <h5 class="card-title">Cart</h5>
+            <ul class="list-group">
+                {% for item in cart_items %}
+                    <li class="list-group-item">
+                        {{ item.product.price }} SR 
+                    </li>
+                {% endfor %}
+            </ul>
+            <h6 style="color: brown;">Total: {{ total_price }} SR</h6>
+           
+            <h5>Thank you for choosing our services!<br> We appreciate your preference and trust in us Looking forward to serving you again soon.</h5>
+        </div>
+    </div>
+</div>
+</div>
 {%endblock%}
+ 

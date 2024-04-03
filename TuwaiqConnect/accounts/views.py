@@ -55,13 +55,14 @@ def orgnaization_register(request : HttpRequest):
                     )
                 user.save()
 
-                orgnaization = orgnaization(
+                orgnaization =  Orgnization(
                     user=user,
                     about = request.POST["about"],
                     logo = request.FILES.get("logo")
                 )
                 orgnaization.save()
                 orgnaization.is_active = False
+                # Here add it to the orgnaization group 
                 msg= "You have been successfully registered!"
                 
         except IntegrityError:
@@ -69,7 +70,7 @@ def orgnaization_register(request : HttpRequest):
         except Exception as e:
             msg=f"something went wrong, {e}"
      
-    return render(request,"accounts/orgnaization_register.html")
+    return render(request,"accounts/orgnaization_register.html",{"msg":msg})
 
 
 
@@ -90,28 +91,47 @@ def staff_register(request : HttpRequest):
     return render (request,"accounts/staff_register.html")
 
 
+def user_login(request :HttpRequest):
+    if request.method == "POST":
+        try:
+            user = authenticate(
+            username=request.POST["username"],
+            password=request.POST["password"]
+            )
+        
+            if user is not None:
+                login(request,user) 
+                return redirect("main:home_page")
+        #staff condition : 
+            if user is not None : 
+                pass
+        #Orgnization condition : 
+            # تسوين دخول بالقروبات  بس اخر شيي
+            if user is not None : 
+                pass
+        #students condition : 
+            if user is not None : 
+                pass
+            
+        except Exception as e:
+            print(e.__class__)
+               
+    return render (request,"accounts/login.html")
 
 
+def user_logout(request:HttpRequest):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect("main:home_page")
+    
 
+def update_student():
+    psss
+    
+    
+def update_orgnaization():
+    pass
 
-
-
-
-
-
-
-
-# def staff_login(request :HttpRequest):
-#     if request.method == "POST":
-#        user = authenticate(
-#            username=request.POST["username"],
-#            password=request.POST["password"]
-#            )
-#        # returns None if the credentials aren’t valid 
-#        if (user is not None and user.is_sttaf):
-#            login(request,user) 
-#         #    return redirect("main:home_page")
-#        else:
-#            pass 
-#     return render (request,"accounts/login.html")
+def update_staff():
+    pass 
 

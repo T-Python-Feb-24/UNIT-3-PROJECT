@@ -1,0 +1,27 @@
+{% extends "main/base.html" %}
+
+{% block title %} profile{% endblock  %}
+{% block style %}
+
+{% endblock  %}
+
+<i class="bi bi-github"></i></a>
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% for profile in student  %}
+                {{profile.user.first_name}}{{profile.user.last_name}}
+                {{profile.collage_name}} graduatio year : {{profile.graduation_year}}
+                {{profile.major}}
+                {{profile.GPA}}
+                {{profile.CV}}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock  %}
+

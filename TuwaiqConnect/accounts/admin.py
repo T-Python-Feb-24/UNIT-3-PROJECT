@@ -8,5 +8,7 @@ class StudentAdmin(admin.ModelAdmin):
 admin.site.register(Student,StudentAdmin)
 
 class OrgnizationAdmin(admin.ModelAdmin):
-    # list_display =("user","about")
-    pass
+    list_display =("user","about")
+    
+    
+admin.site.register(Orgnization,OrgnizationAdmin)

@@ -23,6 +23,9 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include('accounts.urls')),
-    path("",include('main.urls'))
+    path("",include('main.urls')),
+    path("",include('bootcamp.urls')),
+    path("",include('orgnaization.urls')),
+    path("",include('student.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

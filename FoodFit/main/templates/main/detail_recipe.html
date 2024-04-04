@@ -112,28 +112,34 @@
 {% if recipes.count != 0%}
  <h1>Read More</h1>
 {% endif %}
-<div class="row mt-2 g-5">
-<div class="col md-6">
 
-        {% for recipe in recipes %}
-        <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-      <img src="" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'main:detail_recipe_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h5>
-        <p class="card-text">For: {{recipe.quantity}} Grams </p>
-        <p class="card-text">Calories :{{recipe.calories}} </p>
-        <p class="card-text">Category:{{recipe.category}} </p>
-      </div>
-    </div>
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
+
+  <article class="ccard">
+  <div class="im">
+  <div class="card-img">
+    <img class="card-img " src="{{recipe.image.url}}" class="card-img-top" alt="...">
   </div>
-</div>
-</div>
+   </div>
 
-<br><br>
-     
-       {% endfor %}
+  <div class="project-info">
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'main:detail_recipe_page' recipe.id  %}">{{recipe.title}}</a>
+      </div>
+
+      <span class="tag">{{recipe.category}}</span>
+    </div>
+    <span class="lighter"
+      >Quantity: {{recipe.quantity}} <br>
+      Calories : {{recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
+  
  {% endblock %}

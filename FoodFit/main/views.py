@@ -171,13 +171,14 @@ def comments(request:HttpRequest , recipe_id):
 
 
 def search_food(request: HttpRequest):
+ recipes = Recipe.objects.order_by("-fat")[0:3]
  if request.method == "POST":
   query=request.POST['query']
   api_url = "https://api.api-ninjas.com/v1/nutrition?query="
   api_request = requests.get(api_url + query , headers={'X-Api-Key': "LieQDXn0BxDcZSrzyivcIg==KZ0HZTXbWwJgllHA"})
 
   try:
-   recipes = Recipe.objects.order_by("-fat")[0:3]
+   recipes = Recipe.objects.all()
    api_object=json.loads(api_request.content)
    print(api_request.content)
   except Exception as e:
@@ -185,5 +186,5 @@ def search_food(request: HttpRequest):
     print(e)
   return render(request,"main/search_food.html" ,{"api" :api_object , "recipes":recipes})
  else:
-  return render(request,"main/search_food.html" ,{"query" :"enter vaild input" })
+  return render(request,"main/search_food.html" ,{"query" :"enter vaild input" , "recipes":recipes })
  

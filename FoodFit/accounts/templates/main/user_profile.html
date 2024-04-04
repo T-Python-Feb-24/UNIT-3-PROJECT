@@ -29,21 +29,49 @@
 </div>
 
 
-
-    <div class="row mt-5">
-        <div class="col md-6">
-
-              <h1>{{user.username }} favorites Recipes</h1>
-        {% for favorite in user.recipefavorite_set.all %}
-        <div class="col-4">
-            <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
-                <img src="{{ favorite.recipe.image.url }}"  class="w-100 rounded-4 card-poster "/>
-                <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{favorite.recipe.category}} ">{{ favorite.recipe.category }}</h6>
-                <h2><a href="{% url 'main:detail_recipe_page' favorite.recipe.id  %}" class="text-decoration-none">{{favorite.recipe.title}}</a></h2>   
-            </div>
-        </div>
-    {% endfor %}
+<div class="card">
+  <div class="imgg">
+  <img class="imgg" src="/static/images/searchimg.jpg" />
+  </div>
+  <div class="textBox">
+    <div class="textContent">
+      <p class="h1">Clans of Clash</p>
+      <span class="span">12 min ago</span>
     </div>
+    <p class="p">Xhattmahs is not attacking your base!</p>
+  <div>
+</div></div></div>
+
+
+ <div class=" row ">
+ <h1>{{user.username }} favorites Recipes</h1>
+  {% for favorite in user.recipefavorite_set.all %}
+    <div class="col-md-2 mt-5">
+
+  <article class="ccard">
+  <div class="im">
+  <div class="card-img">
+    <img class="card-img " src="{{favorite.recipe.image.url }}" class="card-img-top" alt="...">
+  </div>
+   </div>
+
+  <div class="project-info">
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'main:detail_recipe_page' favorite.recipe.id  %}">{{favorite.recipe.title}}</a>
+      </div>
+
+      <span class="tag">{{favorite.recipe.category }}</span>
+    </div>
+    <span class="lighter"
+      >Quantity: {{favorite.recipe.quantity}} <br>
+      Calories : {{favorite.recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
        
 
     <div class="col md-6">

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from .import views
 from django.conf import settings
 from django.conf.urls.static import static
 from main.views import home
@@ -17,4 +17,5 @@ urlpatterns = [
     path('contact_us/', views.contact_us, name='contact_us'),
     path('contact_us_messages/', views.contact_us_messages, name='contact_us_messages'),
     path('save_contact_message/', views.save_contact_message, name='save_contact_message'),
+    path('comment/<int:comment_id>/delete/<int:story_id>/', views.delete_comment, name='delete_comment'),
 ]

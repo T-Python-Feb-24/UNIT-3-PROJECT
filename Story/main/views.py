@@ -3,9 +3,11 @@ from django.conf import settings
 from .models import Story,Comment,ContactMessage
 import openai
 from dotenv import load_dotenv
+from django.contrib.auth.decorators import login_required
 import os
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 dotenv_path = os.path.join(os.path.dirname(__file__), 'key.env')
 load_dotenv(dotenv_path=dotenv_path)
 
@@ -54,10 +56,11 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
     return response.choices[0].message["content"]
 
-
 def show_story(request, pk):
     story = get_object_or_404(Story, pk=pk)
     lines = story.content.split('\n')  
+    is_bookmarked = story.saved_by.filter(pk=request.user.pk).exists()
+
 
     lines_per_page = 20
     segments = ['\n'.join(lines[i:i + lines_per_page]) for i in range(0, len(lines), lines_per_page)]
@@ -72,7 +75,9 @@ def show_story(request, pk):
     return render(request, 'main/show_story.html', {
         'story': story,
         'page_obj': page_obj,
-        'comments': comments  
+        'comments': comments ,
+        'is_bookmarked': is_bookmarked,
+ 
     })
 
 
@@ -118,6 +123,16 @@ def add_comment(request, story_id):
             pass
     
     return redirect('main:show_story', pk=story_id)
+
+@login_required
+def delete_comment(request, comment_id, story_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if request.user == comment.user or request.user.is_staff:
+        comment.delete()
+        return redirect('main:show_story', pk=story_id)
+    else:
+        return HttpResponseForbidden("You are not allowed to delete this comment.")
 
 def contact_us(request):
     if request.method == "POST":

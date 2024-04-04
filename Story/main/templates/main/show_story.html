@@ -7,30 +7,42 @@
     <h2>{{ story.name }}</h2>
     <div class="story-segment">
         {{ page_obj.object_list|first|linebreaks }}  
-    </div>
+    </div><br><br>
     
     <nav aria-label="Page navigation">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        <nav aria-label="Page navigation" class="d-flex justify-content-between align-items-center">
+            <ul class="pagination mb-0">
+                {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                <li class="page-item disabled"><span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span></li>
+                {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% endif %}
+            </ul>
+        
+            {% if user.is_authenticated %}
+            <div>
+                {% if is_bookmarked %}
+                <a href="{% url 'bookmarks_likes:toggle_bookmark' story_id=story.pk %}" class="btn btn-secondary" style="margin-left: 15px;">Remove from Bookmark</a>
+                {% else %}
+                <a href="{% url 'bookmarks_likes:toggle_bookmark' story_id=story.pk %}" class="btn btn-secondary">Bookmark</a>
+                {% endif %}
+            </div>
             {% endif %}
-            <span class="px-2">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-            {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-            {% endif %}
-        </ul>
+        </nav><br><br>
+        
 
         <div>
-            <p>{{ story.liked_by.count }} Likes</p>
             {% if user.is_authenticated %}
-            <a href="{% url 'bookmarks_likes:toggle_bookmark' story_id=story.pk %}"class="btn btn-secondary">Bookmark</a>
                 <form action="{% url 'bookmarks_likes:toggle_like' story_id=story.pk %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Toggle Like</button>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Toggle Like</button>
                 </form>
             {% else %}
                 <p><a href="{% url 'user_info:user_login' %}">Log in to like this story</a></p>
             {% endif %}
+            <p>{{ story.liked_by.count }} Likes</p>
         </div>
     </nav><br>
 
@@ -71,9 +83,13 @@
                 {% for comment in comments %}
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h5 class="card-title"><b>{{ comment.user.username }}</b></h5>
+                            <h5 class="card-title"><b>@{{ comment.user.username }}</b></h5>
                             <p class="card-text">{{ comment.content }}</p>
+                            {% if request.user == comment.user or request.user.is_staff %}
+                            <a href="{% url 'main:delete_comment' comment_id=comment.id story_id=story.pk %}" class="btn btn-danger">Delete</a>
+                            {% endif %}
                         </div>
+
                     </div>
                 {% endfor %}
             {% else %}

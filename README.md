@@ -11,7 +11,7 @@ A store that sells computers and there accessories.
 - Product catalog
 - Order processing and tracking.
 - User accounts with saved cart
-- Add to list of want prodect
+- Add to list of want product
 
 ## User Stories, Wireframes & UML links
 - User stories document link here.

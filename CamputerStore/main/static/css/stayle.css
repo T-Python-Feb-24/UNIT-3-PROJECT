@@ -63,16 +63,23 @@ h2.title {
 
 .myalart {
   margin-top: 3rem;
-  height: 3rem !important;
   align-items: center;
 
-  .dager-svg {
+  .alert {
+    --bs-alert-padding-y: 10px
+  }
+
+  .danger-svg {
     height: 2rem !important;
     width: 2rem !important;
     fill: rgb(128, 2, 27);
   }
 }
 
+select[id="category"] {
+  width: fit-content !important;
+
+}
 
 .input-group {
   grid-template-columns: 4rem 1fr;

@@ -29,7 +29,7 @@ def sign_up_view(request: HttpRequest):
          return redirect("account:login_view")
 
    except IntegrityError as e:
-      msg = msg = "اسم المستخدم أو الايميل مستخدم بالفعل. حاول مرة اخرى..."
+      msg = "اسم المستخدم أو الايميل مستخدم بالفعل. حاول مرة اخرى..."
       print(e)
 
    except Exception as e:
@@ -60,7 +60,7 @@ def login_view(request: HttpRequest):
 
          return redirect(request.POST.get("next") or "main:index_view")
       else:
-         msg = "Username or Password is wrong. Try again..."
+         msg = "اسم المستخدم أو الايميل مستخدم بالفعل. حاول مرة اخرى..."
 
    return render(request, "account/login.html", {"msg": msg,
                                                  "next": next})

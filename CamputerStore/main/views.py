@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, QueryDict
-from .models import Contactus, Prodect, Comments
+from .models import Contactus, Product, Comments, ProductImage
 from django.core.paginator import Paginator
 
 
@@ -13,27 +13,40 @@ def about_view(request: HttpRequest):
    return render(request, "main/about.html")
 
 
-def search_prodact_view(request: HttpRequest):
-   return render(request, "main/search_prodect.html")
-# def new_plant_view(request: HttpRequest):
-#    if not request.user.is_staff or request.user.is_superuser:
-#       return render(request, "main/no_permission.html")
-#    if request.method == "POST":
-#       new_plant = Plant.objects.create(
-#           name=request.POST.get("name"),
-#           about=request.POST.get("about"),
-#           used_for=request.POST.get("used_for"),
-#           image=request.FILES.get("image", Plant.image.field.get_default()),
-#           category=request.POST.get("category"),
-#           is_edible=request.POST.get("is_edible", False),
-#           created_at=request.POST.get("created_at"))
-
-#       return plant_detail_view(request, new_plant.pk)
-
-#    return render(request, "main/add_plant.html", {"categories": Plant.category_choices.choices})
+def search_product_view(request: HttpRequest):
+   return render(request, "main/search_product.html")
 
 
-# def plant_detail_view(request: HttpRequest, plant_id):
+def add_product_view(request: HttpRequest):
+   if not (request.user.is_staff or request.user.has_perm("main.add_product")):
+      return render(request, "main/no_permission.html")
+   if request.method == "POST":
+      images = request.FILES.getlist("images")
+      print(images)
+      new_product = Product.objects.create(
+          name=request.POST.get("name"),
+          model=request.POST.get("model"),
+          category=request.POST.get("category"),
+          price=request.POST.get("price"),
+          in_stock=request.POST.get("in_stock", False),
+      )
+
+      for image in images:
+         ProductImage.objects.create(product=new_product, image=image)
+
+      return redirect("main:product_detail_view", product_name=new_product.name)
+
+   return render(request, "main/add_product.html", {"categories": Product.categories_choices.choices})
+
+
+def product_detail_view(request: HttpRequest, product_name):
+   try:
+      product = Product.objects.get(name=product_name)
+      pass
+   except Exception as e:
+      print(e)
+   return render(request, "main/product_detail_view.html", {"product": product})
+
 #    try:
 #       plant = Plant.objects.get(pk=plant_id)
 #       relateds = Plant.objects.filter(

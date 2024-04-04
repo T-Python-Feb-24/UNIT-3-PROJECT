@@ -6,4 +6,5 @@ app_name='requests'
 urlpatterns=[
     path("order/new/",views.order_page,name="order_page"),
     path("update/<order_id>/",views.order_update_page ,name="order_update_page"),
+    path("delete/<order_id>/",views.delete_order,name="delete_order")
 ]

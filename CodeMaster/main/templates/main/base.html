@@ -18,10 +18,10 @@
 
     <nav class="navbar navbar-expand-sm  " aria-label="Third navbar example">
         <div class="container-fluid">
-            <div class="col-md-6 col-sm-12  mb-2 mb-md-0 row-gap-3">
-                <a href="/" class="d-flex align-items-center  link-body-emphasis text-decoration-none ms-3">
-                  <h1 class="text-black">CodeMaster</h1>
-              </a>
+            <div class="col-md-2 col-sm-12  mb-2 mb-md-0 row-gap-3">
+                <a href="/" class="d-flex align-items-center text-black link-body-emphasis text-decoration-none ms-3">
+                  <h1 class="">CodeMaster</h1>
+                </a>
             </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
     
           <div class="collapse navbar-collapse " id="navbarsExample03">
             
-            <ul class="nav navbar-nav ms-auto" style="margin-right: 10px;">
+            <ul class="nav navbar-nav ms-auto d-flex align-items-center " style="margin-right: 10px;">
 
 
                 <li><a href="{% url 'main:index_page' %}" class="nav-link px-2 text-style">Home</a></li>
@@ -52,13 +52,15 @@
                 </li>                   
 
              {% else %}
-            <div class="btn-group me-4 pe-3 ">
+             <li>
+            <div class="btn-group d-flex flex-column ">
                 <button class="btn btn-white btn-sm dropdown-toggle text-style fs-6" type="button" data-bs-toggle="dropdown" aria-expanded="false">Login</button>
                 <ul class="dropdown-menu dropdown-menu-end text-center ">
-                  <li><a class="dropdown-item  " href="{% url 'accounts:login_page' %}">Login</a></li>
+                  <li><a class="dropdown-item " href="{% url 'accounts:login_page' %}">Login</a></li>
                   <li><a class="dropdown-item" href="{% url 'accounts:register_page' %}">Register</a></li>                       
                 </ul>
-            </div>     
+            </div> 
+        </li>    
             {% endif %}            
         </ul>
           </div>

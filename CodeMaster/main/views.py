@@ -28,3 +28,7 @@ def contact_page(request):
         return redirect('main:index_page')
 
     return render(request, 'main/contact_page.html')
+
+def no_permission(request:HttpRequest):
+
+    return render(request,"main/no_permission.html")

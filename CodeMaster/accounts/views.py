@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from requests.models import Order
 from main.models import Contact
+from .models import Profile
 
 
 def register_page(request:HttpRequest):
@@ -59,11 +60,57 @@ def logout_user(request:HttpRequest):
 def dashborad_page(request:HttpRequest):
     if not request.user.is_authenticated:
         return redirect("main:index_page")
-   
+  
+    
     messages = Contact.objects.all().order_by('-created_at')
     if request.user.is_staff:
+        count=Order.objects.count()
         orders = Order.objects.all()
     else:
         orders = Order.objects.filter(user=request.user)
+        count=Order.objects.filter(user=request.user).count()
 
-    return render(request,"accounts/dashborad_page.html", {'messages': messages,'orders': orders})
+
+
+
+    return render(request,"accounts/dashborad_page.html", {'messages': messages,'orders': orders,"count":count})
+
+
+def update_profile_page(request:HttpRequest):
+
+    msg = None
+
+    if not request.user.is_authenticated:
+        return redirect("accounts:login_user_view")
+    
+    if request.method == "POST":
+        
+        try:
+
+            with transaction.atomic():
+                user:User = request.user
+
+                user.username = request.POST["username"]
+                user.email = request.POST["email"]
+
+                user.save()
+                
+                try:
+                    profile:Profile = user.profile
+                except Exception as e:
+                    profile = Profile(user=user)
+
+                profile.info = request.POST["info"]
+                profile.phone=request.POST["phone"]
+                profile.instagram = request.POST["instagram"]
+                profile.linked_in = request.POST["linked_in"]
+
+                profile.save()
+
+                return redirect("accounts:dashborad_page")
+
+        except Exception as e:
+            msg = f"Something went wrong {e}"
+            print(e)
+
+    return render(request, "accounts/update_profile_page.html", {"msg" : msg})

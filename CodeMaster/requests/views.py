@@ -25,8 +25,14 @@ def order_page(request: HttpRequest):
 
 
 
-def order_update_page(request: HttpRequest, order_id):
+def order_update_page(request: HttpRequest, order_id):    
+    if not request.user.is_authenticated:
+        return redirect("accounts:login_page")
+    
     order = Order.objects.get(pk=order_id)
+
+    if request.user != order.user and not request.user.is_staff:
+        return redirect("main:no_permission")
 
     if request.method == "POST":
         try:
@@ -46,3 +52,22 @@ def order_update_page(request: HttpRequest, order_id):
             print(e)
 
     return render(request, 'requests/order_update_page.html', {"order": order, "states": Order.states.choices})
+
+
+def delete_order(request:HttpRequest,order_id):
+
+    # if not request.user.is_staff:
+    #     return render(request, "main/no_permission.html")
+
+    try:
+        order = Order.objects.get(pk=order_id)
+        if request.user == order.user:
+            order.delete()
+    except Exception as e:
+        print(e)
+
+    
+    return redirect("accounts:dashborad_page")
+
+    
+        

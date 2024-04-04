@@ -32,24 +32,18 @@
     </form>
 
     <div class="row">
-        {% for place in filtered_places %}
-        <div class="col-md-4">
-            <div class="card mb-4">
-                {% if place.placeimage_set.all %}
-                    <img src="{{ place.placeimage_set.first.image.url }}" class="card-img-top" alt="{{ place.name }}">
-                {% endif %}
+        {% for filtered_place in filtered_places %}
+        <div class="col-md-3 mb-2"> 
+            <div class="card">
+                <img src="{% if filtered_place.images.first %}{{ filtered_place.images.first.image.url }}{% else %}{% endif %}" class="card-img-top" alt="{{ filtered_place.name }}" style="height: 200px;">
                 <div class="card-body">
-                    <h5 class="card-title">{{ place.name }}</h5>
-                    <p class="card-text">Neighborhood: {{ place.neighborhood }}</p>
-                    <p class="card-text">Category: {{ place.category }}</p>
-                    <p class="card-text">Price: {{ place.price }}</p>
-                    <a href="{% url 'main:place_detail' place_id=place.id %}" class="btn btn-primary">View Details</a>
+                    <h5 class="card-title">{{ filtered_place.name }}</h5>
+                    <p class="card-text">Neighborhood: {{ filtered_place.neighborhood }}</p>
+                    <p class="card-text">Category: {{ filtered_place.category }}</p>
+                    <p class="card-text">Price: {{ filtered_place.price }}</p>
+                    <a href="{% url 'main:place_detail' filtered_place.id %}" class="btn btn-primary">View Details <span aria-hidden="true">→</span></a>
                 </div>
             </div>
-        </div>
-        {% empty %}
-        <div class="col-md-12">
-            <p>No places found.</p>
         </div>
         {% endfor %}
     </div>

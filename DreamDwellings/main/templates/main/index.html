@@ -5,27 +5,21 @@
 {% block content %}
 
 <div class="row g-4">
-    <div class="col-md-8 h-25  ">
+    <div class="col-md-8 h-25">
         <img src="https://firebasestorage.googleapis.com/v0/b/dream-dwellings.appspot.com/o/pexels-charlotte-may-5825417.jpg?alt=media&token=31dfc1f4-b323-40f2-a406-5277ce542588" class="ms-3 w-100 h-100 hero rounded-4" />
     </div>
-    <div class="col-md-4 align-self-center  mt-5">
-        <section class="text-center ">
+    <div class="col-md-4 align-self-center mt-5">
+        <section class="text-center">
             <h1>Welcome to DreamDwellings</h1>
             <p>Ready to start a new chapter!</p>
             <a href="{% url 'main:all_places' %}">
                 <button class="btn btn-outline-dark mt-3">See All Places</button>
             </a>
-            
         </section>
     </div>
 </div>
 
-
-{% block footer%}
-   
-    {% endblock %}
-
 {% endblock %}
 
 
-
+    

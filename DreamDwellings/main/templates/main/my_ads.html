@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5 mb-4">My Ads</h1>
+    <div class="row">
+        {% for place in places %}
+        <div class="col-12 mb-4">
+            <div class="card">
+                <img src="{% if place.images.first %}{{ place.images.first.image.url }}{% else %}{% endif %}" class="card-img-top" alt="{{ place.name }}" style="height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ place.name }}</h5>
+                    <p class="card-text">Price: {{ place.price }}</p>
+                    <p class="card-text">Neighborhood: {{ place.neighborhood }}</p>
+                    <p class="card-text">Category: {{ place.category }}</p>
+                    
+                    <p>2 days ago</p>
+                </div>
+                <div class="card-footer" style="background-color: #333;">
+                    <a href="#" class="btn btn-primary mr-2">Update</a>
+                    <form action="#" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12">
+            <p>No ads found.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

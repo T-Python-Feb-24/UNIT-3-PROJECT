@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from .models import Place, PlaceImage
 from django.contrib import messages
+from decimal import Decimal
+
+
 def index_view(request: HttpRequest):
     
     return render(request, "main/index.html")
@@ -17,8 +20,13 @@ def contact_view(request):
     else:
      return render(request, 'main/contact_us.html')
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def add_place(request):
     if request.method == 'POST':
+        
+        user = request.user
         
         name = request.POST.get('name')
         neighborhood = request.POST.get('neighborhood')
@@ -27,13 +35,12 @@ def add_place(request):
         price = request.POST.get('price')
         address = request.POST.get('address')
         category = request.POST.get('category')
-        for_rent = request.POST.get('for_rent')
-        for_sale = request.POST.get('for_sale')
-
-       
+        
+        
         if name and neighborhood and latitude and longitude and price and address and category:
             
             place = Place.objects.create(
+                user=user,  
                 name=name,
                 neighborhood=neighborhood,
                 latitude=latitude,
@@ -41,26 +48,25 @@ def add_place(request):
                 price=price,
                 address=address,
                 category=category,
-                
             )
 
-            
+           
             for i in range(1, 6):  
                 image_file = request.FILES.get(f'image{i}')
                 if image_file:
-                    
                     place_image = PlaceImage(place=place, image=image_file)
                     place_image.save()
 
-            
             return redirect('main/success_page')
         else:
-            
+          
             error_message = 'Please fill in all required fields.'
             return render(request, 'main/add_place.html', {'error_message': error_message})
 
-    
     return render(request, 'main/add_place.html')
+
+    
+    
 
 def success_page_view(request):
     return render(request, 'main/place_added_success.html')
@@ -68,9 +74,8 @@ def success_page_view(request):
 def place_detail(request, place_id):
     
     place = get_object_or_404(Place, pk=place_id)
-    
-    
     return render(request, 'main/place_detail.html', {'place': place})
+
 def services_page(request):
     return render(request, 'main/services.html')
 
@@ -91,3 +96,9 @@ def all_places_view(request):
 
     return render(request, 'main/all_places.html', {'neighborhoods': neighborhoods, 'categories': categories, 'filtered_places': filtered_places})
 
+def ad(request: HttpRequest):
+    if not request.user.is_authenticated and request.user.is_staff:
+        return redirect("main:login_view")
+    places = Place.objects.filter(user=request.user)
+    
+    return render(request,"main/my_ads.html", {'places': places})

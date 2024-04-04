@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Chat Room{% endblock %}
+
+{% block content %}
+
+<form method="post" action="{% url 'chat:create_message' room_id=room.id %}">
+    {% csrf_token %}
+    <textarea name="content" rows="4" cols="50" required></textarea>
+    <button type="submit">Send</button>
+</form>
+{% endblock %}

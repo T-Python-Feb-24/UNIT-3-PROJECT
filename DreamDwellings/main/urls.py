@@ -12,4 +12,5 @@ urlpatterns  = [
     path('place/add/main/success_page/', views.success_page_view, name='success_page'),
     path('services/', views.services_page, name='services_page'),
     path('places/', views.all_places_view, name='all_places'),
+    path("ad/", views.ad, name="ad"),
 ]

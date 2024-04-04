@@ -7,14 +7,14 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-7">
+       
             <h1 class="mb-4">{{ place.name }} Details</h1>
-            <!-- Carousel -->
+            
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     {% for image in place.images.all %}
                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ image.image.url }}" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="{{ place.name }}">
+                            <img src="{{ image.image.url }}" class="d-block w-100 rounded-4 justify-content-center" style="max-height: 500px; object-fit: cover; justify-content: center; " alt="{{ place.name }}">
                         </div>
                     {% endfor %}
                 </div>
@@ -28,7 +28,7 @@
                 </button>
             </div>
 
-            <!-- Place details -->
+            
             <div class="mt-4">
                 <p>Neighborhood: {{ place.neighborhood }}</p>
                 <p>Price: {{ place.price }}</p>
@@ -37,14 +37,18 @@
             </div>
         </div>
 
-        <!-- Map column -->
-        <div class="col-md-5">
-            <div id="map" style="height: 400px;margin-top: 100px; border-radius: 20px;"></div>
-
-            <!-- Update and delete buttons -->
+        <div class="row">
+            <div class="col-md-7">
+                <div id="map" style="height: 400px;margin-top: 100px; border-radius: 20px;"></div>
+    
+        </div>
+        
+           
             <div class="mt-3">
                 <a href="#" class="btn btn-outline-dark me-2">Update</a>
                 <a href="#" class="btn btn-outline-dark">Delete</a>
+                <a href="{% url 'chat:chat_messages' room_id=place.id %}" class="btn btn-primary">Enter Chat Room</a>
+
             </div>
         </div>
     </div>

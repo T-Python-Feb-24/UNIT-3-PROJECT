@@ -10,7 +10,7 @@ def register_view(request:HttpRequest):
      try:
         new_user = User.objects.create_user(username=request.POST["username"], email=request.POST["email"], first_name=request.POST["first_name"], last_name=request.POST["last_name"], password=request.POST["password"])
         new_user.save()    
-        return redirect("accounts:login_user_view")
+        return redirect("accounts:login")
 
      except IntegrityError as e:
         msg = "Username already exists. Please choose a different username."

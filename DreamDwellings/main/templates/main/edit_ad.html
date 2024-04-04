@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<title>Edit Advertisement</title>
+</head>
+<body>
+    <h1>Edit Advertisement</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value="{{ ad.title }}"><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description">{{ ad.description }}</textarea><br>
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, QueryDict
 from .models import Contactus, Product, Comments, ProductImage
+from main.validator import validat, ValidationError
 from django.core.paginator import Paginator
 
 
@@ -136,17 +137,24 @@ def product_detail_view(request: HttpRequest, product_name):
 def contactus_view(request: HttpRequest):
    try:
       msg = None
+      if request.user.is_authenticated:
+         user = request.user
       if request.method == "POST":
          contact = Contactus.objects.create(
-            name=request.POST.get("name"),
-            email=request.POST.get("email"),
-            phone=request.POST.get("phone"),
+            username=request.POST.get("username") or user.username,
+            email=validat(email=request.POST.get("email")) or user.email,
+            phone=validat(phone=request.POST["phone"]) or user.profile.phone,
+            subject=request.POST.get("subject"),
             content=request.POST.get("content"),
          )
-         redirect("main:index_view", context={"msg", msg})
+         msg = "secssfully created contact"
+         return redirect("main:index_view")
+   except ValidationError as e:
+      msg = e.message
    except Exception as e:
-      print(e)
-   return render(request, "main/contactus.html")
+      print(f"from Exception {e} ")
+      msg = "خطأ في البيانات المرسلة "
+   return render(request, "main/contactus.html", context={"msg": msg})
 
 
 # def contactUs_messages_view(request: HttpRequest):

@@ -3,6 +3,9 @@ from django.http import HttpRequest
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Profile
+from main.validator import validat
+from django.core.exceptions import ValidationError
+
 from django.db import transaction, IntegrityError
 
 
@@ -18,23 +21,25 @@ def sign_up_view(request: HttpRequest):
                msg = "Invalid password"
                raise IntegrityError(msg)
             new_user = User.objects.create_user(
-                username=request.POST.get("username"),
-                email=request.POST.get("email"),
-                password=request.POST.get("password")
+                username=validat(username=request.POST.get("username")),
+                email=validat(email=request.POST.get("email")),
+                password=validat(password=request.POST.get("password"))
             )
 
-            profile = Profile.objects.create(user=new_user,
-                                             phone=request.POST.get("phone"))
+            Profile.objects.create(
+               user=new_user,
+               phone=validat(phone=request.POST.get("phone")))
 
          return redirect("account:login_view")
 
    except IntegrityError as e:
       msg = "اسم المستخدم أو الايميل مستخدم بالفعل. حاول مرة اخرى..."
       print(e)
-
-   except Exception as e:
-      msg = "Something went wrong. Please try again."
-      print(e.__class__)
+   except ValidationError as e:
+      msg = e.message
+   # except Exception as e:
+   #    msg = "Something went wrong. Please try again."
+   #    print(e.with_traceback())
 
    return render(request, "account/sign_up.html", {"msg": msg})
 
@@ -90,7 +95,8 @@ def update_profile_view(request: HttpRequest, user_name):
    if request.method == "POST":
       user.first_name = request.POST.get('first_name', user.first_name)
       user.last_name = request.POST.get('last_name', user.last_name)
-      user.profile.phone = request.POST.get('phone', user.profile.phone)
+      user.profile.phone = validat(
+         phone=request.POST.get('phone')) or user.profile.phone
       user.profile.gender = request.POST.get('gender', user.profile.gender)
       user.profile.about = request.POST.get('about', user.profile.gender)
       user.profile.address = request.POST.get('about', user.profile.gender)

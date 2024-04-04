@@ -12,6 +12,8 @@
       </title>
       <link href="{% static "css/bootstrap.css" %}" rel="stylesheet" />
       <link href="{% static "css/stayle.css" %}" rel="stylesheet" />
+      {% block css %}
+      {% endblock css %}
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@100..900&display=swap"
@@ -19,8 +21,8 @@
       <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
       <script src="{% static "js/index.js" %}"></script>
-      {% block form_js %}
-      {% endblock form_js %}
+      {% block js %}
+      {% endblock js %}
       <link rel="icon" href="{% static "icon/computer_icon.svg" %}" sizes="any" type="image/svg+xml">
    </head>
    <body>
@@ -49,9 +51,9 @@
                           aria-label="Toggle navigation">
                      <span class="navbar-toggler-icon"></span>
                   </button>
-                  <div class="collapse gap-5 navbar-collapse flex-row-reverse"
+                  <div class="collapse gap-4 navbar-collapse flex-row-reverse"
                        id="navbarNavDropdown">
-                     <div class="d-flex justify-content-center">
+                     <div class="d-flex my-3 justify-content-center">
                         <ul class="navbar-nav align-items-center flex-row gap-2 flex-row-reverse">
                            <li class="nav-item">
                               <a class="nav-link active" aria-current="page" href="#">
@@ -89,32 +91,33 @@
                                              {% endif %}
                                           </span>
                                        </div>
-                                       <div class="popover_bottom">
-                                          <div class="popover-content">
-                                             <ul>
-                                                {% if not request.user.is_authenticated %}
-                                                   <li>
-                                                      <a href="{% url "account:login_view" %}">الدخول</a>
-                                                   </li>
-                                                   <li>
-                                                      <a href="{% url "account:sign_up_view" %}">التسجيل</a>
-                                                   </li>
-                                                {% endif %}
-                                                {% if request.user.is_superuser or perms.main.add_product %}
-                                                   <li>
-                                                      <a href="{% url "main:add_product_view" %}">اضف منتج</a>
-                                                   </li>
-                                                {% endif %}
-                                             </ul>
-                                          </div>
-                                       </div>
                                     </a>
+                                    <div class="popover_bottom">
+                                       <div class="popover-content">
+                                          <ul>
+                                             {% if not request.user.is_authenticated %}
+                                                <li>
+                                                   <a href="{% url "account:login_view" %}">الدخول</a>
+                                                </li>
+                                                <li>
+                                                   <a href="{% url "account:sign_up_view" %}">التسجيل</a>
+                                                </li>
+                                             {% endif %}
+                                             {% if request.user.is_superuser or perms.main.add_product %}
+                                                <li>
+                                                   <a href="{% url "main:add_product_view" %}">اضف منتج</a>
+                                                </li>
+                                             {% endif %}
+                                          </ul>
+                                       </div>
+                                    </div>
                                  </li>
                                  {% if request.user.is_authenticated %}
                                     <li class="nav-item">
                                        <a class="nav-link active" href="{% url "account:logout_view" %}">
                                           <div class="d-flex flex-column border align-items-center header-user">
-                                             <span>Logout</span>
+                                             <span class="material-symbols-outlined">logout</span>
+                                             <span>تسجيل الخروج</span>
                                           </div>
                                        </a>
                                     </li>

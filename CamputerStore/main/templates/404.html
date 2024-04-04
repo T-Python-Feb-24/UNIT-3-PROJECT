@@ -1,56 +1,88 @@
-{# djlint:off H030,H031 #}
+{# djlint:off H023,H006,H013 #}
+{% extends "main/base.html" %}
 {% load static %}
-<!-- HTML5 -->
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <!-- Enter your title of the page -->
-      <title>404 - Page not found</title>
-      <!-- Link the CSS posted below to this page, change the href -->
-      <link rel="stylesheet" href="{% static "css/404.css" %}">
-      <!--  Enter your website icon -->
-      <link rel="icon" href="{% static "icon/green.svg" %}">
-      <!-- This one is very important, don't skip this part! -->
-      <base href="">
-      <!-- Enter your website URL here -->
-      <!-- Just some important metas, you can ignore these -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- If you want to learn more about them then visit https://www.w3schools.com/tags/tag_meta.asp -->
-   </head>
-   <body>
-      <main>
-         <center>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <h1>404 - Page not found!</h1>
-            <p>
-               Oops! Itseems like you're lost, let me help you find your way back home! :)
-               <br />
-               The following problems could be the case:
-               <br>
-               <br>
-               • The link is broken
-               <br />
-               • This page never existed
-               <br />
-               • This page has been removed
-               <br />
-               <br />
-               <br />
-            </p>
-            <h3>
-               <a href="{% url "main:index_view" %}">Click here to go back home</a>
-            </h3>
-            <br />
-            <br />
-            <br />
-            <br />
-         </center>
-      </main>
-   </body>
-</html>
+{% load tags %}
+{% block title %}
+   404 الصفحة غير موجودة
+{% endblock title %}
+{% block css %}
+   <style>
+       .page_404 {
+           display: flex;
+           align-items: flex-end;
+           padding: 80px 0 150px;
+
+           &img {
+               width: 90%;
+
+           }
+       }
+
+       .col-md-5 {
+           width: 41.66666667%;
+           position: relative;
+           min-height: 1px;
+           padding-left: 15px;
+           padding-right: 15px;
+       }
+
+       h1.page_404_shead {
+           color: #dedede;
+           font-size: 120px;
+           font-weight: 700;
+           margin: 15px 0;
+       }
+
+       .page_404_head {
+           color: var(--text);
+           font-size: 53px;
+           font-weight: 600;
+           padding: 5px 0 30px;
+           line-height: 53px;
+
+       }
+
+       .page_404_sub {
+           font-size: 20px;
+           font-weight: 600;
+           padding: 25px 0 35px;
+           line-height: 28px;
+           margin-bottom: 30px;
+       }
+
+
+       img {
+           vertical-align: middle;
+       }
+   </style>
+{% endblock css %}
+{% block content %}
+   <div class="ml-home-content">
+      <div class="container-fluid">
+         <div class="row" id="content">
+            <div class="col-md-12" id="content-data">
+               <div class="row">
+                  <div class="page_404">
+                     <div class="col-md-5">
+                        <h1 class="page_404_shead">404</h1>
+                        <div class="page_404_head">الصفحة غير موجودة</div>
+                        <div class="page_404_sub">يبدو أنه لا يمكننا العثور على الصفحة التي تبحث عنها.</div>
+                        <div class="page_404_btn">
+                           <a href="{% url "main:index_view" %}">العودة إلى الصفحة الرئيسية</a>
+                        </div>
+                     </div>
+                     <div class="col-md-7">
+                        <div class="page_404_img">
+                           <img src="{% static "images/404page.png" %}">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- fix footer going inside the main container. close out fluid container -->
+         </div>
+         <!-- content-data-->
+      </div>
+      <!-- content -->
+   </div>
+{% endblock content %}

@@ -1,7 +1,12 @@
 from django.db import models
 from main.models import Product
 from django.contrib.auth.models import User
+from main import validator
 User._meta.get_field('email')._unique = True
+User._meta.get_field('email').validators = [
+    validator.validate_email]
+User._meta.get_field('username').validators = [
+    validator.validate_username]
 
 
 def group_based_upload_to(instance, filename):
@@ -19,7 +24,8 @@ class Profile(models.Model):
       Female = "انثى"
 
    user = models.OneToOneField(User, on_delete=models.CASCADE)
-   phone = models.CharField(max_length=10, unique=True)
+   phone = models.CharField(max_length=10, unique=True, validators=[
+                            validator.validate_phone])
    avatar = models.ImageField(
        upload_to=group_based_upload_to, default="profiles/images/user-defualt.svg")
    gender = models.CharField(max_length=22,

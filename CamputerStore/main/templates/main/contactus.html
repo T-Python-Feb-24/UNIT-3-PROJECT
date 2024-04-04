@@ -40,38 +40,36 @@
                 </tbody>
             </table>
         </div>
-        <div class="contactus">
-            <h1 class="text-end m-3 pt-4">اتصل بنا</h1>
+        <div class="w-50">
+            <h1 class="text-center text-end pt-4">اتصل بنا</h1>
             {% if msg %}
                 <svg xmlns="http://www.w3.org/2000/svg" class="d-none h-100">
                     <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
                     <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                     </symbol>
                 </svg>
-                <div class="d-flex w-100 justify-content-center myalart">
-                    <div class="alert alert-danger d-flex align-items-center w-50"
+                <div class="d-flex w-100 myalart">
+                    <div class="alert alert-danger d-flex align-items-center w-75"
                          role="alert">
-                        <svg class="bi flex-shrink-0 me-2 dager-svg"
+                        <svg class="bi flex-shrink-0 me-2 danger-svg"
                              role="img"
                              aria-label="Danger:">
                             <use xlink:href="#exclamation-triangle-fill" />
                         </svg>
-                        <div>
-                            <div>{{ msg }}</div>
-                        </div>
+                        <span class="px-3 text-danger-emphasis">{{ msg }}</span>
                     </div>
                 </div>
             {% endif %}
-            <form action="{% url 'account:sign_up_view' %}"
+            <form action="{% url 'main:contactus_view' %}"
                   method="post"
-                  class="d-flex flex-column gap-2 w-75"
-                  enctype="multipart/form-data">
+                  class="d-flex flex-column gap-2 w-75">
                 {% csrf_token %}
                 <label class="form-label mb-0 ms-1 mt-2">اسم المستخدم</label>
                 <input name="username"
                        class="form-control"
                        type="text"
                        minlength="3"
+                       {% if request.user.is_authenticated %}value="{{ request.user.username }}" disabled{% endif %}
                        required
                        placeholder="اسم المستخدم" />
                 <label class="form-label mb-0 ms-1 mt-2">البريد الالكتروني</label>
@@ -79,17 +77,27 @@
                        class="form-control"
                        type="email"
                        minlength="3"
+                       {% if request.user.is_authenticated %}value="{{ request.user.email }}" disabled{% endif %}
                        required
                        placeholder="البريد الالكتروني" />
-                <label class="form-label mb-0 ms-1 mt-2">الهاتف</label>
+                <label class="form-label mb-0 ms-1 mt-2" for="typePhone">الهاتف</label>
                 <input name="phone"
-                       class="form-control"
-                       type="number"
-                       minlength="3"
+                       id="phone"
+                       class="form-control con"
+                       type="text"
+                       pattern="05[0-9]{4}[0-9]{4}"
+                       {% if request.user.is_authenticated %}value="{{ request.user.profile.phone }}" disabled{% endif %}
                        required
-                       placeholder="الهاتف" />
+                       placeholder="05XXXXXXXX" />
+                <label class="form-label mb-0 ms-1 mt-2">الموضوع</label>
+                <input name="subject"
+                       class="form-control"
+                       type="text"
+                       minlength="5"
+                       required
+                       placeholder="الموضوع" />
                 <label class="form-label mb-0 ms-1 mt-2">الرسالة</label>
-                <textarea name="content" id="" rows="4"></textarea>
+                <textarea name="content" id="" rows="4" required></textarea>
                 <input type="submit" class="btn btn-dark mt-3" value="ارسل الرسالة" />
             </form>
         </div>

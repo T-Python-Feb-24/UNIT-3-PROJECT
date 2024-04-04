@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block content %}
    <div class="d-flex mb-5 justify-content-center">
-      <div class="signup w-50">
+      <div class="row w-50">
          <h1 class="text-center text-end pt-4">انشاء حساب</h1>
          {% if msg %}
             <svg xmlns="http://www.w3.org/2000/svg" class="d-none h-100">
@@ -15,7 +15,7 @@
             <div class="d-flex w-100 justify-content-center myalart">
                <div class="alert alert-danger d-flex align-items-center w-75"
                     role="alert">
-                  <svg class="bi flex-shrink-0 me-2 dager-svg"
+                  <svg class="bi flex-shrink-0 me-2 danger-svg"
                        role="img"
                        aria-label="Danger:">
                      <use xlink:href="#exclamation-triangle-fill" />
@@ -46,8 +46,10 @@
                <label class="form-label mb-0 ms-1 mt-2">الجوال</label>
                <input name="phone"
                       class="form-control"
-                      type="number"
-                      length="10"
+                      type="text"
+                      {% comment %}
+                      pattern="^05[0-9]{4}[0-9]{4}$"
+                      {% endcomment %}
                       required
                       placeholder="05XXXXXXXX" />
                <label class="form-label mb-0 ms-1 mt-2">كلمة السر</label>

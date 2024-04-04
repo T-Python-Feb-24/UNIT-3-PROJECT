@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
+from main import validator
 
 
 class Product(models.Model):
@@ -45,8 +46,13 @@ class Comments(models.Model):
 
 
 class Contactus(models.Model):
-   name = models.CharField(max_length=50)
-   email = models.EmailField(null=False)
-   phone = models.CharField(max_length=10)
-   content = models.TextField(blank=False)
+   username = models.CharField(max_length=50)
+   email = models.EmailField(null=False, validators=[validator.validate_email])
+   phone = models.CharField(max_length=10, validators=[
+                            validator.validate_phone])
+   subject = models.CharField(max_length=200, blank=False, null=False)
+   content = models.TextField(blank=False, null=False)
    created_at = models.DateTimeField(auto_now_add=True)
+
+   def __str__(self):
+      return self.subject

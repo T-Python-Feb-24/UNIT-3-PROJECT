@@ -121,13 +121,13 @@ def delete_images(request:HttpRequest,blog_id):
 
 # ............الحين massage .........................
 
-def user_massage(request:HttpRequest):
+def user_message(request:HttpRequest):
     if not request.user.is_superuser:
         return render(request, "main/not_found.html")
     
     con=Contact.objects.all()
 
-    return render(request,"main/massage.html", {"con" : con})
+    return render(request,"main/message.html", {"con" : con})
     
 
 

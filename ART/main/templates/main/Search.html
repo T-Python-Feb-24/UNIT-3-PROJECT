@@ -4,6 +4,22 @@
 
 
 {% block content %}
+<style>
+    .art-image {
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.art-footer {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+.back_footer{
+    background-color: rgba(0, 0, 0, 0.877);
+}
+</style>
 
 <div class="container">
     <div class="row" style="margin-top: 100px;">
@@ -23,11 +39,21 @@
     <div class="row">
         {% for art in art %}
         <div class="col-4">
-            <div class="d-flex flex-column gap-1 border border-1 shadow p-3 rounded-4 h-100">
-                <img src="{{ art.image.url }}"  class="w-100 rounded-4"/>
-                <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}} ">{{ art.category }}</h6>
-                <h3><a href="{% url 'main:detail_images' art.id %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);">{{plant.name}}</a></h3>
-            </div>
+            <a href="{% url 'main:detail_images' art.id %}">
+                <div class="position-relative rounded-4 overflow-hidden mt-4">
+                    <img src="{{ art.image.url}}"  class="art-image w-100"/>
+                    <div class="art-footer w-100 p-3 d-flex gap-3 back_footer">
+                        <div class="col-2 ">
+                            <img class="mr-3 rounded-circle" src="{{art.user.profile.avatar.url}}" alt="Generic placeholder image" style="max-width:50px">
+                        </div>
+                        <h3><a style="color: white;font-size: 20px;" href="{% url 'account:user_profile_view' art.user.id %}">{{art.user.username}}</a></h3>
+                        <div class="col-2 d-flex gap-3 ">
+                            <strong><a style="color: #2f00ff; font-size: 25px;" href="#" class="mr-3 rounded-circle bi bi-heart" alt="Generic placeholder image"></a></strong>
+                            <h6 style="background-color:black ;color: #eeeeee;" class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}} ">{{ art.category }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>

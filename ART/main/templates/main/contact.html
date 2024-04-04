@@ -36,8 +36,8 @@
                 <input type="submit" value="send"  class="btn btn-primary"/>
    
                </form>
-   
-   
+   {% if user.is_staff%}
+   <a href="{% url 'main:user_message'%}">show the message</a>{% endif %}
    
    </div>
    </div>

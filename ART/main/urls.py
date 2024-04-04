@@ -13,6 +13,6 @@ urlpatterns=[
     path('images/search/', views.search, name='search'),
     path("comments/add/<blog_id>/", views.add_comment, name="add_comment"),
     path("images/contact/",views.contact_us,name="contact"),
-    path("users/massage/",views.user_massage,name="massage_page"),
+    path("users/massage/",views.user_message,name="user_message"),
    
 ]

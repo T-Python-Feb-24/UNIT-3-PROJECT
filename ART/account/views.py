@@ -81,3 +81,42 @@ def user_profile_view(request:HttpRequest, user_id):
         return render(request, "main/not_found.html")
 
     return render(request, "account/profile.html", {"user_object":user_object})
+
+# updateeee
+def update_profile(request:HttpRequest):
+    msg = None
+
+    if not request.user.is_authenticated:
+        return redirect("account:login_user_view")
+    
+    if request.method == "POST":
+        
+        try:
+
+            with transaction.atomic():
+                user:User = request.user
+
+                user.first_name = request.POST["first_name"]
+                user.last_name = request.POST["last_name"]
+                user.email = request.POST["email"]
+
+                user.save()
+                
+                try:
+                    profile:Profile = user.profile
+                except Exception as e:
+                    profile = Profile(user=user)
+
+                profile.about = request.POST["about"]
+             
+                profile.avatar = request.FILES.get("avatar", profile.avatar)
+
+                profile.save()
+
+                return redirect("account:user_profile_view", user_id=user.id)
+
+        except Exception as e:
+            msg = f"Something went wrong {e}"
+            print(e)
+
+    return render(request, "account/update.html", {"msg" : msg})

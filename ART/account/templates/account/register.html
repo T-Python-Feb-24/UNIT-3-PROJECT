@@ -3,7 +3,7 @@
 {% block title %}Register New User{% endblock %}
 
 {% block content %}
-
+<div class="container">
     <h1>Register New User</h1>
 
     {% if msg %}
@@ -11,7 +11,7 @@
     {% endif %}
     <div class="row">
         <div class="col">
-            <form action="{% url 'accounts:register_user_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+            <form action="{% url 'account:register_user_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
@@ -33,4 +33,5 @@
             </form>
         </div>
     </div>
+</div>
 {% endblock %}

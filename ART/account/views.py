@@ -30,7 +30,7 @@ def register_user_view(request:HttpRequest):
                 profile.save()
 
                 #redirect to login page
-                return redirect("accounts:login_user_view")
+                return redirect("account:login_user_view")
         
         except IntegrityError as e:
             msg = "Username already exists. Please choose a different username."
@@ -41,7 +41,7 @@ def register_user_view(request:HttpRequest):
             print(e)
     
 
-    return render(request, "accounts/register.html", {"msg" : msg})
+    return render(request, "account/register.html", {"msg" : msg})
 
 
 def login_user_view(request:HttpRequest):
@@ -54,30 +54,30 @@ def login_user_view(request:HttpRequest):
         if user:
             #login user
             login(request, user)
-            return redirect("main:index_view")
+            return redirect("main:home")
         else:
             msg = "Username or Password is wrong. Try again..."
     
 
-    return render(request, "accounts/login.html", {"msg" : msg})
+    return render(request, "account/login.html", {"msg" : msg})
 
 
 def logout_user_view(request:HttpRequest):
     if request.user.is_authenticated:
         logout(request)
     
-    return redirect('accounts:login_user_view')
+    return redirect('account:login_user_view')
 
 
 
-def user_profile_view(request:HttpRequest, user_name):
+def user_profile_view(request:HttpRequest, user_id):
 
     try:
-        user_object = User.objects.get(username=user_name)
+        user_object = User.objects.get(pk=user_id)
         #comment by this user
         #user_comments = Comment.objects.filter(user=user_object)
         #user_comments = user_object.comment_set.all() #using set
     except:
         return render(request, "main/not_found.html")
 
-    return render(request, "accounts/profile.html", {"user_object":user_object})
+    return render(request, "account/profile.html", {"user_object":user_object})

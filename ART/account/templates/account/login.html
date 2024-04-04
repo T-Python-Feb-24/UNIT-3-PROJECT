@@ -3,7 +3,7 @@
 {% block title %}Login User{% endblock %}
 
 {% block content %}
-
+<div class="container">
     <h1>Login</h1>
     {% if msg %}
     <div class="alert alert-danger">{{msg}}</div>
@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col">
 
-            <form action="{% url 'accounts:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
+            <form action="{% url 'account:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
                 {% csrf_token %}
 
                 <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
@@ -23,4 +23,5 @@
             
         </div>
     </div>
+</div>
 {% endblock %}

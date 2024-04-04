@@ -1,0 +1,81 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Pinterest {% endblock %}
+
+
+{% block content %}
+
+<div class="main justify-content-center">
+    <div >
+        <h2><span style="font-size:50px;">Discover Stories Worth Sharing</span><br></h2>
+    </div>
+
+</div>
+<div class="container mt-5 pt-5">
+<hr />
+<div class="d-flex flex-column justify-content-between ">
+<h1>RandomSnaps</h1>
+
+<div class="d-flex  justify-content-end mb-3 ">
+<a  class="navbar-brand btn btn-" href="{% url 'main:all_images'%}">All</a>
+</div>
+</div>
+<div class="row g-5">
+
+<div class="masonry-rows">
+    <style>
+        .masonry-rows {
+--row-height: 250px;
+--min-item-width: 200px;
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+
+> * {
+min-width: min(var(--min-item-width), 100%);
+height: var(--row-height);
+flex: auto;
+object-fit: cover;
+}
+}
+    </style>
+    <img src="https://picsum.photos/581/378">
+    <img src="https://picsum.photos/467/450">
+    <img src="https://picsum.photos/439/376">
+    <img src="https://picsum.photos/235/333">
+    <img src="https://picsum.photos/392/442">
+    <img src="https://picsum.photos/505/369">
+    <img src="https://picsum.photos/600/359">
+    <img src="https://picsum.photos/215/323">
+    <img src="https://picsum.photos/286/238">
+    <img src="https://picsum.photos/534/476">
+    <img src="https://picsum.photos/483/500">
+    <img src="https://picsum.photos/534/596">
+    <img src="https://picsum.photos/207/337">
+    <img src="https://picsum.photos/443/289">
+    <img src="https://picsum.photos/419/496">
+    <img src="https://picsum.photos/269/385">
+    <img src="https://picsum.photos/374/410">
+    <img src="https://picsum.photos/424/553">
+    <img src="https://picsum.photos/548/548">
+    <img src="https://picsum.photos/200/369">
+  </div>
+  
+<!-- <h2> Leaste Comments:</h2>
+
+<div class="row">
+<div class="col d-flex flex-column gap-2">
+{% for comment in comments %}
+    <div class="d-flex flex-column gap-2 border border-1 p-3 rounded-3">
+        <a href="{% url 'account:user_profile_view' comment.user.username %}" class="text-decoration-none"><h3>{{ comment.user.username }}</h3></a>
+       <a href="{% url 'main:plant_detail' comment.plant.id %}#commentPost"> <h6 class="text-muted">{{comment.plant.name}}</h6></a>
+        <p>{{ comment.content }}</p>
+    </div>
+{% endfor %}
+
+</div>
+</div> -->
+
+</div>
+</div>
+{% endblock %}

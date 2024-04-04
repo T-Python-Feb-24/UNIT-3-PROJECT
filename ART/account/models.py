@@ -9,7 +9,9 @@ class Profile(models.Model):
     about = models.TextField()
     avatar = models.ImageField(upload_to="images/", default="images/avatar.webp")
     instagram_link = models.URLField(blank=True)
-    Twitter_link = models.URLField(blank=True)
+    linked_link = models.URLField(blank=True)
 
     def __str__(self) -> str:
         return f"{self.user.username} profile"
+# Create your models here.
+

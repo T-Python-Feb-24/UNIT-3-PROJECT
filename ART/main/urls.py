@@ -1,6 +1,18 @@
 from.import views
 from django.urls import path
+from django.contrib.auth.models import User
 
-main="main"
+app_name  = "main"
 
-urlpatterns=[]
+urlpatterns=[
+    path('', views.home, name='home'),
+    path('images/new/', views.add_images, name='add_images'),
+    path('images/all/', views.all_images, name='all_images'),
+    path('images/<blog_id>/detail/', views.detail_images, name='detail_images'),
+    path('images/<blog_id>/delete/', views.delete_images, name='delete_images'),
+    path('images/search/', views.search, name='search'),
+    path("comments/add/<blog_id>/", views.add_comment, name="add_comment"),
+    path("images/contact/",views.contact_us,name="contact"),
+    path("users/massage/",views.user_massage,name="massage_page"),
+   
+]

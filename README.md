@@ -6,10 +6,12 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 
 ## Project Name here
-project description here.
+project description here
+name:PICART
+description:The project is a website for showcasing drawings and art in general, catering to artists and art enthusiasts.
 
 ## Features List here
-- list of features
+- list of features:
 
 ## User Stories, Wireframes & UML links
 - User stories document link here.

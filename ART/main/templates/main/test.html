@@ -1,0 +1,193 @@
+{% extends 'main/base.html' %}
+
+{% block title %} users messages {% endblock %}
+
+{% block content %}
+<style>
+    body {
+        /* Created with https://www.css-gradient.com */
+        background: #161616;
+    }
+
+    h1 {
+        color: #fff;
+    }
+
+    .lead {
+        color: #aaa;
+    }
+
+    .wrapper {
+        margin: 10vh
+    }
+
+    .card {
+        border: none;
+        transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+        overflow: hidden;
+        border-radius: 20px;
+        min-height: 450px;
+        box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            min-height: 350px;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .card {
+            min-height: 300px;
+        }
+    }
+
+    .card-has-bg {
+        transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            -webkit-filter: grayscale(1);
+            -moz-filter: grayscale(100%);
+            -ms-filter: grayscale(100%);
+            -o-filter: grayscale(100%);
+            filter: grayscale(100%);
+        }
+
+        &:hover {
+            transform: scale(0.98);
+            box-shadow: 0 0 5px -2px rgba(0, 0, 0, 0.3);
+            background-size: 130%;
+            transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
+            .card-img-overlay {
+                transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+                background: rgb(255, 255, 255);
+                background: linear-gradient(0deg, rgba(107, 99, 83, 0.5) 0%, rgb(138, 134, 126) 100%);
+            }
+        }
+    }
+
+    .card-footer {
+        background: none;
+        border-top: none;
+    }
+
+    .card-title {
+        font-weight: 800
+    }
+
+    .card-meta {
+        color: rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: 2px;
+    }
+
+    .card-body {
+        transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    &:hover {
+        .card-body {
+            margin-top: 30px;
+            transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        cursor: pointer;
+        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    /* .card-img-overlay {
+        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+        background: rgb(255, 186, 33);
+        background: linear-gradient(0deg, rgba(136, 78, 245, 0.379) 0%, rgba(255, 186, 33, 1) 100%);
+    } */
+
+
+.card-overlay {
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 767px) {}
+</style>
+<div class="container">
+    <div class="row g-4 mt-5">
+    </div>
+    <div class="col">
+        <div class="d-flex gap-2 justify-content-center cata mt-5">
+            <a style="color: antiquewhite;" href="{% url 'main:all_images' %}" class="p-2 ps-3 pe-3 text-decoration-none">All</a>
+            {% for val, key in category %}
+            <a style="color: white;" href="?cat={{val}}" class="p-2 ps-3 pe-3 {% if request.GET.cat == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
+            {% endfor %}
+            {% if request.user.is_authenticated %}
+            <a style="color:white;" href="?user={{request.user.id}}" class="p-2 ps-3 pe-3 text-decoration-none">My Posts</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<section class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center mb-4">
+            </div>
+        </div>
+        <div class="row">
+            <!-- {% for art in art %}
+            <div class="col-4">
+                <div class="HS d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
+                    <img src="{{ art.image.url }}" class="w-100 rounded-4" />
+                    <h3><a href="{% url 'main:detail_images' art.id %}" class="text-decoration-none" style="color: rgba(241, 19, 19, 0.582);">{{art.name}}</a></h3>
+                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}}">{{ art.category }}</h6><a href="{% url 'account:user_profile_view' art.user.id %}">{{art.user.username}}</a>
+                </div>
+            </div>
+            {% endfor %} -->
+            <div class="d-flex justify-content-between align-items-center mb-4 mt-0">
+                <h2>{% if 'cat' in request.GET %} {{request.GET.cat}} {% else %} All {% endif %}images({{ art.count }}) </h2>
+            </div>
+            {% for art in art %}
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <a href="{% url 'main:detail_images' art.id %}">
+                    <div class="card text-dark card-has-bg click-col card-overlay" style="background-image: url('{{ art.image.url }}');">
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-body">
+                                <h4 class="card-title mt-0 "></h4>
+                            </div>
+                            <div class="card-footer">
+                                <div class="media row">
+                                    <div class="col-2">
+                                        <img class="mr-3 rounded-circle" src="{{art.user.profile.avatar.url}}" alt="Generic placeholder image" style="max-width:50px">
+                                    </div>
+                                    <div class="media-body col-8">
+                                        <h3><a style="color: black;font-size: 20px;" href="{% url 'account:user_profile_view' art.user.id %}">{{art.user.username}}</a></h3>
+                                    </div>
+                                    <div class="col-2 d-flex gap-2">
+                                        <strong><a style="color: #414141; font-size: 20px;" href="#" class="mr-3 rounded-circle bi bi-heart" alt="Generic placeholder image"></a></strong>
+                                        <a style="color: #414141; font-size: 20px;" href="#" class="mr-3 rounded-circle bi bi-download" alt="Generic placeholder image"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div class="row mt-5">
+    <div class="col d-flex gap-2 justify-content-center">
+        {% for page in pages_count %}
+        <a href="?page={{page}}{% if 'cat' in request.GET %}&cat={{request.GET.cat}}{% endif %}" class="btn border {% if request.GET.page == page %} btn-primary {% elif page == '1' and 'page' not in request.GET %} btn-outline-dark {% endif %}">{{page}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

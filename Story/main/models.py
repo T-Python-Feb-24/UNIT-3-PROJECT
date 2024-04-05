@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class Story(models.Model):
     CATEGORY_CHOICES = [
         ('Fun', 'Fun'),
-        ('Fair', 'Fair'),
         ('Adventure', 'Adventure'),
         ('Romance', 'Romance'),
         ('Mystery', 'Mystery'),

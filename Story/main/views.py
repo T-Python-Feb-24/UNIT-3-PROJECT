@@ -170,3 +170,7 @@ def contact_us_messages(request):
 
     messages = ContactMessage.objects.all()
     return render(request, 'main/contact_us_messages.html', {'messages': messages})
+
+def category_stories(request, category_name):
+    stories = Story.objects.filter(category=category_name)  
+    return render(request, 'main/category_stories.html', {'stories': stories, 'category_name': category_name})

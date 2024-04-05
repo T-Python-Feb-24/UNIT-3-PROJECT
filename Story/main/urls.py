@@ -18,4 +18,5 @@ urlpatterns = [
     path('contact_us_messages/', views.contact_us_messages, name='contact_us_messages'),
     path('save_contact_message/', views.save_contact_message, name='save_contact_message'),
     path('comment/<int:comment_id>/delete/<int:story_id>/', views.delete_comment, name='delete_comment'),
+    path('category/<str:category_name>/', views.category_stories, name='category_stories'),
 ]

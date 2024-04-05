@@ -6,17 +6,18 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.http import JsonResponse
 
-
-
 # Create your views here.
 
+
+
+# Home page
 def home_page(request:HttpRequest):
 
     tasks = Task.objects.all()
     projects = Project.objects.all()
     comments = Comment.objects.all().order_by('-created_at')[:5]
     # important_events = Event.objects.filter(is_important=True)
-
+    
     return render(request, "main/home_page.html", {
         "tasks": tasks,
         "projects": projects,
@@ -26,14 +27,16 @@ def home_page(request:HttpRequest):
 
 
 
-
+# View tasks
 def tasks(request:HttpRequest):
 
     tasks = Task.objects.all()
     return render(request, 'home_page.html', {'tasks': tasks})
 
 
-def create_task(request):
+
+# Add task 
+def create_task(request:HttpRequest):
 
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -46,6 +49,7 @@ def create_task(request):
 
 
 
+# Task search 
 def task_search(request: HttpRequest):
     tasks = Task.objects.all()
 
@@ -66,7 +70,7 @@ def task_search(request: HttpRequest):
 
 
 
-
+# Add comment 
 def add_comment(request:HttpRequest, project_id):
 
     if not request.user.is_authenticated:
@@ -74,16 +78,15 @@ def add_comment(request:HttpRequest, project_id):
 
     if request.method == "POST":
         task_object = Task.objects.get(pk=project_id)
-        new_comment = Comment(post=task_object,user=request.user, content=request.POST["content"])
+        new_comment = Comment(task=task_object,user=request.user, content=request.POST["content"])
         new_comment.save()
 
-    
     return redirect("main:task_detail", project_id=project_id)
 
 
 
 
-
+# Task detail 
 def task_detail(request:HttpRequest, project_id):
 
     try:
@@ -100,23 +103,23 @@ def task_detail(request:HttpRequest, project_id):
 
 
 
-
+# Dashboard
 def dashboard(request:HttpRequest):
+    comments = Comment.objects.all()[0:3]
 
-    return render(request, "main/dashboard.html" )
+    return render(request, "main/dashboard.html", {"comments":comments})
 
 
 
 
+# Send email 
 def send_email(request:HttpRequest):
     
     if request.method == 'POST':
         recipient_email = request.POST.get('recipient_email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-
         send_mail(subject, message, 'your-email@example.com', [recipient_email])
-
         return JsonResponse({'success': True})
 
     return render(request, 'dashboard.html')

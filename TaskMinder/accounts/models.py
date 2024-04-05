@@ -10,7 +10,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     about = models.TextField()
     avatar = models.ImageField(upload_to="images/", default="images/default.jpeg")
-    projects_link = models.URLField(blank=True)
 
     def __str__(self) -> str:
         return f"{self.user.first_name} profile"

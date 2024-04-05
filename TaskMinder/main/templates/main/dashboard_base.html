@@ -1,10 +1,11 @@
-{% extends 'main/dashboard_base.html' %}
+{% extends 'main/base.html' %}
 {% load static %}
 {% block title %} TaskMinder {% endblock %}
 
 
+{% block content %}
 {% block con2 %}
-
+{% endblock %}
     <!-- Checkbox -->
 
 <!-- <section>
@@ -18,17 +19,6 @@ checkbox
 
 </section> -->
 
-
-
-    <nav class="navbar">
-        <div class="container-fluid">
-            <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
-                <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <button type="submit" class="px-3">Go</button>
-                </div>
-        </div>
-    </nav>
 
     <!-- SideBar  -->
 
@@ -48,7 +38,6 @@ checkbox
             <li><button class="btn logout"><a href="{% url 'accounts:logout_user' %}">LOGOUT</a></button></li>
         </ul>
     </div>
-
 
 
 {% endblock %}

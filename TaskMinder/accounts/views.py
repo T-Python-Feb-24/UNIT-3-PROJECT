@@ -20,7 +20,7 @@ def sign_up(request:HttpRequest):
                 new_user = User.objects.create_user(username=request.POST["username"], email=request.POST["email"], first_name=request.POST["first_name"], last_name=request.POST["last_name"], password=request.POST["password"])
                 new_user.save()
 
-                profile = Profile(user=new_user, about=request.POST["about"], projects_link=request.POST["projects_link"], avatar=request.FILES.get("avatar", Profile.avatar.field.get_default()))
+                profile = Profile(user=new_user, about=request.POST["about"], avatar=request.FILES.get("avatar", Profile.avatar.field.get_default()))
                 profile.save()
 
                 return redirect("accounts:sign_in")
@@ -32,7 +32,7 @@ def sign_up(request:HttpRequest):
         except Exception as e:
             msg = "Something went wrong. Please try again."
             print(e)
-    
+        
 
     return render(request, "accounts/sign_up.html", {"msg" : msg})
 
@@ -57,7 +57,7 @@ def logout_user(request:HttpRequest):
     if request.user.is_authenticated:
         logout(request)
     
-    return redirect('accounts:sign_in')
+    return redirect('main:home_page')
 
 
 
@@ -97,7 +97,6 @@ def update_profile(request:HttpRequest):
                     profile = Profile(user=user)
 
                 profile.about = request.POST["about"]
-                profile.projects_link = request.POST["projects_link"]
                 profile.avatar = request.FILES.get("avatar", profile.avatar)
 
                 profile.save()

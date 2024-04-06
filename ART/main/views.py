@@ -90,13 +90,8 @@ def search(request:HttpRequest):
     art = []
     try: 
         if "search" in request.GET:
-            art = Blog.objects.filter(name__contains=request.GET["search"])
+            art = Blog.objects.filter(category__contains=request.GET["search"])
 
-        
-        # if "date" in request.GET and len(request.GET["date"]) > 4:
-        #     first_date = date.fromisoformat(request.GET["date"])
-        #     end_date = first_date + timedelta(days=1)
-        #     plants = plants.filter(created_at__gte=first_date, created_at__lt=end_date)
     except Exception as e:
         print(e)
     

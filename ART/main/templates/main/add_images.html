@@ -14,8 +14,9 @@
         <form style="width:50% ;height: 200%; " action="{% url 'main:add_images' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
             {% csrf_token %}
 
-            <input name="name" type="text" placeholder="Name" class="form-control" required minlength="5" />
-            <textarea name="about" placeholder="About" class="form-control" required ></textarea>
+            <input name="name" type="text" placeholder="Name" class="form-control" />
+            <h6>اختياري</h6>
+            <textarea name="about" placeholder="About" class="form-control"  ></textarea>
 
             <div class="form-check form-switch">
                 <input name="is_published" value="True" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
@@ -33,7 +34,7 @@
             <h5>Choose Image:</h5>
             <input name="image"  type="file"  accept="image/*" class="form-control"/>
 
-            <input type="submit" class="btn btn-dark" value="Add Post" style="background-color: rgb(206, 194, 194); "/>
+            <input type="submit" class="btn btn-dark" value="Add Post" style="background-color: rgb(0, 0, 0); "/>
         </form>
     </div>
 

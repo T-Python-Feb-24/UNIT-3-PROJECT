@@ -5,7 +5,7 @@
 
 
     <div class="row">
-        <div style="font-size: 100%;" class="col-md-6 d-flex justify-content-end">
+        <div style="font-size: 100%;" class="col-md-6 d-flex justify-content-end mt-5">
             <div style="font-size: 100%;" class="login-form p-4 bg-light rounded">
                 <h1 style="font-family:cursive;" class="mb-4">Login</h1>
                 {% if msg %}
@@ -15,7 +15,7 @@
                     {% csrf_token %}
                     <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
                     <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
-                    <input type="submit" class="btn btn-primary mt-3" value="Login" />
+                    <input type="submit" class="btn btn-primary mt-3" value="Login" style="background-color: black;" />
                 </form>
             </div>
         </div>

@@ -50,7 +50,7 @@
 
     <div class="row g-4">
         <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
-            <h2>{% if 'cat' in request.GET %} {{request.GET.cat}} {% else %} All {% endif %}images({{ art.count }}) </h2>
+            <h2 style="font-family:cursive;">{% if 'cat' in request.GET %} {{request.GET.cat}} {% else %} All {% endif %}images({{ art.count }}) </h2>
         </div>
         {% for art in art %}
         <div class="col-4">

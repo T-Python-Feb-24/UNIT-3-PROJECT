@@ -90,7 +90,7 @@ input[type="radio"] {
     border-radius: 15px;
 }
 
-/* All Plants */
+/* All Recipes */
 .cat {
     background-color: rgba(21, 155, 81, 0.377);
     color:white;
@@ -137,7 +137,7 @@ input[type="radio"] {
   object-fit: cover;
 }
 
-/* Favorites */
+/* Saved */
 .bookmark {
   font-size: 2rem;
   color: rgb(255, 166, 0);

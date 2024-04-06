@@ -4,10 +4,10 @@
 **Overview:** The purpose of this website is to allows users to publish their own recipes, search for and save their favorite recipes.
 
 **Features:**
-    - User accounts with saved recipes.
-    - Recipe creation and editing.
-    - Search and categorization of recipes.
-    - User ratings and reviews.
+- User accounts with saved recipes.
+- Recipe creation and editing.
+- Search and categorization of recipes.
+- User ratings and reviews.
 
 ## User Stories, Wireframes & UML links
 - User stories: (https://docs.google.com/document/d/1wmZ36AlmnteXeCMwDYsYLTxLwcfpf8fo-l1PlFbM4Mc/edit?usp=sharing)

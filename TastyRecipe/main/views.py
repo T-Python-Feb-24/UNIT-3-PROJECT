@@ -13,7 +13,7 @@ def home(request:HttpRequest):
     if request.user.is_authenticated:
         print(request.user.first_name)
     
-    recipes = Recipe.objects.all().order_by('-created_at')[0:3]
+    recipes = Recipe.objects.all().order_by('-created_at')[0:4]
 
     reviews = Review.objects.all().order_by('-created_at')[0:5]
 
@@ -21,12 +21,13 @@ def home(request:HttpRequest):
 
 def add_recipe(request:HttpRequest):
 
-    if not request.user.is_staff:
+    if not request.user.is_authenticated:
         return render(request, "no_permission.html")
 
     if request.method == 'POST':
         try:
             new_recipe = Recipe(
+                user = request.user,
                 title = request.POST["title"], 
                 ingredients = request.POST["ingredients"],
                 instructions = request.POST["instructions"],
@@ -48,7 +49,7 @@ def all_recipes(request:HttpRequest):
     else:
         recipes = Recipe.objects.all().order_by("-created_at") 
     
-    limit = 3
+    limit = 4
     pages_count = [str(n) for n in range(1, math.ceil(recipes.count()/limit)+1)]
     start = (int(request.GET.get("page", 1))-1)*limit
     end = (start)+limit
@@ -105,7 +106,7 @@ def update_recipe(request:HttpRequest, recipe_id):
 
 def delete_recipe(request:HttpRequest, recipe_id):
 
-    if not request.user.is_staff:
+    if not request.user.is_authenticated and request.user.username or request.user.is_superuser:
         return render(request, "no_permission.html")
 
     try:

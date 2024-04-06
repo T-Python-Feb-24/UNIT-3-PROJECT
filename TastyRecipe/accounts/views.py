@@ -77,7 +77,7 @@ def profile_view(request:HttpRequest, user_name):
 def update_user(request: HttpRequest, user_name):
     message = None
 
-    if not request.user.is_authenticated:
+    if not request.user.is_authenticated and request.user.username or request.user.is_superuser:
         return redirect("accounts:login")
     
     try:

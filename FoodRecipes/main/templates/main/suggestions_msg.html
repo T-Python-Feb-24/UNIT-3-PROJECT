@@ -9,11 +9,12 @@
 {% block content %}
 <section>
     <div class="container">
-        <h1 class="fw-dark text-blak mb-0 mt-5 ">Suggestions from users</h1>
+        <h1 class="fw-dark text-blak mb-5 mt-5 ">Suggestions from users</h1>
         <div class="row">
-            {% for sug in suggestions %}
+            {% for sug in msg %}
             <div class="col d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
-                <p>{{sug.recipes}}</p>
+                <h4>{{user.username}}</h4>
+                <p>{{sug.Recipes.name}}</p>
                 <p> {{sug.content}}</p>
             </div>
             {% endfor %}

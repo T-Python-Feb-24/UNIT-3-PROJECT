@@ -2,8 +2,11 @@
 {% block title %}Ditail Recipes{% endblock %}
 
 {% block style %}
-
-
+<style>
+    .checked {
+      color: orange;
+    }
+</style>
 {% endblock %}
 {% block content  %}
 <section>
@@ -18,7 +21,7 @@
                 <div class="d-flex flex-column gap-2 mt-4">
                     
                     <h1>{{ recipes.name  }}</h1>
-                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{recipes.categroy}}">{{ recipes.categroy}}</h6>
+                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{recipes.categroy}}" style="width: 100px; text-align: center;">{{ recipes.category}}</h6>
                     <p>{{ recipes.content }}</p>
                     <p>{{recipes.time_coockin}}</p>
                     <p>{{recipes.number_people}}</p>
@@ -42,19 +45,7 @@
 
     
 
-    <div class="row" id="comments">
-        <div class="col-7 d-flex flex-column gap-4">
-
-            
-            {% for comment in comments %} 
-                <div class="d-flex flex-column gap-2 shadow p-3 ">
-                    <a href="{% url 'accounts:user_profile' comment.user.id %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
-                    <p>{{ comment.content }}</p>
-                </div>
-            {% endfor %}
-
-        </div>
-    </div>
+    
 
     <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -77,11 +68,29 @@
     </div>
 
     <div class="row mt-4">
-        <div class="col">
+        <div class="col-6">
             {% if request.user.is_authenticated %}
             <form action="{% url 'main:add_comment' recipes.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data" >
                 {% csrf_token %}
                 <label for="content mt-5">Enter your comment:</label><br>
+
+                <div class="star-rating">
+                    <input class="radio-input" type="radio" id="star5" name="evaluation" value="5" />
+                    <label class="radio-label" class for="star5" title="5 stars">5 stars</label>
+
+                    <input class="radio-input" type="radio" id="star4" name="evaluation" value="4" />
+                    <label class="radio-label" for="star4" title="4 stars">4 stars</label>
+
+                    <input class="radio-input" type="radio" id="star3" name="evaluation" value="3" />
+                    <label class="radio-label" for="star3" title="3 stars">3 stars</label>
+
+                    <input class="radio-input" type="radio" id="star2" name="evaluation" value="2" />
+                    <label class="radio-label" for="star2" title="2 stars">2 stars</label>
+
+                    <input class="radio-input" type="radio" id="star1" name="evaluation" value="1" />
+                    <label class="radio-label" for="star1" title="1 star">1 star</label>
+
+                </div>
                 <input type="text" name="content" class="form-control" placeholder="comment">
 
                 <input type="submit" value="Add Comment" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
@@ -89,18 +98,60 @@
             {% else %}
             <div class="alert alert-warning">You must <a href="{% url 'accounts:login_user' %}">Sign in</a></div>
             {% endif %}
-
+            
+            
+            
         </div>
+
+        <div class="col-12 col-md-8 all-comments mb-3" id="commentDetail">
+
+            {% for comment in comments %}
+
+                    <div class="border rounded-4 mt-2 mb-3 d-flex flex-column p-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="" alt="" width="40" height="40">
+                            <h4 class="pt-3">{{ comment.user.username}}</h4>
+                        </div>
+                        <p class="com-date">{{comment.comment_date}}</p>
+                        
+                        <div>
+                            <span class="fa fa-star {% if comment.evaluation >= 1 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 2 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 3 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 4 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 5 %} checked {% endif %}"></span>
+                        </div>
+                        <p class="com-p">{{ comment.content }}</p>
+                    </div>
+
+            {% endfor %}
     </div>
+
+        <!-- <div class="col-6 d-flex flex-column gap-4 mt-5 "  style="padding-right: 100px; justify-content: space-between;" id="comments">
+        
+                    
+            {% for comment in comments %} 
+                <div class="d-flex flex-column gap-2 shadow p-3 ">
+                    <a href="{% url 'accounts:user_profile' comment.user.id %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+
+        </div> -->
+    </div>
+
+    
+
+
     <div class="row mt-4">
-        <div class="col">
+        <div class="col-6">
             {% if request.user.is_authenticated %}
-            <form action="{% url 'main:suggestions' recipes.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data" >
+            <form action="{% url 'main:suggestions' recipes.id %}" method="post" class="d-flex flex-column gap-2">
                 {% csrf_token %}
-                <label for="content mt-5">Enter your suggestion:</label><br>
+                <label for="content mt-5">Add your suggestion for the chef:</label><br>
                 <input type="text" name="content" class="form-control" placeholder="suggestions" />
 
-                <input type="submit" value="Add Comment" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
+                <input type="submit" value="Add suggestion" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
             </form>
             {% else %}
             <div class="alert alert-warning">You must <a href="{% url 'accounts:login_user' %}">Sign in</a></div>

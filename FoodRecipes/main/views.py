@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from .models import Recipes,Comment,Suggestions
 from django.contrib.auth.models import User
 from accounts.models import ProfileUser
+from favorites.models import Favorite
 
 
 def home(requset:HttpRequest):
@@ -47,13 +48,15 @@ def detail_recipes(requset:HttpRequest,recipes_id):
         recipes= Recipes.objects.get(pk=recipes_id)
         comments=Comment.objects.filter(Recipes=recipes)
         suggestions=Suggestions.objects.filter(Recipes=recipes)
+        is_favored =requset.user.is_authenticated and  Favorite.objects.filter(user=requset.user, recipes=recipes).exists()
+
         
         
     except Recipes.DoesNotExist:
         pass
     except Exception as e:
         print(e)
-    return render(requset ,"main/detail_recipes.html", {"recipes":recipes,'comments':comments ,"suggestions":suggestions})
+    return render(requset ,"main/detail_recipes.html", {"recipes":recipes,'comments':comments ,"suggestions":suggestions , "is_favored":is_favored})
 
 
 def update_recipes(requset:HttpRequest,recipes_id):
@@ -82,13 +85,6 @@ def delete_recipes(requset:HttpRequest,recipes_id):
         print(e)
     return redirect('main:home')
 
-# def repost_recipe(requset:HttpRequest,recipes_id):
-#     recipe =Recipes.objects.all(Recipes, id=recipes_id)
-#     user_profile = requset.user.ProfileUser
-    
-#     user_profile.reposted_recipes.add(recipe)
-    
-#     return render(requset,"main/detail_plants.html",{"recipe":recipe,"user_profile":user_profile})
 
 
 def recipes_search(requset:HttpRequest):
@@ -104,12 +100,11 @@ def suggestions(request: HttpRequest,recipes_id ):
     if request.method == "POST":
         try:
             recipes= Recipes.objects.get(pk=recipes_id)
-            new_suggestions = Suggestions(Recipes=recipes,uesr=request.user, content=request.POST["content"])
+            new_suggestions = Suggestions(Recipes=recipes,user=request.user, content=request.POST["content"])
             new_suggestions.save()
+            return redirect("main:detail_recipes",recipes_id=recipes.id)  #msg
         except Exception as e:
                 print(e)
-        return redirect("main:home")  #msg
-    return redirect(request, 'main:detail_recipes',recipes_id=recipes.id)
 
 
 def suggestions_msg(request: HttpRequest):
@@ -123,15 +118,16 @@ def suggestions_msg(request: HttpRequest):
     
 
 def add_comment(request:HttpRequest, recipes_id):
-    # if not request.user.is_authenticated:
-    #     return redirect("")
+    if not request.user.is_authenticated:
+        return redirect("accounts:login_user")
     
     if request.method == "POST":
         try:
             recipes= Recipes.objects.get(pk=recipes_id)
             new_comment = Comment(Recipes=recipes,
                                   user=request.user, 
-                                  content=request.POST["content"])
+                                  content=request.POST["content"],
+                                  evaluation=request.POST["evaluation"])
             new_comment.save()
         except Exception as e:
                 print(e)

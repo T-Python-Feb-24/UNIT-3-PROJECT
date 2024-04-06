@@ -6,6 +6,8 @@ from django.db import IntegrityError
 from main.models import Comment
 from .models import ProfileUser
 from django.db import transaction, IntegrityError
+from main.models import Recipes
+
 
 
 # Create your views here.
@@ -72,11 +74,12 @@ def user_profile(request:HttpRequest, user_id):
     try:
         user=User.objects.get(id=user_id)
         user_profile = ProfileUser.objects.get(user=user)
+        my_recipes = Recipes.objects.filter(user=user)
         
     except:
         return render(request, "main/not_found.html")
 
-    return render(request, "accounts/user_profile.html", {"user_profile": user_profile})
+    return render(request, "accounts/user_profile.html", {"user_profile": user_profile, "my_recipes" : my_recipes})
 
 
 

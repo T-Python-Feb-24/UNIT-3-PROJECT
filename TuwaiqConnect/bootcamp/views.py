@@ -6,8 +6,9 @@ from.models import Bootcamp
 # Create your views here.
 
 def all_bootcamps(request :HttpRequest):
+    bootcamps = Bootcamp.objects.all()
     
-    return render(request,"bootcamp/all_bootcamps.html")
+    return render(request,"bootcamp/all_bootcamps.html",{"bootcamps":bootcamps})
 
 def add_bootcamp(request : HttpRequest):
     if request.method == "POST":   
@@ -21,3 +22,12 @@ def add_bootcamp(request : HttpRequest):
     )
         bootcamp.save()
     return render(request,"bootcamp/new_bootcamp.html")
+
+def all_bootcamps():
+    pass 
+
+def update_bootcamp ():
+    pass 
+
+def delete_bootcamp():
+    pass

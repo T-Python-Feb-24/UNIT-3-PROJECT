@@ -11,7 +11,8 @@
    <a href="{% url "main:home_page" %}">home</a>
    {% if request.user.is_authenticated %}
    <h3>welcome {{request.user}}</h3>
-   <a href="{% url "student:student_profile" request.user.id %}">profile{{request.user}}</a>
+   <!---   هنا نسوي شروط اذا كان المستخدم طالب او جهه او ستاف يطلع له البروفايل حقه -->
+   <a href="{% url "student:student_profile" request.user.username %}">profile{{request.user}}</a>
   <a href="{% url "accounts:user_logout" %}">user_logout</a>
    {% endif %}
 </head>

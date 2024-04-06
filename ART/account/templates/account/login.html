@@ -1,27 +1,26 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block title %}Login User{% endblock %}
-
 {% block content %}
-<div class="container">
-    <h1>Login</h1>
-    {% if msg %}
-    <div class="alert alert-danger">{{msg}}</div>
-    {% endif %}
+
+
     <div class="row">
-        <div class="col">
-
-            <form action="{% url 'account:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
-                {% csrf_token %}
-
-                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
-                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
-
-                <input type="submit" class="btn btn-primary" value="Login" />
-
-            </form>
-            
+        <div style="font-size: 100%;" class="col-md-6 d-flex justify-content-end">
+            <div style="font-size: 100%;" class="login-form p-4 bg-light rounded">
+                <h1 style="font-family:cursive;" class="mb-4">Login</h1>
+                {% if msg %}
+                <div class="alert alert-danger">{{msg}}</div>
+                {% endif %}
+                <form action="{% url 'account:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
+                    {% csrf_token %}
+                    <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                    <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+                    <input type="submit" class="btn btn-primary mt-3" value="Login" />
+                </form>
+            </div>
         </div>
+        <div class="col-md-6"></div>
     </div>
 </div>
 {% endblock %}
+

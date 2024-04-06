@@ -39,13 +39,16 @@
         <div class="col-4">
             <div class="d-flex flex-column gap-2 border border-1 shadow p-2 rounded-3 h-100">
                 <h4>{{ comment.user.username }}</h4>
-                <a href="{% url 'main:detail_images' comment.art.id %}#comments"><h6 class="text-muted">{{comment.plant.name}}</h6></a>
+                <a href="{% url 'main:detail_images' comment.user.username %}#comments"><h6 class="text-muted">{{comment.user.user}}</h6></a>
                 <p>{{ comment.message }}</p>
             </div>
         </div>
         {% endfor %}
   
     </div>
+    {% if request.user.is_authenticated %}
+          <a style="color:rgb(0, 0, 0); font-size: larger;" href="?user={{request.user.username}}" class="p-2 ps-3 pe-3 text-decoration-none">My Posts</a>{% endif %}
+                
     </div>
 </div>
 

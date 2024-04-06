@@ -1,43 +1,85 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Pinterest {% endblock %}
-
+{% block title %} RandomSnaps {% endblock %}
 
 {% block content %}
+<style>
+ .main{
+      margin-top: 7vw;
+      display: flex;
+      align-items: center;
+      font-family: "Angkor" , sans-serif;
+      color: #000000;
+      background-color: rgb(60, 18, 18);
+      background: rgba(255, 255, 255, 0.623);
+      /* opacity: 85%; */
+      flex-direction: row;
+      height: 80vh;
+      row-gap: 1px;
+      background-size: cover;
+      background-position: center;
+      /* effect for the main section image to be fixid  */
+      background-attachment: fixed;
+      padding: 200px;
+    
+    }
+    .video-container {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+    }
+
+    video {
+      object-fit: cover;
+    }
+</style>
+
+<div class="video-container">
+  <video autoplay muted loop>
+    <source src="/static/images/sea.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 <div class="main justify-content-center">
-    <div >
-        <h2><span style="font-size:50px;">Discover Stories Worth Sharing</span><br></h2>
+    <div>
+        <h2><span style="font-size:50px; font-family:cursive;">Discover Stories Worth Sharing</span><br></h2>
+        <br>
+        <button class="btn btn-secondary " style="color: rgb(255, 255, 255); background: rgba(0, 0, 0, 0.719); width: 150px;height: 60px; border-radius: 10px; border: 0;margin-left: 40% ;" type="button"   >Get Start</button>
+        </form> 
     </div>
-
 </div>
+
 <div class="container mt-5 pt-5">
-<hr />
-<div class="d-flex flex-column justify-content-between ">
-<h1>RandomSnaps</h1>
+    <hr />
+    <div class="d-flex flex-column justify-content-between ">
+        <h1 style="color: rgb(255, 255, 255);">RandomSnaps</h1>
+        <div class="d-flex  justify-content-end mb-3 ">
+            <a class="navbar-brand btn btn-" href="{% url 'main:all_images'%}">All</a>
+        </div>
+    </div>
+    <div class="row g-5">
+        <div class="masonry-rows">
+            <style>
+                .masonry-rows {
+                    --row-height: 250px;
+                    --min-item-width: 200px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
 
-<div class="d-flex  justify-content-end mb-3 ">
-<a  class="navbar-brand btn btn-" href="{% url 'main:all_images'%}">All</a>
-</div>
-</div>
-<div class="row g-5">
+                    > * {
+                        min-width: min(var(--min-item-width), 100%);
+                        height: var(--row-height);
+                        flex: auto;
+                        object-fit: cover;
+                    }
+                }
+            
 
-<div class="masonry-rows">
-    <style>
-        .masonry-rows {
---row-height: 250px;
---min-item-width: 200px;
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-
-> * {
-min-width: min(var(--min-item-width), 100%);
-height: var(--row-height);
-flex: auto;
-object-fit: cover;
-}
-}
     </style>
     <img src="https://picsum.photos/581/378">
     <img src="https://picsum.photos/467/450">
@@ -61,20 +103,7 @@ object-fit: cover;
     <img src="https://picsum.photos/200/369">
   </div>
   
-<!-- <h2> Leaste Comments:</h2>
 
-<div class="row">
-<div class="col d-flex flex-column gap-2">
-{% for comment in comments %}
-    <div class="d-flex flex-column gap-2 border border-1 p-3 rounded-3">
-        <a href="{% url 'account:user_profile_view' comment.user.username %}" class="text-decoration-none"><h3>{{ comment.user.username }}</h3></a>
-       <a href="{% url 'main:plant_detail' comment.plant.id %}#commentPost"> <h6 class="text-muted">{{comment.plant.name}}</h6></a>
-        <p>{{ comment.content }}</p>
-    </div>
-{% endfor %}
-
-</div>
-</div> -->
 
 </div>
 </div>

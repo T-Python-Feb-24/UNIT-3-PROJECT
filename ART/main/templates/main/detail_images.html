@@ -1,117 +1,159 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Pinterest {% endblock %}
-
+{% block title %} DETAILE {% endblock %}
 
 {% block content %}
-
 <style>
     .art-image {
-    height: 500px;
-    object-fit: cover;
-    object-position: center;
-}
+        height: 500px;
+        object-fit: cover;
+        object-position: center;
+    }
 
-.art-footer {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-}
-.back_footer{
-    background-color: rgba(0, 0, 0, 0.877);
-}
+    .art-footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
+
+    .back_footer {
+        background-color: rgba(0, 0, 0, 0.877);
+    }
+
+    .image-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 20px;
+    }
+
+    .details-container {
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        border-color: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    .btn-download {
+        color: #212529;
+    }
+
+    .btn-download:hover {
+        color: #212529;
+    }
+
+    .comment-form {
+        margin-top: 20px;
+    }
+
+    .comment-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn-comment {
+        background-color: #28a745;
+        color: #fff;
+    }
+
+    .btn-comment:hover {
+        background-color: #218838;
+        color: #fff;
+    }
+
+    .comment-container {
+        margin-top: 20px;
+    }
+
+    .comment-card {
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+    }
 </style>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <img src="{{ art.image.url }}"  class="mp-5" style="width: 500px; margin-top: 20px; margin-left: 20px; margin-bottom: 20px;"/>
-                
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="image-container">
+                <img src="{{ art.image.url }}" class="art-image w-100" />
             </div>
-            <div class="col">
-                <div class="d-flex flex-column gap-2 mt-4">
-                    
-                    <h1>{{ recipes.name  }}</h1>
-                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.categroy}}">{{ art.category}}</h6>
-                    <p>{{ art.content }}</p>
-                    <p>{{art.time_coockin}}</p>
-                    <p>{{art.number_people}}</p>
-                    <h6>{{art.published_at}}</h6>
-                    
-                    <div class="d-flex gap-2">
-                        <a style="color: blue; font-size:20px ;" href="" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
-                        <a style="color: #414141; font-size: 20px;" href="{{ art.image.url }}" class="mr-3 rounded-circle bi bi-download" alt="Generic placeholder image" download=""></a>
-                        <a href="{% url 'main:delete_images' art.id %}" class="btn btn mt-3 mp-5"  style="background-color: rgb(187, 27, 27);">Delete</a>
-                       
-                       
+        </div>
+        <div class="col-md-4">
+            <div class="details-container">
+              
+                <h3 class=" pt-2 pb-2 ps-4 pe-4 rounded-pill {{art.category}}" style="font-size: 28px; background-color: rgb(69, 150, 221); ">{{ art.category }}</h3>
+
+<div class="d-flex justify-content-between align-items-center mt-4">
+    <div class="d-flex gap-2">
+        <a href="#" style="color: blue; font-size: 20px;" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+        <a href="{{ art.image.url }}" class="rounded-circle bi bi-download btn-download"></a>
+    </div>
+    {% if user.is_staff%}
+    <a href="{% url 'main:delete_images' art.id %}" class="btn btn-delete">Delete</a>{% endif%}
+</div>
+
+
+                <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Favorite</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <span class="material-symbols-outlined">favorite</span>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                            </div>
+                        </div>
                     </div>
-                    
                 </div>
             </div>
-
-            
-            
-
-    
-
-    
-
-    <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Favorite</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <span class="material-symbols-outlined">
-                favorite
-                </span>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
-    
-            </div>
-          </div>
         </div>
     </div>
 
     <div class="row mt-4">
-        <div class="col-6">
+        <div class="col-md-6">
             {% if request.user.is_authenticated %}
-            <form action="{% url 'main:add_comment' art.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data" >
+            <form action="{% url 'main:add_comment' art.id %}" method="post" class="comment-form">
                 {% csrf_token %}
-                <label for="content mt-5">Enter your comment:</label><br>
-                <input type="text" name="content" class="form-control" placeholder="comment">
-
-                <input type="submit" value="Add Comment" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
+                <input type="text" name="content" class="form-control comment-input" placeholder="Enter your comment">
+                <input type="submit" value="Add Comment" class="btn btn-comment">
             </form>
             {% else %}
             <div class="alert alert-warning">You must <a href="{% url 'account:login_user_view' %}">Sign in</a></div>
             {% endif %}
-            
-            
-            
         </div>
-        <div class="col-6 d-flex flex-column gap-4 mt-5 "  style="padding-right: 100px; justify-content: space-between;" id="comments">
-        
-                    
-            {% for comment in comments %} 
-                <div class="d-flex flex-column gap-2 shadow p-3 ">
-                    <a href="{% url 'account:user_profile' comment.user.id %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
+        <div class="col-md-6">
+            <div class="comment-container">
+                {% for comment in comments %}
+                <div class="comment-card">
+                    <a href="{% url 'account:user_profile_view' comment.user.id %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
                     <p>{{ comment.content }}</p>
                 </div>
-            {% endfor %}
-
+                {% endfor %}
+            </div>
         </div>
     </div>
+
     <div class="row p-4 mt-5">
         <h1>Related image</h1>
         {% for rel in related %}
         <div class="col-4">
             <a href="{% url 'main:detail_images' rel.id %}">
                 <div class="position-relative rounded-4 overflow-hidden">
-                    <img src="{{ rel.image.url}}"  class="art-image w-100"/>
+                    <img src="{{ rel.image.url }}" class="art-image w-100" />
                     <div class="art-footer w-100 p-3 d-flex gap-3 back_footer">
                         <div class="col-2 ">
                             <img class="mr-3 rounded-circle" src="{{rel.user.profile.avatar.url}}" alt="Generic placeholder image" style="max-width:50px">
@@ -127,12 +169,5 @@
         </div>
         {% endfor %}
     </div>
-    
-
-
-
-    </div>
-
-
-
+</div>
 {% endblock %}

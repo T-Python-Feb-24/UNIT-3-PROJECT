@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 class Blog(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     name =  models.CharField(max_length=200)
-    about = models.TextField()
+    about = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='images/', default='images/default_img.jpg')
     is_published = models.BooleanField()
-    Categories = models.TextChoices('Category', ["Ornamental drawing","Pointillism", "Cartoon drawing"]) 
+    Categories = models.TextChoices('Category', ["Nature","Arts", "Daily Life" ,"Food"]) 
     category = models.CharField(max_length = 64, choices = Categories.choices)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -20,6 +20,7 @@ class Comment(models.Model):
     
     Blog= models.ForeignKey(Blog, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
 # contact
@@ -29,6 +30,13 @@ class Contact(models.Model):
     email=models.EmailField(max_length=254)
     message=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
+
+# ارجعيله
+class VisibilityChoices(models.TextChoices):
+    PRIVATE = 'private', 'Private'
+    PUBLIC = 'public', 'Public'
+
+is_published = models.CharField(max_length=10, choices=VisibilityChoices.choices, default=VisibilityChoices.PUBLIC)
 
 
     

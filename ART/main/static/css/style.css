@@ -14,7 +14,7 @@
       font-family: "Angkor" , sans-serif;
       color: #f1f1f1;
       background-color: rgb(60, 18, 18);
-      background: url("/static/images/pexels-elevate-1269029.jpg") no-repeat;
+      background: url("/static/images/photo.jpg") no-repeat;
       /* opacity: 85%; */
       flex-direction: row;
       height: 80vh;
@@ -36,19 +36,12 @@
       white-space: pre-line;
   }
   /* تعديل لون الcat */
-  .cata{
-    background-color: rgba(184, 180, 178, 0.767);
-    width: 100%;
-    font-size: 20px;
-    border-radius: 50px;
-     
-  }
-  /* تعديل اللي داخل post */
-  .cat{
-    background-color: #000;
-    color: #f1f1f1;
-  }
   
+     
+ 
+  /* تعديل اللي داخل post */
+  
+
   .thumb {
       width: 90px;
       height: 90px;

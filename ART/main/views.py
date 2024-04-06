@@ -123,7 +123,7 @@ def delete_images(request:HttpRequest,blog_id):
 
 def user_message(request:HttpRequest):
     if not request.user.is_superuser:
-        return render(request, "main/not_found.html")
+        return render(request, "main/404.html")
     
     con=Contact.objects.all()
 
@@ -150,15 +150,17 @@ def contact_us(request:HttpRequest):
 
 # ............الحين comment ......................... 
 
-def add_comment(request:HttpRequest, blog_id):
 
+
+def add_comment(request: HttpRequest, blog_id):
     object = Blog.objects.get(pk=blog_id)
     if request.method == "POST":
-        #add new comment
-        print(object)
-        new_comment = Comment(Blog=object,user=request.user, content=request.POST["content"])
+        new_comment = Comment(Blog=object, user=request.user, content=request.POST["content"])
         new_comment.save()
     
     return redirect("main:detail_images", blog_id=object.id)
+
+
+
 # Create your views here.
 # testttttttttttttttttttttttt

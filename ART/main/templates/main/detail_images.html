@@ -100,7 +100,7 @@
         <a href="#" style="color: blue; font-size: 20px;" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
         <a href="{{ art.image.url }}" class="rounded-circle bi bi-download btn-download"></a>
     </div>
-    {% if user.is_staff%}
+    {% if request.user.is_authenticated and request.user.username == art.user.username or request.user.is_superuser %}
     <a href="{% url 'main:delete_images' art.id %}" class="btn btn-delete">Delete</a>{% endif%}
 </div>
 

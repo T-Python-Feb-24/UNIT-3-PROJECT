@@ -38,9 +38,9 @@
       {% for comment in user.comment_set.all %}
         <div class="col-4">
             <div class="d-flex flex-column gap-2 border border-1 shadow p-2 rounded-3 h-100">
-                <h4>{{ comment.user.username }}</h4>
-                <a href="{% url 'main:detail_images' comment.user.username %}#comments"><h6 class="text-muted">{{comment.user.user}}</h6></a>
-                <p>{{ comment.message }}</p>
+                
+                <a href="{% url 'main:detail_images' comment.user.username %}#comments"><img src="{{ comment.Blog.image.url }}" width="200px" height="300px"></img></a>
+                <p>{{ comment.content }}</p>
             </div>
         </div>
         {% endfor %}

@@ -14,8 +14,8 @@
         <form style="width:50% ;height: 200%; " action="{% url 'main:add_images' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
             {% csrf_token %}
 
-            <input name="name" type="text" placeholder="Name" class="form-control" />
-            <h6>اختياري</h6>
+            <input name="name" type="text" placeholder="Name" class="form-control" required minlength="4" />
+            <h6>This is an additional option for you</h6>
             <textarea name="about" placeholder="About" class="form-control"  ></textarea>
 
             <div class="form-check form-switch">

@@ -25,6 +25,7 @@ def add_images(request:HttpRequest):
             new_blog = Blog(user=request.user,name = request.POST["name"],about = request.POST["about"],
                             image = request.FILES.get("image", Blog.image.field.default),
                             is_published = request.POST.get("is_published", False),category = request.POST['category'])
+            
             new_blog.save()
             return redirect("main:detail_images",new_blog.id)
             
@@ -81,7 +82,7 @@ def detail_images(request:HttpRequest,blog_id):
         print(e)
 
 
-    return render(request, "main/detail_images.html", {"art" : art, "comments" :comments , "related" : related_posts  })
+    return render(request, "main/detail_images.html", {"art" : art , "comments" :comments , "related" : related_posts  })
     
 
  # ............الحين Search .........................
@@ -100,6 +101,8 @@ def search(request:HttpRequest):
     
 
 def delete_images(request:HttpRequest,blog_id):
+    if not request.user.is_authenticated and request.user.username or request.user.is_superuser:
+      return render(request,"main/404.html")
     try:
         art = Blog.objects.get(pk=blog_id)
     except Blog.DoesNotExist:

@@ -31,12 +31,7 @@ class Contact(models.Model):
     message=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
 
-# ارجعيله
-class VisibilityChoices(models.TextChoices):
-    PRIVATE = 'private', 'Private'
-    PUBLIC = 'public', 'Public'
 
-is_published = models.CharField(max_length=10, choices=VisibilityChoices.choices, default=VisibilityChoices.PUBLIC)
 
 
     

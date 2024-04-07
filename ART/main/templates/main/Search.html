@@ -2,40 +2,42 @@
 
 {% block title %} SEARCH {% endblock %}
 
-
 {% block content %}
 <style>
     .art-image {
-    height: 500px;
-    object-fit: cover;
-    object-position: center;
-}
+        height: 500px;
+        object-fit: cover;
+        object-position: center;
+    }
 
-.art-footer {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-}
-.back_footer{
-    background-color: rgba(0, 0, 0, 0.877);
-}
+    .art-footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
+
+    .back_footer {
+        background-color: rgba(0, 0, 0, 0.877);
+    }
+
+    /* تحديد حجم أيقونة البحث */
+    .search-icon {
+        font-size: 1rem; /* تغيير حجم أيقونة البحث */
+    }
 </style>
 
 <div class="container">
     <div class="row ">
         <div class="d-flex flex-column gap-2 mt-5">
-                
-            <h1>Search</h1>
-            <form action="{% url 'main:search' %}"  method="get" class="d-flex gap-2">
-                <input type="search" class="form-control" name="search" value="{{request.GET.search}}" placeholder="Search..."/>
-                <!-- <input type="date" class="form-control" style="width: 200px;" name="date" value="{{request.GET.date}}"/> -->
-                <input type="submit" value="Search" class="btn btn-outline-dark" />
-            </form> 
-    
-            <h2>Search results for {{ request.GET.search }} ({{ art.count }}) </h2>
+            <h1 style="font-family: cursive;">Search</h1>
+            <form action="{% url 'main:search' %}" method="get" class="d-flex gap-2 align-items-center" style="width: 50%"> 
+                <input type="search" class="form-control" name="search" value="{{request.GET.search}}" placeholder="Search..." />
+                <input type="submit" value="Search" class="btn btn-outline-dark search-icon" /> 
+            </form>
+            <h2 style="font-family: cursive;">Search results for {{ request.GET.search }} ({{ art.count }}) </h2>
         </div>
     </div>
-    
+
     <div class="row">
         {% for art in art %}
         <div class="col-4">
@@ -57,6 +59,6 @@
         </div>
         {% endfor %}
     </div>
-    
+
 </div>
 {% endblock %}

@@ -64,11 +64,11 @@
   </div>
 
       {% else %}
-        <div class="dropdown ms-5">
+        <div class="dropdown ms-5 ">
           <button class="btn btn-secondary dropdown-toggle m-3 mt-3 " style="color: rgb(255, 255, 255); background: rgba(0, 0, 0, 0.719); width: 100px;height: 60px; border-radius: 10px; border: 0;" type="button" data-bs-toggle="dropdown" aria-expanded="false" >Join</button>
-          <ul style="background-color: rgba(0, 0, 0, 0.808);" class="dropdown-menu ">
-            <li><a class="dropdown-item" href="{% url 'account:register_user_view' %}" style="color: aliceblue;">Sign up</a></li>
-            <li><a class="dropdown-item" href="{% url 'account:login_user_view' %}" style="color:antiquewhite;">Login</a></li>
+          <ul style="background-color: rgba(0, 0, 0, 0.808);" class="dropdown-menu  ">
+            <li><a class="dropdown-item" href="{% url 'account:register_user_view' %}" style="color: rgb(139, 145, 148);">Sign up</a></li>
+            <li><a class="dropdown-item" href="{% url 'account:login_user_view' %}" style="color:rgb(136, 142, 145);"">Login</a></li>
           </ul>
         </div>
         {% endif %}

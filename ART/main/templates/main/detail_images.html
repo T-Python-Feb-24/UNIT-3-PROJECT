@@ -5,10 +5,13 @@
 {% block content %}
 <style>
     .art-image {
-        height: 500px;
-        object-fit: cover;
-        object-position: center;
-    }
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+    float: left; 
+    margin-right: 20px; 
+    border-radius: 40px;
+}
 
     .art-footer {
         position: absolute;
@@ -20,17 +23,22 @@
         background-color: rgba(0, 0, 0, 0.877);
     }
 
-    .image-container {
+    /* .image-container {
         width: 100%;
         max-width: 500px;
         margin: 20px;
-    }
+    } */
 
-    .details-container {
-        padding: 20px;
-        background-color: #f8f9fa;
-        border-radius: 10px;
-    }
+
+/* خلف الحذف والتحميل */
+.details-container {
+    margin-top: 100px;
+    padding: 20px;
+    background-color: transparent; /* تعيين لون خلفية شفاف */
+    border-radius: 10px;
+    border: 2px solid #000000; /* إضافة حدود بلون محدد */
+}
+
 
     .btn-delete {
         background-color: #dc3545;
@@ -44,6 +52,7 @@
     }
 
     .btn-download {
+        font-size: 20px;
         color: #212529;
     }
 
@@ -61,12 +70,12 @@
     }
 
     .btn-comment {
-        background-color: #28a745;
+        background-color: #000000;
         color: #fff;
     }
 
     .btn-comment:hover {
-        background-color: #218838;
+        background-color: #8e9790;
         color: #fff;
     }
 
@@ -76,33 +85,58 @@
 
     .comment-card {
         padding: 15px;
-        background-color: #fff;
+        color: #eeeeee;
+        background-color: #465f8f;
         border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         margin-bottom: 10px;
+    }
+    .accounts{
+        color: #f8f9fa;
+    }
+    .accounts:hover{
+        color: #000000;
     }
 </style>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 mt-5">
             <div class="image-container">
                 <img src="{{ art.image.url }}" class="art-image w-100" />
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-5">
             <div class="details-container">
               
-                <h3 class=" pt-2 pb-2 ps-4 pe-4 rounded-pill {{art.category}}" style="font-size: 28px; background-color: rgb(69, 150, 221); ">{{ art.category }}</h3>
+                <h3 class=" pt-2 pb-2 ps-4 pe-4 rounded-pill {{art.category}}" style="font-family: cursive;">{{ art.category }}</h3>
+                
 
 <div class="d-flex justify-content-between align-items-center mt-4">
-    <div class="d-flex gap-2">
+    <div class="d-flex align-items-center gap-3">
+    <!-- Category -->
+    <h3 style="color: white; font-size: 20px;">{{ category }}</h3>
+    
+    <!-- User information -->
+    <div class="d-flex align-items-center gap-2">
+        <img class="mr-3 rounded-circle" src="{{ art.user.profile.avatar.url }}" alt="User Avatar" style="max-width: 50px;">
+        <h3><a style="color: white; font-size: 20px;" href="{% url 'account:user_profile_view' art.user.id %}">{{ art.user.username }}</a></h3>
+    </div>
+    
+    <!-- Favorite and Download buttons -->
+    <div class="col-2 d-flex gap-3">
         <a href="#" style="color: blue; font-size: 20px;" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
         <a href="{{ art.image.url }}" class="rounded-circle bi bi-download btn-download"></a>
     </div>
+    
+    <!-- Delete button (if authenticated user is the owner or superuser) -->
+    <div style="margin-left: 30px;">
     {% if request.user.is_authenticated and request.user.username == art.user.username or request.user.is_superuser %}
-    <a href="{% url 'main:delete_images' art.id %}" class="btn btn-delete">Delete</a>{% endif%}
+        <a href="{% url 'main:delete_images' art.id %}" class="btn btn-delete">Delete</a>
+    {% endif %}
 </div>
+</div>
+
+
 
 
                 <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -126,7 +160,7 @@
     <div class="row mt-4">
         <div class="col-md-6">
             {% if request.user.is_authenticated %}
-            <form action="{% url 'main:add_comment' art.id %}" method="post" class="comment-form">
+            <form  action="{% url 'main:add_comment' art.id %}" method="post" class="comment-form">
                 {% csrf_token %}
                 <input type="text" name="content" class="form-control comment-input" placeholder="Enter your comment">
                 <input type="submit" value="Add Comment" class="btn btn-comment">
@@ -139,7 +173,7 @@
             <div class="comment-container">
                 {% for comment in comments %}
                 <div class="comment-card">
-                    <a href="{% url 'account:user_profile_view' comment.user.id %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
+                    <a href="{% url 'account:user_profile_view' comment.user.id %}" class="text-decoration-none"><h4 class="accounts " style="font-family: cursive;">{{ comment.user.username }}</h4></a>
                     <p>{{ comment.content }}</p>
                 </div>
                 {% endfor %}
@@ -147,8 +181,11 @@
         </div>
     </div>
 
+
+   
     <div class="row p-4 mt-5">
-        <h1>Related image</h1>
+        <hr>
+        <h1 style="font-family: cursive;">Related image</h1>
         {% for rel in related %}
         <div class="col-4">
             <a href="{% url 'main:detail_images' rel.id %}">

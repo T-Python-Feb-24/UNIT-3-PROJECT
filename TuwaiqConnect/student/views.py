@@ -28,29 +28,25 @@ def new_project(request : HttpRequest):
     return render(request,"student/new_project.html",{"types":Project.types.choices})
 
 def update_student(request : HttpRequest,student_username):
+    
+    student = Student.objects.get(user__username=student_username)
+   
     if request.method == "POST":
         
-        student = Student.objects.get(user__username=student_username)
-        user = student.user_set.all
-        
-        user.first_name = request.POST["first_name"]
-        user.last_name = request.POST["last_name"]
+        user = student.user
         user.email = request.POST["email"]
+        user.save()
         
-        save.user()
-        
-        student.collage_name = request.POST["collage_name"]
+        student.collage_name = request.POST["college_name"]
         student.graduation_year = request.POST["graduation_year"]
         student.major = request.POST["major"]
         student.GPA = request.POST["GPA"] 
-        student.CV = request.FILES.get("CV")
+        student.CV = request.FILES.get("CV",student.CV)
         student.save()
         
-        return redirect("student:student_profile")
+        return redirect("student:student_profile",student_username)
                 
-        
-        
-    return render(request,"student/update_student.html")
+    return render(request,"student/update_student.html",{"student":student})
 
 def delete_project(request : HttpRequest):
     

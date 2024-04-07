@@ -23,7 +23,8 @@
                     <p><strong>College Name:</strong> <input type="text" name="college_name" value="{{ student.collage_name }}"></p>
                     <p><strong>Graduation Year:</strong> <input type="number" name="graduation_year" value="{{ student.graduation_year }}"></p>
                     <p><strong>Major:</strong> <input type="text" name="major" value="{{ student.major }}"></p>
-                    <p><strong>GPA:</strong> <input type="text" name="gpa" value="{{ student.GPA }}"></p>
+                    <p><strong>GPA:</strong> <input type="text" name="GPA" value="{{ student.GPA }}"></p>
+                    <p><strong>Email:</strong><input type="email" name ="email" value="{{student.user.email}}">
                     <p><strong>CV:</strong> <input type="file" name="cv"></p>
                     <button type="submit">Update Profile</button>
                 </form>

@@ -1,6 +1,7 @@
 
 body {
 font-family: "Playfair Display", serif;
+background-color: black;
   
 }
  header {
@@ -52,6 +53,37 @@ footer {
     color: #000000; 
     line-height: 1.5; 
 }
+
+.container {
+    margin-top: 500px;
+}
+
+.row {
+    justify-content: center;
+}
+
+.col-md-6 {
+    display: flex;
+    align-items: center;
+}
+
+.col-md-6 img {
+    max-width: 100%;
+    height: auto;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.alert-danger {
+    margin-bottom: 15px;
+}
+
 .container {
     max-width: 800px;
     margin: 20px auto;

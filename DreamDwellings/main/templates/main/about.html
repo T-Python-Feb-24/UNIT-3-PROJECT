@@ -1,31 +1,66 @@
 {% extends 'main/base.html' %}
 
-{% block title %}about{% endblock %}
+{% block title %}About Us{% endblock %}
 
 {% block content %}
-<div class="row g-4">
-    <div class="ss col-md-7 ">
-        <img src="https://firebasestorage.googleapis.com/v0/b/dream-dwellings.appspot.com/o/pexels-lina-kivaka-3625711.jpg?alt=media&token=88e56d82-8819-417d-8f87-6e028c36065c" class="ms-3 w-75 hero " />
-    </div>
-    <div class="col-md-5">
-        <div class="mt-5 why-choose-us">
-            <h2 class="text-center mb-4">Why Choose Us?</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>We have a strong track record of successful projects.</h4>
-                    <p>Our proven track record demonstrates our commitment to delivering successful outcomes for our clients. We have successfully completed numerous projects, helping our clients achieve their real estate goals.</p>
-                </div>
-                <div class="col-md-6">
-                    <h4>We negotiate the best deals for our clients.</h4>
-                    <p>Our experienced team of negotiators works tirelessly to secure the best deals for our clients. We leverage our industry expertise and network to negotiate favorable terms and maximize value for our clients.</p>
-                </div>
-                <div class="col-md-6">
-                    <h4>We have a dedicated team with the expertise and skills.</h4>
-                    <p>Our team comprises dedicated professionals with a diverse range of expertise and skills. From real estate agents to legal advisors, our team is equipped to handle all aspects of your real estate transactions with professionalism and integrity.</p>
-                </div>
-                <div class="col-md-6">
-                    <h4>We have a solid network of resources in the industry.</h4>
-                    <p>With our extensive network of resources in the real estate industry, we have access to a wide range of properties and market insights. This enables us to provide our clients with comprehensive support and guidance throughout their real estate journey.</p>
+<style>
+    .why-choose-us {
+    margin-top: 50px; 
+    padding: 100px;
+}
+
+.why-choose-us h2 {
+    text-align: center;
+    margin-bottom: 30px; 
+}
+
+.why-choose-us .row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.why-choose-us .col-md-3 {
+    padding: 0 15px; 
+}
+
+.why-choose-us h4 {
+    font-size: 20px;
+    color: #333; 
+    margin-bottom: 10px; 
+}
+
+.why-choose-us p {
+    font-size: 16px; 
+    color: #000000; 
+    line-height: 1.5; 
+}
+
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="https://firebasestorage.googleapis.com/v0/b/dream-dwellings.appspot.com/o/pexels-lina-kivaka-3625711.jpg?alt=media&token=88e56d82-8819-417d-8f87-6e028c36065c" class="img-fluid" alt="About Us Image">
+        </div>
+        <div class="col-md-6">
+            <div class="why-choose-us mt-5">
+                <h2 class="text-center mb-4">Why Choose Us?</h2>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>We Have a Strong Track Record</h4>
+                        <p>Our proven track record demonstrates our commitment to delivering successful outcomes for our clients. We have successfully completed numerous projects, helping our clients achieve their real estate goals.</p>
+                    </div>
+                    <div class="col-md-8">
+                        <h4>We Negotiate the Best Deals</h4>
+                        <p>Our experienced team of negotiators works tirelessly to secure the best deals for our clients. We leverage our industry expertise and network to negotiate favorable terms and maximize value.</p>
+                    </div>
+                    <div class="col-md-8">
+                        <h4>We Have a Dedicated Team</h4>
+                        <p>Our team comprises dedicated professionals with a diverse range of expertise and skills. From real estate agents to legal advisors, our team is equipped to handle all aspects of your real estate transactions with professionalism and integrity.</p>
+                    </div>
+                    <div class="col-md-8">
+                        <h4>We Have a Solid Network</h4>
+                        <p>With our extensive network of resources in the real estate industry, we have access to a wide range of properties and market insights. This enables us to provide our clients with comprehensive support and guidance throughout their real estate journey.</p>
+                    </div>
                 </div>
             </div>
         </div>

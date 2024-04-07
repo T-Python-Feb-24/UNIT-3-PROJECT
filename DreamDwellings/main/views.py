@@ -1,26 +1,38 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
-from .models import Place, PlaceImage
+from .models import Place, PlaceImage,Contact
 from django.contrib import messages
 from decimal import Decimal
-
 
 def index_view(request: HttpRequest):
     
     return render(request, "main/index.html")
+
 def about(request: HttpRequest):
     
     return render(request, "main/about.html")
 
+@login_required
 def contact_view(request):
     if request.method == 'POST':
-        
-        messages.success(request, 'Your message has been sent successfully. We will get back to you soon.')
+        user = request.user  
+       
+        new_contact = Contact(
+            user=user,
+            first_name=request.POST.get('first_name'),
+            last_name=request.POST.get('last_name'),
+            email=request.POST.get('email'),
+            message=request.POST.get('message')
+        )
+       
+        new_contact.save()
+
+       
         return redirect('main:contact')  
     else:
-     return render(request, 'main/contact_us.html')
-
-from django.contrib.auth.decorators import login_required
+        return render(request, 'main/contact_us.html')
+    
 
 @login_required
 def add_place(request):
@@ -79,6 +91,7 @@ def place_detail(request, place_id):
 def services_page(request):
     return render(request, 'main/services.html')
 
+
 def all_places_view(request):
     neighborhoods = Place.objects.values_list('neighborhood', flat=True).distinct()
     categories = Place.objects.values_list('category', flat=True).distinct()
@@ -102,3 +115,30 @@ def ad(request: HttpRequest):
     places = Place.objects.filter(user=request.user)
     
     return render(request,"main/my_ads.html", {'places': places})
+
+def update_place(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
+    
+    
+    if request.method == 'POST' and request.user.is_staff:
+        place.name = request.POST.get('name')
+        place.neighborhood = request.POST.get('neighborhood')
+        place.latitude = request.POST.get('latitude')
+        place.longitude = request.POST.get('longitude')
+        place.price = request.POST.get('price')
+        place.address = request.POST.get('address')
+        place.category = request.POST.get('category')
+        place.save()
+        
+        return redirect('main:place_detail', place_id=place.id)
+    
+    return render(request, 'main/update_place.html', {'place': place})
+
+def delete_place(request, place_id):
+    if not request.user.is_staff:
+        return redirect('main:ad')
+    
+    place = get_object_or_404(Place, pk=place_id)
+    place.delete()
+
+    return redirect('main:ad')

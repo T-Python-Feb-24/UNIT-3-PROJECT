@@ -13,4 +13,6 @@ urlpatterns  = [
     path('services/', views.services_page, name='services_page'),
     path('places/', views.all_places_view, name='all_places'),
     path("ad/", views.ad, name="ad"),
+    path('place/<int:place_id>/update/', views.update_place, name='update_place'),
+    path('place/<int:place_id>/delete/', views.delete_place, name='delete_place'),
 ]

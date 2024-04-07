@@ -13,7 +13,32 @@
             <form action="{% url 'accounts:register' %}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <div class="mb-3">
+                <style>
+                    .container {
+                        margin-top: 150px;
+                        width: 2000px;
+                    }
+
+                    .form-label {
+                        font-weight: bold;
+                    }
+
+                    .form-control {
+                        margin-bottom: 15px;
+                    }
+
+                    .btn-primary {
+                        background-color: #000000;
+                        border-color: #010f1d;
+                    }
+
+                    .btn-primary:hover {
+                        background-color: #0056b3;
+                        border-color: #0056b3;
+                    }
+                </style>
+
+                <div class="mb-0">
                     <label for="username" class="form-label">Username</label>
                     <input id="username" name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
                     <div class="invalid-feedback">
@@ -45,10 +70,6 @@
                     </div>
                 </div>
 
-                
-
-                
-
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input id="password" name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
@@ -57,15 +78,12 @@
                     </div>
                 </div>
 
-               
-
                 <button type="submit" class="btn btn-primary">Sign Up</button>
-
             </form>
         </div>
     </div>
 </div>
-{% block footer%}
+{% block footer %}
    
     {% endblock %}
 {% endblock %}

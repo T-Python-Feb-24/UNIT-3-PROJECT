@@ -7,52 +7,73 @@
 {% block content %}
 <div class="container">
     <div class="row">
-       
-            <h1 class="mb-4">{{ place.name }} Details</h1>
-            
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    {% for image in place.images.all %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ image.image.url }}" class="d-block w-100 rounded-4 justify-content-center" style="max-height: 500px; object-fit: cover; justify-content: center; " alt="{{ place.name }}">
-                        </div>
-                    {% endfor %}
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+        <h1 class="mb-4">{{ place.name }} Details</h1>
+        
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for image in place.images.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ image.image.url }}" class="d-block w-100 rounded-4 justify-content-center" style="max-height: 500px; object-fit: cover; justify-content: center;" alt="{{ place.name }}">
+                    </div>
+                {% endfor %}
             </div>
-
-            
-            <div class="mt-4">
-                <p>Neighborhood: {{ place.neighborhood }}</p>
-                <p>Price: {{ place.price }}</p>
-                <!-- <p>Latitude: {{ place.latitude }}</p>
-                <p>Longitude: {{ place.longitude }}</p> -->
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
 
-        <div class="row">
-            <div class="col-md-7">
-                <div id="map" style="height: 400px;margin-top: 100px; border-radius: 20px;"></div>
-    
+        
+        <div class="mt-4">
+            <p><strong>Neighborhood:</strong> {{ place.neighborhood }}</p>
+            <p><strong>Price:</strong> {{ place.price }}</p>
+            <!-- <p><strong>Latitude:</strong> {{ place.latitude }}</p>
+            <p><strong>Longitude:</strong> {{ place.longitude }}</p> -->
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-7">
+            <div id="map" style="height: 400px; border-radius: 20px;"></div>
         </div>
         
-           
+        <div class="col-md-5">
             <div class="mt-3">
-                <a href="#" class="btn btn-outline-dark me-2">Update</a>
-                <a href="#" class="btn btn-outline-dark">Delete</a>
-                <a href="{% url 'chat:chat_messages' room_id=place.id %}" class="btn btn-primary">Enter Chat Room</a>
-
+                
+                <a href="#" class="btn btn-primary">Enter Chat Room</a>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .mb-4 {
+        margin-bottom: 4rem;
+    }
+
+    .carousel-inner img {
+        max-height: 500px;
+        object-fit: cover;
+        justify-content: center;
+    }
+
+    .mt-4 {
+        margin-top: 4rem;
+    }
+
+    .mt-3 {
+        margin-top: 3rem;
+    }
+
+    #map {
+        height: 400px;
+        border-radius: 20px;
+    }
+</style>
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
@@ -63,4 +84,5 @@
     }).addTo(map);
     L.marker([{{ place.latitude }}, {{ place.longitude }}]).addTo(map).bindPopup("{{ place.name }}").openPopup();
 </script>
+
 {% endblock %}

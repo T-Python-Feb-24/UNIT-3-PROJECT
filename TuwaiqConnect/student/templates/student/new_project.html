@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <form action="{% url "student:new_project"  %}" method="POST" enctype=multipart/form-data >
+                <form action="{% url "student:new_project"  %}" method="POST" enctype="multipart/form-data" >
                     {% csrf_token %}
                     <label for="project_type">Project Type:</label><br>
                 <select name="porject_type" required>
@@ -22,16 +22,16 @@
                 </select>
 
                     <label for="screenshot">Screenshot:</label><br>
-                    <input type="file" id="screenshot" name="screenshot" accept="image/*" required><br>
+                    <input type="file" name="screenshot" accept="image/*" required><br>
                         
                     <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name" required><br>
+                    <input type="text" name="name" required><br>
                     
                     <label for="desc">Description:</label><br>
-                    <textarea id="desc" name="desc" rows="4" cols="50" required></textarea><br>
+                    <textarea  name="desc" rows="4" cols="50" required></textarea><br>
                     
                     <label for="link">Link<i class="bi bi-github"></i></a>:</label><br>
-                    <input type="url" id="link" name="link" required><br>
+                    <input type="url" name="link" required><br>
                     
                     <button type="submit">Submit</button>
                 </form>

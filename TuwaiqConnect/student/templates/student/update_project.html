@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+
+{% block title %}New Porject{% endblock  %}
+{% block style %}
+
+{% endblock  %}
+
+<i class="bi bi-github"></i></a>
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="{% url 'student:update_project' project.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="project_type">Project Type:</label><br>
+                    <select name="project_type">
+                        {% for type, val in types %}
+                            <option value="{{ val }}" {% if project.project_type == val %}selected{% endif %}>{{ type }}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <label for="screenshot">Screenshot:</label><br>
+                    <input type="file" name="screenshot" accept="image/*"><br>
+                        
+                    <label for="name">Name:</label><br>
+                    <input type="text" name="name" value="{{ project.name }}" ><br>
+                    
+                    <label for="desc">Description:</label><br>
+                    <textarea name="desc" rows="4" cols="50" >{{ project.desc }}</textarea><br>
+                    
+                    <label for="link">Link <i class="bi bi-github"></i>:</label><br>
+                    <input type="url" name="link" value="{{ project.link }}" ><br>
+                    
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock  %}

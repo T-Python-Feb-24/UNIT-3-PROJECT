@@ -23,10 +23,10 @@
                 <p><strong>Major:</strong> {{ student.major }}</p>
                 <p><strong>GPA:</strong> {{ student.GPA }}/5</p>
                 <p><strong>CV:</strong> <a href="{{ student.CV }}" download="CV">View CV (PDF)</a></p>
-               <h6 class="text-success"> To Contact {{student.user.first_name|capfirst}}:</h6>
+               <h6 class="text-success">Contact {{student.user.first_name|capfirst}}:</h6>
                 <p><strong>Email:</strong> {{ student.user.email }}</p>
                 <a href="{% url "student:update_student" student.user.username %}"class="btn btn-primary">Update Your Profile</a>
-            </div>
+            </div>  
         </div>
     </div>    
 </section>
@@ -58,13 +58,19 @@
                             <p>{{ project.desc }}</p>
                             <p class="text-muted"> project type: {{ project.project_type }}</p>
                         <div class="col">
+                            
                             <img src="{{ project.screenshot.url }}" class="screenshot">
+                          
                         </div>
-                        <p><strong>source code <i class="bi bi-github"></i></a>:</strong> <a href="{{ project.link }}">{{ project.link }}</a></p
-                    </div>
-                </div>  
-                        <hr >
-                    {% endfor %}
+                        <p><strong>source code <i class="bi bi-github"></i></a>:</strong><a href="{{ project.link }}">{{ project.link }}</a></p>
+
+                        {% if request.user.id%}
+                        <a href="{% url "student:update_project" project.id %}"class="btn btn-primary">update</a>
+                        <a href=""class="btn btn-danger">Delete</a>
+                        {% endif %} 
+                         {% endfor %}
+                    </div>   
+                <hr >
         </div>
     </div>
 </section>

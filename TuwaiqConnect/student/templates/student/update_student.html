@@ -27,6 +27,9 @@
                     <p><strong>Email:</strong><input type="email" name ="email" value="{{student.user.email}}">
                     <p><strong>CV:</strong> <input type="file" name="cv"></p>
                     <button type="submit">Update Profile</button>
+                    {% if msg %}
+                    <h6 class="altr altr-danger">{{msg}}</h6>
+                    {% endif %}
                 </form>
             </div>
         </div>
@@ -49,7 +52,6 @@
                         <p><strong>source code <i class="bi bi-github"></i></a>:</strong> <a href="{{ project.link }}">{{ project.link }}</a></p
                     </div>
                 </div>  
-                    <a href="" class="btn btn-danger">Delete</a>
                         <hr >
                     {% endfor %}
         </div>

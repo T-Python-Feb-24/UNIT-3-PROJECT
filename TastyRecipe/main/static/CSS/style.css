@@ -23,7 +23,7 @@
     color: #000;
   }
   .navbar-nav a:hover {
-    color: #0e7717ce;
+    color: #146772;
   }
   
 .navbar-scrolled{
@@ -35,16 +35,17 @@
   color: #3a3a3a;
 }
 .navbar-scrolled a:hover{
-    color: #147228;
+    color: #146772;
   }
 
 /* Home Page */
 .image-container {
-    margin-top: 55px;
-    background-image: url("/static/images/plants.webp");
+    margin-top: 76px;
+    background-image: url("/static/images/food.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
     position: relative;
-    height: 500px;
+    height: 50%;
     opacity: 50%;
 }
 
@@ -57,7 +58,7 @@
     color: rgb(255, 255, 255);
     font-size: 3vw; 
     font-weight: bold;
-    margin: 43px auto;
+    margin: 0 auto;
     padding: 20px;
     border-radius: 30px;
     width: 50%;
@@ -73,8 +74,8 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 350px;
-    padding-bottom: 10px;
+    padding: 280px;
+    padding-top: 400px;
 }
 
 /* Update Page */

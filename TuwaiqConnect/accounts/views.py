@@ -91,7 +91,36 @@ def staff_register(request : HttpRequest):
     return render (request,"accounts/staff_register.html")
 
 
-def user_login(request :HttpRequest):
+# def user_login(request :HttpRequest):
+#     if request.method == "POST":
+#         try:
+#             user = authenticate(
+#             username=request.POST["username"],
+#             password=request.POST["password"]
+#             )
+        
+#             if user is not None:
+#                 login(request,user) 
+#                 return redirect("main:home_page")
+#         #staff condition : 
+#             if user is not None : 
+#                 pass
+#         #Orgnization condition : 
+#             # تسوين دخول بالقروبات  بس اخر شيي
+#             if user is not None : 
+#                 pass
+#         #students condition : 
+#             if user is not None : 
+#                 pass
+            
+#         except Exception as e:
+#             print(e.__class__)
+               
+#     return render (request,"accounts/login.html")
+
+# لا تنسين شرط اذا كان مسجل ما يطلع له صفحات الدخول خير شر او مايقدر يرجع للهوم بيج الاساسيه حقت الموقع 
+def organization_login(request :HttpRequest):
+    # الهوم بيج حق الجهات
     if request.method == "POST":
         try:
             user = authenticate(
@@ -102,36 +131,52 @@ def user_login(request :HttpRequest):
             if user is not None:
                 login(request,user) 
                 return redirect("main:home_page")
-        #staff condition : 
-            if user is not None : 
-                pass
-        #Orgnization condition : 
-            # تسوين دخول بالقروبات  بس اخر شيي
-            if user is not None : 
-                pass
-        #students condition : 
-            if user is not None : 
-                pass
-            
         except Exception as e:
-            print(e.__class__)
-               
-    return render (request,"accounts/login.html")
+            print(e)
+            
+    return render(request,"accounts/organization_login.html")
+
+
+def student_login(request :HttpRequest):
+    # تودينه عالهوم بيج حقت الطلاب
+    if request.method == "POST":
+        try:
+            user = authenticate(
+            username=request.POST["username"],
+            password=request.POST["password"]
+            )
+        
+            if user is not None:
+                login(request,user) 
+                return redirect("main:home_page")
+        except Exception as e:
+            print(e)
+            
+    return render(request,"accounts/student_login.html")
+
+
+def staff_login(request :HttpRequest):
+    # الهوم بيج حق الستاف 
+    if request.method == "POST":
+        try:
+            user = authenticate(
+            username=request.POST["username"],
+            password=request.POST["password"]
+            )
+        
+            if user is not None:
+                login(request,user) 
+                return redirect("main:home_page")
+        except Exception as e:
+            print(e)
+            
+    return render(request,"accounts/staff_login.html")
 
 
 def user_logout(request:HttpRequest):
+    
     if request.user.is_authenticated:
         logout(request)
     return redirect("main:home_page")
     
-
-def update_student():
-    psss
     
-    
-def update_orgnaization():
-    pass
-
-def update_staff():
-    pass 
-

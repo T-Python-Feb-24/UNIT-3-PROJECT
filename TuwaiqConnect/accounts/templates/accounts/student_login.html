@@ -156,15 +156,15 @@ body {
 <div class="container">
   <div class="left">
     <div class="header">
-      <h2 class="animation a1">Organization Service</h2>
-      <h4 class="animation a2">Log in to your organization account </h4>
+      <h2 class="animation a1">Student Service</h2>
+      <h4 class="animation a2">Log in to your account </h4>
     </div>
-    <form action="{% url "accounts:user_login" %}" method="POST">
+    <form action="{% url "accounts:organization_login" %}" method="POST">
       {% csrf_token %}
       <div class="form">
         <input type="text" class="form-field animation a3" placeholder="User Name" name="username">
         <input type="password" class="form-field animation a4" placeholder="Password" name="password">
-        <p class="animation a5"><a href="{% url 'accounts:orgnaization_register' %}">Register as an Organization</a></p>
+        <p class="animation a5"><a href="{% url 'accounts:student_register' %}">Register as a Student</a></p>
         <button type="submit" class="animation a6">LOGIN</button>
       </div>
     </form>

@@ -23,8 +23,6 @@ def add_bootcamp(request : HttpRequest):
         bootcamp.save()
     return render(request,"bootcamp/new_bootcamp.html")
 
-def all_bootcamps():
-    pass 
 
 def update_bootcamp ():
     pass 

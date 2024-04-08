@@ -1,16 +1,17 @@
 {% extends 'main/base.html' %}
 
-{% block title %}update {{request.user.usernamae}} profile {% endblock %}
+{% block title %}update {{request.user.usernamae}} Update Account {% endblock %}
 
 {% block content %}
 
-    <h1>New User</h1>
+    
 
     {% if msg %}
         <div class="alert alert-danger">{{msg}}</div>
     {% endif %}
-    <div class="row">
-        <div class="col">
+    <div class="row" style=" margin-left: 20px; margin-bottom: 100px;" >
+        <h1 class="fw-light text-blak " style="margin-top: 50px;  margin-bottom: 20px; ">Update Account</h1>
+        <div class="col-6">
             <form action="{% url 'accounts:update_profile' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
                 {% csrf_token %}
 

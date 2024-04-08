@@ -13,10 +13,11 @@
         <div class="row">
             {% for sug in msg %}
             <div class="col d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
-                <h4>{{user.username}}</h4>
+                <h4>{{sug.user.username}}</h4>
                 <p>{{sug.Recipes.name}}</p>
                 <p> {{sug.content}}</p>
             </div>
+            
             {% endfor %}
         </div>
     </div>

@@ -1,6 +1,39 @@
 {% extends 'main/base.html' %}
 {% block title %}{% endblock %}
 
+{% block style%}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .emoji {
+        font-size: 3rem;
+        color: #f8d7da; 
+    }
+    .col {
+        text-align: center;
+    }
+    /* .h-2 {
+        margin-top: 20px;
+        color: #dc3545; 
+    } */
+    .p-2 {
+        color: #6c757d; 
+    }
+    
+    .btn:hover {
+        background-color: #cb2647; 
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 
 <div class="container">

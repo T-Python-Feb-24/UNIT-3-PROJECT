@@ -7,8 +7,10 @@ from favorites.models import Favorite
 
 
 def home(requset:HttpRequest):
+    
+    recipes=Recipes.objects.all().order_by('-published_at')[0:3]
 
-    return render(requset,"main/home.html")
+    return render(requset,"main/home.html",{"recipes":recipes})
 
 
 def add_recipes(requset:HttpRequest):
@@ -107,13 +109,14 @@ def suggestions(request: HttpRequest,recipes_id ):
                 print(e)
 
 
-def suggestions_msg(request: HttpRequest):
-    if not request.user.is_staff:
+def suggestions_msg(request:HttpRequest):
+    if request.user.is_staff == None:
      return redirect("main:home")
     try:
         msg=Suggestions.objects.all()
     except Exception as e:
             print(e)
+            msg = ['msg empty'] 
     return render( request,'main/suggestions_msg.html',{"msg":msg})
     
 

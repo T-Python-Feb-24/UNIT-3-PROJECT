@@ -65,7 +65,7 @@ def login_view(request: HttpRequest):
 
          return redirect(request.POST.get("next") or "main:index_view")
       else:
-         msg = "اسم المستخدم أو الايميل مستخدم بالفعل. حاول مرة اخرى..."
+         msg = "اسم المستخدم أو الايميل مستخدم خاطئ. حاول مرة اخرى..."
 
    return render(request, "account/login.html", {"msg": msg,
                                                  "next": next})
@@ -112,12 +112,4 @@ def update_profile_view(request: HttpRequest, user_name):
                                                           "genders": Profile.gender_choices.choices, })
 
 
-def user_favorite_view(request: HttpRequest):
-   try:
-      msg = None
-      users = request.user
-   except User.DoesNotExist:
-      msg = "Your wishlist is empty. Add some products to your wishlist by clicking the  button in product page."
-      return render(request, "account/favorite.html", {"msg": msg})
 
-   return render(request, "account/favorite.html", {"users": users})

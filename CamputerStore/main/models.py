@@ -18,6 +18,7 @@ class Product(models.Model):
                                choices=categories_choices.choices,
                                default=categories_choices.PC)
    price = models.FloatField(null=False)
+   discount = models.IntegerField(null=True, default=None)
    in_stock = models.IntegerField(null=False)
    created_at = models.DateTimeField(auto_now_add=True)
 

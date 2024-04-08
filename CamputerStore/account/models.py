@@ -41,9 +41,7 @@ class Profile(models.Model):
       return f"{self.user.username} profile"
 
 
-class Favorite(models.Model):
-   user = models.ForeignKey(User, on_delete=models.CASCADE)
-   product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
 
 
 class Cart(models.Model):

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Product, Comments, Contactus, ProductImage
-from account.models import Profile, Cart, Favorite
+from account.models import Profile, Cart
+from favorites.models import Favorite
 
 
 class ImageInline(admin.TabularInline):

@@ -1,11 +1,13 @@
 {% extends 'main/S1.html' %}
+{% block title %} READ STORY ({{ story.name }}) {% endblock %}
 {% block content %}
-<div class="container mt-4">
+<div class="container mt-4" >
     {% if story.image %}
     <img src="{{ story.image.url }}" alt="{{ story.name }}" class="img-fluid mb-3">
     {% endif %}
-    <h2>{{ story.name }}</h2>
-    <div class="story-segment">
+    <div class="story-segment card card-body" style="margin-top: 125px;">
+        <h1 class="S-head">{{ story.name }}</h1>
+        <hr>
         {{ page_obj.object_list|first|linebreaks }}  
     </div><br><br>
     
@@ -57,13 +59,13 @@
     {% endif %}
 </div>
 
-<div class="container mt-3">
+<div class="container mt-3 card">
     <h2>Add Comment</h2>
     {% if request.user.is_authenticated %}
         <form action="{% url 'main:add_comment' story_id=story.pk %}" method="post">
             {% csrf_token %}
+            <br>
             <div class="mb-3">
-                <label for="content" class="form-label">Comment</label>
                 <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>

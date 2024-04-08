@@ -1,6 +1,6 @@
 {% extends 'main/S1.html' %}
 
-{% block title %} <title>Login User</title> {% endblock %}
+{% block title %} Log in {% endblock %}
 
 {% block content %}
 
@@ -8,19 +8,21 @@
     {% if msg %}
     <div class="alert alert-danger">{{msg}}</div>
     {% endif %}
-    <div class="row">
-        <div class="col">
-
-            <form action="{% url 'user_info:user_login' %}" method="post" class="d-flex flex-column gap-2">
+    <div style="margin-top: 125px;" class="row">
+        <div class="col card " >
+            <form action="{% url 'user_info:user_login' %}" method="post"  >
                 {% csrf_token %}
 
-                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
-                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
-
-                <input type="submit" class="btn btn-primary" value="Login" />
-
-            </form>
-            
+                <div class="mb-3  ">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+                </div>
+                <button type="submit" class="btn btn-primary">log in</button>
+              </form>
         </div>
     </div>
 {% endblock %}

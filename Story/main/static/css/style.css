@@ -2,7 +2,47 @@
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
 }
+
+body.dark .navbar-toggler {
+  filter: invert(100%);
+}
+body.dark .offcanvas {
+  background-color: #000;
+  color: #fff;
+}
+
+body.dark .offcanvas .nav-link {
+  color: #ccc; 
+}
+
+body.dark .btn-close {
+  filter: invert(1); 
+}
+body.light_mode {
+  background-color: #fff; 
+  color: #000; 
+}
+
+body.dark {
+  background-color: #121212; 
+  color: #ffffff; 
+}
+body.light_mode .my-footer {
+  background-color: #f8f9fa; 
+  color: #212529; 
+  padding: 20px;
+  text-align: center;
+}
+
+body.dark .my-footer {
+  background-color: #343a40; 
+  color: #ffffff; 
+  padding: 20px;
+  text-align: center;
+}
+
 
 .body-wrapper { 
   display: flex;
@@ -10,7 +50,6 @@ html, body {
   min-height: 100vh; 
 }
 
-/*here's the video style*/
 .main-box{
     box-shadow: 50px; ;
     width: 100%;
@@ -63,7 +102,9 @@ html, body {
 }
 
 .main-box1:hover {
-    transform: scale(1.05);
+    transform: scale(1.2);
+    width: 500px;
+    z-index: 12; 
     box-shadow: 0 0 20px rgba(215, 215, 215, 0.5);
 }
 
@@ -147,17 +188,46 @@ html, body {
 /* CSS for show_story.html */
 
 .container {
-  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  margin-top: 50px;
+}
+.img-fluid{
+  min-width: 280px; 
+
 }
 
 .card {
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 30px;
+  padding: 40px;
+  min-width: 280px; 
 }
+.card-1{
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  padding: 30px;
+  height: 400px;
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+body.dark .card  {
+  background-color: #333; 
+  color: #fff; 
+}
+
+body.dark .card  a {
+  color: #4dd0e1; 
+}
+
+
 
 .card-title {
   font-size: 24px;
@@ -171,13 +241,23 @@ html, body {
   text-align: justify;
   max-height: 100px; 
   overflow-y: auto; 
+  width: 100%; 
+  height: auto; 
+}
+.card-body {
+  min-height: 200px;
 }
 
 .card-img-top {
   max-width: 100%;
-  height: auto;
+  height: 200px; 
   border-radius: 5px;
   margin-top: 20px;
+  object-fit: cover; 
+}
+
+.S-head{
+  padding-top: 50px;
 }
 
 /* Page layout styling */
@@ -214,10 +294,7 @@ html, body {
   }
 }
 
-.container {
-  margin-top: 50px;
-  max-width: 600px;
-}
+
 
 .form-group {
   margin-bottom: 20px;
@@ -237,3 +314,21 @@ label {
   background-color: #0056b3;
 }
 
+.Fun{
+  background-color: rgb(255, 197, 7);
+}
+.Adventure{
+  background-color: rgb(145, 255, 0);
+}
+.Romance{
+  background-color: rgb(233, 39, 39);
+}
+.Mystery{
+  background-color: rgb(122, 122, 122);
+}
+.Science-Fiction{
+  background-color: rgb(31, 153, 235);
+}
+.Horror{
+  background-color: rgb(160, 60, 60);
+}

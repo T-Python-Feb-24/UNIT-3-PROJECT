@@ -8,7 +8,7 @@ class Story(models.Model):
         ('Adventure', 'Adventure'),
         ('Romance', 'Romance'),
         ('Mystery', 'Mystery'),
-        ('Sci-Fi', 'Science Fiction'),
+        ('Sci-Fi', 'Science-Fiction'),
         ('Horror', 'Horror'),
     ]
 

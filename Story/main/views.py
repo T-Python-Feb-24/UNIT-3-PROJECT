@@ -7,7 +7,10 @@ from django.contrib.auth.decorators import login_required
 import os
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden,HttpRequest, HttpResponse
+
+
+
 dotenv_path = os.path.join(os.path.dirname(__file__), 'key.env')
 load_dotenv(dotenv_path=dotenv_path)
 
@@ -174,3 +177,18 @@ def contact_us_messages(request):
 def category_stories(request, category_name):
     stories = Story.objects.filter(category=category_name)  
     return render(request, 'main/category_stories.html', {'stories': stories, 'category_name': category_name})
+
+def dark_mode(requset: HttpRequest):
+
+    response = redirect("main:home")
+    response.set_cookie("mode", "dark")
+
+    return response
+
+
+def light_mode(requset: HttpRequest):
+
+    response = redirect("main:home")
+    response.set_cookie("mode", "light")
+
+    return response

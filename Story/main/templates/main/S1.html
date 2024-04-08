@@ -4,58 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!--the navbar-->
-    <header class="my-header">
-        <a href="{% url 'main:home' %}" style="color: black; text-decoration: none;">
-            <img src="/static/image/Story-logo1.webp" alt="" style="height: 50px;">
-        </a>
-                <nav>
-
-           
-
-            
-            {% if user.is_authenticated %}
-            <div class="dropdown">
-                <button class="dropbtn">{{ user.username }}</button>
-                <div class="dropdown-content">
-                    <a href="{% url 'user_info:user_detail' user.username %}">Profile</a>
-                    <a href="{% url 'bookmarks_likes:saved_stories' %}">Saved Stories</a>
-                    <a href="{% url 'user_info:user_logout' %}">Log Out</a>
-                </div>
-            </div>
-            {% else %}
-            <div class="dropdown">
-                <button class="dropbtn">Login/Sign Up</button>
-                <div class="dropdown-content">
-                    <a href="{% url 'user_info:user_login' %}">Log In</a>
-                    <a href="{% url 'user_info:register_user' %}">Sign Up</a>
-                </div>
-            </div>
-            {% endif %}
-            <a href="{% url 'main:add_story' %}" class="add-plant-link">Add Story</a>
-            <a href="{% url 'main:all_stories' %}" class="add-plant-link">Show all Stories</a>
-            <a href="{% url 'main:contact_us' %}" class="add-plant-link">Contact Us</a>
-        </nav>
-    </header>
-<!--end navbar-->
-
-{% block title %}  {%endblock%}
+    <title>{% block title %}{% endblock %}</title>
 </head>
-<body>
+<body {% if "mode" in request.COOKIES and request.COOKIES.mode == "dark" %} class="dark" {% else %} class="light_mode" {% endif %}>
 
-    {% block content %}
+<header>
+    <nav class="navbar navbar-light {% if "mode" in request.COOKIES and request.COOKIES.mode == "dark" %}bg-dark{% else %}bg-light{% endif %} fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <a class="navbar-brand" href="{% url 'main:home' %}">
+                <img src="{% static 'image/Story-logo1.webp' %}" alt="Logo" style="width: 90px; border-radius: 25px;">
+            </a>
+            
+            <div class="d-flex">
+                <a href="{% url 'main:light_mode' %}" class="btn btn-light">Light</a>
+                <a href="{% url 'main:dark_mode' %}" class="btn btn-dark">Dark</a>
+            </div>
+        </div>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    {% if user.is_authenticated %}
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_info:user_detail' user.username %}"><h3>Profile</h3></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'bookmarks_likes:saved_stories' %}"><h3>Saved Stories</h3></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main:add_story' %}"><h3>Add Story</h3></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main:all_stories' %}"><h3>Show all Stories</h3></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main:contact_us' %}"><h3>Contact Us</h3></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_info:user_logout' %}"><h3>Log Out</h3></a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_info:user_login' %}"><h3>Log In</h3></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_info:register_user' %}"><h3>Sign Up</h3></a>
+                        </li>
 
-    {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'main:all_stories' %}"><h3>Show all Stories</h3></a>
+                        </li>
+                    </ul>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 </body>
-
 </html>

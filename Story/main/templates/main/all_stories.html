@@ -9,12 +9,13 @@
         <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
                 {% if story.image %}
-                <img src="{{ story.image.url }}" alt="{{ story.name }}" class="card-img-top">
+               <!-- <img src="{{ story.image.url }}" alt="{{ story.name }}" class="card-img-top">-->
                 {% else %}
-                <img src="{% static 'path/to/default/image.jpg' %}" alt="Default Image" class="card-img-top">
+               <!-- <img src="{% static 'path/to/default/image.jpg' %}" alt="Default Image" class="card-img-top">-->
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ story.name }}</h5>
+                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{story.category}} "><b>{{ story.category }}</b></h6>
                     <p class="card-text">{{ story.description|default:"No description available." }}</p>
                     <a href="{% url 'main:show_story' pk=story.pk %}" class="btn btn-primary">Read Story</a>
                 </div>

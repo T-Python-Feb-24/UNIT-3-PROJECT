@@ -56,16 +56,6 @@
                     <!-- <h6><strong>Time Estimate: {{ recipe.time_estimate }}</strong></h6> -->
                 </div>
             </div>
-
-            <!-- <div class="row">
-                <div class="d-flex justify-content-end">
-                    <a href="{% url 'accounts:add_remove_saved_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#savedModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_saved %} bi-bookmark-fill {% else %} bi-bookmark {% endif %} bookmark"></i></a>
-                    {% if request.user.is_authenticated and request.user.username == recipe.user.username or request.user.is_superuser %}
-                        <a href="{% url 'main:update_recipe' recipe.id %}" class="btn"><span class="material-symbols-rounded">edit</span></a>
-                        <a href="{% url 'main:delete_recipe' recipe.id %}" class="btn"><span class="material-symbols-rounded">delete</span></a>
-                    {% endif %}
-                </div>
-            </div> -->
         </div>
         
         <div class="col col-md-5 order-1 order-md-1 d-flex flex-column justify-content-center align-items-center">

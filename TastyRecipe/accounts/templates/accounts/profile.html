@@ -25,7 +25,7 @@
     .user-profile th {
         width: 150px;
         color: aliceblue;
-        background: linear-gradient(#134e1a, #0a2c0c, #030b02);
+        background: linear-gradient(#13384e, #0a1e2c, #02080b);
     }
 
     .user-profile td {
@@ -78,7 +78,7 @@
   {% if request.user.is_authenticated and request.user.username == user_info.username %}
   <div class="row">
     <div class="col d-flex justify-content-center">
-        <a class="btn btn-outline-success" style="width: 200px; padding: 10px;" href="{% url 'accounts:update_user' user_info.username %}">Update Info<span class="material-symbols-rounded">edit</span></a>
+        <a class="btn btn-outline-primary" style="width: 150px; padding: 5px;" href="{% url 'accounts:update_user' user_info.username %}">Update Info<span class="material-symbols-rounded">edit</span></a>
       </div>
     </div> <!--Update Profile-->
   {% endif %}
@@ -92,7 +92,7 @@
         <div class="col mt-2">
             <div class="d-flex flex-column border border-1 shadow p-3 rounded-4 h-100" style="width: 300px;">
 
-                <a href="{% url 'main:recipe_detail' review.recipe.id %}#reviews" style="color: darkgreen; text-decoration: none;">Plant: <strong>{{review.recipe.title}}</strong></a>
+                <a href="{% url 'main:recipe_detail' review.recipe.id %}#reviews" style="color: darkblue; text-decoration: none;">Recipe Title: <strong>{{review.recipe.title}}</strong></a>
                 <p class="mt-3">{{ review.content }}</p>
                 <h6 class="text-muted">{{ review.created_at }}</h6>
             </div>
@@ -109,27 +109,28 @@
 
       <h2>{{user.username }}'s Saved Recipes</h2>
       <hr>
-          {% for favorite in user.saved_set.all %}
-          <div class="col-4" style="width: 25%;">
+          {% for saved in user.saved_set.all %}
+          <div class="col-4">
             <main>
-                            <div class = "card">
-                                <img src="{{ favorite.recipe.image.url }}" />
-                                <div class="card-content">
-                                    <h2>{{favorite.recipe.title}}</h2>
-                                    <p>
-                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    </p>
-                                    <a href="{% url 'main:recipe_detail' favorite.recipe.id %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);" class="button">
-                                        Find out more 
-                                        <span class="material-symbols-outlined">
-                                            arrow_right_alt
-                                        </span>
-                                    </a>
-                                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{favorite.recipe.category}}">{{ favorite.recipe.category }}</h6>
-                                </div>
-                            </div> <!--Images-->
-                        </main>                        
-          </div>
+              <div class = "card">
+                  <img src="{{ saved.recipe.image.url }}"/>
+                  <div class="card-content">
+                      <h3>{{saved.recipe.title}}</h3>
+                      <p>
+                          {{saved.recipe.brief}}
+                      </p>
+                      <a href="{% url 'main:recipe_detail' saved.recipe.id %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);" class="button">
+                          Find out more 
+                          <span class="material-symbols-outlined">
+                              arrow_right_alt
+                          </span>
+                      </a>
+                      <h5 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{saved.recipe.category}} ">{{ saved.recipe.category }}</h5>
+                      <h6 class="text-muted">{{ saved.recipe.created_at }}</h6>
+                  </div>
+              </div> <!--Image 1-->
+          </main>
+    </div>
           
       {% endfor %}
     </div>

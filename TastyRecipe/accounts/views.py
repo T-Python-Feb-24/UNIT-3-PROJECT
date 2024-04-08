@@ -27,7 +27,7 @@ def register_user_view(request:HttpRequest):
                 new_user.save()
 
                 #create profile for user
-                profile = Profile(user=new_user, about=request.POST["about"], instagram_link=request.POST["instagram_link"], youtube_link=request.POST["youtube_link"], avatar=request.FILES.get("avatar", Profile.avatar.field.get_default()))
+                profile = Profile(user=new_user, instagram_link=request.POST["instagram_link"], youtube_link=request.POST["youtube_link"], avatar=request.FILES.get("avatar", Profile.avatar.field.get_default()))
                 profile.save()
 
                 #redirect to login page
@@ -102,7 +102,6 @@ def update_user(request: HttpRequest, user_name):
                 except Exception as e:
                     profile = Profile(user=user)
 
-                profile.about = request.POST["about"]
                 profile.instagram_link = request.POST["instagram_link"]
                 profile.youtube_link = request.POST["youtube_link"]
                 profile.avatar = request.FILES.get("avatar", profile.avatar)

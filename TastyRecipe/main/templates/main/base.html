@@ -77,9 +77,19 @@
       opacity: 0.3;
     }
 
-  .card h2 {
+  .card h3 {
       position: absolute;
-      inset: auto auto 50px 30px;
+      inset: auto auto 80px 30px;
+      margin: 0;
+      transition: inset .3s .3s ease-out;
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: normal;
+      text-transform: uppercase;
+    }
+
+    .card h5 {
+      position: absolute;
+      inset: auto auto 40px 30px;
       margin: 0;
       transition: inset .3s .3s ease-out;
       font-family: 'Roboto Condensed', sans-serif;
@@ -114,13 +124,13 @@
       text-decoration: none;
     }
   
-  .card:hover h2 {
+  .card:hover h3 {
         color: black;
         inset: auto auto 220px 30px;
         transition: inset .3s ease-out;
     }
 
-    .card:hover h6 {
+    .card:hover h5 {
       inset: auto auto 190px 30px;
       transition: inset .3s ease-out;
     }
@@ -220,8 +230,8 @@
         <div class="row">
           <div class="col-lg-3 mb-3">
 
-            <a class="navbar-brand diplomata-regular" href="{% url 'main:home' %}"><img src="{% static 'Images/logo.png' %}" alt="logo" width="30px" height="30px"> TASTY RECIPES</a>
-            <ul class="list-unstyled d-flex flex-row justify-content-center gap-5 mt-4">
+            <a class="navbar-brand diplomata-regular" href="{% url 'main:home' %}"><img src="{% static 'Images/logo.png' %}" alt="logo" width="30px" height="30px"> TASTY <br> RECIPES</a>
+            <ul class="list-unstyled d-flex flex-row gap-5 mt-4">
               <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-facebook"></i></a></li>
               <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-instagram"></i></a></li>
               <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-x-twitter"></i></a></li>

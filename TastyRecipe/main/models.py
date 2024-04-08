@@ -6,6 +6,7 @@ class Recipe(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title =  models.CharField(max_length=200)
+    brief = models.TextField()
     ingredients = models.TextField()
     instructions = models.TextField()
     time_estimate = models.CharField(max_length=100)

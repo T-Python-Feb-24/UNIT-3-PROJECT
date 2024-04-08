@@ -29,6 +29,7 @@ def add_recipe(request:HttpRequest):
             new_recipe = Recipe(
                 user = request.user,
                 title = request.POST["title"], 
+                brief = request.POST["brief"], 
                 ingredients = request.POST["ingredients"],
                 instructions = request.POST["instructions"],
                 time_estimate = request.POST["time_estimate"],
@@ -89,6 +90,7 @@ def update_recipe(request:HttpRequest, recipe_id):
         if request.method == "POST":
             try:
                 recipe.title = request.POST["title"]
+                recipe.brief = request.POST["brief"]
                 recipe.ingredients = request.POST["ingredients"]
                 recipe.instructions = request.POST["instructions"]
                 recipe.time_estimate = request.POST["time_estimate"]
@@ -106,7 +108,7 @@ def update_recipe(request:HttpRequest, recipe_id):
 
 def delete_recipe(request:HttpRequest, recipe_id):
 
-    if not request.user.is_authenticated and request.user.username or request.user.is_superuser:
+    if not request.user.is_authenticated and request.user.username != recipe.user.username:
         return render(request, "no_permission.html")
 
     try:

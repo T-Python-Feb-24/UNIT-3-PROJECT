@@ -31,9 +31,9 @@
                         <div class = "card">
                             <img src="{{ recipe.image.url }}"/>
                             <div class="card-content">
-                                <h2>{{recipe.title}}</h2>
+                                <h3>{{recipe.title}}</h3>
                                 <p>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                    {{recipe.brief}}
                                 </p>
                                 <a href="{% url 'main:recipe_detail' recipe.id %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);" class="button">
                                     Find out more 
@@ -41,7 +41,7 @@
                                         arrow_right_alt
                                     </span>
                                 </a>
-                                <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{recipe.category}}">{{ recipe.category }}</h6>
+                                <h5 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{recipe.category}}">{{ recipe.category }}</h5>
                             </div>
                         </div> <!--Image 1-->
                     </main>

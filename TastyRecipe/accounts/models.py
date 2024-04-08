@@ -7,7 +7,6 @@ from main.models import Recipe
 class Profile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    about = models.TextField()
     avatar = models.ImageField(upload_to="images/", default="images/avatar.webp")
     instagram_link = models.URLField(blank=True)
     youtube_link = models.URLField(blank=True)

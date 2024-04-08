@@ -15,7 +15,9 @@
             <form action="{% url 'main:update_recipe' recipe.id %}" enctype="multipart/form-data" method="post" class="d-flex flex-column gap-2">
                 {% csrf_token %}
 
-                <input name="title" type="text" placeholder="Title" class="form-control" minlength="5" value="{{ recipe.title }}" />
+                <input name="title" type="text" placeholder="Title" class="form-control" minlength="3" value="{{ recipe.title }}" />
+                <input name="brief" type="text" placeholder="Brief" class="form-control" minlength="5" value="{{ recipe.brief }}" />
+
                 <textarea name="ingredients" placeholder="Ingredients" class="form-control">{{recipe.ingredients}}</textarea>
                 <textarea name="instructions" placeholder="Instructions" class="form-control">{{recipe.instructions}}</textarea>
                 <input type="text" name="time_estimate" placeholder="ex. 20 min" class="form-control" minlength="5" value="{{recipe.time_estimate}}"/>

@@ -12,7 +12,8 @@
             <form action="{% url 'main:add_recipe' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
                 {% csrf_token %}
     
-                <input name="title" type="text" placeholder="Title" class="form-control" required minlength="5"/>
+                <input name="title" type="text" placeholder="Title" class="form-control" required minlength="3"/>
+                <input name="brief" type="text" placeholder="Brief" class="form-control" required minlength="5"/>
                 <textarea name="ingredients" class="form-control" placeholder="Ingredients"></textarea>
                 <textarea name="instructions" placeholder="Instructions" class="form-control"></textarea>
                 <input type="text" id="time" name="time_estimate" placeholder="ex. 20 min" class="form-control" required minlength="5"/>    

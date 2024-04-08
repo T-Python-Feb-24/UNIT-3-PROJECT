@@ -56,19 +56,26 @@
         </div>
          <!-- هذي تسجيل الدخول -->
          {% if request.user.is_authenticated %} 
-      <div class="d-flex gap-5 ms-5 ">
-        <a class="nav-link" href="{% url 'account:user_profile_view' request.user.id %}" >welcome, {{request.user.username }}</a>
+         <div class="dropdown d-flex gap-5 ms-5">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome, {{ request.user.username }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="{% url 'account:user_profile_view' request.user.id %}">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'favorites:user_favorites_view' %}">Favorites</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'account:logout_user_view' %}">Logout</a></li>
+          </ul>
       </div>
-      <div  class="d-flex gap-5 ms-4 ">
-      <a class="nav-link" href="{% url 'account:logout_user_view' %}">Logout</a>
-  </div>
+      
+      
 
       {% else %}
         <div class="dropdown ms-5 ">
           <button class="btn btn-secondary dropdown-toggle m-3 mt-3 " style="color: rgb(255, 255, 255); background: rgba(0, 0, 0, 0.719); width: 100px;height: 60px; border-radius: 10px; border: 0;" type="button" data-bs-toggle="dropdown" aria-expanded="false" >Join</button>
           <ul style="background-color: rgba(0, 0, 0, 0.808);" class="dropdown-menu  ">
             <li><a class="dropdown-item" href="{% url 'account:register_user_view' %}" style="color: rgb(139, 145, 148);">Sign up</a></li>
-            <li><a class="dropdown-item" href="{% url 'account:login_user_view' %}" style="color:rgb(136, 142, 145);"">Login</a></li>
+            <li><a class="dropdown-item" href="{% url 'account:login_user_view' %}" style="color:rgb(136, 142, 145);">Login</a></li>
           </ul>
         </div>
         {% endif %}

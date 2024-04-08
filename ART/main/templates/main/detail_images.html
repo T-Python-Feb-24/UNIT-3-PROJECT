@@ -91,10 +91,11 @@
         margin-bottom: 10px;
     }
     .accounts{
-        color: #f8f9fa;
+        color: #000000;
+        font-family: cursive;
     }
     .accounts:hover{
-        color: #000000;
+        color: #ffffff;
     }
 </style>
 
@@ -106,9 +107,13 @@
             </div>
         </div>
         <div class="col-md-4 mt-5">
+
+            <h1 style="font-family: cursive;">{{ art.name}}</h1>
+            <p >{{ art.about}}</p>
             <div class="details-container">
               
                 <h3 class=" pt-2 pb-2 ps-4 pe-4 rounded-pill {{art.category}}" style="font-family: cursive;">{{ art.category }}</h3>
+                <h5 class="text-muted">{{ art.created_at}}</h5>
                 
 
 <div class="d-flex justify-content-between align-items-center mt-4">
@@ -124,7 +129,7 @@
     
     <!-- Favorite and Download buttons -->
     <div class="col-2 d-flex gap-3">
-        <a href="#" style="color: blue; font-size: 20px;" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+        <a href="{% url 'favorites:add_remove_favorites_view' art.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %}" style="color: blue; font-size: 20px;"></i></a>
         <a href="{{ art.image.url }}" class="rounded-circle bi bi-download btn-download"></a>
     </div>
     
@@ -157,29 +162,39 @@
         </div>
     </div>
 
-    <div class="row mt-4">
-        <div class="col-md-6">
-            {% if request.user.is_authenticated %}
-            <form  action="{% url 'main:add_comment' art.id %}" method="post" class="comment-form">
-                {% csrf_token %}
-                <input type="text" name="content" class="form-control comment-input" placeholder="Enter your comment">
-                <input type="submit" value="Add Comment" class="btn btn-comment">
-            </form>
-            {% else %}
-            <div class="alert alert-warning">You must <a href="{% url 'account:login_user_view' %}">Sign in</a></div>
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-            <div class="comment-container">
+    <div class="container">
+
+        <div class="row mt-4">
+            <div class="col-12 col-md-6 order-2 order-md-2 d-flex gap-2 justify-content-end">
                 {% for comment in comments %}
-                <div class="comment-card">
-                    <a href="{% url 'account:user_profile_view' comment.user.id %}" class="text-decoration-none"><h4 class="accounts " style="font-family: cursive;">{{ comment.user.username }}</h4></a>
+                <div class="d-flex flex-column border border-1 shadow p-3 rounded-4 w-100" style="color: aliceblue;">
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'account:user_profile_view' comment.user.username %}" class="text-decoration-none"><h4 class="accounts">{{ comment.user.username }}</h4></a>
+                    </div>
                     <p>{{ comment.content }}</p>
+                    <h6 class="text-muted">{{ comment.created_at }}</h6>
                 </div>
                 {% endfor %}
             </div>
+        
+            <div class="col col-md-6 order-1 order-md-1 d-flex justify-content-start">
+                <div class="d-flex flex-column border border-1 shadow p-3 rounded-4" style="width: 500px; background-color: #9e9ea0;">
+                    {% if request.user.is_authenticated %}
+                    <form action="{% url 'main:add_comment' art.id %}" method="post" class="d-flex flex-column gap-2">
+                        {% csrf_token %}
+        
+                        <label for="content" class="d-flex justify-content-center" style="font-size: 32px; color: rgb(255, 255, 255); font-family: cursive; ">Share Your Review</label>
+                        <textarea id="content" name="content" class="form-control" placeholder="Write Your Review..." required></textarea>
+        
+                        <input type="submit" value="Add Review" class="btn btn-dark" style="background-color: #bebee0; color: rgb(255, 255, 255);"/>
+                    </form>
+                    {% else %} 
+                        <div style="font-family: cursive;" class="alert alert-warning">You must <a href="{% url 'account:login_user_view' %}">Sign in</a> to write a review.</div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </div>
+        
 
 
    

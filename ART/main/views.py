@@ -2,6 +2,7 @@ from django.shortcuts import render ,redirect
 from django.http import HttpRequest,HttpResponse
 from .models import Blog,Comment
 from django.contrib.auth.models import User
+from favorites.models import Favorite
 # Create your views here.
 from .models import Blog, Comment, Contact
 
@@ -20,7 +21,9 @@ def home(request:HttpRequest):
     
 # .............................الان نسوي add.........................
 def add_images(request:HttpRequest):
-      if request.method == 'POST':
+    if not request.user.is_authenticated :
+       return render(request,"main/no_permission.html")
+    if request.method == 'POST':
         try:
             new_blog = Blog(user=request.user,name = request.POST["name"],about = request.POST["about"],
                             image = request.FILES.get("image", Blog.image.field.default),
@@ -33,11 +36,13 @@ def add_images(request:HttpRequest):
             print(e)
         return redirect("main:all_images")
 
-      return render(request, "main/add_images.html", {'category' : Blog.Categories.choices})
+    return render(request, "main/add_images.html", {'category' : Blog.Categories.choices})
+
 
 # ................الحين نسويي allllll.........................
 
 def all_images(request:HttpRequest):
+    # is_favored = request.user.is_authenticated and  Favorite.objects.filter(user=request.user, Blog=art).exists()
     user=request.user
     if "cat" in request.GET:
         art = Blog.objects.filter(category = request.GET["cat"])
@@ -61,7 +66,7 @@ def all_images(request:HttpRequest):
 
     # print(start, end)
 
-    return render(request, "main/all_images.html", {"art" : art, "category" : Blog.Categories.choices, "pages_count":pages_count})
+    return render(request, "main/all_images.html", {"art" : art, "category" : Blog.Categories.choices, "pages_count":pages_count })
 
 
 
@@ -75,14 +80,14 @@ def detail_images(request:HttpRequest,blog_id):
         art = Blog.objects.get(pk=blog_id)
         comments = Comment.objects.filter(Blog=art) #this is to get the comments on the above post using filter
         related_posts = Blog.objects.filter(category=art.category).exclude(id=art.id) #get related posts
-        # is_favored = request.user.is_authenticated and  Favorite.objects.filter(user=request.user, post=plant).exists()
+        is_favored = request.user.is_authenticated and  Favorite.objects.filter(user=request.user, Blog=art).exists()
     except Blog.DoesNotExist:
-        return render(request, "main/not_found.html")
+        return render(request, "main/404.html")
     except Exception as e:
         print(e)
 
 
-    return render(request, "main/detail_images.html", {"art" : art , "comments" :comments , "related" : related_posts  })
+    return render(request, "main/detail_images.html", {"art" : art , "comments" :comments , "related" : related_posts , "is_favored" : is_favored})
     
 
  # ............الحين Search .........................
@@ -102,7 +107,7 @@ def search(request:HttpRequest):
 
 def delete_images(request:HttpRequest,blog_id):
     if not request.user.is_authenticated and request.user.username or request.user.is_superuser:
-      return render(request,"main/404.html")
+      return render(request,"main/no_permission.html")
     try:
         art = Blog.objects.get(pk=blog_id)
     except Blog.DoesNotExist:
@@ -121,7 +126,7 @@ def delete_images(request:HttpRequest,blog_id):
 
 def user_message(request:HttpRequest):
     if not request.user.is_superuser:
-        return render(request, "main/404.html")
+        return render(request, "main/no_premission.html")
     
     con=Contact.objects.all()
 
@@ -151,6 +156,8 @@ def contact_us(request:HttpRequest):
 
 
 def add_comment(request: HttpRequest, blog_id):
+    if not request.user.is_authenticated :
+       return render(request,"account/login_user_view.html")
     object = Blog.objects.get(pk=blog_id)
     if request.method == "POST":
         new_comment = Comment(Blog=object, user=request.user, content=request.POST["content"])
@@ -160,5 +167,4 @@ def add_comment(request: HttpRequest, blog_id):
 
 
 
-# Create your views here.
-# testttttttttttttttttttttttt
+

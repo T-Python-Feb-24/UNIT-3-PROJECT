@@ -8,19 +8,19 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 
-def add_remove_favorites_view(request: HttpRequest, post_id):
+def add_remove_favorites_view(request: HttpRequest, blog_id):
 
     if not request.user.is_authenticated:
-        return redirect("accounts:login_user_view")
+        return redirect("account:login_user_view")
     
     try:
-        post = Blog.objects.get(pk=post_id)
+        art = Blog.objects.get(pk=blog_id)
 
         #check if user already favored this post
-        favored_post = Favorite.objects.filter(user=request.user, post=post).first()
+        favored_post = Favorite.objects.filter(user=request.user, Blog=art).first()
 
         if not favored_post:
-            favorite = Favorite(user=request.user, post=post)
+            favorite = Favorite(user=request.user, Blog=art)
             favorite.save()
         else:
             #delete favorite if already exists
@@ -30,7 +30,7 @@ def add_remove_favorites_view(request: HttpRequest, post_id):
         print(e)
 
 
-    return redirect("main:detail_images", post_id=post_id)
+    return redirect("main:detail_images", blog_id=blog_id)
 
 
 def user_favorites_view(request: HttpRequest):

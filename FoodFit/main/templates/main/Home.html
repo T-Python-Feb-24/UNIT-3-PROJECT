@@ -4,24 +4,77 @@
 
 
  {% block content %}
-   <div class="row mt-5">
-<div class="-continer col col-md-12 order-1 order-md-2 justify-content-center ">
-  <img class="-img" src="/static/images/searchimg.jpg" />
- </div>
+
+
+ <div class="row ">
+ <div class="col col-md-12 order-1 order-md-1 justify-content-center flex-column d-flex">
+
+ <div class="back-continer ">
+ <div class="row">
+
+<div class="home-cir">
+<div class="row">
+
+</div>
 </div>
 
- <div class="row mt-5">
- <div class="col col-md-6 order-2 order-md-2 justify-content-center flex-column d-flex  ">
-  <dive class="overly">
-  <div class="box"> 
-  <p class="title">Food Recipes </p>
-  <h1 class="">Search by food name  </h1>
+<div class="home-cir2">
+<div class="row">
 
-  </div>
-  </div>
+
+</div>
+</div>
+
   </div>
     </div>
 
+
+  </div>
+    </div>
+
+
+
+
+
+
+<div class="row mt-5 ">
+ <div class="col col-md-12 order-1 order-md-1 justify-content-center flex-column d-flex  ">
+
+<div class="about-con">
+<div class="row">
+
+
+</div>
+</div>
+
+ <div class="about-cir">
+<div class="row">
+
+</div>
+</div>
+
+<div class="about-box">
+<div class="row">
+
+</div>
+</div>
+
+<div class="over">
+<div class="row">
+<h1 class="about-title">About</h1>
+<p>I will write here about the website idea I will write<br> here about the website idea I will write<br></p>
+</div>
+</div>
+
+
+
+</div>
+</div><!--end row con-->
+
+
+
+
+<!--end about continer-->
 <div class="continer">
 <div class="row mt-5">
 <div class="col">
@@ -32,6 +85,49 @@
 </div>
 
 
+
+<div class="con">
+<div class="more">
+<a href="{% url 'main:all_recipe_page'%}" class=" home-b btn ">See More</a>
+</div>
+</div>
+
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
+
+  <article class="ccard">
+  <div class="im">
+  <div class="card-img">
+    <img class="card-img " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  </div>
+   </div>
+
+  <div class="project-info">
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'main:detail_recipe_page' recipe.id  %}">{{recipe.title}}</a>
+      </div>
+
+      <span class="tag">{{recipe.category}}</span>
+    </div>
+    <span class="lighter"
+      >Quantity: {{recipe.quantity}} <br>
+      Calories : {{recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
+
+
+
+<div class="con">
+<div class="more">
+<a href="{% url 'accounts:register_user_view'%}" class=" home-b btn ">See More</a>
+</div>
+</div>
 
 
 

@@ -10,7 +10,8 @@ def home(request:HttpRequest):
 
   if request.user.is_authenticated:
      print(request.user.first_name)
-  return render(request,"main/Home.html")
+  recipes = Recipe.objects.order_by("-quantity")[0:3]
+  return render(request,"main/Home.html",{"recipes":recipes})
 
  
 

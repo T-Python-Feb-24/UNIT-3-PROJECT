@@ -1,28 +1,35 @@
 {% extends 'product/base.html' %}
 
 {% block title %}Login User{% endblock %}
-
+{% load static%}
 {% block content %}
-
+<style>
+    body{
+        background-color: rgb(219, 218, 217);
+    }
+</style>
     
     {% if msg %}
     <div class="alert alert-danger">{{msg}}</div>
     {% endif %}
-<div class="container">
+<div class="container m-5">
+    <h1 class="p-3 " style="text-align: center; color: rgb(90, 82, 82);">Login</h1>
     <div class="row">
-        <div class="col">
-            <h1 class="p-3">Login</h1>
+        <div class="col-7 justify-content-center d-flex flex-column gap-2 border border-3 shadow p-5 rounded-4 h-100" style="text-align: center; background-color: rgb(218, 217, 216); margin-left: 250px;">
+
+           
             <form action="{% url 'accounts:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
                 {% csrf_token %}
 
                 <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
                 <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
 
-                <input type="submit" class="btn btn-dark" value="Login" />
+                <input type="submit" class="btn" style="background-color: rgb(64, 64, 64); color: rgb(254, 254, 252);" value="Login" />
 
             </form>
             
         </div>
+       
     </div>
 </div>
 {% endblock %}

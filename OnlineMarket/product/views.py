@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from .models import Product,Comment,Review
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import date, timedelta
+from favorites.models import Favorite
 # Create your views here.
 
 
@@ -17,6 +18,7 @@ def home_view(request:HttpRequest):
 # عرض المنتجات مع امكانية اضافتها للسله
 def product_list_view(request:HttpRequest):
 
+
     if "cat" in request.GET:
         products_list = Product.objects.filter(category=request.GET["cat"])
     else:
@@ -24,7 +26,7 @@ def product_list_view(request:HttpRequest):
 
     paginator = Paginator(products_list, 4)  # عرض 4 منتجات في كل صفحة
     page_number = request.GET.get('page')
-
+    
     try:
         products = paginator.page(page_number)
     except PageNotAnInteger:
@@ -32,7 +34,7 @@ def product_list_view(request:HttpRequest):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
 
-    return render(request, "product/product_list.html", {"products": products, "categories": Product.categories.choices})
+    return render(request, "product/product_list.html", {"products": products, "categories": Product.categories.choices })
 
 
 # تشمل محتوى العنصر والكومنت والريلايتد
@@ -42,13 +44,15 @@ def product_detail_view(request:HttpRequest,product_id):
         product = Product.objects.get(pk=product_id)
         comments=Comment.objects.filter(product=product)
         reviews=Review.objects.filter(product=product)
+
         related = Product.objects.filter(category=product.category).exclude(id=product_id)[:4]
+        is_favored = request.user.is_authenticated and  Favorite.objects.filter(user=request.user, product=product).exists()
     except Product.DoesNotExist:
         return render(request)
     except Exception as e:
         print(e)
 
-    return render(request, 'product/product_detail.html' ,{"product":product ,"comments":comments,"reviews":reviews ,"related":related})
+    return render(request, 'product/product_detail.html' ,{"product":product ,"comments":comments,"reviews":reviews ,"related":related ,"is_favored":is_favored})
 
 #اضافة المنتجات بس للموظف staff
 def product_add_view(request:HttpRequest):

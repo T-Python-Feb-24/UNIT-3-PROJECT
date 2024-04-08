@@ -32,9 +32,7 @@
               <a class="nav-link" href="{% url 'product:product_add_view' %}" style="color: rgb(251, 251, 248);">Add Product</a>
             </li>
             {%endif%}
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true" style="color: rgb(251, 251, 248);">Link</a>
-            </li>
+           
           </ul>
     
           <div class="d-flex align-items-center">
@@ -47,8 +45,10 @@
                   Welcome, {{ request.user.username }}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <li><a class="dropdown-item" href="{% url 'accounts:user_profile_view' request.user.username %}">Profile</a></li>
-                  <li><a class="dropdown-item" href="{% url 'accounts:logout_user_view' %}">Logout</a></li>
+                  <li><a class="dropdown-item text-black btn btn-dark" href="{% url 'accounts:user_profile_view' request.user.username %}">Profile</a></li>
+                  <li><a class="dropdown-item text-black btn btn-dark" href="{% url 'favorites:user_favorites_view' %}" >favorite</a></li>
+                 
+                  <li><a class="dropdown-item text-black btn btn-dark" href="{% url 'accounts:logout_user_view' %}">Logout</a></li>
                 </ul>
               </div>
               
@@ -58,9 +58,9 @@
                  <button class="btn btn-secondary dropdown-toggle bg-body-tertiary text-black" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                      <span class="material-symbols-outlined text-black">person</span>
                  </button>
-                 <ul class="dropdown-menu">
-                   <li><a class="dropdown-item" href="{% url 'accounts:register_user_view'%}">Sign Up</a></li>
-                   <li><a class="dropdown-item" href="{% url 'accounts:login_user_view'%}">Login</a></li>
+                 <ul class="dropdown-menu ">
+                   <li><a class="dropdown-item btn btn-dark"  href="{% url 'accounts:register_user_view'%}">Sign Up</a></li>
+                   <li><a class="dropdown-item btn btn-dark"  href="{% url 'accounts:login_user_view'%}">Login</a></li>
                  </ul>
              </div>
              {% endif %}
@@ -78,19 +78,24 @@
   {% endblock%}
 
   <!-- فوتر-->
-  <div class="container">
-    <footer class="py-3 my-4">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+  <footer class="bd-footer " style="background-color: rgb(49, 47, 47);">
+    <div class="container text-dark align-items-center" >
+      <ul class="nav justify-content-center border-bottom " style="padding: 20px;" >
+        <li class="nav-item"><a href="https://twitter.com/Apple" class="nav-link px-2 text-body-secondary"><i class="bi bi-twitter-x" style="color: rgb(218, 216, 215);"></i></a></li>
+        <li class="nav-item"><a href="https://instagram.com/apple" class="nav-link px-2 text-body-secondary"><i class="bi bi-instagram" style="color: rgb(218, 216, 215);"></i></a></li>
+        <li class="nav-item"><a href="https://www.apple.com/" class="nav-link px-2 text-body-secondary"><i class="bi bi-browser-chrome" style="color: rgb(218, 216, 215);"></i></a></li>
+        <li class="nav-item"><a href="https://facebook.com/apple" class="nav-link px-2 text-body-secondary"><i class="bi bi-facebook" style="color: rgb(218, 216, 215);"></i></a></li>
+        <li class="nav-item"><a href="https://youtube.com/user/Apple" class="nav-link px-2 text-body-secondary"><i class="bi bi-youtube" style="color: rgb(218, 216, 215);"></i></a></li>
       </ul>
-      <p class="text-center text-body-secondary">© 2024 Blogger, Inc</p>
-    </footer>
-  </div>
+      <p class="text-center text-body-secondary " style="padding: 20px;"> <style> #footer-text{
+        color: rgb(218, 216, 215);}
+      </style><span id="footer-text"> © 2024 Store</span></p>
 
+    </div>
+  </footer>
+
+  
+       
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

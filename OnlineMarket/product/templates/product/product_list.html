@@ -1,6 +1,12 @@
 {% extends 'product/base.html' %}
 {% block title %} Product List {% endblock %}
 {% block content %}
+
+<style>
+    .active{
+        background-color:black ;
+    }
+</style>
  <div class="container">
     <div class="row g-4 p-3">
 
@@ -27,10 +33,14 @@
             <h6 class="cat rounded-pill {{product.category}}" style="margin-left: 30px;">{{ product.category }}</h6>
             <p class="rounded-pill {{product.price}}" style="margin-left: 30px;">{{product.price}} sr</p>
             <h6><a href="{% url 'product:product_detail_view' product.id  %}" class="text-decoration-none" style="background-color: black; color: azure; border-radius: 44px; margin: 20px; padding: 3px 75px; text-align: center;">More</a></h6>
+            
         </div>
+        
     </div>
+ 
     {% endfor %}
-</div>
+   </div>   
+
 
 <!-- قائمة التنقل بين الصفحات -->
 <div class="container">
@@ -39,30 +49,30 @@
             <ul class="pagination justify-content-center">
                 {% if products.has_previous %}
                 <li class="page-item text-black">
-                    <a class="page-link text-black" href="?page=1">Next</a>
+                    <a class="page-link text-black btn btn-dark" href="?page=1">Next</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link text-black" href="?page={{ products.previous_page_number }}">Previous</a>
+                    <a class="page-link text-black btn btn-dark" href="?page={{ products.previous_page_number }}">Previous</a>
                 </li>
                 {% endif %}
                 {% for num in products.paginator.page_range %}
-                <li class="page-item {% if num == products.number %}active{% endif %}">
-                    <a class="page-link text-black" href="?page={{ num }}">{{ num }}</a>
+                <li class="page-item  {% if num == products.number %}{% endif %}">
+                    <a class="page-link text-black btn btn-dark" href="?page={{ num }}">{{ num }}</a>
                 </li>
                 {% endfor %}
                 {% if products.has_next %}
                 <li class="page-item">
-                    <a class="page-link text-black" href="?page={{ products.next_page_number }}">Next</a>
+                    <a class="page-link text-black btn btn-dark" href="?page={{ products.next_page_number }}">Next</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link text-black" href="?page={{ products.paginator.num_pages }}">prvious</a>
+                    <a class="page-link text-black btn btn-dark" href="?page={{ products.paginator.num_pages }}">prvious</a>
                 </li>
                 {% endif %}
             </ul>
         </nav>
     </div>
 </div>
-    
+</div>   
 
 
 {%endblock%}

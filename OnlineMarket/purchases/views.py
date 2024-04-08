@@ -5,6 +5,8 @@ from .models import Cart
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def product_cart_view(request: HttpRequest, product_id):
@@ -32,7 +34,7 @@ def product_cart_view(request: HttpRequest, product_id):
 def cart_view(request:HttpRequest):
     user=request.user
     cart_item= user.cart_set.all()
-    total_price=sum(item.product.price for item in cart_item)
+    total_price=sum(item.product.price*item.quantity for  item in cart_item)
     return render(request,"purchases/cart.html",{"user":user,"cart_item":cart_item,"total_price":total_price})
 
 def delete_product_view(request:HttpRequest,product_id):
@@ -51,7 +53,7 @@ def checkout_view(request:HttpRequest):
         cart_item = user.cart_set.all()  # Example, replace with actual retrieval logic
         total_price=sum(item.product.price for item in cart_item)
         subject = 'Purchase Invoice'
-        message = 'test msg'
+        message = f'Hello {user.username}, this ur total: {total_price}sr. Thank you for choosing our services!We appreciate your preference and trust in us Looking forward to serving you again soon.'
         send_html_email_to_user(subject,message,user.email)
         return render(request, 'purchases/order_success.html')
     else:

@@ -82,9 +82,7 @@ def user_profile_view(request:HttpRequest, user_name):
 
     try:
         user_object = User.objects.get(username=user_name)
-        #comment by this user
-        #user_comments = Comment.objects.filter(user=user_object)
-        #user_comments = user_object.comment_set.all() #using set
+        
     except:
         return render(request, "product/not_found.html")
 

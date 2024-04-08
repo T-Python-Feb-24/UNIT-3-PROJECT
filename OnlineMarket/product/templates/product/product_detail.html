@@ -23,18 +23,22 @@
             <div class="d-flex flex-column gap-2 ">
                 <img src="{{ product.image.url }}"  class="w-100 rounded-4" style="height: 400px;"/>
                     <div class="d-flex justify-content-between">
-                        <div class="d-flex gap-2 p-4">
+                        <div class="d-flex gap-2 p-2" style="margin-left: 130px;">
                             
                             {% if request.user.is_staff %}
+                            <a href="{% url 'favorites:add_remove_favorites_view' product.id %}" class="text-decoration-none p-2"><i class="bi {% if is_favored %} bi-heart-fill text-danger {% else %} bi-heart {% endif %} favorite"></i></a>
                                 <a href="{% url 'product:product_edit_view' product.id %}" class="btn btn-dark">update</a>
                                 <a href="{% url 'product:product_delete_view' product.id %}" class="btn btn-dark">Delete</a>
                             {%endif%}
-                            <a href="{% url 'favorites:add_remove_favorites_view' product.id %}" class="text-decoration-none text-black p-1"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+                            
+                            
                         </div>
                     </div>
             </div>
         </div>
+        
     </div>
+    
     <hr>
     <br>
     <h5> product details</h5>
@@ -81,7 +85,7 @@
     </form>
 </div>
         
-        <!-- نموذج التعليق (الذي يكون مخفيًا في البداية) -->
+        <!-- نموذج التعليق ( يكون مخفيً في البداية) -->
         <div id="comment-form" style="display: none;">
             <form action="{% url 'product:add_comment_view' product.id %}" method="post" class="d-flex flex-column gap-2">
                 {% csrf_token %}
@@ -94,13 +98,13 @@
     
     <script>
         // JavaScript
-        // عرض نموذج التقييم عند النقر على زر التقييم وإخفاء نموذج التعليق
+        // عرض نموذج التقييم  وإخفاء نموذج التعليق
         document.getElementById("rating-button").addEventListener("click", function() {
             document.getElementById("rating-form").style.display = "block";
             document.getElementById("comment-form").style.display = "none";
         });
         
-        // عرض نموذج التعليق عند النقر على زر التعليق وإخفاء نموذج التقييم
+        // عرض نموذج التعليق وإخفاء نموذج التقييم
         document.getElementById("comment-button").addEventListener("click", function() {
             document.getElementById("rating-form").style.display = "none";
             document.getElementById("comment-form").style.display = "block";

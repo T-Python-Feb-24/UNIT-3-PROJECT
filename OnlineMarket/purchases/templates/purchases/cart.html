@@ -17,7 +17,7 @@
                     <h6 class="text-muted">Added at: {{ cart_item.created_at }}</h6>
                     <h6>Price:{{cart_item.product.price}}sr</h6>
                     
-                    
+                    <!--<input name="quantity{{ forloop.counter }}" type="number" min="1" value="{{ cart_item.quantity}}" />-->
                     <a href="{% url 'purchases:delete_product_view' cart_item.product.id  %}"><span class="material-symbols-outlined text-black" style="margin-left: 600px;">delete</span></a>
                     
                 </div>

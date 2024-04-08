@@ -22,15 +22,17 @@ def add_remove_favorites_view(request: HttpRequest, product_id):
         if not favored_product:
             favorite = Favorite(user=request.user, product=product)
             favorite.save()
+           
         else:
-            #delete favorite if already exists
-            favored_product.delete()
+             favored_product.delete()
     
     except Exception as e:
-        print(e)
+            print(e)
+    return redirect("product:product_detail_view", product_id=product_id)
+       
+  
 
-
-    return redirect("main:post_detail_view", product_id=product_id)
+   
 
 
 def user_favorites_view(request: HttpRequest):

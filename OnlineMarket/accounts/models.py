@@ -7,7 +7,7 @@ class Profile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     about = models.TextField()
-    avatar = models.ImageField(upload_to="images/", default="static/images/ava.png")
+    avatar = models.ImageField(upload_to="images/", default="static/images/ava1.png")
     
 
     def __str__(self) -> str:

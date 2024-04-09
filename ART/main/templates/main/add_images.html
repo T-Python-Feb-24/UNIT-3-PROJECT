@@ -5,22 +5,21 @@
 
 {% block content %} 
 <div class="container">
-    <div class="row mt-4">
+    <div class="row  ">
         <div class="col-md-6">
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center mt-5">
                 <div class="col">
-                    <img src="/static/images/png.webp" class="w-100 hero rounded-4" />
+                    <img style="margin-top: 10%; " src="/static/images/image5.jpg" class="w-100 hero rounded-4 " />
                 </div>
-                <div class="col">
-                    <h1 style="font-family: cursive;">Add new image</h1>
-                </div>
+                
             </div>
         </div>
         <div class="col-md-6">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mt-5">
+                <h1 style="font-family: cursive; text-align: center;">Add new image</h1>
                 <form style="width: 100%;" action="{% url 'main:add_images' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
                     {% csrf_token %}
-                    <input name="name" type="text" placeholder="Name" class="form-control" required minlength="4" />
+                    <input name="name" type="text" placeholder="Name" class="form-control"  />
                     <h6>This is an additional option for you</h6>
                     <textarea name="about" placeholder="About" class="form-control"></textarea>
                     <div class="form-check form-switch">

@@ -1,18 +1,18 @@
 {% extends 'main/base.html' %}
 
-{% block title %} Not Found Page {% endblock %}
+{% block title %} No Permission Page {% endblock %}
 
 {% block content %}
 
-    <div class="row">
-        <div class="col">
-
-            <h1>Not Found</h1>
-            <a href="/">Go back to Home Page</a>
-
-        </div>
-        <div class="col">
-            <img class="w-100" src="/static/images/not.jpg" />
-        </div>
+<div class="container d-flex justify-content-center align-items-center" style="height: 90vh;">
+    <div class="text-center">
+        <img class="img-fluid mb-3" src="/static/images/No-Permission.png" style="max-width: 50%;" alt="No Permission Image">
+        <h1> You do not have Permission to view the content</h1>
+        <a style="background-color: rgb(67, 44, 197); border: 0; width: 30%;" href="{% url 'main:home' %}" class="btn btn-primary">Go back to Home Page</a>
     </div>
+</div>
+
+
+
+
 {% endblock %}

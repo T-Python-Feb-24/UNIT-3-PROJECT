@@ -3,49 +3,23 @@
 {% block title %} Not Found Page {% endblock %}
 
 {% block content %}
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
+   
 
-        .container {
-            text-align: center;
-            max-width: 600px;
-        }
 
-        .emoji {
-            font-size: 8rem;
-            margin-bottom: 20px;
-        }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="text-center">
+            <img class="img-fluid mb-3" src="/static/images/error-404.webp" style="max-width: 80%;" alt="No Permission Image">
+            <h1 class="mb-3">Oops! Page Not Found</h1>
+            <p class="mb-4">We couldn't find the page you were looking for.</p>
+            <a href="{% url 'main:home' %}" class="btn btn-primary">Go back to Home</a>
 
-        p {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            font-size: 1.25rem;
-            padding: 10px 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <img class="w-100" src="/static/images/not.jpg" />
-        <h1>Oops! Page Not Found</h1>
-        <p>We couldn't find the page you were looking for.</p>
-        <a class="btn btn-primary" href="/">Go back to Home</a>
+        </div>
     </div>
-</body>
-</html>
+
+   
+
+
+
+
 {% endblock %}

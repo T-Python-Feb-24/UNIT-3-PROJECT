@@ -97,6 +97,12 @@
     .accounts:hover{
         color: #ffffff;
     }
+    .cat{
+    color: #000000; 
+    background-color: rgb(255, 255, 255);
+    margin-top: -420px; 
+    margin-left: 70px; 
+}
 </style>
 
 <div class="container">
@@ -143,17 +149,20 @@
 
 
 
-
+<!-- الشرط  -->
                 <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Favorite</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">To like a shot, please create an account. <a style="width: 30%;background-color: #000000;color: white;border-radius: 30px; padding: 10px; text-align: center;" href="{% url 'account:register_user_view' %}">Register</a></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <span class="material-symbols-outlined">favorite</span>
+                            
+                            <span class="material-symbols-outlined"> 
+                                <div>Already have an account? <a href="{% url 'account:login_user_view' %}">Sign in</a> </div>
+                            </span>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                                <button style="background-color: #5b3ddd;border: 0; color: white;" type="button" class="btn " data-bs-dismiss="modal">OK</button>
                             </div>
                         </div>
                     </div>
@@ -165,6 +174,7 @@
     <div class="container">
 
         <div class="row mt-4">
+            {% if user.is_authenticated %}
             <div class="col-12 col-md-6 order-2 order-md-2 d-flex gap-2 justify-content-end">
                 {% for comment in comments %}
                 <div class="d-flex flex-column border border-1 shadow p-3 rounded-4 w-100" style="color: aliceblue;">
@@ -176,24 +186,29 @@
                 </div>
                 {% endfor %}
             </div>
+            {% endif %}
+            
         
             <div class="col col-md-6 order-1 order-md-1 d-flex justify-content-start">
-                <div class="d-flex flex-column border border-1 shadow p-3 rounded-4" style="width: 500px; background-color: #9e9ea0;">
-                    {% if request.user.is_authenticated %}
-                    <form action="{% url 'main:add_comment' art.id %}" method="post" class="d-flex flex-column gap-2">
-                        {% csrf_token %}
-        
-                        <label for="content" class="d-flex justify-content-center" style="font-size: 32px; color: rgb(255, 255, 255); font-family: cursive; ">Share Your Review</label>
-                        <textarea id="content" name="content" class="form-control" placeholder="Write Your Review..." required></textarea>
-        
-                        <input type="submit" value="Add Review" class="btn btn-dark" style="background-color: #bebee0; color: rgb(255, 255, 255);"/>
-                    </form>
-                    {% else %} 
-                        <div style="font-family: cursive;" class="alert alert-warning">You must <a href="{% url 'account:login_user_view' %}">Sign in</a> to write a review.</div>
-                    {% endif %}
+                <div class="d-flex flex-column " style="width: 500px; border-color: #000000;">
+                    <button style="background-color: #000000; border: 0;" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
+                        Share Your Review
+                    </button>
+                    <div class="collapse" id="collapseReview">
+                        {% if request.user.is_authenticated %}
+                        <form action="{% url 'main:add_comment' art.id %}" method="post" class="d-flex flex-column gap-2">
+                            {% csrf_token %}
+                            <textarea id="content" name="content" class="form-control" placeholder="Write Your Review..." required></textarea>
+                            <input type="submit" value=" Add Review" class="btn btn-dark" style="background-color: #bebee0; color: rgb(255, 255, 255);"/>
+                        </form>
+                        {% else %} 
+                        <div style="font-family: cursive; background-color: rgb(175, 175, 185); color: black;" class="alert ">You must<a href="{% url 'account:login_user_view' %}">Sign in</a> to write a review. </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
+        
         
 
 
@@ -213,7 +228,9 @@
                         <h3><a style="color: white;font-size: 20px;" href="{% url 'account:user_profile_view' rel.user.id %}">{{rel.user.username}}</a></h3>
                         <div class="col-2 d-flex gap-3 ">
                             <strong><a style="color: #2f00ff; font-size: 25px;" href="#" class="mr-3 rounded-circle bi bi-heart" alt="Generic placeholder image"></a></strong>
-                            <h6 style="background-color:black ;color: #eeeeee;" class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}} ">{{ art.category }}</h6>
+                            <div>
+                                <h6  class=" cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}} ">{{ art.category }}</h6>
+                            </div>
                         </div>
                     </div>
                 </div>

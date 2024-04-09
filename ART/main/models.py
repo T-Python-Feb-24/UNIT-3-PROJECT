@@ -6,7 +6,7 @@ class Blog(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     name =  models.CharField(max_length=200)
     about = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='images/', default='images/default_img.jpg')
+    image = models.ImageField(upload_to='images/', default='images/default_img.png')
     is_published = models.BooleanField()
     Categories = models.TextChoices('Category', ["Nature","Arts", "Daily Life" ,"Food"]) 
     category = models.CharField(max_length = 64, choices = Categories.choices)

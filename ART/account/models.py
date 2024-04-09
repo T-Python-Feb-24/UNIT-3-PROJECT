@@ -7,9 +7,9 @@ class Profile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     about = models.TextField()
-    avatar = models.ImageField(upload_to="images/", default="images/avatar.webp")
+    avatar = models.ImageField(upload_to="images/", default="images/default_avatar.jpg")
     instagram_link = models.URLField(blank=True)
-    linked_link = models.URLField(blank=True)
+    
     
 
     def __str__(self) -> str:

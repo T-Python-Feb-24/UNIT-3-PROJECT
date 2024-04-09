@@ -106,8 +106,8 @@ def search(request:HttpRequest):
     
 
 def delete_images(request:HttpRequest,blog_id):
-    if not request.user.is_authenticated and request.user.username or request.user.is_superuser:
-      return render(request,"main/no_permission.html")
+    # if not request.user.is_authenticated and request.user.username or request.user.is_superuser:
+    #   return render(request,"main/no_permission.html")
     try:
         art = Blog.objects.get(pk=blog_id)
     except Blog.DoesNotExist:

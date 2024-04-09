@@ -1,3 +1,4 @@
+from uuid import uuid4
 from django.db import models
 from django.core.validators import FileExtensionValidator
 
@@ -25,13 +26,16 @@ class Product(models.Model):
 
 
 def group_based_upload_to(instance, filename):
+   ext = filename.split('.')[-1]
+   filename = '{}.{}'.format(uuid4().hex, ext)
    return "product/image/{}/{}".format(instance.product.id, filename)
 
 
 ext_validatod = [FileExtensionValidator(["png", "jpg", "jpeg"])]
 
 
-class ProductImage(models.Model):
-   product = models.ForeignKey(Product, on_delete=models.CASCADE)
-   image = models.ImageField(
-       upload_to=group_based_upload_to, null=False, validators=ext_validatod)
+class Product_image(models.Model):
+   product = models.ForeignKey(
+      Product, on_delete=models.CASCADE, related_name="Images")
+   image = models.ImageField(verbose_name="Image",
+                             upload_to=group_based_upload_to, null=False, validators=ext_validatod)

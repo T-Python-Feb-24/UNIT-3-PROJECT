@@ -265,6 +265,72 @@ section {
   }
 }
 
+.cards {
+  /* user setting */
+  margin-top: 0;
+  --min-column-size: 200px;
+  --column-count: 4;
+  --gap: 2rem;
+  border-radius: 20px;
+  padding-top: 1rem;
+  margin-bottom: 5rem;
+  /* calculations */
+  --breakpoint: calc(var(--min-column-size) * var(--column-count) + (var(--gap) * (var(--column-count) - 1)));
+  --column-size: calc((100% / var(--column-count)) - var(--gap));
+
+  display: grid;
+  justify-items: left;
+  gap: var(--gap);
+
+  grid-template-columns: repeat(auto-fit,
+      minmax(min(max(var(--column-size), (100% - var(--breakpoint)) * -999), 100%),
+        1fr));
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.card-product {
+  height: 30rem;
+  margin: 2rem;
+  align-self: center;
+  display: grid;
+  grid-template-rows: 15rem;
+  gap: .5rem;
+  padding: 1.5rem;
+  border-radius: 30px;
+  min-height: 8rem;
+  max-width: 24rem;
+  background-color: var(--dark-theme-card);
+}
+
+.product-img {
+  max-height: 100%;
+  overflow: hidden;
+
+}
+
+.card-body .product-info {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-rows: repeat(1fr, 2);
+}
+
+.product-info *:nth-child(1) {
+  grid-row: 1;
+  place-self: center;
+
+}
+
+.product-info *:nth-child(2) {
+  grid-row: 2;
+  place-self: end end;
+
+}
+
+
 .contactus {
   width: 40%;
 
@@ -328,7 +394,8 @@ footer {
   }
 }
 
-.no-perms {
+.no-perms,
+.no-products {
   display: grid;
   height: 100%;
   place-items: center;

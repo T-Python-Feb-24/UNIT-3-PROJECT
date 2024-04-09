@@ -1,5 +1,5 @@
 from django import template
-import random
+from product.models import Product
 register = template.Library()
 
 
@@ -15,11 +15,19 @@ def _range(_min, args=None):
    return range(*args)
 
 
-# @register.filter(name="random")
-# def random_int(a):
-#    return random.choice(plant_count())[0]
+@register.filter(name='base_category')
+def base_category(a):
+   return Product.categories_choices.choices
 
 
-# @register.simple_tag
-# def number_of_plants(request):
-#    return plant_count() - 1
+@register.filter(name='image_name')
+def image_name(name: str):
+   return name.split("/")[-1]
+
+   # @register.filter(name="random")
+   # def random_int(a):
+   #    return random.choice(plant_count())[0]
+
+   # @register.simple_tag
+   # def number_of_plants(request):
+   #    return plant_count() - 1

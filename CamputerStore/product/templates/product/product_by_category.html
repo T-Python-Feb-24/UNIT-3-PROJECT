@@ -5,5 +5,54 @@
    All Plant
 {% endblock title %}
 {% block content %}
- 
+   {% if msg %}
+      <div class="no-products">
+         <h2>{{ msg }}</h2>
+      </div>
+   {% else %}
+      <div class="cards">
+         {% for product in products %}
+            <a href="{% url "product:product_detail_view" product.id %}">
+               <div class="card card-product">
+                  <div class="product-img">
+                     <img src="{{ product.Images.first.image.url }}"
+                          class="card-img-top"
+                          height="100%"
+                          width="100%"
+                          alt="{{ product.Images.first.image.name|image_name }}">
+                  </div>
+                  <div class="card-body">
+                     <div class="product-info">
+                        <h4>{{ product.name }}</h4>
+                        <p class="card-text fw-semibold">{{ product.price }} ريال</p>
+                     </div>
+                  </div>
+               </div>
+            </a>
+         {% endfor %}
+      </div>
+      <nav aria-label="Page navigation">
+         <ul class="pagination d-flex justify-content-center">
+            <li class="page-item">
+               <a class="page-link bg-gray"
+                  href="?page={% if request.GET.page > "1" %}{{ request.GET.page|add:"-1" }}{% else %}1{% endif %}"
+                  aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+               </a>
+            </li>
+            {% for page in 1|range:pages.num_pages %}
+               <li class="page-item bg-gray">
+                  <a class="page-link bg-gray" href="?page={{ page }}">{{ page }}</a>
+               </li>
+            {% endfor %}
+            <li class="page-item ">
+               <a class="page-link bg-gray"
+                  href="?page={% if request.GET.page < pages.num_pages %}{{ request.GET.page|add:"1" }}{% else %}{{ pages.num_pages }}{% endif %}{% if 'category' or 'edible' in request.GET %}&cat={{ request.GET.category }}&edible={{ request.GET.edible }}{% endif %}"
+                  aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+               </a>
+            </li>
+         </ul>
+      </nav>
+   {% endif %}
 {% endblock content %}

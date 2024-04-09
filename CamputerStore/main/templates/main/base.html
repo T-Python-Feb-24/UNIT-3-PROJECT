@@ -132,9 +132,9 @@
                      </div>
                   </nav>
                   <div class="d-flex px-3 justify-content-start gap-3 top-nav-bar">
-                     <a href="#">كمبيوتر</a>
-                     <a href="#">كمبيوتر</a>
-                     <a href="#">كمبيوتر</a>
+                     {% for val,key in categories|base_category %}
+                        <a class="nav-link" href="{% url "product:product_by_category" key %}">{{ val }}</a>
+                     {% endfor %}
                   </div>
                </header>
                <section>

@@ -14,7 +14,7 @@ A store that sells computers and there accessories.
 - Add to list of want product
 
 ## User Stories, Wireframes & UML links
-- User stories document link here.
+- [User stories document link here](https://docs.google.com/document/d/1BI1GYzRFn5o1ExNftHMuCBOHUm_oDJ1yrGYjXbkke_Y/edit?usp=sharing).
 - [wireframe link](https://www.figma.com/file/UfJOJ89Fk7VzpBYc50GOt2/%D9%85%D8%AA%D8%AC%D8%B1-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D8%A8?type=design&node-id=6%3A3&mode=design&t=U1rlkkqOE4CFVt0l-1).
 - [UML link](https://www.figma.com/file/el992Qw8HJa98A4UhYxLBS/UML-Diagrams-(%D9%85%D8%AA%D8%AC%D8%B1-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D8%A8)?type=whiteboard&node-id=0%3A1&t=uDr67oWQ7WnKJcx4-1).
 

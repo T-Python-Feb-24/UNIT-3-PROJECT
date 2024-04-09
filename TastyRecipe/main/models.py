@@ -10,6 +10,7 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     instructions = models.TextField()
     time_estimate = models.CharField(max_length=100)
+    served = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images/', default='images/logo.png')
     
     Categories = models.TextChoices('Category', ["Pasta", "Soup", "Chicken", "Salad"]) 

@@ -33,6 +33,7 @@ def add_recipe(request:HttpRequest):
                 ingredients = request.POST["ingredients"],
                 instructions = request.POST["instructions"],
                 time_estimate = request.POST["time_estimate"],
+                served = request.POST["served"],
                 image = request.FILES.get("image", Recipe.image.field.default),
                 category = request.POST['category']
             )
@@ -94,6 +95,7 @@ def update_recipe(request:HttpRequest, recipe_id):
                 recipe.ingredients = request.POST["ingredients"]
                 recipe.instructions = request.POST["instructions"]
                 recipe.time_estimate = request.POST["time_estimate"]
+                recipe.served = request.POST["served"]
                 recipe.image = request.FILES.get("image", recipe.image)
                 recipe.category = request.POST['category']
                 recipe.save()

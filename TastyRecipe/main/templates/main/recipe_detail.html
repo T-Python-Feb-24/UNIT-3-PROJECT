@@ -4,31 +4,87 @@
 
 {% block style %}
 <style>
-    .ribbon-2 {
-    --f: 10px; /* control the folded part*/
-    --r: 15px; /* control the ribbon shape */
-    --t: 10px; /* the top offset */
+aside:before, aside:after {
+    height: 0;
+    width: 0;
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0;
+}
 
-    position: relative;
-    inset: var(--t) calc(-1*var(--f)) auto auto;
-    padding: 0 10px var(--f) calc(10px + var(--r));
-    clip-path: 
-      polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
-        calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
-        var(--r) calc(50% - var(--f)/2));
-    background: #d88f53;
-    box-shadow: 0 calc(-1*var(--f)) 0 inset #0005;
-  }
+aside {
+  margin: 10px 0;
+  line-height: 34px;
+  position: relative;
+  width: 200PX;
+  display: inline-block;
+  font-size: 25px;
+}
+
+aside.ribbon3 {
+    background-color: rgb(255, 166, 0);
+    }
+aside.ribbon3:after, aside.ribbon3:before {
+      border-width: 14px 0 20px 20px;
+    }
+aside.ribbon3:before {
+      border-color: rgb(255, 166, 0) transparent;
+      left: -20px;
+    }
+aside.ribbon3:after {
+      border-color: transparent rgb(255, 166, 13);
+      right: -20px;
+    }
+
+.ribbon{
+  position:relative;
+  padding: 0 0.5em;
+  font-size:2.000em;
+  margin: 0 0 0 -0.625em;
+  line-height: 1.875em;
+  border-radius: 0 0.156em 0.156em 0;
+  color: rgb(71, 71, 71);
+  background: rgb(123, 159, 199);
+  box-shadow: -1px 2px 3px rgba(0,0,0,0.5);
+}
+
+.ribbon:before, .ribbon:after{
+  position:absolute;
+  content: '';
+  display: block;
+}
+
+.ribbon:before{
+  width: 0.469em;
+  height: 100%;
+  padding: 0 0 0.438em;
+  top:0;
+  left: -0.469em;
+  background:inherit;
+  border-radius: 0.313em 0 0 0.313em;
+}
+
+.ribbon:after{
+  width: 0.313em;
+  height: 0.313em;
+  background: rgba(0,0,0,0.35);
+  bottom: -0.313em;
+  left: -0.313em;
+  border-radius: 0.313em 0 0 0.313em;
+  box-shadow: inset -1px 2px 2px rgba(0,0,0,0.3);
+}
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row" style="margin-top: 100px;">
+    <div class="row" style="margin-top: 120px;">
         {% if message %}
             <div class="alert alert-warning">{{message}}</div>
         {% endif %}
-        <div class="col-12 col-md-7 order-2 order-md-2" style="padding-left: 100px;">
+        <div class="col-12 col-md-7 order-2 order-md-2">
             <div class="d-flex flex-column gap-2 h-100 justify-content-center">
                 <div class="d-flex" style="justify-content: space-between;">
                     <h1>{{ recipe.title }} <a href="{% url 'accounts:add_remove_saved_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#savedModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_saved %} bi-bookmark-fill {% else %} bi-bookmark {% endif %} bookmark"></i></a>
@@ -41,7 +97,7 @@
                     </div>
                 </div>
 
-                <p class="text-muted"><strong>Aurthor: </strong>
+                <p class="text-muted"><strong>By </strong>
                     <a href="{% url 'accounts:profile' recipe.user.username %}" class="text-decoration-none">
                         {{ recipe.user.first_name }} {{ recipe.user.last_name }}
                     </a>
@@ -49,23 +105,27 @@
                 
                 <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{recipe.category}}">{{ recipe.category }}</h6>
                 <div>
-                    <h4><strong>Ingredients:</strong></h4>
-                    <p>{{ recipe.ingredients }}</p>
-                    <!-- <h5><strong>Instructions:</strong></h5>
-                    <p>{{ recipe.instructions }}</p> -->
-                    <!-- <h6><strong>Time Estimate: {{ recipe.time_estimate }}</strong></h6> -->
+                    <aside class="ribbon3 d-flex justify-content-center" style="color: rgb(71, 71, 71);"><strong>Ingredients:</strong></aside>
+                    {{ recipe.ingredients }}
                 </div>
             </div>
         </div>
         
         <div class="col col-md-5 order-1 order-md-1 d-flex flex-column justify-content-center align-items-center">
             <img src="{{ recipe.image.url }}"  class="rounded-4" style="background-size: cover; width: 80%; height: auto;"/>
-            <br><h6><strong>Time Estimate: {{ recipe.time_estimate }}</strong></h6>
+            <br>
+            <div class="d-flex gap-2">
+                <i class="fa fa-clock-o"></i> {{ recipe.time_estimate }}
+                <strong>~</strong>
+                <i class="fa fa-users"></i>{{ recipe.served }} people
+            </div>
         </div>
     </div> <!-- row 1-->
 
     <div class="row p-5 mt-5">
-        <h2 class="ribbon-2"><strong>Instructions:</strong></h2>
+        <div class="ribbon">
+            <h3><strong>Instructions</strong></h3>
+        </div>
         <p>{{ recipe.instructions }}</p>
     </div>
 
@@ -88,7 +148,7 @@
             </div>
         
             <div class="col col-md-6 order-2 order-md-2 d-flex justify-content-end">
-                <div class="d-flex flex-column border border-1 shadow p-3 rounded-4" style="color: aliceblue; width: 500px; background: linear-gradient(#145a3b, #124e2d, #0f4324);">
+                <div class="d-flex flex-column border border-1 shadow p-3 rounded-4" style="color: aliceblue; width: 500px; background: linear-gradient(#144c5a, #123d4e, #0f3943);">
                     
                     {% if request.user.is_authenticated %}
                     <form action="{% url 'main:add_review' recipe.id %}" method="post" class="d-flex flex-column gap-2">
@@ -97,7 +157,7 @@
                         <label for="content" class="d-flex justify-content-center" style="font-size: 32px;">Share Your Review</label>
                         <textarea id="content" name="content" class="form-control" placeholder="Write Your Review..." required></textarea>
 
-                        <input type="submit" value="Add Review" class="btn btn-dark" style="background: linear-gradient(#082211, #05160b, #020b04);"/>
+                        <input type="submit" value="Add Review" class="btn btn-dark" style="background: linear-gradient(#081b22, #051116, #02070b);"/>
                     </form>
                     {% else %} 
                         <div class="alert alert-warning">You must <a href="{% url 'accounts:login' %}">Sign in</a> to write a review.</div>
@@ -106,8 +166,8 @@
                 </div>
             </div>
         </div> <!--Review Row-->
-    </div>
-</div>
+    </div><!--END Reviews-->
+</div> <!--END Container-->
 
 <!-- Modal -->
 <div class="modal fade" id="savedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

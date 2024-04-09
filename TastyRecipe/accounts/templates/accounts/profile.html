@@ -38,7 +38,7 @@
 {% block content %}
 <div class="container">
 
-  <div class="row" style="margin-top: 100px;">
+  <div class="row" style="margin-top: 120px;">
     <h1>{{ user_info.username }}'s Profile: </h1>
 
     <div class="col-3">
@@ -49,7 +49,7 @@
     </div><!--col 1-->
 
     <div class="col-9 mt-3 d-flex justify-content-center">
-      <div class="d-flex justify-content-center mt-3" style="align-items: center;">
+      <div class="d-flex justify-content-center" style="align-items: center;">
         <table class="user-profile">
           <tbody>
             <tr>
@@ -73,11 +73,11 @@
         </table>
       </div>
     </div><!--col 2-->
-  </div><!--END Row-->
+  </div><!--Profile Details-->
 
   {% if request.user.is_authenticated and request.user.username == user_info.username %}
   <div class="row">
-    <div class="col d-flex justify-content-center">
+    <div class="col d-flex justify-content-end">
         <a class="btn btn-outline-primary" style="width: 150px; padding: 5px;" href="{% url 'accounts:update_user' user_info.username %}">Update Info<span class="material-symbols-rounded">edit</span></a>
       </div>
     </div> <!--Update Profile-->
@@ -110,27 +110,35 @@
       <h2>{{user.username }}'s Saved Recipes</h2>
       <hr>
           {% for saved in user.saved_set.all %}
-          <div class="col-4">
+          <div class="col-4" style="width: 25%;">
             <main>
               <div class = "card">
-                  <img src="{{ saved.recipe.image.url }}"/>
+                  <div id="corner-ribbon">
+                      <div>
+                      <div>
+                          <div>
+                            <h6 class="cat pt-1 pb-1 ps-2 pe-2 {{saved.recipe.category}}">{{ saved.recipe.category }}</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <img src="{{ saved.recipe.image.url }}" />
                   <div class="card-content">
                       <h3>{{saved.recipe.title}}</h3>
                       <p>
-                          {{saved.recipe.brief}}
+                          {{saved.recipe.brief}}                                    
                       </p>
                       <a href="{% url 'main:recipe_detail' saved.recipe.id %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);" class="button">
-                          Find out more 
+                          Let's cook
                           <span class="material-symbols-outlined">
                               arrow_right_alt
                           </span>
                       </a>
-                      <h5 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{saved.recipe.category}} ">{{ saved.recipe.category }}</h5>
                       <h6 class="text-muted">{{ saved.recipe.created_at }}</h6>
                   </div>
-              </div> <!--Image 1-->
-          </main>
-    </div>
+              </div> <!--Images-->
+          </main>                        
+</div>
           
       {% endfor %}
     </div>

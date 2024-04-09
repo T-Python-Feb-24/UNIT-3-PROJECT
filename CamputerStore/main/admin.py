@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Product, Comments, Contactus, ProductImage
+from .models import Comments, Contactus
+from product.models import Product, ProductImage
 from account.models import Profile, Cart
 from favorites.models import Favorite
 

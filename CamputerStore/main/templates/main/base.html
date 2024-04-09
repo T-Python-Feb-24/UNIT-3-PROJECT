@@ -29,10 +29,6 @@
       <main>
          <header>
             <div class="d-flex gap-3 top-nav-bar">
-               <select class="form-select select" name="currency-selector" aria-label="Lang">
-                  <option value="العربية" selected>العربية</option>
-                  <option value="English">English</option>
-               </select>
                <select class="form-select select" aria-label="currncy">
                   <option value="العربية" selected>SAR-ريال</option>
                   <option value="English">USD-دولار</option>
@@ -103,9 +99,9 @@
                                                    <a href="{% url "account:sign_up_view" %}">التسجيل</a>
                                                 </li>
                                              {% endif %}
-                                             {% if request.user.is_superuser or perms.main.add_product %}
+                                             {% if request.user.is_superuser or perms.product.add_product %}
                                                 <li>
-                                                   <a href="{% url "main:add_product_view" %}">اضف منتج</a>
+                                                   <a href="{% url "product:add_product_view" %}">اضف منتج</a>
                                                 </li>
                                              {% endif %}
                                           </ul>
@@ -125,7 +121,7 @@
                               </ul>
                            </div>
                            <form class="input-group d-grid align-items-center"
-                                 action="{% url "main:search_product_view" %}"
+                                 action="{% url "product:search_product_view" %}"
                                  method="post">
                               <input type="search" placeholder="عما تبحث" id="example-search-input">
                               <button type="submit" value="submit" id="search">
@@ -135,15 +131,10 @@
                         </div>
                      </div>
                   </nav>
-                  <div class="d-flex gap-3 top-nav-bar">
-                     <select class="form-select select" name="currency-selector" aria-label="Lang">
-                        <option value="العربية" selected>العربية</option>
-                        <option value="English">English</option>
-                     </select>
-                     <select class="form-select select" aria-label="currncy">
-                        <option value="العربية" selected>SAR-ريال</option>
-                        <option value="English">USD-دولار</option>
-                     </select>
+                  <div class="d-flex px-3 justify-content-start gap-3 top-nav-bar">
+                     <a href="#">كمبيوتر</a>
+                     <a href="#">كمبيوتر</a>
+                     <a href="#">كمبيوتر</a>
                   </div>
                </header>
                <section>

@@ -327,3 +327,10 @@ footer {
     margin: .5rem;
   }
 }
+
+.no-perms {
+  display: grid;
+  height: 100%;
+  place-items: center;
+
+}

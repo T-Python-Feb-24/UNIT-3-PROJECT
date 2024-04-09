@@ -1,18 +1,43 @@
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, QueryDict
-from .models import Contactus, Comments
+from .models import Product, ProductImage
 from main.validator import validat, ValidationError
 from django.core.paginator import Paginator
 
 
-def index_view(request: HttpRequest):
+def search_product_view(request: HttpRequest):
+   return render(request, "product/search_product.html")
 
-   return render(request, "main/index.html")
+
+def add_product_view(request: HttpRequest):
+   if not (request.user.is_staff or request.user.has_perm("product.add_product")):
+      return render(request, "main/no_permission.html")
+   if request.method == "POST":
+      images = request.FILES.getlist("images")
+      print(images)
+      new_product = Product.objects.create(
+          name=request.POST.get("name"),
+          model=request.POST.get("model"),
+          category=request.POST.get("category"),
+          price=request.POST.get("price"),
+          in_stock=request.POST.get("in_stock", False),
+      )
+
+      for image in images:
+         ProductImage.objects.create(product=new_product, image=image)
+
+      return redirect("product:product_detail_view", product_name=new_product.name)
+
+   return render(request, "product/add_product.html", {"categories": Product.categories_choices.choices})
 
 
-def about_view(request: HttpRequest):
-   return render(request, "main/about.html")
-
+def product_detail_view(request: HttpRequest, product_name):
+   try:
+      product = Product.objects.get(name=product_name)
+      pass
+   except Exception as e:
+      print(e)
+   return render(request, "product/product_detail_view.html", {"product": product})
 
 #    try:
 #       plant = Plant.objects.get(pk=plant_id)
@@ -98,29 +123,6 @@ def about_view(request: HttpRequest):
 #    return render(request, "main/search_plant.html",
 #                  {"plants": plants, "pages": pages, "active_cat": active_cat,
 #                   "categories": Plant.category_choices.choices})
-
-
-def contactus_view(request: HttpRequest):
-   try:
-      msg = None
-      if request.user.is_authenticated:
-         user = request.user
-      if request.method == "POST":
-         contact = Contactus.objects.create(
-            username=request.POST.get("username") or user.username,
-            email=validat(email=request.POST.get("email")) or user.email,
-            phone=validat(phone=request.POST["phone"]) or user.profile.phone,
-            subject=request.POST.get("subject"),
-            content=request.POST.get("content"),
-         )
-         msg = "secssfully created contact"
-         return redirect("main:index_view")
-   except ValidationError as e:
-      msg = e.message
-   except Exception as e:
-      print(f"from Exception {e} ")
-      msg = "خطأ في البيانات المرسلة "
-   return render(request, "main/contactus.html", context={"msg": msg})
 
 
 # def contactUs_messages_view(request: HttpRequest):

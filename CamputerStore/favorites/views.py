@@ -8,29 +8,29 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 
-def add_remove_favorites_view(request: HttpRequest, prodect_id):
+def add_remove_favorites_view(request: HttpRequest, product_id):
 
    if not request.user.is_authenticated:
       return redirect("accounts:login_user_view")
 
    try:
-      prodect = Product.objects.get(pk=prodect.pk)
+      product = Product.objects.get(pk=product.pk)
 
       # check if user already favored this post
-      favored_prodect = Favorite.objects.filter(
-         user=request.user, prodect=prodect).first()
+      favored_product = Favorite.objects.filter(
+         user=request.user, product=product).first()
 
-      if not favored_prodect:
-         favorite = Favorite(user=request.user, post=prodect)
+      if not favored_product:
+         favorite = Favorite(user=request.user, post=product)
          favorite.save()
       else:
          # delete favorite if already exists
-         favored_prodect.delete()
+         favored_product.delete()
 
    except Exception as e:
       print(e)
 
-   return redirect("main:post_detail_view", prodect_id=prodect_id)
+   return redirect("main:post_detail_view", product_id=product_id)
 
 
 def user_favorites_view(request: HttpRequest):

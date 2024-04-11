@@ -15,8 +15,14 @@ class Bootcamp(models.Model):
     end_date = models.DateField()
     location = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.bootcamp_name
+    
 
 class Evaluation(models.Model):
-    student = models.OneToOneField(Student,on_delete=models.CASCADE)
-    attendence_rate = models.FloatField()
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    bootcamp = models.ForeignKey(Bootcamp, on_delete=models.CASCADE)
+    attendance_rate = models.FloatField()
     grades_rate = models.FloatField()
+    
+    

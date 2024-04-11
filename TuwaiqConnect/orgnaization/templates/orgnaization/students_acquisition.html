@@ -10,7 +10,7 @@
         
             {% for bootcamp in bootcamps %}
             <div class="col border border-2">
-           <a href="{% url "orgnaization:bootcamp_details" bootcamp.id %}"> {{bootcamp.bootcamp_name}}</a>
+           <a href="{% url "bootcamp:bootcamp_details" bootcamp.id %}"> {{bootcamp.bootcamp_name}}</a>
             </div>
             {% endfor %}
 

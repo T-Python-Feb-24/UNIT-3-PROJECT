@@ -12,3 +12,4 @@ class OrgnizationAdmin(admin.ModelAdmin):
     
     
 admin.site.register(Orgnization,OrgnizationAdmin)
+

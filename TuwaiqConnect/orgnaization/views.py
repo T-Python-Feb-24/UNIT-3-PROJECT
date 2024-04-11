@@ -18,10 +18,3 @@ def students_acquisition(request :HttpRequest):
     return render(request,"orgnaization/students_acquisition.html",{"bootcamps":bootcamps})
 
 
-def bootcamp_details(request :HttpRequest,bootcamp_id):
-    
-    bootcamp = Bootcamp.objects.get(pk=bootcamp_id)
-    students = bootcamp.students.all()
-    
-    
-    return render (request,"orgnaization/bootcamp_details.html",{"bootcamp":bootcamp,"students":students})

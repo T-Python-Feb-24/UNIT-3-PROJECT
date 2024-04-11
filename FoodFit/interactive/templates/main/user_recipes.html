@@ -8,7 +8,7 @@
     <div class="row g-4">
 
         <div class="d-flex justify-content-center align-items-center">
-            <div class=" c d-flex gap-2">
+            <div class=" cat d-flex gap-2">
                 <a href="{% url 'interactive:users_recipe_page' %}" class="p-2 ps-3 pe-3   text-decoration-none  {% if 'categories' not in request.GET %} All  {% endif %}">All</a>
                 {% for val, key in category %}
                     <a href="?categories={{val}}" class=" p-2 ps-3 pe-3  {% if request.GET.categories == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
@@ -18,32 +18,40 @@
 
     </div>
 
-    <div class="row mt-2 g-5">
-
-        {% for recipe in recipes %}
-        <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-      <img src="{{recipe.image.url}}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-      <img class="rounded-circle shadow-1-strong me-3"
-        src="{{ request.user.avatar }}" alt="avatar" width="40"
-         height="40" />
-      <h5 class="card-title"> @{{ request.user.username }}</h5>
-        <h5 class="card-title"><a href="{% url 'interactive:user_recipe_detail_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h5>
-        <p class="card-text">For: {{recipe.quantity}} Grams </p>
-        <p class="card-text">Calories :{{recipe.calories}} </p>
-        <p class="card-text">Category:{{recipe.category}} </p>
-      </div>
-    </div>
-  </div>
-</div>
-     
-       {% endfor %}
 
  
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
+
+  <article class="ccard2 ">
+  <div class="im">
+  <div class="card-img2">
+    <img class="card-img2 " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
+  <div class="user-card">
+  <img class="rounded-circle shadow-1-strong me-3"
+        src="{{user.profile.avatar.url}}" alt="avatar" width="40"
+         height="40" />
+         <div class="mt-3"><a href="{% url 'accounts:user_profile_page' recipe.user.id %}" ><p>@{{ recipe.user.username }}</p></a></div>
+         </div>
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'interactive:user_recipe_detail_page' recipe.id  %}">{{recipe.title}}</a>
+      </div>
+    </div>
+    <span class="lighter">
+     Category : {{recipe.category}} <br>
+      Calories : {{recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
 
  {% endblock %}
 

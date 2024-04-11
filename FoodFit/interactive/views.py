@@ -42,7 +42,7 @@ def user_recipe_detail(request: HttpRequest , recipe_id):
     try:
         recipe=UserRecipe.objects.get(pk=recipe_id)
         recipes=UserRecipe.objects.filter(user=recipe.user).exclude(id=recipe_id)[0:3]
-        comments=UserComment.objects.filter(recipe=recipe).order_by("-created_at")[0:3]
+        comments=UserComment.objects.filter(recipe=recipe).all
         is_favored = request.user.is_authenticated and  Favorite.objects.filter(user=request.user, recipe=recipe).exists()
     except UserRecipe.DoesNotExist:
         return redirect('main:home')

@@ -8,58 +8,63 @@
 
 
  <div class="row mt-5 ">
+ <div class="col-md-12">
  <div class="d-flex justify-content-center align-items-center">
- <h1>{{recipe.title}}</h1>
+ <h1>{{recipe.title}}</h1><br>
  </div>
   </div>
+  </div>
 
+<div class="row">
+ <div class="col-md-12 ">
+<img class="user-recipe-img"src="{{ recipe.image.url }}" />
+<br>
+<a href="{% url 'favorites:add_remove_favorites_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" 
+{% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+
+</div>
+</div>
 
 <div class="row mt-5">
+<div class="user-recipe-box">
+<div class=" user-recipe-detial col mt-1 md-10 ">
 
-    <div class="col md-6">
-    <img src="{{ recipe.image.url }}"  class="w-100 rounded-4"/>
-    <br><br>
-    <a href="{% url 'favorites:add_remove_favorites_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
-    </div>
-
-
-    <div class="col mt-1 md-6 ">
         
         <a href="{% url 'interactive:update_recipe_page' recipe.id %}" class="btn btn-primary">update</a>
         <a href="{% url 'interactive:delete_recipe_view' recipe.id %}" class="btn btn-danger">Delete</a>
         
         <h4 class="mt-5">{{recipe.title}}</h4>
-        <h4>By :</h4><a href="{% url 'accounts:user_profile_page' user.id %}" ><h4>@{{ request.user.username }}</h4></a>
+        
+        <h4>By :</h4><a href="{% url 'accounts:user_profile_page' user.id %}" ><h4>@{{ recipe.user.username }}</h4></a>
         <br>
-        <h6>Category :{{recipe.category}}</h6>
-        <br>
+        <p>Category :{{recipe.category}}</p>
         <p>Quantity : {{recipe.quantity}} Grams</p>
         <p>Calories :{{recipe.calories}}</p>
-        <h6>How to prepare :<br>{{recipe.about}}</h6>
-        
-       
-       
         <br>
-        <hr>
+        <p>How to prepare :<br>{{recipe.about}}</p>
         
+    </div>
     </div>
 </div>
 
-
+ <br>
+<hr>
 
 <div class="row mt-5">
-
     <div class="col md-6">
-    <h1> Leave a comment for {{ request.user.username }} recipe</h1>
+     <div class="d-flex justify-content-center align-items-center">
+    <h1 class=""> Leave a comment for {{ request.user.username }} recipe</h1>
+    </div>
     <br><br>
-    
+    <div class="add-comment">
  <form action="{% url 'interactive:comments_view' recipe.id %}" method="post" class="d-flex flex-column gap-2">
     {% csrf_token %}
-    <textarea name="content"  placeholder="text your comment here" style="height:200px;" class="form-control hight-100" required></textarea>
+    <textarea name="content"  placeholder="text your comment here" style="height:400px;" class="  form-control hight-100" required></textarea>
 
-    <input type="submit" value="Add Comment" class="btn btn-primary"/>
+    <input type="submit" value="Add Comment" class="btn btn-outline-success"/>
     </form>
     
+    </div>
     </div>
 
 
@@ -67,38 +72,41 @@
 
 <div class="col md-6">
 
-<section >
-  <div class="container text-dark">
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-12 col-lg-10 col-xl-8">
-        <div class="d-flex justify-content-between align-items-center ">
-          <div class="card">
-          </div>
-        </div>
-        {% for comment in comments %}
-        <div class="card mb-3">
-          <div class="card-body">
-            <div class="d-flex flex-start">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="{{ request.user.avatar.url }}" alt="avatar" width="40"
-                height="40" />
-              <div class="w-100">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h6 class="text-primary fw-bold mb-0">
-                    <a href="{% url 'accounts:user_profile_page' comment.user.id %}" >{{ comment.user.username }}</a>
-                    <p class="text-dark ms-2">{{ comment.content }}</p>
-                  </h6>
-                  <p class="">{{ comment.created_at}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-        </section >
+<div class="comment-box">
+
+
+{% for comment in comments %}
+<div class="col mt-2">
+<div class="card22">
+  <div class="header11">
+    <div>
+      <a class="title11" href="{% url 'accounts:user_profile_page' comment.user.id %}">
+        {{ comment.user.username }} </a> <p class="name" >just commented</p>
+    </div>
+      <span class="image11"><div>
+      <img class="image11" src="{{user.profile.avatar.url}}">
+      </div></span>
+  </div>
+    <p class="description">
+      {{ comment.content }}
+    </p>
+  <dl class="post-info">
+    <div class="cr">
+      <dd class="dd">{{ comment.created_at}}</dd>
+    </div>
+  </dl>
+</div>
+</div>
+{% endfor %}
+
 
 </div>
 
+
+
+
+
+</div>
 </div>
 
 
@@ -107,33 +115,42 @@
 <hr>
 <br>
 {% if recipes.count != 0%}
+ <div class="d-flex justify-content-center align-items-center">
  <h1>Read More For {{ request.user.username }}</h1>
+ </div>
 {% endif %}
-<div class="row mt-2 g-5">
-<div class="col md-6">
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
 
-        {% for recipe in recipes %}
-        <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-        <div class="col-md-4">
-      <img src="" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'interactive:user_recipe_detail_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h5>
-        <p class="card-text">For: {{recipe.quantity}} Grams </p>
-        <p class="card-text">Calories :{{recipe.calories}} </p>
-        <p class="card-text">Category:{{recipe.category}} </p>
+  <article class="ccard2 ">
+  <div class="im">
+  <div class="card-img2">
+    <img class="card-img2 " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
+  <div class="user-card">
+  <img class="rounded-circle shadow-1-strong me-3"
+        src="{{user.profile.avatar.url}}" alt="avatar" width="40"
+         height="40" />
+         <div class="mt-3"><a href="{% url 'accounts:user_profile_page' user.id %}" ><p>@{{ request.user.username }}</p></a></div>
+         </div>
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'interactive:user_recipe_detail_page' recipe.id  %}">{{recipe.title}}</a>
       </div>
     </div>
+    <span class="lighter">
+     Category : {{recipe.category}} <br>
+      Calories : {{recipe.calories}}</span>
   </div>
-</div>
-</div>
+</article>
+  </div>
+    {% endfor %}
 
-<br><br>
-     
-       {% endfor %}
-
+  </div>
 
 
 

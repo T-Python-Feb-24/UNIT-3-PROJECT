@@ -1,6 +1,8 @@
 from django.db.models.manager import BaseManager
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, QueryDict
+
+from favorites.models import Favorite
 from .models import Product, Product_image
 from main.validator import validat, ValidationError
 from django.core.paginator import Paginator
@@ -32,13 +34,15 @@ def add_product_view(request: HttpRequest):
    return render(request, "product/add_product.html", {"categories": Product.categories_choices.choices})
 
 
-def product_detail_view(request: HttpRequest, product_pk):
+def product_detail_view(request: HttpRequest, product_id):
    try:
-      product = Product.objects.get(pk=product_pk)
-
+      product = Product.objects.get(pk=product_id)
+      is_favored = request.user.is_authenticated and Favorite.objects.filter(
+         user=request.user, product=product).exists()
    except Exception as e:
       print(e)
-   return render(request, "product/product_detail.html", {"product": product})
+   return render(request, "product/product_detail.html", {"product": product,
+                                                          "is_favored": is_favored})
 
 
 def product_by_category(request: HttpRequest, category: str):

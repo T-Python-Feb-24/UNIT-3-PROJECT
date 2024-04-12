@@ -1,8 +1,115 @@
-{# djlint:off H023 #}
+{# djlint:off H023 H006 #}
 {% extends "main/base.html" %}
 {% load tags %}
 {% block title %}
    {{ product.name }}
 {% endblock title %}
 {% block content %}
+   <div class="product-detail-wrapper mb-4">
+      <div class="product_image_gallery me-4">
+         <div class="product-img">
+            <img src="https://microless.com/cdn/products/f500f3b94e937400aa5be26e4e365470-md.jpg"
+                 alt="Product Image"
+                 class="product-main-img"
+                 data-index="1" />
+         </div>
+         <div class="product-thumbnail-container">
+            <div class="product-thumbnail active">
+               <img src="https://microless.com/cdn/products/f500f3b94e937400aa5be26e4e365470-md.jpg"
+                    alt="thumbnail Image"
+                    data-index="1" />
+            </div>
+            <div class="product-thumbnail">
+               <img src="https://microless.com/cdn/products/730b0db55a50f912901c0fbeb742ab01-md.jpg"
+                    alt="thumbnail Image"
+                    data-index="2" />
+            </div>
+         </div>
+      </div>
+      <div class="product-info">
+         <div class="product-title--items-wrap">
+            <h1 class="product-title-h1">
+               <span>بطاقة رسومات ASUS Dual GeForce RTX 4060 White OC، ذاكرة GDDR6128 بت سعة 8 جيجابايت، ساعة OC بسرعة 2535 ميجاهرتز، سرعة ذاكرة 17 جيجابت في الثانية، 3072 نواة CUDA، PCI E 4.0، HDMI، منفذ عرض | 90YV0JC2-M</span>
+            </h1>
+            <div class="d-flex gap-5">
+               <div class="product-model-wrp">
+                  <span class="label">الموديل:</span>
+                  <span class="value">Dual GeForce RTX 4060 OC</span>
+               </div>
+               <div class="product-sku-wrp">
+                  <span class="label">كود التخزين:</span>
+                  <span class="value">127579</span>
+               </div>
+            </div>
+            <hr>
+            <!-- /.product-badges -->
+            <div class="product-additional-info">
+               <div class="warranty-informations">
+                  <ul>
+                     <li class="warranty-item">
+                        <div class="warranty clearfix">
+                           <div class="warranty-label">الضمان:</div>
+                           <!-- /.warranty-label -->
+                           <div class="no-ext-warranty">
+                              <strong>1 سنة</strong>
+                              &nbsp;&nbsp;<span>خدمة ضمان خالية من المتاعب مع تغطية عالمية تكاليف الشحن علينا.</span>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <!-- warranty-informations -->
+               <div class="product-brand-wishlist">
+                  <div class="product-wishlist-wrapper">
+                     <!-- /.product-wishlist -->
+                     <div class="d-block">
+                        <a href="{% url 'favorites:add_remove_favorites_view' product.id %}"
+                           {% if not request.user.is_authenticated %}data-bs-toggle="modal" data-bs-target="#favoriteModal"{% endif %}
+                           class="d-flex text-decoration-none text-color-inherit align-items-center">
+                           <i class="material-symbols-outlined fs-2 px-2
+                                     {% if is_favored %}fav{% endif %}">
+                              favorite
+                           </i>
+                           اضافة الى قائمة الرغبات
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="product-price">
+         <div class="product-price-wrapper">
+            <div class="discounts">
+               <div class="prices">
+                  <div class="product-main-price priceFormat">
+                     <span class="price-amount">1,427.11</span><span class="price-symbol">ريال</span>
+                  </div>
+                  <!-- /.right -->
+               </div>
+            </div>
+            <hr>
+            <div class="instock-lable">متوفر</div>
+            <form action="#" method="post">
+               {% csrf_token %}
+               <div class="d-flex add-btn">
+                  <select name="quantity" tabindex="-1" aria-hidden="true">
+                     <option value="1" selected>1</option>
+                     <option value="2">2</option>
+                     <option value="3">3</option>
+                     <option value="4">4</option>
+                     <option value="5">5</option>
+                     <option value="6">6</option>
+                     <option value="7">7</option>
+                     <option value="8">8</option>
+                     <option value="9">9</option>
+                     <option value="10">10</option>
+                  </select>
+                  <!-- /.quantity-selector -->
+                  <button type="submit" class="product-btn-add-to-cart">اضف الى السلة</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 {% endblock content %}

@@ -14,14 +14,14 @@ def add_remove_favorites_view(request: HttpRequest, product_id):
       return redirect("accounts:login_user_view")
 
    try:
-      product = Product.objects.get(pk=product.pk)
+      product = Product.objects.get(pk=product_id)
 
       # check if user already favored this post
       favored_product = Favorite.objects.filter(
          user=request.user, product=product).first()
 
       if not favored_product:
-         favorite = Favorite(user=request.user, post=product)
+         favorite = Favorite(user=request.user, product=product)
          favorite.save()
       else:
          # delete favorite if already exists
@@ -30,7 +30,7 @@ def add_remove_favorites_view(request: HttpRequest, product_id):
    except Exception as e:
       print(e)
 
-   return redirect("main:post_detail_view", product_id=product_id)
+   return redirect("product:product_detail_view", product_id=product_id)
 
 
 def user_favorites_view(request: HttpRequest):

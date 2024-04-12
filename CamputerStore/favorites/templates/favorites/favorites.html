@@ -14,7 +14,7 @@
                     <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{ favorite.post.category }}">{{ favorite.post.category }}</h6>
                     <h6 class="text-muted">{{ favorite.post.published_at }}</h6>
                     <h2>
-                        <a href="{% url 'main:post_detail_view' favorite.post.id %}"
+                        <a href="{% url 'main:post_detail_view' favorite.product.id %}"
                            class="text-decoration-none">{{ favorite.post.title }}</a>
                     </h2>
                 </div>

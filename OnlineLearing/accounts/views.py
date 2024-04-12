@@ -6,7 +6,6 @@ from django.db import IntegrityError
 from main.models import *
 from .models import Profile
 from django.db import transaction, IntegrityError
-from .models import Favorite
 
 
 

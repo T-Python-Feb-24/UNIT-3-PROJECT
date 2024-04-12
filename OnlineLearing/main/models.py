@@ -28,6 +28,8 @@ class Course(models.Model):
     poster = models.ImageField(upload_to="images/")
     categories = models.CharField(max_length=20, choices=COURSE_CATEGORIES)
     content = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 
     def _str_(self):

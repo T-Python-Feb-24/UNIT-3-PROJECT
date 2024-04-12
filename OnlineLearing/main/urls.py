@@ -14,6 +14,8 @@ urlpatterns = [
     path("post/delete/<post_id>/", views.delete_post_view, name="delete_post_view"),
     path("post/register/" ,views.register_courses_view , name= "register_courses_view"),
     path("posts/search/", views.posts_search_view, name="posts_search_view"),
+     path("user-courses/", views.user_courses_view, name="user_courses"),
+
     
 
 ]

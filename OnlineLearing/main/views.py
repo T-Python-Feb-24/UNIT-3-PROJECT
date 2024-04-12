@@ -107,3 +107,10 @@ def posts_search_view(request:HttpRequest):
 
     return render(request, "main/search_page.html", {"courses" : courses})
 
+
+
+def user_courses_view(request):
+
+    user_courses = Course.objects.filter(user=request.user)
+    context = {'user_courses': user_courses}
+    return render(request, 'main/user_courses.html', context)

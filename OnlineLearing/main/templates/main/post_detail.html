@@ -19,12 +19,14 @@
                             <p class="card-text">Content: {{ post.content }}</p>
                             <p class="card-text">Categories: {{ post.categories }}</p>
                             <div class="btn-group" role="group" aria-label="Action buttons">
+                            <a href="{% url 'favorites:add_remove_favorites_view' post.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none form-control"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+
                                 {% if request.user.is_staff and perms.main.Update.Delete %}
                                 <a href="{% url 'main:update_post_view' post.id %}" class="btn btn-primary">Update</a>
                                 <a href="{% url 'main:delete_post_view' post.id %}" class="btn btn-danger">Delete</a>
                                 {% endif %}
 
-                                <a href="{% url 'main:register_courses_view' %}" class="btn btn-primary">Register</a>
+                                <a href="{% url 'main:register_courses_view' %}" class="btn btn-light">Register</a>
                             </div>
                         </div>
                     </div>

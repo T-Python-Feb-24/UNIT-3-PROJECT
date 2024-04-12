@@ -11,4 +11,6 @@ urlpatterns = [
     path("add/comment/<project_id>", views.add_comment, name="add_comment"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path('send/email/', views.send_email, name='send_email'),
+    path('create/', views.create_task, name='create_task'),
+
 ]

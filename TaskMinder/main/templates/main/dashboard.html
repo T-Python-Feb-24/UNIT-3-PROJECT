@@ -32,7 +32,6 @@ checkbox
 
     <!-- SideBar  -->
 
-
     <div class="sidebar">
         <ul>
             <li>
@@ -50,5 +49,67 @@ checkbox
     </div>
 
 
+    <!-- Add Tasks  -->
+
+
+    <section style="display: flex; justify-content: center; text-align: center;">
+        <div>
+            <h1>Task Manager</h1><br>
+                <hr><br>
+
+                <form id="taskForm" method="POST" action="{% url 'main:create_task' %}">
+                    {% csrf_token %}
+                <label for="taskTitle">Task Title</label>
+                <input type="text" id="taskTitle" style="border-radius: 20px; padding: 5px 20px;" name="title" required>
+
+                <label for="taskDeadline">Deadline</label>
+                <input type="date" id="taskDeadline" style="border-radius: 20px; padding: 5px 20px;" name="due_date" required>
+
+                <label for="taskDescription">Description</label>
+                <textarea id="taskDescription" style="border-radius: 20px; text-align: center;" name="description"></textarea>
+
+                <input type="submit" class="btn btn-warning" value="Add Task" >
+                </form>
+        </div>
+    </section> 
+
+    <section style="display: flex; justify-content: center; text-align: center;">
+        <ul class="task-list">
+
+        </ul>
+    </section> 
+
+
+
+
+    <section style="display: flex; justify-content: center; text-align: center;">
+      <script>
+        document.getElementById("taskForm").addEventListener("submit", function(event) {
+          event.preventDefault();
+    
+          var taskTitle = document.getElementById("taskTitle").value;
+          var taskDeadline = document.getElementById("taskDeadline").value;
+    
+          var taskItem = document.createElement("li");
+          taskItem.classList.add("task-item");
+    
+          var taskText = document.createTextNode(taskTitle + " (Deadline: " + taskDeadline + ")");
+          taskItem.appendChild(taskText);
+    
+          var deleteButton = document.createElement("button");
+          deleteButton.innerHTML = "Delete";
+          deleteButton.addEventListener("click", function() {
+            this.parentNode.remove();
+          });
+          taskItem.appendChild(deleteButton);
+    
+          document.querySelector(".task-list").appendChild(taskItem);
+    
+          document.getElementById("taskTitle").value = "";
+          document.getElementById("taskDeadline").value = "";
+        });
+      </script>
+    </section>
+    
 
 {% endblock %}

@@ -36,17 +36,38 @@ def tasks(request:HttpRequest):
 
 
 # Add task 
-def create_task(request:HttpRequest):
+# def create_task(request:HttpRequest):
 
+#     if request.method == 'POST':
+#         title = request.POST.get('title')
+#         description = request.POST.get('description')
+#         priority = request.POST.get('priority')
+#         task = Task(title=title, description=description, priority=priority)
+#         task.save()
+#         return redirect('main:tasks')
+#     # return render(request, 'home_page.html')
+#     return render(request, 'dashboard.html')
+
+
+def task_list(request):
+    tasks = Task.objects.all()  
+    return render(request, 'tasks/task_list.html', {'tasks': tasks})
+
+
+
+def create_task(request:HttpRequest):
     if request.method == 'POST':
         title = request.POST.get('title')
+        due_date = request.POST.get('due_date')
         description = request.POST.get('description')
-        priority = request.POST.get('priority')
-        task = Task(title=title, description=description, priority=priority)
-        task.save()
-        return redirect('main:tasks')
-    return render(request, 'home_page.html')
 
+        # Create a new task object
+        task = Task(title=title, due_date=due_date, description=description)
+        task.save() 
+
+        return redirect('dashboard')  
+    
+    return render(request, 'task_list.html', {'task': task})
 
 
 # Task search 

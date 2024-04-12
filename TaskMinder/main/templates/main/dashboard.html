@@ -98,6 +98,7 @@ checkbox
     
           var deleteButton = document.createElement("button");
           deleteButton.innerHTML = "Delete";
+          deleteButton.classList.add("btn", "btn-warning");
           deleteButton.addEventListener("click", function() {
             this.parentNode.remove();
           });

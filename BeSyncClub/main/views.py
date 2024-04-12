@@ -7,7 +7,9 @@ from .models import Event
 
 def index_view(request: HttpRequest):
 
-    return render(request, "main/index.html")
+    events = Event.objects.all()
+    return render(request, "main/index.html", {"events" : events})
+
 
 
 def add_event_view(request: HttpRequest):
@@ -53,9 +55,9 @@ def edit_event_view(request: HttpRequest, event_id):
         event.on_site = request.POST.get("on_site", False)
         event.theme = request.POST["theme"]
         event.event_type = request.POST["event_type"]
-        event.event_date= request.POST["event_date"]
-        event.time_start = request.POST["time_start"]
-        event.time_end = request.POST["time_end"]
+        event.event_date= request.POST.get("event_date", event.event_date)
+        event.time_start = request.POST.get("time_start", event.time_start)
+        event.time_end = request.POST.get("time_end", event.time_end)
 
         event.save()
         return redirect("main:event_detail_view", event_id=event.id)
@@ -64,7 +66,6 @@ def edit_event_view(request: HttpRequest, event_id):
         print(e)
     
     return render(request, "main/edit_event.html", {"event" : event, "themes" : Event.themes.choices, "types" : Event.types.choices})
-
 
 
 
@@ -84,6 +85,7 @@ def event_detail_view(request: HttpRequest, event_id):
     return render(request, "main/event_detail.html", {"event" : event})
 
 
+
 def delete_event_view(request:HttpRequest, event_id):
 
     #limit access to this view for only staff
@@ -95,3 +97,11 @@ def delete_event_view(request:HttpRequest, event_id):
         print(e)
     
     return redirect("main:index_view")
+
+
+
+def all_events_view(request:HttpRequest):
+
+    events = Event.objects.all()
+
+    return render(request, "main/all_events.html", {"events" : events})

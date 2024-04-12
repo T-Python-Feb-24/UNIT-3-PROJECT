@@ -70,7 +70,7 @@
                                             Date :
                                         </label>
                                         <input type="date" name="event_date" id="date"
-                                            value="{{ event.event_date }}" 
+                                            value="{{event.event_date|date:'Y-m-d' }}"
                                             style="padding: 5px; border-radius: 5px; 
                                             border: 1px solid #ccc; margin-bottom: 10px;"
                                         />
@@ -81,7 +81,7 @@
                                             From:
                                         </label>
                                         <input type="time" name="time_start" id="time"
-                                        value="event.time_start" 
+                                        value="{{event.time_start|date:'H:i' }}"
                                         style="padding: 5px; border-radius: 5px; 
                                             border: 1px solid #ccc; margin-bottom: 10px;"
                                         />
@@ -92,7 +92,7 @@
                                             To:
                                         </label>
                                         <input type="time" name="time_end" id="time"
-                                        value="event.time_end" 
+                                        value="{{event.time_end|date:'H:i' }}"
                                         style="padding: 5px; border-radius: 5px; 
                                             border: 1px solid #ccc; margin-bottom: 10px;"
                                         />      

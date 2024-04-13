@@ -8,37 +8,37 @@
    <div class="product-detail-wrapper mb-4">
       <div class="product_image_gallery me-4">
          <div class="product-img">
-            <img src="https://microless.com/cdn/products/f500f3b94e937400aa5be26e4e365470-md.jpg"
+            <img src="{{ product.Images.first.image.url }}"
                  alt="Product Image"
                  class="product-main-img"
                  data-index="1" />
          </div>
          <div class="product-thumbnail-container">
             <div class="product-thumbnail active">
-               <img src="https://microless.com/cdn/products/f500f3b94e937400aa5be26e4e365470-md.jpg"
+               <img src="{{ product.Images.first.image.url }}"
                     alt="thumbnail Image"
                     data-index="1" />
             </div>
-            <div class="product-thumbnail">
-               <img src="https://microless.com/cdn/products/730b0db55a50f912901c0fbeb742ab01-md.jpg"
-                    alt="thumbnail Image"
-                    data-index="2" />
-            </div>
+            {% for img in product.Images.all|slice:"1:" %}
+               <div class="product-thumbnail">
+                  <img src="{{ img.image.url }}" alt="thumbnail Image" data-index="2" />
+               </div>
+            {% endfor %}
          </div>
       </div>
       <div class="product-info">
          <div class="product-title--items-wrap">
             <h1 class="product-title-h1">
-               <span>بطاقة رسومات ASUS Dual GeForce RTX 4060 White OC، ذاكرة GDDR6128 بت سعة 8 جيجابايت، ساعة OC بسرعة 2535 ميجاهرتز، سرعة ذاكرة 17 جيجابت في الثانية، 3072 نواة CUDA، PCI E 4.0، HDMI، منفذ عرض | 90YV0JC2-M</span>
+               <span>{{ product.name }}</span>
             </h1>
             <div class="d-flex gap-5">
                <div class="product-model-wrp">
                   <span class="label">الموديل:</span>
-                  <span class="value">Dual GeForce RTX 4060 OC</span>
+                  <span class="value">{{ product.model }}</span>
                </div>
                <div class="product-sku-wrp">
                   <span class="label">كود التخزين:</span>
-                  <span class="value">127579</span>
+                  <span class="value">{{ product.id }}</span>
                </div>
             </div>
             <hr>
@@ -83,30 +83,31 @@
             <div class="discounts">
                <div class="prices">
                   <div class="product-main-price priceFormat">
-                     <span class="price-amount">1,427.11</span><span class="price-symbol">ريال</span>
+                     <span class="price-amount">{{ product.price }}</span><span class="price-symbol">ريال</span>
                   </div>
                   <!-- /.right -->
                </div>
             </div>
             <hr>
-            <div class="instock-lable">متوفر</div>
+            <div class="instock-lable">
+               {% if product.in_stock > 0 %}
+                  <span class="text-success">متوفر</span>
+               {% else %}
+                  <span class="text-danger ">غير متوفر</span>
+               {% endif %}
+            </div>
             <form action="#" method="post">
                {% csrf_token %}
                <div class="d-flex add-btn">
                   <select name="quantity" tabindex="-1" aria-hidden="true">
-                     <option value="1" selected>1</option>
-                     <option value="2">2</option>
-                     <option value="3">3</option>
-                     <option value="4">4</option>
-                     <option value="5">5</option>
-                     <option value="6">6</option>
-                     <option value="7">7</option>
-                     <option value="8">8</option>
-                     <option value="9">9</option>
-                     <option value="10">10</option>
+                     {% for i in in_stock|range:product.in_stock %}
+                        <option value="{{ i }}" {% if i == 1 %}selected{% endif %}>{{ i }}</option>
+                     {% endfor %}
                   </select>
                   <!-- /.quantity-selector -->
-                  <button type="submit" class="product-btn-add-to-cart">اضف الى السلة</button>
+                  <button type="submit"
+                          class="product-btn-add-to-cart"
+                          {% if not product.in_stock > 0 %}disabled{% endif %}></button>
                </div>
             </form>
          </div>

@@ -123,7 +123,10 @@
                            <form class="input-group d-grid align-items-center"
                                  action="{% url "product:search_product_view" %}"
                                  method="post">
-                              <input type="search" placeholder="عما تبحث" id="example-search-input">
+                              <input name="name"
+                                     type="search"
+                                     placeholder="عما تبحث"
+                                     id="example-search-input">
                               <button type="submit" value="submit" id="search">
                                  <span class="material-symbols-outlined">search</span>
                               </button>

@@ -1,0 +1,101 @@
+{% extends "main/base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<main class="main_container">
+    <div class="row first_page_bg">
+        <div class="col text-white">
+            <div class="phrases rounded-2">
+                <h1>Spend Your Holiday</h1>
+                <p>Discover the perfect blend of relaxation and adventure as you spend your holiday at our luxurious resort.</p>
+                <div class="d-flex align-items-center gap-3">
+                    <a class="btn btn-outline-light" href="">Contact Us</a>
+                    <a class="btn btn-outline-light" href="">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="m-3">
+        <div class="row booking-bar">
+            <h4>Book Your Rooms:</h4>
+            <div class="col d-flex align-items-center">
+                <form class="booking_rooms_form d-flex align-items-center gap-3" action="" method="post">
+                    <div class="d-flex align-items-center gap-1">
+                        <label for="arrival_date">Arrival Date:</label>
+                        <input class="form-control w-50" id="arrival_date" type="date" required>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <label for="departure_date">Departure Date:</label>
+                        <input class="form-control w-50" id="departure_date" type="date" required>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <label for="num_adults">Number of Adults:</label>
+                        <input class="form-control w-50" type="number" id="num_adults" name="num_adults" min="1" max="7" required>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <label for="num_children">Number of Children:</label>
+                        <input class="form-control w-50" type="number" id="num_children" name="num_children" min="0" max="5" required>
+                    </div>
+                    <input class="btn btn-outline-success" value="Check Availability" type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="m-3">
+        <div class="row">
+            <h4>Our Rooms</h4>
+            {% for room in rooms %}
+                <div class="col-4 mt-1">
+                    <div class="shadow room-card">
+                        <img src="{{room.room_img.url}}" class="w-100">
+                        <div class="p-3">
+                            <h6>{{room.room_type}}</h6>
+                            <p class="text-muted">Amenities: {{room.amenities}}</p>
+                            <div class="d-flex flex-column align-items-center gap-1">
+                                <a class="btn btn-outline-success w-100" href="">Book Now</a>
+                                <p>{{room.price}}$ Per Night</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+    <div class="m-3">
+        <div class="row">
+            <h4>Our Gallery</h4>
+            {% for img in gallery %}
+                <div class="col-2">
+                    <div>
+                        <img src="{{img}}" class="gallery-img border border-white">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+</main>
+<script>
+    document.getElementById('arrival_date').min = new Date().toISOString().split('T')[0];
+    // Get arrival date input element
+    const arrivalDateInput = document.getElementById('arrival_date');
+    // Get departure date input element
+    const departureDateInput = document.getElementById('departure_date');
+
+    // Function to set minimum date for departure date
+    function setMinDepartureDate() {
+        // Get the selected arrival date
+        const selectedArrivalDate = new Date(arrivalDateInput.value);
+        // Set minimum date for departure date input
+        departureDateInput.min = selectedArrivalDate.toISOString().split('T')[0];
+    }
+
+    // Listen for change event on arrival date input
+    arrivalDateInput.addEventListener('change', setMinDepartureDate);
+</script>
+
+{% endblock content %}

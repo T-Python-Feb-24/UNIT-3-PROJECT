@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 
+
 #import User Model
 from django.contrib.auth.models import User
 from .models import Student, Profile
+from main.models import Event
+
 
 #import login, logout, authenticate
 from django.contrib.auth import authenticate, login, logout
@@ -34,9 +37,10 @@ def register_user_view(request:HttpRequest):
                 student = Student( 
                     user = new_user,
                     city = request.POST["city"],
+                    major = request.POST["major"]
                 )
                 student.save()
-
+                
                 #redirect to login page
                 return redirect("accounts:login_user_view")
         
@@ -49,7 +53,7 @@ def register_user_view(request:HttpRequest):
             print(e)
     
 
-    return render(request, "accounts/register_user.html", {"msg" : msg})
+    return render(request, "accounts/register_user.html", {"msg" : msg, "majors" : Student.majors.choices})
 
 
 def login_user_view(request:HttpRequest):
@@ -77,9 +81,9 @@ def logout_user_view(request:HttpRequest):
     return redirect('accounts:login_user_view')
 
 
-def profile_view(request:HttpRequest, user_id):
+def profile_view(request:HttpRequest, user_name):
 
-    student = User.objects.get(id=user_id)
+    student = User.objects.get(username=user_name)
  
 
     return render(request, "accounts/profile.html", {"student" : student})
@@ -100,7 +104,6 @@ def update_profile_view(request:HttpRequest):
                 user:User = request.user
                 user.first_name = request.POST["first_name"]
                 user.last_name = request.POST["last_name"]
-                user.email = request.POST["email"]
                 user.save()
                 
                 student:Student = user.student
@@ -120,10 +123,10 @@ def update_profile_view(request:HttpRequest):
                 profile.github_link = request.POST["github_link"]
                 profile.save()
 
-                return redirect("accounts:user_profile_view", user_name=user.username)
+                return redirect("accounts:profile_view", user_name=user.username)
 
         except Exception as e:
             msg = f"Something went wrong {e}"
             print(e)
 
-    return render(request, "accounts/update_profile.html", {"msg" : msg})
+    return render(request, "accounts/update_profile.html", {"msg" : msg, "majors" : Student.majors.choices })

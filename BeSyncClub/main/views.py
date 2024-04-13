@@ -4,6 +4,9 @@ from datetime import date, timedelta
 import math
 
 from .models import Event
+from accounts.models import Student
+
+
 
 def index_view(request: HttpRequest):
 
@@ -31,7 +34,7 @@ def add_event_view(request: HttpRequest):
                 time_end = request.POST["time_end"]
 
             )
-            new_event.save()
+            new_event.save()  
             return redirect("main:index_view") ##pop up successfully
         except Exception as e:
             print(e)

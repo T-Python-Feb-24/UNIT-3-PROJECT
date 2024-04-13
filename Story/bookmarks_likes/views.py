@@ -7,6 +7,7 @@ from main.models import Story
 from django.urls import path
 from . import views
 from django.http import HttpResponse
+from django.http import JsonResponse
 
 
 

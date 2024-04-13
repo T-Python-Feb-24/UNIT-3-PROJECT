@@ -1,10 +1,14 @@
 {% extends 'main/S1.html' %}
 {% block content %}
-{% block title %} <title> Stories in {{ category_name }} </title>{% endblock %}
+{% block title %}  Stories in {{ category_name }} </title>{% endblock %}
 
-<h2 style="padding: 15px;"> <b> {{ category_name }} Stories </b></h2>
 
-<div class="container body-wrapper">
+<div class="container body-wrapper" style="padding: 50px;">
+
+
+
+    <h2 style="padding: 50px;"> <b> {{ category_name }} Stories </b></h2>
+
         <div class="row">
         {% for story in stories %}
         <div class="col-md-4">

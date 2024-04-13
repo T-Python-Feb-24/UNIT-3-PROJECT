@@ -1,5 +1,5 @@
 {% extends 'main/S1.html' %}
-{% block title %} READ STORY ({{ story.name }}) {% endblock %}
+{% block title %} READ STORY - {{ story.name }} {% endblock %}
 {% block content %}
 <div class="container mt-4" >
     {% if story.image %}
@@ -7,6 +7,8 @@
     {% endif %}
     <div class="story-segment card card-body" style="margin-top: 125px;">
         <h1 class="S-head">{{ story.name }}</h1>
+        <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill "style="margin-right: 15px;"><b>{{ story.category }}</b></h6>
+
         <hr>
         {{ page_obj.object_list|first|linebreaks }}  
     </div><br><br>
@@ -22,13 +24,12 @@
                 <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
                 {% endif %}
             </ul>
-        
             {% if user.is_authenticated %}
             <div>
                 {% if is_bookmarked %}
-                <a href="{% url 'bookmarks_likes:toggle_bookmark' story_id=story.pk %}" class="btn btn-secondary" style="margin-left: 15px;">Remove from Bookmark</a>
+                <a href="{% url 'bookmarks_likes:toggle_bookmark' story_id=story.pk %}" class="btn btn-secondary  bi-bookmark-check" style="margin-left: 15px;"> Remove </a>
                 {% else %}
-                <a href="{% url 'bookmarks_likes:toggle_bookmark' story_id=story.pk %}" class="btn btn-secondary">Bookmark</a>
+                <a href="{% url 'bookmarks_likes:toggle_bookmark' story_id=story.pk %}" class="btn btn-secondary  bi-bookmark"> Bookmark</a>
                 {% endif %}
             </div>
             {% endif %}
@@ -37,12 +38,20 @@
 
         <div>
             {% if user.is_authenticated %}
-                <form action="{% url 'bookmarks_likes:toggle_like' story_id=story.pk %}" method="post">
+            <form action="{% url 'bookmarks_likes:toggle_like' story_id=story.pk %}" method="post">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Toggle Like</button>
-                </form>
+                <button type="submit" class="like-btn">
+                    {% if user_has_liked %}
+                        <i class="bi bi-hand-thumbs-up-fill"></i>  
+                    {% else %}
+                        <i class="bi bi-hand-thumbs-up"></i> 
+                    {% endif %}
+                </button>
+            </form>
+            
+            
             {% else %}
-                <p><a href="{% url 'user_info:user_login' %}">Log in to like this story</a></p>
+             <p><a href="{% url 'user_info:user_login' %}">Log in to like this story</a></p>
             {% endif %}
             <p>{{ story.liked_by.count }} Likes</p>
         </div>
@@ -59,26 +68,46 @@
     {% endif %}
 </div>
 
-<div class="container mt-3 card">
-    <h2>Add Comment</h2>
-    {% if request.user.is_authenticated %}
-        <form action="{% url 'main:add_comment' story_id=story.pk %}" method="post">
-            {% csrf_token %}
-            <br>
-            <div class="mb-3">
-                <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        
-    {% else %}
-        <p>Please <a href="{% url 'user_info:user_login' %}">log in</a> to leave a comment.</p>
-    {% endif %}
-</div>
+
+
 
 <hr>
-<h2 style="padding: 25px;">Comments</h2>
-<div class="container">
+<div class="container mt-4">
+    <h2 style="padding: 25px;">Recommended Stories</h2>
+    <div class="row">
+        {% for recommended_story in recommended_stories %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <!--<img src="#}" class="card-img-top" alt="#">-->
+                <div class="card-body">
+                    <h5 class="card-title">{{ recommended_story.name }}</h5>
+                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{story.category}} "style="margin-right: 15px;"><b>{{ story.category }}</b></h6>
+                    <p class="card-text">{{ recommended_story.description }}</p>
+                    <a href="{% url 'main:show_story' pk=recommended_story.pk %}" class="btn btn-primary">Read Story</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div><hr>
+
+{% if user.is_authenticated %}
+<div class="container mt-3 card">
+    <h2>Add Comment</h2>
+    <form action="{% url 'main:add_comment' story_id=story.pk %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% else %}
+<p>Please <a href="{% url 'user_info:user_login' %}">log in</a> to leave a comment.</p>
+{% endif %}
+
+<div class="container mt-4">
+    <h2 style="padding: 25px;">Comments</h2>
     <div class="row">
         <div class="col">
             {% if comments %}
@@ -87,11 +116,10 @@
                         <div class="card-body">
                             <h5 class="card-title"><b>@{{ comment.user.username }}</b></h5>
                             <p class="card-text">{{ comment.content }}</p>
-                            {% if request.user == comment.user or request.user.is_staff %}
+                            {% if request.user.is_authenticated and request.user == comment.user or request.user.is_authenticated and request.user.is_staff %}
                             <a href="{% url 'main:delete_comment' comment_id=comment.id story_id=story.pk %}" class="btn btn-danger">Delete</a>
                             {% endif %}
                         </div>
-
                     </div>
                 {% endfor %}
             {% else %}
@@ -100,4 +128,6 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}

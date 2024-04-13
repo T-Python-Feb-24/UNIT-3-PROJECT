@@ -8,8 +8,8 @@ import os
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.http import HttpResponseForbidden,HttpRequest, HttpResponse
-
-
+from django.db.models import Q
+from bookmarks_likes.models import Like
 
 dotenv_path = os.path.join(os.path.dirname(__file__), 'key.env')
 load_dotenv(dotenv_path=dotenv_path)
@@ -62,25 +62,31 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 def show_story(request, pk):
     story = get_object_or_404(Story, pk=pk)
     lines = story.content.split('\n')  
-    is_bookmarked = story.saved_by.filter(pk=request.user.pk).exists()
+    is_bookmarked = False
+    user_has_liked = False    
+    recommended_stories = Story.objects.filter(~Q(pk=pk), category=story.category)[:3]  
+    
+    if request.user.is_authenticated:
+        is_bookmarked = story.saved_by.filter(pk=request.user.pk).exists()
+        user_has_liked = Like.objects.filter(user=request.user, story=story).exists()
 
 
     lines_per_page = 20
     segments = ['\n'.join(lines[i:i + lines_per_page]) for i in range(0, len(lines), lines_per_page)]
-
     paginator = Paginator(segments, 1)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
 
-    comments = story.comment_set.all()  
+    comments = story.comment_set.all()
 
     return render(request, 'main/show_story.html', {
         'story': story,
         'page_obj': page_obj,
         'comments': comments ,
         'is_bookmarked': is_bookmarked,
- 
+        'recommended_stories': recommended_stories,  
+        'user_has_liked': user_has_liked,
     })
 
 

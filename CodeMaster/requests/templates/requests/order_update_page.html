@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <h1 class="fs-1">Update</h1>
     <br>
-    <form action="{% url 'requests:order_update_page' order.id %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'requests:order_update_page' order.id %}"  method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% if not request.user.is_staff %}   
 
@@ -16,6 +16,8 @@
             <label for="exampleFormControlTextarea1" class="form-label">Description of the required service:</label>
             <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ order.description }}</textarea>
         </div>
+
+        
         {% else %}
         
         <h3>{{ order.subject }}</h3>
@@ -45,8 +47,10 @@
         </div>  
         {% endif %}
         <div class="mb-3">
-            <button class="btn bg-dark text-white" type="submit">Send</button>
+            <button class="btn bg-dark text-white"  type="submit">Send</button>
         </div>
+
     </form>
+    
 </div>
 {% endblock %}

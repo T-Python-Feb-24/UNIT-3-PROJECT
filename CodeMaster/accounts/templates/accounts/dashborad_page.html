@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<ul class="nav nav-tabs" id="myTab" role="tablist">
+<ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
     <li class="nav-item ms-2" role="presentation">
       <button class="nav-link active text-dark" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
     </li>
@@ -15,9 +15,22 @@
     {% endif %}
 </ul>
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show " id="home" role="tabpanel" aria-labelledby="home-tab">
-        {% if request.user.is_staff %}     
-        <h2 class="ms-3 mt-4">Orders({{ count }}):</h2>
+    <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home-tab">
+        {% if request.user.is_staff %}    
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex  gap-2">
+                <h2 class="ms-3 mt-4">Orders({{ count }}):</h2>
+            </div>
+            <div class="d-flex justify-content-end">
+                <form action="{% url 'accounts:dashborad_page' %}?tab='home'"  method="get" class="d-flex gap-2 me-2 w-auto">
+                    <input type="search" class="form-control " name="search"  value="{{request.GET.search}}"/>
+                    <input type="submit" value="search" class="btn btn-dark " />
+                </form> 
+            </div>            
+        </div>
+
+   
+       
         {% else %}
         <h2 class="ms-2 mt-4">My Orders ({{count }})</h2>
         {% endif %}
@@ -32,11 +45,9 @@
                         <th class="text-start">Subject</th>
                         <th>State</th>
                         <th>Ordered At</th>
-                        {% if request.user.is_staff %} 
+                        <th>Order number</th>
                             <th>Details</th>
-                        {% else %}
-                            <th>Edit</th>
-                        {% endif %}
+                     
                         <th>Delete</th>
                     </tr>
                 </thead>
@@ -46,11 +57,13 @@
                             {% if request.user.is_staff %}
                             <td>{{ order.user.username }}</td>
                             {% endif %}
+                            
                             <td class="text-start">{{ order.subject }}</td>
                             <td {% if order.state == "Accepted" %} class="text-success" {% elif order.state == "Rejected" %} class="text-danger" {% elif order.state == "Under review" %} class="text-warning" {% endif %}>{{ order.state }}</td>
-                      
+                            
                             <td>{{ order.ordered_at }}</td>
-                            <td><a href="{% url 'requests:order_update_page' order.id %}">{% if request.user.is_staff %} details {% else %} <span class="material-symbols-outlined text-black">edit</span> {% endif %}</a></td>
+                            <td class="text-center">#{{ order.id }}</td>
+                            <td><a href="{% url 'requests:order_details' order.id %}">{% if request.user.is_staff %} details {% else %} <span class="material-symbols-outlined text-black">edit</span> {% endif %}</a></td>
                             
                             <td><a href="{% url 'requests:delete_order' order.id %}"><span class="material-symbols-outlined text-danger">delete</span></a></td>
                         </tr>
@@ -97,7 +110,7 @@
                         <p class="mb-0">info</p>
                     </div>
                     <div class="col-sm-9">
-                        <p class="text-muted mb-0">{{ request.user.profile.info }} </p>
+                        <p class="text-muted mb-0">{% if request.user.profile.info == "" %} No information {% else %} {{ request.user.profile.info }} {% endif %} </p>
                     </div>
                 </div>
                 <hr>

@@ -66,8 +66,11 @@ def dashborad_page(request:HttpRequest):
     if request.user.is_staff:
         count=Order.objects.count()
         orders = Order.objects.all()
+        if "search" in request.GET:
+            orders = Order.objects.filter(id__contains=request.GET["search"])    
+            
     else:
-        orders = Order.objects.filter(user=request.user)
+        orders = Order.objects.filter(user=request.user).order_by('-ordered_at')
         count=Order.objects.filter(user=request.user).count()
 
 

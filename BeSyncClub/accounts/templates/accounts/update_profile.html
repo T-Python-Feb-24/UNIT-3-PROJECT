@@ -13,14 +13,14 @@
 					{% csrf_token %}
 					<div class="row g-4">
 					<div class="col-md-4">	
-						<div class="text-center d-flex justify-content-center align-items-center flex-column gap-2 p-4 rounded-5 shadow-sm" style="background-color: #ffffff;">
+						<div class="text-center d-flex justify-content-center align-items-center flex-column gap-2 p-4 rounded-3 shadow-sm" style="background-color: #ffffff;">
 							<img src="{{ user.profile.avatar.url }}" class=" rounded-circle img-thumbnail" style="width: 300px; " alt="avatar">
 							<h6>Upload a different avatar...</h6>
 							<input type="file" class="form-control" name="avatar" />
 						</div>
 					</div>
 					<div class="col-md-8">
-						<div class="card mb-4 px-4 py-4 rounded-5 border-0 shadow-sm">
+						<div class="card mb-4 px-4 py-4 rounded-3 border-0 shadow-sm">
 							<h2 class="m-3">Account Details</h2>
 							<div class="card-body">
 								<div class="row mb-3 align-items-center">

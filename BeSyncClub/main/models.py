@@ -18,6 +18,8 @@ class Event(models.Model):
     themes = models.TextChoices("Theme", ["DataScience", "NetWork", "CyberSecurity", "SoftwareEngineering", "ArtificialIntelligence"])
     types = models.TextChoices("Type", ["Workshop", "Program", "Meeting", "Challenges"])
     
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     event_title = models.CharField(max_length=30) 
     event_description = models.TextField()
     objective = models.TextField()

@@ -16,6 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Diplomata&family=Londrina+Outline&family=Whisper&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Diplomata&family=Lobster&family=Londrina+Outline&family=Whisper&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
     <!-- Font Awsome -->
@@ -35,6 +37,13 @@
           font-style: normal;
       }
 
+      .caveat {
+          font-family: "Caveat", cursive;
+          font-size: x-large;
+          font-weight: 700;
+          font-style: normal;
+      }
+
       .com_img {
           width: 265px;
           height: 90px;
@@ -42,9 +51,7 @@
           border-radius: 15px;
         }
 
-        /* ----- White Block ---------------------------------------*/ 
-
-
+/* Category Ribbon Style */
 /* ----- Ribbon Container ---------------------------------------*/ 
 	#corner-ribbon > div > div {
 		background : transparent;
@@ -185,7 +192,8 @@
 
 	}
 
-        main {
+  /* Cards Style */
+    main {
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -211,7 +219,7 @@
       height: 100%;
       top: 0;
       left: 0;
-      opacity: 0.8;
+      opacity: 0.7;
       transition: opacity .2s ease-out;
     }
 
@@ -228,11 +236,18 @@
       font-family: 'Roboto Condensed', sans-serif;
       font-weight: normal;
       text-transform: uppercase;
+      color: rgb(255, 255, 255);
+    }
+
+    .card:hover h3 {
+        color: rgb(71, 71, 71);
+        inset: auto auto 220px 30px;
+        transition: inset .3s ease-out;
     }
 
     .card h6 {
       position: absolute;
-      inset: auto auto 20px 30px;
+      inset: auto auto 6px 30px;
       margin: 0;
       transition: inset .3s .3s ease-out;
       font-family: 'Roboto Condensed', sans-serif;
@@ -248,7 +263,7 @@
     }
 
   .card p {
-      inset: auto auto 80px 30px;
+      inset: auto auto 60px 30px;
     }
   
   .card a {
@@ -257,12 +272,6 @@
       text-decoration: none;
     }
   
-  .card:hover h3 {
-        color: rgb(71, 71, 71);
-        inset: auto auto 220px 30px;
-        transition: inset .3s ease-out;
-    }
-
     .card:hover h5 {
       inset: auto auto 230px 30px;
       transition: inset .3s ease-out;
@@ -283,7 +292,7 @@
 
   </head>
   
-  <body style="background: linear-gradient(#ffffff, #afa172be); background-attachment:  fixed;">
+  <body style="background: linear-gradient(#ffffff, #a8a8a893); background-attachment:  fixed;">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-collapse fixed-top shadow p-2 mb-1">
         <div class="container">
@@ -358,7 +367,7 @@
     <!-- Footer -->
 
     <footer class="bd-footer">
-      <hr style="margin-top: 5rem;">
+      <hr style="margin-top: 2rem;">
       <div class="container py-3 py-md-3 px-3 px-md-3 text-body-secondary">
         <div class="row">
           <div class="col-lg-3 mb-3">
@@ -383,12 +392,23 @@
             </ul>
           </div>
 
-          <div class="col-6 col-lg-2 mb-3">
+          <!-- <div class="col-6 col-lg-2 mb-3">
             <h5>Legal</h5>
             <ul class="list-unstyled">
               <li class="mb-2"><a href="#" style="color: #080822; text-decoration: none;">Term Policy</a></li>
               <li class="mb-2"><a href="#" style="color: #080822; text-decoration: none;">Accessibility</a></li>
             </ul>
+          </div> -->
+        </div>
+
+        <div class="row">
+          <hr>
+          <div class="col d-flex" style="justify-content: space-between;">
+            © 2024 by. Nawal Alrashed, All rights reserved.
+            <div class="d-flex gap-3">
+              <a href="#" style="color: #080822; text-decoration: none;">Terms & Conditions</a>
+              <a href="#" style="color: #080822; text-decoration: none;">Privacy Policy</a>
+            </div>
           </div>
         </div>
       </div>

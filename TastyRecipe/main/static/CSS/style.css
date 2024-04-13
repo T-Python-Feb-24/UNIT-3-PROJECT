@@ -45,8 +45,17 @@
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    height: 50%;
+    height: 10%;
     opacity: 50%;
+}
+
+.image2 {
+  background-image: url("/static/images/food.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 100vh;
+  opacity: 50%;
 }
 
 .p {

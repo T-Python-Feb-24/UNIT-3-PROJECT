@@ -14,7 +14,7 @@
 					<div class="row g-4">
 					<div class="col-md-4">	
 						<div class="text-center d-flex justify-content-center align-items-center flex-column gap-2 p-4 rounded-3 shadow-sm" style="background-color: #ffffff;">
-							<img src="{{ user.profile.avatar.url }}" class=" rounded-circle img-thumbnail" style="width: 300px; " alt="avatar">
+							<img src="{{ user.profile.avatar.url }}" class=" rounded-circle img-thumbnail shadow-sm" style="width: 300px; " alt="avatar">
 							<h6>Upload a different avatar...</h6>
 							<input type="file" class="form-control" name="avatar" />
 						</div>
@@ -58,7 +58,7 @@
 									<div class="col-10">
 										<select name="major" class="form-select">
 											{% for val, major in majors %}
-												<option value="{{val}}" {% if student.major == val %} selected {% endif %}>{{major}}</option>
+												<option value="{{val}}" {% if user.student.major == val %} selected {% endif %}>{{major}}</option>
 											{% endfor %}
 										</select>
 									</div>

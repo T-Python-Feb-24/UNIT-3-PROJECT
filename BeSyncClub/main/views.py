@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from datetime import date, timedelta
+from django.contrib.auth.models import User
+
 import math
 
 from .models import Event
@@ -11,7 +13,8 @@ from accounts.models import Student
 def index_view(request: HttpRequest):
 
     events = Event.objects.all()
-    return render(request, "main/index.html", {"events" : events})
+    members = User.objects.filter(groups__name='members')
+    return render(request, "main/index.html", {"events" : events, "members" : members})
 
 
 

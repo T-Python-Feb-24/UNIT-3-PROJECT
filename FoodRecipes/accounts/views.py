@@ -79,7 +79,7 @@ def user_profile(request:HttpRequest, user_id):
     except:
         return render(request, "main/not_found.html")
 
-    return render(request, "accounts/user_profile.html", {"user_profile": user_profile, "my_recipes" : my_recipes})
+    return render(request, "accounts/user_profile.html", {"user_profile": user_profile, "my_recipes" : my_recipes })
 
 
 

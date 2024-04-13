@@ -42,8 +42,8 @@
 
       {% for rec in recipes %}
           <div class="col-4">
-              <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
-                  <img src="{{ rec.image.url }}"  class="w-100 rounded-4"/>
+              <div class="d-flex flex-column gap-2 border border-1 shadow p-3  h-100">
+                  <img src="{{ rec.image.url }}"  class="w-100 "/>
                   <h2><a href="{% url 'main:detail_recipes' rec.id  %}" class="text-decoration-none text-black">{{rec.name }}</a></h2>
                   <h3><a href="{% url 'accounts:user_profile' rec.user.id %}" class="text-decoration-none text-black"> {{rec.user.username}}</a></h3>
                   <h6 class="cat pt-1 pb-1 rounded-pill {{ rec.category }}" style="width: 100px; background-color: rgb(116, 233, 174); text-align: center;">{{ rec.category }}</h6>

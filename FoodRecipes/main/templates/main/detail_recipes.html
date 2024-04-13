@@ -6,6 +6,13 @@
     .checked {
       color: orange;
     }
+    .favorite {
+    font-size: 1.6rem;
+    color: red;
+    
+
+}
+
 </style>
 {% endblock %}
 {% block content  %}
@@ -23,7 +30,7 @@
                     <h1>{{ recipes.name  }}</h1>
                     <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{recipes.categroy}}" style="width: 100px; text-align: center;">{{ recipes.category}}</h6>
                     <p>{{ recipes.content }}</p>
-                    <p>{{recipes.time_coockin}}</p>
+                    <p>{{recipes.time_coocking}}</p>
                     <p>{{recipes.number_people}}</p>
                     <h6>{{recipes.published_at}}</h6>
                     
@@ -37,35 +44,34 @@
                        
                     </div>
                     
+                    <div class=" modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+            
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Favorite</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+            
+                            <span class="material-symbols-outlined">
+                                favorite
+                                </span>
+                            <div class="modal-footer ">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                    
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+           
+
+        </div>   
             
-            
-
     
-
-    
-
-    <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Favorite</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <span class="material-symbols-outlined">
-                favorite
-                </span>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
-    
-            </div>
-          </div>
-        </div>
-    </div>
+       
 
     <div class="row mt-4">
         <div class="col-6">
@@ -103,13 +109,13 @@
             
         </div>
 
-        <div class="col-12 col-md-8 all-comments mb-3" id="commentDetail">
+        <div class="col-6  mt-5" id="commentDetail">
 
             {% for comment in comments %}
 
                     <div class="border rounded-4 mt-2 mb-3 d-flex flex-column p-3">
                         <div class="d-flex align-items-center gap-2">
-                            <img src="" alt="" width="40" height="40">
+                            <!-- <img src="" alt="" width="40" height="40"> -->
                             <h4 class="pt-3">{{ comment.user.username}}</h4>
                         </div>
                         <p class="com-date">{{comment.comment_date}}</p>

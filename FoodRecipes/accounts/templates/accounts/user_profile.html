@@ -3,41 +3,82 @@
 {% block title %} {{user_profile.user.username }} profile {% endblock %}
 
 {% block style %}
+<style>
+    .main{
+         
+        background-color: #2e674cb3; 
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+        padding:20px; 
+        border-radius: 10px
 
+        
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<section style="width: 500px;">
+<section  >
     <div class="container">
-        <div class="row ">
+        <div class="row mt-5 main " style="color: rgb(234, 241, 238);  font-family: Oswald , sans-serif;">
             <h1>{{user_profile.user.username }} Profile</h1>
-            <div class="col d-flex justify-content-between align-items-center">
-                <img src="{{user_profile.avatar.url}}" class="avatar w-100 rounded-4" style="width: 100px; height: 100px;" />
-                <div class="d-flex flex-column">
+            <div class="col-6 d-flex justify-content-between align-items-center">
+                <img src="{{user_profile.avatar.url}}" class="avatar w-100 rounded-4" style="width: 300px; height: 300px;" />
+                
+                <div class="col-6 d-flex flex-column " style="padding-left: 50px;">
                     <h3>{{user_profile.user.first_name}} {{ user_profile.user.last_name}}</h3>
-                    <a href="mailto:{{user_info.user.email}}">{{ user_profile.user.email }}</a>
+                    <a href="mailto:{{user_info.user.email}} " style="color: rgb(190, 234, 215);">{{ user_profile.user.email }}</a>
                     <p class="mt-2">{{ user_profile.about }}</p>
                     
                 </div>
-                <div class="col">
+                
+            </div>
+            <div class="row mt-2 ">
+                <div class="col-9">
                     <h5>@{{user_profile.user.username}} </h5>
                     {% if request.user == user_profile.user %}
-                        <a href="{% url 'accounts:update_profile' %}" class="btn btn-primary">Update</a>
+                        <a href="{% url 'accounts:update_profile' %}" class="btn btn" style="background-color: rgb(161, 215, 145);" >Update</a>
                     {% endif %}
+                    
+                </div>
+                <div class="col-3 order-last">
+                   
                 </div>
             </div>
         </div>
+        
     </div>
 </section>
     
     
 <section>
-    <div class="container">
-
+    
+    
+    <div class="container mt-5">
+        {% if user_profile.user.is_staf %}
         <div class="row">
-            {% if not user_profile.user.is_staf %}
+            <h1 class="fw-light text-blak ">My Recipes</h1>
+            {% for rec in my_recipes %}
+            <div class="col-12 mb-3">
+                <div class="d-flex flex-row align-items-center border border-1 shadow p-3 ">
+                    <div class="w-40">
+                        <img src="{{  rec.image.url }}" class="w-100  card-poster"  style="height: 300px;" />
+                    </div>
+                    <div class="w-75 ps-3">
+                        <h2><a href="{% url 'main:detail_recipes' rec.id  %}" class="text-decoration-none text-black">{{rec.name }}</a></h2>
+                        <h3><a href="{% url 'accounts:user_profile' user.id %}" class="text-decoration-none text-black"> {{rec.user.username}}</a></h3>
+                        <h6 class="cat pt-1 pb-1 rounded-pill {{ rec.category }}" style="width: 100px; background-color: rgb(116, 233, 174); text-align: center;">{{ rec.category }}</h6>
+                        <h6 class="text-muted">{{ rec.published_at }}</h6>
+                    
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="row">
+            
             <h1 class="fw-light text-blak ">Comments</h1>
-            <h2>{{user_profile.user.username}} Comments</h2>
+            <!-- <h2>{{user_profile.user.username}} Comments</h2> -->
                 <div class="col d-flex flex-column gap-4">
                     {% for comment in user_profile.user.comment_set.all %}
                         <div class="d-flex flex-column gap-1 p-3 shadow">
@@ -47,9 +88,9 @@
                         </div>
                     {% endfor %}
                 </div>
-            {% endif %}
-            {% if not request.user.is_staf %}
-                <h1 class="fw-light text-blak ">Favorite</h1>
+            
+          
+                <h1 class="fw-light text-blak mt-5">Favorite</h1>
                     {% for rec in user.favorite_set.all %}
                 <div class="col-12 mb-3">
                     <div class="d-flex flex-row align-items-center border border-1 shadow p-3 ">
@@ -67,60 +108,10 @@
                 </div>
                 {% endfor %}
          
-                {% endif %}
-        </div>            
+                
+        </div> 
+        {% endif %}      
     </div>
-
-    <div class="container">
-
-        <div class="row">
-            <h1 class="fw-light text-blak ">Comments</h1>
-            <h2>{{user_profile.user.username}} Comments</h2>
-            <div class="col d-flex flex-column gap-4">
-                {% for rec in user_profile.recipes.recipes_set.all %}
-                <div class="col-12 mb-3">
-                    <div class="d-flex flex-row align-items-center border border-1 shadow p-3 ">
-                        <div class="w-40">
-                            <img src="{{  rec.image.url }}" class="w-100  card-poster"  style="height: 300px;" />
-                        </div>
-                        <div class="w-75 ps-3">
-                            <h2><a href="{% url 'main:detail_recipes' rec.id  %}" class="text-decoration-none text-black">{{rec.name }}</a></h2>
-                            <h3><a href="{% url 'accounts:user_profile' rec.user.id %}" class="text-decoration-none text-black"> {{rec.user.username}}</a></h3>
-                            <h6 class="cat pt-1 pb-1 rounded-pill {{ rec.category }}" style="width: 100px; background-color: rgb(116, 233, 174); text-align: center;">{{ rec.category }}</h6>
-                            <h6 class="text-muted">{{ rec.published_at }}</h6>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>            
-        </div>
-    </section>  
-
-    <section>
-        <div class="container p-2">
-            
-            {% if request.user.is_staf %}
-        <div class="row">
-            {% for rec in my_recipes %}
-            <div class="col-12 mb-3">
-                <div class="d-flex flex-row align-items-center border border-1 shadow p-3 ">
-                    <div class="w-40">
-                        <img src="{{  rec.image.url }}" class="w-100  card-poster"  style="height: 300px;" />
-                    </div>
-                    <div class="w-75 ps-3">
-                        <h2><a href="{% url 'main:detail_recipes' rec.id  %}" class="text-decoration-none text-black">{{rec.name }}</a></h2>
-                        <h3><a href="{% url 'accounts:user_profile' user.id %}" class="text-decoration-none text-black"> {{rec.user.username}}</a></h3>
-                        <h6 class="cat pt-1 pb-1 rounded-pill {{ rec.category }}" style="width: 100px; background-color: rgb(116, 233, 174); text-align: center;">{{ rec.category }}</h6>
-                        <h6 class="text-muted">{{ rec.published_at }}</h6>
-                       
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        
-        {% endif %}
-    </section>
+    
+   
 {% endblock %}

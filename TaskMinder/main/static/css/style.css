@@ -216,7 +216,7 @@ section{
 
 
 /* dashboard  */
-.all-comments{
+/* .all-comments{
   position: relative;
   overflow-y: scroll;
   height: 400px;
@@ -237,14 +237,14 @@ section{
 .all-comments::-webkit-scrollbar-thumb {
   background:#198754;
   border-radius: 15px;
-}
+} */
 
 
 
 
 
 
-
+/* 
 
 .container {
   max-width: 400px;
@@ -295,4 +295,4 @@ input[type="submit"]:hover {
 
 .task-item button:hover {
   background-color: #d32f2f;
-}
+} */

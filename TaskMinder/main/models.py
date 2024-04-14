@@ -24,17 +24,17 @@ class Task(models.Model):
 
 
 
-class Project(models.Model):
+# class Project(models.Model):
 
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    start_date = models.DateField()
-    end_date = models.DateField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+#     title = models.CharField(max_length=255)
+#     description = models.TextField()
+#     start_date = models.DateField()
+#     end_date = models.DateField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
     
 
 
@@ -42,7 +42,7 @@ class Project(models.Model):
 class Comment(models.Model):
 
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    # project = models.ForeignKey(Project, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     context = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -64,9 +64,9 @@ class Note(models.Model):
         return self.title
 
 
-class SentEmail(models.Model):
+# class SentEmail(models.Model):
     
-    recipient_email = models.EmailField()
-    subject = models.CharField(max_length=255)
-    message = models.TextField()
-    sent_timestamp = models.DateTimeField(auto_now_add=True)
+#     recipient_email = models.EmailField()
+#     subject = models.CharField(max_length=255)
+#     message = models.TextField()
+#     sent_timestamp = models.DateTimeField(auto_now_add=True)

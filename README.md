@@ -4,16 +4,17 @@
 A task management project is designed to help individuals or teams organize, track, and complete tasks efficiently. It provides a centralized platform for managing tasks, enabling users to effectively plan, collaborate, and monitor progress.
 
 ## Features List here
-- Task Creation
-- Task Prioritization
-- Task Status Tracking
-- Task Comments and Discussions
-- Task Attachments
-- Task Reminders and Notifications
-- Task Filtering and Sorting
+- User Registration and Authentication
+- Dashboard and Task Management
+- Reading List
+- Journaling
+- Notes
+- Yearly Goals
+- Habit tracking and progress monitoring
+- Security and Privacy
 
 ## User Stories, Wireframes & UML links
-- User stories https://drive.google.com/file/d/1XJ90WkcmdJwDFH_svSfNu-5yzb3jCBo8/view?usp=sharingdocument 
+- User stories https://docs.google.com/document/d/1-WhOZNMp7xSz-ZuSr-Pn4I5KpTfeI3mK6tN47NaGdyo/edit?usp=sharing
 - Wireframe https://drive.google.com/file/d/1ahLSK0RDc5aatMrIvBhE6s068AZ-cXfr/view?usp=sharing 
 - UML https://drive.google.com/file/d/1ArY_ObPLSYrVPnu2YzwmWo0thF5GsNSN/view?usp=sharing
 

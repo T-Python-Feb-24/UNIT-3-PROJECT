@@ -19,9 +19,9 @@
         <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
         <form class="d-flex" role="search">
             {% if request.user.is_authenticated %} 
-            <a class="nav-link mt-3 px-3" href="{% url 'main:dashboard' %}" style="color: rgb(149, 99, 69);">WELCOME ✦{{request.user.username }}✦ </a>
+            <a class="nav-link mt-3 px-3" href="{% url 'main:dashboard' %}" style="color: rgb(149, 99, 69);text-transform: capitalize;">WELCOME ✦{{request.user.username }}✦ </a>
              {% endif %}
-            <button class="btn"><a href="#section1" class="d-flex btn btn-outline-warning">About</a></button>
+            <button class="btn"><a href="#section1" class="d-flex btn btn-outline-warning">About Us</a></button>
             <button class="btn"><a href="{% url 'accounts:sign_in' %}" class="d-flex btn btn-outline-warning">Sign In</a></button>
         </form>
     </div>
@@ -57,14 +57,19 @@
 <!-- About section  -->
 
 <section id="section1">
-    <h3 class="title" style="color: rgb(94, 85, 63);">About Us<br><br><br> </h3>
-    <p class="m-5" style="font-size: 20px;color: rgb(94, 85, 63);">Welcome to our Task Management Project! 
+    <h3 class="title" style="color: rgb(94, 85, 63);">Who We Are<br><br><br> </h3>
+    <p class="m-5" style="font-size: 20px;color: rgb(94, 85, 63); ">Welcome to the Personal Task Manager!! <br> your all-in-one solution for effortless productivity!
 
-        At our core, we believe that effective task management is the key to success in any endeavor. Our platform is designed to empower individuals and teams by providing a centralized hub for organizing, tracking, and collaborating on tasks and projects. 
-            
-        With our user-friendly interface and robust features, you'll be able to create and assign tasks, set deadlines, track progress, and communicate seamlessly with your team members. Our advanced notification system ensures that you never miss an important update or deadline. 
-            
-        Whether you're a project manager overseeing a complex initiative or an individual looking to stay on top of your personal tasks, our Task Management Project is here to support you every step of the way. <mark style="background-color: rgb(241, 213, 123);">Say goodbye to scattered to-do lists and hello to a streamlined workflow.</mark>
+        TaskMinder is designed to be your personal command center, helping you stay organized and on top of your tasks with ease. Forget about scattered to-do lists and missed deadlines – here, you'll have a centralized hub to create, prioritize, and track your tasks with precision.
+        
+        Whether you're a busy professional or a student tackling a packed schedule, the Personal Task Manager is your faithful companion. With its user-friendly interface, you can:
+        <br><br>
+       ✧ Quickly create personalized tasks with due dates and detailed notes <br>
+       ✧ Prioritize your responsibilities based on importance and urgency <br>
+       ✧ Set reminders to ensure you never miss a critical deadline <br>
+       ✧ Monitor your progress and get a clear overview of your productivity <br><br>
+
+        <mark style="background-color: rgb(241, 213, 123);">Say goodbye to scattered to-do lists and hello to a streamlined workflow.</mark> <br>
             
         Join us today and experience the power of efficient task management. Together, we'll unlock your full potential and achieve remarkable results.
     </p>

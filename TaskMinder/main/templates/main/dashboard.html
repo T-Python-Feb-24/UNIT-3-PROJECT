@@ -1,9 +1,9 @@
-{% extends 'main/dashboard_base.html' %}
+{% extends 'main/base.html' %}
 {% load static %}
 {% block title %} TaskMinder {% endblock %}
 
 
-{% block con2 %}
+{% block content %}
 
     <!-- Checkbox -->
 
@@ -17,9 +17,6 @@ checkbox
         </label>
 
 </section> -->
-
-
-
 
     <nav class="navbar">
         <div class="container-fluid">
@@ -39,13 +36,20 @@ checkbox
         <ul>
             <li>
             {% if request.user.is_authenticated %} 
-              <a class="nav-link mt-5" href="{% url 'accounts:user_profile' request.user.username %}" style="color: rgb(149, 99, 69);">WELCOME<br>✦{{request.user.username }}✦</a>
+              <a class="nav-link mt-5" href="#" style="color: rgb(149, 99, 69);text-transform: capitalize;">WELCOME<br>✦{{request.user.username }}✦</a>
             {% endif %}
+            <li><button class="btn mt-3"><a href="{% url 'accounts:user_profile' request.user.username %}">MY PROFILE</a></button></li>
+
+            
             </li>
-            <li><button class="btn mt-3"><a href="{% url 'main:home_page' %}">HOME</a></button></li>
-            <li><button class="btn"><a href="#">PROJECTS</a></button></li>
-            <li><button class="btn"><a href="#">MY TASKS</a></button></li>
-            <li><button class="btn"><a href="#">CALENDAR</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:home_page' %}">HOME</a></button></li>
+            <li><button class="btn"><a href="">TASKS</a></button></li>
+            <li><button class="btn"><a href="">JOURNAL</a></button></li>
+            <!-- <li><button class="btn"><a href="#">CALENDAR</a></button></li> -->
+            <li><button class="btn"><a href="">READING LIST</a></button></li>
+            <li><button class="btn"><a href="">NOTES</a></button></li>
+            <li><button class="btn"><a href="">YEARLY GOALS</a></button></li>
+
             <hr class="m-3">
             <li><button class="btn logout"><a href="{% url 'accounts:logout_user' %}">LOGOUT</a></button></li>
         </ul>

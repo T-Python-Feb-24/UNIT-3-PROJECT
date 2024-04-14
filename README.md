@@ -1,158 +1,35 @@
 # UNIT-3-PROJECT
 
-## Create a Project of your own choosing
 
-Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
-
-
-## Project Name here
-project description here.
+## StoryHub ##
+StoryHub is a web platform designed for storytellers and readers alike, enabling a community-driven experience where users can publish, share, and interact with stories across various genres.
+the application emphasizes user engagement through features like story bookmarking, liking, and commenting, alongside a robust user profile system. Story Hub caters to a wide array of literary enthusiasts, providing tools for both amateur and seasoned writers to express their narratives and receive feedback from a vibrant community.
 
 ## Features List here
-- list of features
-
-## User Stories, Wireframes & UML links
-- User stories document link here.
-- wireframe link here.
-- UML link here.
-
-
-## Minimum Requirements
-- User Stories(shared as a link to document or added as a file).
-- Wireframe (shared as link or uploaded as a file) - You can use Figma or similar online wireframing/design software.
-- UML (shared as a link or uploaded as a file) - You can use Lucid Charts or similar online UML design tool.
-- Use Templates & Template Inheritance.
-- Organize your project in apps as needed.
-- Use models to represent you data.
-- Use a CSS library to style your website.
-- User Authentication & Authorization (register, login, logout, Limit access to some pages using permissions , etc.)
-- Use naming conventions.
-- Strive to make the user journey intuitive and complete.
-
-
-## Example Projects :
-
-
-1. **Task Management System:**
-- **Overview:** Create a platform for managing tasks and projects within a team or organization.
-- **Features:**
-- User authentication and role-based access control.
-- Task creation, assignment, and tracking.
-- Project management with milestones.
-- File uploads and comments on tasks.
-- Notification system for task updates.
-
-
-**Online Learning Platform:**
-
-- **Overview:** Develop a platform for online courses, quizzes, and educational resources.
-- **Features:**
-- User registration and profile management.
-- Course creation and enrollment.
-- Quiz and assessment functionalities.
-- Progress tracking and certificates.
+1.	User Authentication and Profiles:
+    o	Secure registration and login processes.
+    o	Personalized user profiles, where users can add a bio, manage their profile picture, and personalize their account details.
+2.	Story Management:
+    o	Create Stories: Users can create stories, specify categories, upload images, and write content.
+    o	Edit Stories: Authors have the ability to update their stories, change images, and modify content.
+    o	Delete Stories: Authors can remove their stories from the platform.
+    o	View Stories: Stories can be viewed by all visitors, with detailed pages displaying content, author information, and interactive elements.
+3.	Interactive Story Features:
+    o	Comments: Registered users can comment on stories to provide feedback or discuss content.
+    o	Likes: Users can like stories, which helps in recognizing popular content.
+    o	Bookmarks: Users can bookmark stories for easy access later, creating a personalized library of favorites.
+4.	Search and Discovery:
+    o	Users can browse stories by category or use a search function to find specific content or authors.
+    o	The homepage features new and trending stories to enhance content discoverability.
+5.	Admin Features:
+    o	Admin dashboard for managing all users, stories, comments, and site settings.
+    o	Ability to review user-generated reports on comments or stories, managing community conduct.
+6.	Responsive Design:
+    o	The website is fully responsive, ensuring a seamless experience on both desktops and mobile devices.
+7.	Dark Mode:
+    o	Users can toggle between light and dark modes, allowing for a customizable reading experience that suits their preference or ambient lighting conditions.
+8.	Contact and Feedback:
+    o	A contact form allows users to send messages directly to the site administrators, providing feedback or requesting support.
 
 
 
-
-**Crowdfunding Platform:**
-
-- **Overview:** Build a crowdfunding website where users can create campaigns and seek financial support for their projects.
-- **Features:**
-    - User profiles with project history.
-    - Campaign creation and customization.
-    - Payment integration for contributions.
-    - Progress tracking and updates.
-
-**Job Board and Recruitment System:**
-
-- **Overview:** Develop a platform for job seekers and employers to connect.
-- **Features:**
-    - User profiles with resumes.
-    - Job posting and application functionalities.
-    - Search and filter options for jobs.
-    - Employer dashboards for managing postings.
-
-
-**Inventory Management System:**
-
-- **Overview:** Build a system for tracking and managing inventory for businesses.
-- **Features:**
-    - User authentication with roles (e.g., admin, staff).
-    - Product catalog with stock levels.
-    - Order processing and tracking.
-    - Reporting and analytics.
-
-
-**Recipe Sharing Platform:**
-
-- **Overview:** Create a platform where users can share and discover recipes.
-- **Features:**
-    - User accounts with saved recipes.
-    - Recipe creation and editing.
-    - Search and categorization of recipes.
-    - User ratings and reviews.
-      
-## Resources:
-
-**Free high quality images :**
-
-- https://www.pexels.com/
-- https://unsplash.com
-
-**Free sounds website:**
-
-- https://mixkit.co/
-
-**Free stock videos:**
-
-- https://pixabay.com/videos/
-
-**Free Fonts:**
-
-- https://fonts.google.com
-
-**Free Icons**
-
-- https://fonts.google.com/icons
-- https://icons.getbootstrap.com/
-
-**CSS Library:**
-
-- https://getbootstrap.com/
-- https://get.foundation/index.html
-
-**CSS Animation libraries:**
-
-- https://animate.style
-- https://www.minimamente.com/project/magic/
-
-
-## Use python-dotenv to save your sensitive data.
-- https://pypi.org/project/python-dotenv/
-
-
-## Use a CDN or cloud storage provider to sore your large static files (videos, images, etc.), such as:
-- https://firebase.google.com/docs/storage
-
-
-
-## Use Git & Github to manage and track changes in your project.
-- At lease commit and sync the changes once at the end of everyday.
-
-
-
-## Edit the README.md file to include (include the info at the top):
-- Project Name
-- Project Description
-- Features list.
-
-## Wireframe / Design tools
-- https://www.figma.com/templates/wireframe-kits/
-- https://www.mockflow.com/
-
-## UML design tools
-- https://www.lucidchart.com/pages/examples/uml_diagram_tool
-- https://app.diagrams.net/
-
- 

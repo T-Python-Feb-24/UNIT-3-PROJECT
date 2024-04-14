@@ -3,7 +3,7 @@
 {% block title %} {{ user.username }} Profile {% endblock %}
 
 {% block content %}
-<div  class="container mt-5">
+<div class="container mt-5">
     <div style="margin-top: 125px;" class="row">
         <div class="col-2">
             <img src="{{ user.profile.avatar.url }}" class="avatar w-100 rounded-4" />
@@ -17,8 +17,14 @@
                 <p class="mt-2">{{ user.profile.about }}</p>
             </div>
             <hr/>
-            <h2>{{ user.username }} Comments</h2>
-            </div>
+            <h2>{{ user.get_full_name }}'s Stories</h2>
+            <ul>
+                {% for story in stories %}
+                    <li><a href="{% url 'main:show_story' pk=story.pk %}">{{ story.name }}</a></li>
+                {% empty %}
+                    <p>No stories found.</p>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>

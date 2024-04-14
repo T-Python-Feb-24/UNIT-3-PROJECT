@@ -10,13 +10,22 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden,HttpRequest, HttpResponse
 from django.db.models import Q
 from bookmarks_likes.models import Like
+from django.db.models import Count
+
 
 dotenv_path = os.path.join(os.path.dirname(__file__), 'key.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 
 def home(request):
-    return render(request, 'main/home.html')
+    most_liked_stories = Story.objects.annotate(num_likes=Count('liked_by')).order_by('-num_likes')[:5]
+
+    recent_stories = Story.objects.all().order_by('-created_at')[:10]
+
+    return render(request, 'main/home.html', {
+        'most_liked_stories': most_liked_stories,
+        'recent_stories': recent_stories
+    })
 
 from django.shortcuts import render, redirect
 from .models import Story
@@ -28,24 +37,31 @@ def add_story(request):
         category = request.POST.get('category')
         content = request.POST.get('content', '')  
 
-        try:
-            if not content.strip():
-                prompt = f"{name} is a {category} story. {description} Once upon a time,"
+        if not content.strip():
+            prompt = f"{name} is a {category} story. {description} Once upon a time,"
+            try:
                 content = get_completion(prompt)
+            except Exception as e:
+                print("API generation failed:", e)
+                messages.error(request, f"AI generation failed. Error: {str(e)}")
+                return render(request, 'main/add_story.html', {'CATEGORY_CHOICES': Story.CATEGORY_CHOICES})
 
-            Story.objects.create(
+        try:
+            new_story = Story.objects.create(
                 name=name,
                 description=description,
                 category=category,
                 content=content
             )
             messages.success(request, "Story added successfully.")
+            return redirect('main:all_stories')
         except Exception as e:
-            messages.error(request, f"Failed to add story. Error: {str(e)}")
+            messages.error(request, f"Failed to save story. Error: {str(e)}")
         
-        return redirect('main:home')
+        return render(request, 'main/add_story.html', {'CATEGORY_CHOICES': Story.CATEGORY_CHOICES})
     else:
         return render(request, 'main/add_story.html', {'CATEGORY_CHOICES': Story.CATEGORY_CHOICES})
+
 
 
 def get_completion(prompt, model="gpt-3.5-turbo"):
@@ -60,32 +76,34 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     return response.choices[0].message["content"]
 
 def show_story(request, pk):
-    story = get_object_or_404(Story, pk=pk)
-    lines = story.content.split('\n')  
+    try:
+        story = Story.objects.get(pk=pk)
+    except Story.DoesNotExist:
+        return render(request, "main/no_access.html")  
+
+    lines = story.content.split('\n')
     is_bookmarked = False
-    user_has_liked = False    
-    recommended_stories = Story.objects.filter(~Q(pk=pk), category=story.category)[:3]  
-    
+    user_has_liked = False
+    recommended_stories = Story.objects.filter(~Q(pk=pk), category=story.category)[:3]
+
     if request.user.is_authenticated:
         is_bookmarked = story.saved_by.filter(pk=request.user.pk).exists()
         user_has_liked = Like.objects.filter(user=request.user, story=story).exists()
 
-
     lines_per_page = 20
     segments = ['\n'.join(lines[i:i + lines_per_page]) for i in range(0, len(lines), lines_per_page)]
-    paginator = Paginator(segments, 1)  
+    paginator = Paginator(segments, 1)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
 
     comments = story.comment_set.all()
 
     return render(request, 'main/show_story.html', {
         'story': story,
         'page_obj': page_obj,
-        'comments': comments ,
+        'comments': comments,
         'is_bookmarked': is_bookmarked,
-        'recommended_stories': recommended_stories,  
+        'recommended_stories': recommended_stories,
         'user_has_liked': user_has_liked,
     })
 
@@ -113,12 +131,27 @@ def delete_story(request, pk):
     
     story.delete()
 
-    return redirect('main:home')  
+    return redirect('main:all_stories')  
 
 
 def all_stories(request):
+    query = request.GET.get('q')
+    category = request.GET.get('category')
     stories = Story.objects.all()
-    return render(request, 'main/all_stories.html', {'stories': stories})
+
+    if query:
+        stories = stories.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    if category:
+        stories = stories.filter(category=category)
+
+    return render(request, 'main/all_stories.html', {
+        'stories': stories,
+        'category_query': category,  
+        'category_choices': Story.CATEGORY_CHOICES  
+    })
+
+
 
 def add_comment(request, story_id):
     if request.method == "POST":
@@ -198,3 +231,16 @@ def light_mode(requset: HttpRequest):
     response.set_cookie("mode", "light")
 
     return response
+
+def no_access(request):
+    return render(request, 'main/no_access.html', {'message': 'You do not have permission to access this page.'})
+
+
+def about_us(request):
+    return render(request, 'main/about_us.html')
+
+def faq(request):
+    return render(request, 'main/faq.html')
+
+def help_page(request):
+    return render(request, 'main/Help.html')

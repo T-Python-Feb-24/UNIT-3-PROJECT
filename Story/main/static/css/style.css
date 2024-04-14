@@ -176,7 +176,7 @@ body.dark textarea.form-control {
 
 .main-box1:hover {
     transform: scale(1.2);
-    width: 500px;
+    width: 700px;
     z-index: 12; 
     box-shadow: 0 0 20px rgba(215, 215, 215, 0.5);
 }
@@ -202,6 +202,44 @@ body.dark textarea.form-control {
   width: 100%;
   margin-top: auto; 
 }
+.my-footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+}
+
+.my-footer h5 {
+  color: #ff7b00; /* Gold color for headers */
+  margin-bottom: 15px;
+}
+
+.my-footer ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.my-footer a {
+  color: #535151;
+  text-decoration: none;
+}
+body.dark .my-footer a {
+  color: #cccaca; 
+}
+
+.my-footer a:hover {
+  text-decoration: underline;
+}
+
+.social-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #d1d1d1;
+}
+
+.social-icon:hover {
+  color: #ffd700;
+}
+
 
 .add-plant-link {
     display: inline-block;
@@ -399,7 +437,7 @@ label {
 .Mystery{
   background-color: rgb(122, 122, 122);
 }
-.Science-Fiction{
+.Sci-Fi{
   background-color: rgb(31, 153, 235);
 }
 .Horror{
@@ -430,3 +468,114 @@ body.dark .bi {
 }
 
 /*end*/
+
+/* the continer with image */
+.ai-story-container {
+  height: 600px;  
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-left: 25px;
+  padding-top: 30px; 
+  position: relative; 
+}
+
+.ai-story-content {
+  color: white; 
+  max-width: 50%; 
+  position: relative; 
+  z-index: 2; 
+  padding: 20px; 
+}
+.ai-story-content::before {
+  content: "";
+  position: absolute;
+  border-radius: 25px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(3px); 
+  z-index: -1; 
+}
+
+.ai-story-content h2 {
+  font-size: 2rem; 
+}
+
+.ai-story-content p {
+  font-size: 1.2rem; 
+}
+
+.ai-story-content .btn {
+  margin-top: 20px; 
+}
+/*end */
+
+/*scroll horizontally */
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.story-card {
+  flex: 0 0 auto;
+  width: 300px; 
+  margin-right: 20px; 
+}
+
+.story-card:last-child {
+  margin-right: 0;
+}
+
+/*----*/
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; 
+}
+
+.story-card {
+  flex: 0 0 auto;
+  width: 300px; 
+  margin-right: 20px;
+}
+
+.story-card:last-child {
+  margin-right: 0;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  z-index: 2;
+}
+
+.carousel-control.left {
+  left: 0;
+}
+
+.carousel-control.right {
+  right: 0;
+}
+
+/* end */

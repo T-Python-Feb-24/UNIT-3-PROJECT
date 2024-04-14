@@ -6,17 +6,21 @@ from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from .models import Profile
 from django.contrib.auth.decorators import login_required
+from .decorators import login_required_or_no_access 
 
 
-
+@login_required_or_no_access
 def user_detail(request, username):
     try:
-        user = User.objects.get(username=username)
-    except:
-        return render(request, "main/no_access.html")
+        user_profile = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return redirect('main:no_access')  
 
-        
-    return render(request, 'user_info/user_detail.html', {'user': user})
+    if request.user.username != username and not request.user.is_superuser:
+        return redirect('main:no_access') 
+
+    return render(request, 'user_info/user_detail.html', {'user': user_profile})
+
 
 def register_user(request: HttpRequest):
     msg = None

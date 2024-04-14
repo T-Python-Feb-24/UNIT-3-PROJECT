@@ -4,17 +4,17 @@
 
 {% block content %}
 
-    <h1>Login</h1>
+    <h1 style="padding-top: 150px;">Login</h1>
     {% if msg %}
     <div class="alert alert-danger">{{msg}}</div>
     {% endif %}
-    <div style="margin-top: 125px;" class="row">
+    <div  class="row">
         <div class="col card " >
             <form action="{% url 'user_info:user_login' %}" method="post"  >
                 {% csrf_token %}
 
                 <div class="mb-3  ">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <label for="exampleInputEmail1" class="form-label">User name </label>
                   <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
                 </div>
                 <div class="mb-3">

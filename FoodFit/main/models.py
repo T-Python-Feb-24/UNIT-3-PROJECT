@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 
 class Recipe(models.Model):
     
-    categories = models.TextChoices("Category", ["Carbs", "Vegetarian" , "Protien"])
+    categories = models.TextChoices("Category", ["Mix","Carbs", "Vegetarian" , "Protien"])
 
     title=models.CharField(max_length = 64)
     about= models.TextField()
+    ingredients=models.TextField()
     quantity=models.IntegerField()
     fat=models.IntegerField()
     protien=models.IntegerField()

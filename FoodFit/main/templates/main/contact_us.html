@@ -1,46 +1,51 @@
-{% extends 'main/base.html' %}
 
+{% extends 'main/base.html' %}
+{% load static %}
 
 
 
  {% block content %}
 
 
-  <div class="row">
- <div class="col">
- <div class="d-flex flex-column gap-2">
-      <img src="" class="w-100 rounded-4" />
+
+ 
+ <div class=" contact-row row ">
+    {% if messages %}
+        <ul>
+          {% for message in messages %}
+                <div class="alert alert-success" role="alert"><li>{{ message }}</li></div>
+          {% endfor %}
+        </ul>
+    {% endif %}
 
 
- </div>
- </div>
-
-
-
-     <div class="col md-6">
-     <h1>Contact us </h1>
-     <hr>
-     <br>
-     <form action="{% url 'main:contact_us_page' %}"  method="POST"  enctype="multipart/form-data" class="d-flex flex-column gap-2" >
+  <article class="ccard-form  ">
+  <div class="im">
+  <div class="card-img-form">
+    <img class="card-img-form " src="{% static 'images/homeimg.jpg'%}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
+  
+ <form action="{% url 'main:contact_us_page' %}"  method="POST"  enctype="multipart/form-data" class="d-flex flex-column gap-2" >
             {% csrf_token %}
 
-          <label for="text">Enter your name:</label>
+          <label for="text">Your name:</label>
           <input type="text" name="name" placeholder="ex:Ahamd" class="form-control" required value="{% if request.user.is_authenticated %} {{ request.user.first_name}}{% endif %}"  />
-                
-            
-            
             <br>
-            <label for="email">Enter your email:</label>
+            <label for="email">Your email:</label>
             <input type="email" name="email" placeholder="ex:ahmad@gmail.com" class="form-control" required value="{% if request.user.is_authenticated %} {{ request.user.email}}{% endif %}" />
             <br>
             <label for="text">Your message:</label>
             <textarea name="message" placeholder="Enter your message.." class="form-control " style="height:200px;" required></textarea>
-            <input type="submit" value="send"  class="btn btn-primary"/>
+            <input type="submit" value="send"  class="b btn btn-primary"/>
             </form>
+      </div>
+</article>
+ 
 
 
-
-</div>
-</div>
+  </div>
  
  {% endblock %}

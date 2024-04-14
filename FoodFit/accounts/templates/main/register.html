@@ -1,17 +1,26 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block title %}Register New User{% endblock %}
 
 {% block content %}
 
-    <h1>Register New User</h1>
-     {% if msge %}
-    <div class="alert alert-danger"> <p>{{msge}}</p> </div>
-    {% endif %}
+ <div class=" contact-row row ">
+{% if messages %}
+       
+          {% for message in messages %}
+                <div class="alert alert-danger" role="alert">{{ message }}</div>
+          {% endfor %}
+        
+  {% endif %}
+  <article class="ccard-form  ">
+  <div class="im">
+  <div class="card-img-login">
+    <img class="card-img-login " src="{% static 'images/homeimg.jpg'%}" class="card-img-top" alt="...">
+  </div>
+   </div>
     
-    <div class="row">
-        <div class="col">
-            <form action="{% url 'accounts:register_user_view' %}" method="post" class="d-flex flex-column gap-2"  enctype="multipart/form-data" >
+  <div class="project-info">
+  <form action="{% url 'accounts:register_user_view' %}" method="post" class="d-flex flex-column gap-2"  enctype="multipart/form-data" >
                 {% csrf_token %}
 
                 <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
@@ -22,15 +31,20 @@
 
                 <textarea name="about" class="form-control" placeholder="about yourself"></textarea>
 
-                <h4>Choose Avatar:</h4>
+                <h6>Choose Avatar:</h6>
                 <input type="file" class="form-control" name="avatar" />
 
                 <input name="password" class="form-control" type="password" minlength="1" required placeholder="Password" />
-                <input type="submit" class="btn btn-primary" value="Sign Up" />
+                <input type="submit" class="b btn " value="Sign Up" />
 
             </form>
-        </div>
-    </div>
+        <h6>You already have an account ? <a href="{% url 'accounts:login_user_view' %}">login</a></h6>
+      </div>
+</article>
+ 
+
+
+  </div>
 
 
     {% endblock %}

@@ -1,11 +1,20 @@
 {% extends 'main/base.html' %}
+{% load static %}
+
 
 {% block content %}
 
-   <div class="row">
-        <h1>Update info</h1>
-        <div class="col">
 
+ <div class=" contact-row row ">
+  <article class="ccard-form4  ">
+  <div class="im">
+  <div class="card-img-login">
+    <img class="card-img-login " src="{% static 'images/homeimg.jpg'%}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
+  
             <form action="{% url 'accounts:update_user_profile_view' request.user.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
                 {% csrf_token %}
                  <label for="html">first name:</label>
@@ -19,17 +28,15 @@
                 <textarea name="about" class="form-control" > {{ info.about }} </textarea>
 
                  <h5>Choose avatar:</h5>
-                <img src="{{ info.avatar.url }}" class="thumb" />
+                <img src="{{ info.avatar.url }}" class="update-img" />
                 <input name="avatar"  type="file"  accept="image/*" class="form-control"  />
-                <input type="submit" class="btn btn-primary" value="Update" />
+                <input type="submit" class="b btn " value="Update" />
 
             </form>
+      </div>
+</article>
+ 
 
 
-        </div>
-
-
-    </div>
-
-
+  </div>
 {% endblock %}

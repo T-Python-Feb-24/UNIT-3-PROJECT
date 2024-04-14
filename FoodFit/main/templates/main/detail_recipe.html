@@ -19,44 +19,53 @@
  <br><br>
     <a href="{% url 'favorites:recipe_favorites_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
     
+    
 </div>
 </div>
+<a href="{% url 'main:update_recipe_page' recipe.id %}" class="btn btn-primary">update</a>
+        <a href="{% url 'main:delete_recipe_view' recipe.id %}" class="btn btn-danger">Delete</a>
 
 <div class="row ml-5 mt-5">
+<div class="user-recipe-box">
     <div class=" detail-info col md-6">
-    {% if request.user.is_staff %}
-        <a href="{% url 'main:update_recipe_page' recipe.id %}" class="btn btn-primary">update</a>
-        <a href="{% url 'main:delete_recipe_view' recipe.id %}" class="btn btn-danger">Delete</a>
-        {% endif %}
+    
+        
         <div class="row align-items-center flex-direction-row ">
         <div class="col">
-        <h4 class=" detail-info-h mt-5">{{recipe.title}}</h4>
+        <h4 class=" nut3 detail-info-h mt-5">{{recipe.title}}</h4>
         </div>
         <div class="col">
-        <p class="  mt-5"> {{recipe.category}}</p>
+        <p class=" num mt-5"> {{recipe.category}}</p>
         </div>
         </div>
         <br>
-        <p>Quantity : {{recipe.quantity}} Grams</p>
-        <p>Calories :{{recipe.calories}}</p>
+        <div class="r-f">
+        <p><strong class="nut1 ">Quantity :</strong> {{recipe.quantity}} Grams</p>
+        <p><strong class="nut2">Calories :</strong>{{recipe.calories}}</p>
         <br>
-        <p>Ingredients :{{recipe.calories}}</p>
         <br>
-        <p>How to prepare :<br><br>{{recipe.about}}</p>
-      
+        <p><strong class="nut3">Ingredients :</strong>{{recipe.calories}}</p>
+        <br>
+        <br>
+        <p><strong class="nut">How to prepare :</strong><br><br>{{recipe.about}}</p>
+      </div>
    
     </div>
- 
+ </div>
 
+<br>
+<br>
 
-       <div class="con">
-<div class="line">
-
-</div>
-</div>
+<div class="r-con">
+<div class="line2">
+  <div class="s-r-title-box2">
+  
+ </div>
+ </div>
+ </div>
         
         <!---->
-        <div class="row g-5 mt-5  justify-content-center align-items-center">
+        <div class="row g-5 mt-1  justify-content-center align-items-center">
   <h6 class=" nutritions-title">Nutritions</h6>
 <div class="col-md-8">
   <ul class=" nut-list list-group">
@@ -126,7 +135,7 @@ style=" height: 200px; width: 200px;"
 </div>
 
 
-<br>
+
  
 
 
@@ -187,13 +196,18 @@ style=" height: 200px; width: 200px;"
 <br>
 <br>
 <br>
+<div class="r-con">
+<div class="line2">
+  <div class="r-title-box2">
+  
+ </div>
+ </div>
+ </div>
 {% if recipes.count != 0%}
 
-<div class="con">
-<div class="more">
-<a href="{% url 'main:all_recipe_page'%}" class=" home-b btn ">See More</a>
-</div>
-</div>
+ <h1 class="d-flex justify-content-center align-items-center ">Related Recipes You May Like</h1>
+
+
 
 {% endif %}
 
@@ -203,8 +217,8 @@ style=" height: 200px; width: 200px;"
 
   <article class="ccard">
   <div class="im">
-  <div class="card-img">
-    <img class="card-img " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  <div class="card-img4">
+    <img class="card-img4 " src="{{recipe.image.url}}" class="card-img-top" alt="...">
   </div>
    </div>
 
@@ -225,5 +239,7 @@ style=" height: 200px; width: 200px;"
     {% endfor %}
 
   </div>
-  
+  <br>
+  <a href="{% url 'main:all_recipe_page'%}" class=" home-b btn ">See More</a>
+  <br>
  {% endblock %}

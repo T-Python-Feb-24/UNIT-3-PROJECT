@@ -20,6 +20,7 @@ def add_user_recipe(request: HttpRequest ):
             user=request.user,
             title=request.POST["title"],
             about=request.POST["about"],
+            ingredients=request.POST["ingredients"],
             quantity=request.POST["quantity"],
             calories=request.POST["calories"],
             category=request.POST["category"],
@@ -27,7 +28,7 @@ def add_user_recipe(request: HttpRequest ):
             )
 
             new_recipe.save()
-            return redirect('main:user_recipe_detail_page' )
+            return redirect('interactive:users_recipe_page')
 
         except Exception as e:
             print(e)
@@ -76,6 +77,7 @@ def update_recipe (request:HttpRequest,recipe_id):
       try:
          recipe.title=request.POST["title"]
          recipe.about=request.POST["about"]
+         recipe.ingredients=request.POST["ingredients"]
          recipe.quantity=request.POST["quantity"]
          recipe.calories=request.POST["calories"]
          recipe.category=request.POST["category"]
@@ -83,8 +85,6 @@ def update_recipe (request:HttpRequest,recipe_id):
             
          recipe.save()
          return redirect('interactive:user_recipe_detail_page')
-      except UserRecipe.DoesNotExist:
-         return redirect('main:home')
       except Exception as e:
             print(e)
             return redirect('interactive:user_recipe_detail_page' , recipe_id=recipe.id)

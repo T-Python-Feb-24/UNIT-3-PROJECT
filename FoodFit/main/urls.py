@@ -14,6 +14,7 @@ urlpatterns  = [
    path("search/recipe/",views.search_recipe,name="search_recipe_page"),
    path("contact/us/",views.contact_us,name="contact_us_page"),
    path("user/message/",views.user_message,name="user_message_page"),
+   path("delete/<msg_id>/message/",views.delete_message,name="delete_message_view"),
    path("comments/<recipe_id>/",views.comments,name="comments_view"),
 
    path("search/food/",views.search_food,name="search_food_page"),

@@ -1,26 +1,40 @@
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block title %}Login User{% endblock %}
 
 {% block content %}
 
-    <h1>Login</h1>
-    {% if msg %}
+
+
+ <div class=" contact-row row ">
+     {% if msg %}
     <div class="alert alert-danger">{{msg}}</div>
     {% endif %}
-    <div class="row">
-        <div class="col">
-
-            <form action="{% url 'accounts:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
+  <article class="ccard-login  ">
+  <div class="im">
+  <div class="card-img-login">
+    <img class="card-img-login " src="{% static 'images/homeimg.jpg'%}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
+  <form action="{% url 'accounts:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
                 {% csrf_token %}
 
-                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
-                <input name="password" class="form-control" type="password" minlength="1" required placeholder="Password" />
-
-                <input type="submit" class="btn btn-primary" value="Login" />
+                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" /><br>
+                <input name="password" class="form-control" type="password" minlength="1" required placeholder="Password" /><br>
+                <input type="submit" class="b btn btn-primary" value="Login" />
 
             </form>
-            
-        </div>
-    </div>
+        <h6>You dont have an account ? <a href="{% url 'accounts:register_user_view' %}">sign up</a></h6>
+      </div>
+</article>
+ 
+
+
+  </div>
+
+  
+ 
 {% endblock %}

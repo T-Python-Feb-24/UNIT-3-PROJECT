@@ -1,7 +1,7 @@
 
 {% extends 'main/base.html' %}
 {%load mathfilters %}
-
+{% load static %}
 
 
  {% block content %}
@@ -19,23 +19,32 @@
   <div class="box"> 
   <p class="title">Food Calorie Counter </p>
   <h1 class="">Search by food name  </h1>
-   <form method="POST" actions= "{% url 'main:search_food_page'%}"class="d-flex" role="search">
-{% csrf_token %}
-            <input class=" -search form-control me-2" type="search" placeholder="Search" name="query" >
-            <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+
   </div>
   </div>
   </div>
     </div>
 <br>
-<h1 class="api-title">Results for {{api.0.name}} : </h1>
+
 <hr>
- <div class="row mt-5">
+ <div class=" calories-box row mt-5">
+   <h1 class="api-title">Search by food name  </h1>
+    <form method="POST" actions= "{% url 'main:search_food_page'%}" class="d-flex" role="search">
+{% csrf_token %}
+     <input class=" -search2 form-control me-2" type="search" placeholder="Search" name="query" >
+    <button class="-searchbtn btn btn-outline-success" type="submit">Search</button>
+    </form>
+
+{% if api %}
+<div class="result-api">
+ <h1 class="api-title">Results for {{api.0.name}} : </h1>
+ <h1 class= "api-title">{{api.0.name}} has a total of {{api.0.calories}} calories </h1>
+</div>
+{% endif %}
  <div class=" x col">
 
 
-            {% if api %}
+            
             {% if api == "error"%}
             <div class="alert alert-danger "> something went wrong.Please try again </div>
             {% else%}
@@ -47,103 +56,179 @@
                 </div>
                 {% endif %}
                
-             <h1 class= "cal-title">{{api.0.name}} has a total of {{api.0.calories}} calories </h1>
              <ul class=" list-group">
+              <li class=" list-group-head d-flex justify-content-between align-items-center">
+                   <p class="u2"> Nutritional Values </p>
+                </li>
              <li class=" list-group-item d-flex justify-content-between align-items-center">
                     Total grams 
-                    <p>{{api.0.serving_size_g}} g</p>
+                    <p><strong class="nut">{{api.0.serving_size_g}}</strong> g</p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Carbohydrates
-                    <p>{{api.0.carbohydrates_total_g}}</p>
+                    <p><strong class="nut1">{{api.0.carbohydrates_total_g}}</strong> g</p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Protein
-                    <p>{{api.0.protein_g}}</p>
+                    <p><strong class="nut2">{{api.0.protein_g}}</strong> g</p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Sodium
-                    <p>{{api.0.sodium_mg}}</p>
+                    <p><strong class="nut3">{{api.0.sodium_mg}}</strong> mg</p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Sugar
-                    <p>{{api.0.sugar_g}}</p>
+                    <p><strong class="nut4">{{api.0.sugar_g}}</strong> g</p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Potassium
-                    <p>{{api.0.potassium_mg}}</p>
+                    <p><strong class="nut5">{{api.0.potassium_mg}}</strong> mg</p>
                 </li>
                 </ul>
 
              {% endif %}
-             {% endif %}
              
              </div>
               <div class="col">
-            <h1 class="cal-title2">To burn {{api.0.calories}} calories </h1>
             <ol class=" xx list-group ">
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li class=" list-group-head2 d-flex justify-content-between align-items-center">
+                    <p class="u" >To burn {{api.0.calories}} calories </p>
+                </li>
+        <li class="list-group-item2 d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-            <div class="">You have to Run for</div>
-            <span class=" -icon material-symbols-outlined">directions_run</span>
+            <div class="item-title">You have to Run for</div>
+            <img class="sport-img-2"src="{% static 'images/runing.png' %}" />
             </div>
-            <p class="mt-4"><strong>{{ api.0.calories | div:223 | mul:60 | floatformat:0}} </strong>minutes</p>
+            <p class=" mun mt-1">minutes <br><strong class="num">{{ api.0.calories | div:293 | mul:60 | floatformat:0}} </strong></p>
+            
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li class="list-group-item2 d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-            <div class="">You have to yoga for</div>
-            <span class=" -icon material-symbols-outlined">self_improvement</span>
+            <div class="item-title">You have to yoga for</div>
+            <img class="sport-img-" src="{% static 'images/yoga.png' %}" />
             </div>
-            <p class="mt-4"><strong>{{ api.0.calories | div:270 | mul:60 | floatformat:0}}</strong> minutes</p>
+            <p class=" mun mt-1">minutes <br><strong class="num1">{{ api.0.calories | div:270 | mul:60 | floatformat:0}}</strong> </p>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li class="list-group-item2 d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-            <div class="">You have to workout for</div>
-            <span class=" -icon material-symbols-outlined">fitness_center</span>
+            <div class="item-title">You have to workout for</div>
+            <img class="sport-img-2" src="{% static 'images/gym.png' %}" />
             </div>
-            <p class="mt-4"><strong>{{ api.0.calories | div:449 | mul:60 | floatformat:0}}</strong> minutes</p>
+            <p class="mun mt-1">minutes <br><strong class="num2">{{ api.0.calories | div:449 | mul:60 | floatformat:0}}</strong> </p>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li class="list-group-item2 d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-            <div class="">You have to walk for</div>
-            <span class=" -icon material-symbols-outlined">directions_walk</span>
+            <div class="item-title">You have to clean for</div>
+            <img class="sport-img-" src="{% static 'images/clean.png' %}" />
             </div>
-            <p class="mt-4"><strong>{{ api.0.calories | div:293 | mul:60 | floatformat:0}}</strong> minutes</p>
+            <p class="mun mt-1">minutes <br><strong class="num3">{{ api.0.calories | div:223 | mul:60 | floatformat:0}}</strong> </p>
         </li>
         </ol>
                     
           </div> 
+        
+        
+
+
+        <div class=" row">
+             <div class=" chart-food  col-md-8 ">
+  <canvas class="bar" id="myChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+
+
+<script>
+
+
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Total grams', 'Carbohydrates', 'Protein', 'Sodium', 'Sugar', 'Potassium'],
+      datasets: [{
+        label: 'grams',
+        data: [100, {{api.0.carbohydrates_total_g}}, {{api.0.protein_g}}, {{api.0.sodium_mg}}, {{api.0.sugar_g}}, {{api.0.potassium_mg}}],
+        backgroundColor: [
+      'rgb(255, 99, 132, 0.2)',
+      'rgb(255, 159, 64, 0.2)',
+      'rgb(255, 205, 86, 0.2)',
+      'rgb(75, 192, 192, 0.2)',
+      'rgb(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+    ],
+     borderColor: [
+      'rgb(255, 99, 132, 0.2)',
+      'rgb(255, 159, 64, 0.2)',
+      'rgb(255, 205, 86, 0.2)',
+      'rgb(75, 192, 192, 0.2)',
+      'rgb(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+    ],
+        borderWidth: 1
+        
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+</script>
+</div>
+</div>
+
         </div>
         </div>
 
 <br><br>
 <br>
-<hr>
 
 
 
-  <h1>Check Our Recipes</h1>
-<div class=" row row-cols-5 row-cols-md-1 g-1 mt-5 ">
- {% for recipe in recipes %}
- <div class="col-md-4 mt-5">
-  <div class=" col-md-3 ">
-   </div>
-    <div class="card h-100 ">
-      <img class="cardimg" src="{{recipe.image.url}}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'main:detail_recipe_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h5>
-        <p class="card-text">Quantity : {{recipe.quantity}}</p>
-        <p class="card-text">Calories : {{recipe.calories}}</p>
-      </div>
-      <div class="card-footer">
-        <p class="text-footer"><strong>{{recipe.category}} </strong></p>
-      </div>
-      </div>
-    </div>
-  
- 
-    {% endfor %}
+
+  <h1 class="api-title">Check Our Recipes</h1>
+
+
+<div class="con">
+<div class="more">
+<a href="{% url 'main:all_recipe_page'%}" class=" home-b btn ">See More</a>
+</div>
+</div>
+
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
+
+  <article class="ccard">
+  <div class="im">
+  <div class="card-img">
+    <img class="card-img " src="{{recipe.image.url}}" class="card-img-top" alt="...">
   </div>
+   </div>
+
+  <div class="project-info">
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'main:detail_recipe_page' recipe.id  %}">{{recipe.title}}</a>
+      </div>
+
+      <span class="tag">{{recipe.category}}</span>
+    </div>
+    <span class="lighter"
+      >Quantity: {{recipe.quantity}} <br>
+      Calories : {{recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
+
 <br><br><br>
 
  {% endblock %}

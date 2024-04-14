@@ -179,13 +179,32 @@ button:hover{
     margin-left: 28vw;
 
 }
+.-search2{
+    width: 600px;
+    height: 50px;
+    margin-left: 22vw;
+
+}
+.-searchbtn{
+    width: 90px;
+    height: 45px;
+}
 
 .x{
-    font-size: 25px;
+    font-size: 20px;
     font-family: "Great Vibes";
+    
     
 }
 
+.result-api{
+    margin-top: 1vw;
+    background-color: rgba(168, 228, 198, 0.3);
+    width: 1100px;
+    margin-left: 11vw;
+    border-radius: 30px;
+    margin-bottom: 3vw;
+}
 
 .-list{
     background-color: rgb(233, 237, 235);
@@ -195,8 +214,60 @@ button:hover{
 .list-group-item{
     color: rgb(19, 27, 23);
     background-color: rgb(239, 245, 242);
+    border-radius: 20px;
+    height: 80px;
+    width: 600px;
+    margin-bottom: 3px;
+    margin-left: 2vw;
+}
+.list-group-head{
+    color: rgb(19, 27, 23);
+    background-color: rgb(59, 59, 59);
+    border-radius: 20px;
+    height: 80px;
+    width: 600px;
+    margin-bottom: 3px;
+    color: #f0f4f7;
+    font-weight: 600;
+    font-size: 26px;
+    margin-left: 2vw;
+    margin-top: 1vw;
+}
+.list-group-head2{
+    color: rgb(19, 27, 23);
+    background-color: rgb(59, 59, 59);
+    border-radius: 20px;
+    height: 80px;
+    width: 680px;
+    margin-bottom: 3px;
+    color: #f0f4f7;
+    font-weight: 600;
+    font-size: 26px;
+    margin-top: 1vw;
+}
+.u{
+    margin-left: 13vw;
+    margin-top: 1vw;
+}
+.u2{
+    margin-left: 11vw;
+    margin-top: 1vw;
 }
 
+.list-group-item2{
+    color: rgb(19, 27, 23);
+    background-color: rgb(239, 245, 242);
+    border-radius: 20px;
+    height: 120px;
+    margin-bottom: 4px;
+    width: 680px;
+}
+
+.item-title{
+    margin-left: 2vw;
+    
+    font-weight: 500;
+}
 
 .xx{
     font-size: 20px;
@@ -221,8 +292,9 @@ button:hover{
 }
 
 .api-title{
-    font-family: "Great Vibes";
-    margin-left: 37vw;
+    
+    margin-top: 1vw;
+    text-align: center;
 }
 
 .card{
@@ -445,6 +517,7 @@ margin-bottom: 5vw;
   }
   
   .profile-userpic img {
+    object-fit: cover;
     float: none;
     margin: 0 auto;
     width: 80%;
@@ -809,7 +882,10 @@ align-items: center;
     margin-left: 48vw;
 }
 
-
+.r-f{
+    font-size: 25px;
+    font-weight: 500;
+}
 .detail-info{
     
     
@@ -861,7 +937,70 @@ align-items: center;
     height: 150px;
 }
 
+.sport-img-{
+    width: 90px;
+    height: 90px;
+    margin-left: 5vw;
+}
+.sport-img-2{
+    width: 70px;
+    height: 70px;
+    margin-left: 6vw;
+}
 
+.mun{
+    
+    margin-right: 4vw;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    
+   
+}
+.num{
+  
+    font-size: 30px;
+    color: #50a672;
+   
+}
+.num1{
+  
+    font-size: 30px;
+    color: #a6508f;
+   
+}
+.num2{
+  
+    font-size: 30px;
+    color: #c9a455;
+   
+}
+.num3{
+  
+    font-size: 30px;
+    color: #5077a6;
+   
+}
+
+.nut{
+    color: #a6508f;
+}
+
+.nut1{
+    color: #c9a455;
+}
+.nut2{
+    color: #50a672;
+}
+.nut3{
+    color: #5077a6;
+}
+.nut4{
+    color: #a67750;
+}
+.nut5{
+    color: #a66d50;
+}
 .user-recipe-img{
     width: 800px;
     height: 600px;
@@ -872,23 +1011,73 @@ align-items: center;
 .user-recipe-detial{
     margin-left: 3vw;
     padding-top: 2vw;
-    font-size: 20px;
+    font-size: 25px;
 }
+
+.r-title-box{
+    background-color: rgba(151, 199, 167, 0.5);
+    justify-content: center;
+    width: 1000px;
+    height: 80px;
+    border-radius: 50px;
+    margin-bottom: 4vw;
+}
+.r-title{
+    text-align: center;
+    font-size: 60px;
+}
+.r-con{
+    justify-content: center;
+    align-items: center;
+    
+}
+.r-title-box2{
+    position: absolute;
+    background-color: rgb(148, 175, 180);
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    
+}
+.s-r-title-box2{
+    position: absolute;
+    background-color: rgb(150, 180, 148);
+    justify-content: center;
+    margin-right: 1vw;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.line2{
+    margin-left: 20vw;
+    position: relative;
+    display: flex;
+    margin-top: 3vw;
+    width: 1000px;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3vw;
+    }
 .user-recipe-detial a{
     text-decoration: none;
 }
 
 .user-recipe-box{
     width: 1600px;
-    height: 560px;
+    height: 700px;
     border-radius: 30px;
     background-color: rgba(218, 221, 219, 0.5);
     margin-left: 2vw;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     overflow: scroll;
+    
 }
 
-
+/**/
 .cardabout {
     width: 900px;
     height: 400px;
@@ -970,6 +1159,17 @@ align-items: center;
     background-color: rgba(233, 236, 234, 0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     overflow: scroll;
+}
+.calories-box{
+    margin-top: 2vw;
+   margin-left: 7vw;
+    width: 1480px;
+    height: 1500px;
+    border-radius: 30px;
+    padding-top: 1vw;
+    background-color: rgba(233, 236, 234, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    
 }
 
 .profile-box2{
@@ -1097,3 +1297,206 @@ align-items: center;
     height: 400px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   }
+
+.chart-food{
+   
+    margin-left: 15vw;
+    
+}
+
+.alert{
+    margin-bottom: 5vw;
+    width: 900px;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+/*forms*/
+.ccard-form4 {
+    margin-top: 3vw;
+    margin-left: 5vw;
+    background-color: white;
+    color: black;
+    width: 1000px;
+    max-height: 900px;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+.ccard-form3 {
+    margin-top: 3vw;
+    margin-left: 5vw;
+    background-color: white;
+    color: black;
+    width: 1000px;
+    max-height: 1200px;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+.ccard-form2 {
+    margin-top: 3vw;
+    margin-left: 5vw;
+    background-color: white;
+    color: black;
+    width: 1000px;
+    max-height: 1000px;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+.ccard-form {
+    margin-top: 3vw;
+    margin-left: 5vw;
+    background-color: white;
+    color: black;
+    width: 1000px;
+    max-height: 730px;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+
+  .b{
+    background-color: #86b398;
+  }
+  .update-img{
+    width: 200px;
+    height: 200px;
+    border-radius: 30px;
+    object-fit: cover;
+    margin-bottom: 1vw;
+  }
+  
+ 
+
+ 
+  
+  .card-img-form {
+    position: relative;
+    top: -50px;
+    height: 100px;
+    display: flex;
+    height: 200px;
+    width: 780px;
+    object-fit: cover;
+    border-radius: 30px;
+    margin-left: 75px;
+  }
+
+
+/*ci*/
+  .card-img4{
+    position: relative;
+    top: -60px;
+    height: 100px;
+    display: flex;
+  }
+ 
+  .card-img4 a,
+  .card-img4 {
+    height: 280px;
+    width: 280px;
+    object-fit: cover;
+    border-radius: 100%;
+    
+    margin-left: 30px;
+    
+    
+  }
+
+.contact-row{
+    justify-content: center;
+    margin-top: 7vw;
+
+}
+
+/*msg*/
+
+.ccard-msg {
+    margin-top: 8vw;
+    margin-left: 1vw;
+    background-color: white;
+    color: black;
+    width: 360px;
+    max-height: 500px;
+    border-radius: 30px;
+    
+  }
+
+ 
+  
+  .card-img-msg {
+    position: relative;
+    top: -50px;
+    height: 100px;
+    display: flex;
+    height: 280px;
+    width: 280px;
+    object-fit: cover;
+    border-radius: 30px;
+    margin-left: 30px;
+  }
+
+
+
+  .card-img-msg {
+    position: relative;
+    top: -60px;
+    height: 100px;
+    display: flex;
+  }
+ 
+  .card-img-msg a,
+  .card-img-msg {
+    height: 230px;
+    width: 230px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-left: 34px;
+    
+    
+  }
+  .project-title-msg {
+    text-align: center;
+    font-weight: 500;
+    margin-left: 6vw;
+    font-size: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: black;
+  }
+
+.lighter-msg{
+    text-align: center;
+}
+
+/*login*/
+.ccard-login {
+    margin-top: 5vw;
+    margin-left: 1vw;
+    background-color: white;
+    color: black;
+    width: 1000px;
+    max-height: 480px;
+    border-radius: 30px;
+    
+  }
+
+.card-img-login {
+    position: relative;
+    top: -50px;
+    height: 100px;
+    display: flex;
+    height: 200px;
+    width: 780px;
+    object-fit: cover;
+    border-radius: 30px;
+    margin-left: 75px;
+  }
+
+
+
+ 

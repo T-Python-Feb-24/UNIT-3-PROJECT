@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from main.models import Comment 
 from .models import Profile
 from django.db import transaction
+from django.contrib import messages
 
 # Create your views here.
 
@@ -16,8 +17,8 @@ def register_user_view(request:HttpRequest):
         try:
             with transaction.atomic():
                 if User.objects.filter(username=request.POST["username"]).exists():
-                    msge=" Username already exite , try another username "
-                    return render(request, "accounts/register.html",{"msge":msge})
+                  messages.error(request, "username already used , Please choose another username")
+                  return render(request, "accounts/register.html")
                 
                 new_user = User.objects.create_user(username=request.POST["username"],
                 email=request.POST["email"], first_name=request.POST["first_name"], 

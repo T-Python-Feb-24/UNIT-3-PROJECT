@@ -1,52 +1,59 @@
 {% extends 'main/base.html' %}
-
+{% load static%}
 
 
 
  {% block content %}
 
-
-
- <div class="row">
- <div class="col-md-6 justify-content-center align-items-center"></div>
-<div class="col-md-6 justify-content-center align-items-center">
-
+  <div class=" contact-row row ">
+  <article class="ccard-form3  ">
+  <div class="im">
+  <div class="card-img-form">
+    <img class="card-img-form " src="{% static 'images/homeimg.jpg'%}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
  <form action="{% url 'main:update_recipe_page' recipe.id %}"   method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="form-row ">
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label >Title</label>
       <input type="text" class="form-control" name="title" placeholder="Title" value="{{ recipe.title }}" >
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group ">
+      <label >Ingredients</label>
+      <textarea name="ingredients" placeholder="ingredients" class="form-control" >{{ recipe.ingredients }}</textarea>
+    </div>
+    <div class="form-group ">
       <label >about</label>
-      <textarea name="about" placeholder="about" class="form-control" value="{{ recipe.about }}" ></textarea>
+      <textarea name="about" placeholder="about" class="form-control" >{{ recipe.about }}</textarea>
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label >Quantity (per grams)</label>
       <input type="number" class="form-control" name="quantity" value="{{ recipe.quantity }}" >
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label >Fat</label>
       <input type="number" class="form-control" name="fat" value="{{ recipe.fat }}">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label >Protien</label>
       <input type="number" class="form-control" name="protien" value="{{ recipe.protien }}">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label for="inputCity">Carbs</label>
       <input type="number" class="form-control" name="carb" value="{{ recipe.carb }}" >
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label for="inputCity">Calories</label>
       <input type="number" class="form-control" name="calories" value="{{ recipe.calories }}" >
     </div>
 
 <label for="inputCity">Choose category:</label>
-<div class="form-group col-md-6">
+<div class="form-group ">
 <select name ="category" class="form-select" aria-label="Default select example">
 {% for value, categories in category %}
 <option value ="{{value}}" {% if recipe.category == value %} selected {% endif %}>{{categories}}</option>
@@ -55,15 +62,18 @@
  </div>
    
   <h5>Choose Image:</h5>
-  <div class="form-group col-md-6">
-  <img src="{{ recipe.image.url }}" class="w-50" />
+  <div class="form-group ">
+  <img src="{{ recipe.image.url }}" class="update-img" />
      <input name="image"  type="file"  accept="image/*" class="form-control"  />
       </div>
 <br>
-  <button type="submit" class="btn btn-primary">Update Recipe</button>
+  <button type="submit" class="b btn ">Update Recipe</button>
 </form>
+      </div>
+</article>
  
- </div>
- </div>
+
+
+  </div>
  
  {% endblock %}

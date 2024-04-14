@@ -3,6 +3,8 @@ from django.http import HttpRequest, HttpResponse
 import json , requests
 from .models import Recipe ,Comment , Contact
 from favorites.models import RecipeFavorite
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -34,6 +36,7 @@ def add_recipe (request:HttpRequest):
             new_recipe=Recipe(
             title=request.POST["title"],
             about=request.POST["about"],
+            ingredients=request.POST["ingredients"],
             quantity=request.POST["quantity"],
             fat=request.POST["fat"],
             protien=request.POST["protien"],
@@ -61,6 +64,7 @@ def update_recipe (request:HttpRequest,recipe_id):
       try:
          recipe.title=request.POST["title"]
          recipe.about=request.POST["about"]
+         recipe.ingredients=request.POST["ingredients"]
          recipe.quantity=request.POST["quantity"]
          recipe.fat=request.POST["fat"]
          recipe.protien=request.POST["protien"]
@@ -133,10 +137,11 @@ def contact_us (request:HttpRequest):
         message=request.POST["message"],
         )
       contact_us.save()
-      return redirect('main:home')
-    
-    except Exception as e :
+      messages.success(request, "Successfully submitted.") 
+      return redirect('main:contact_us_page')
+    except Exception as e:
             print(e)
+            messages.error(request, "An error occurred.")
 
   return render(request,"main/contact_us.html")
 
@@ -150,6 +155,19 @@ def user_message (request:HttpRequest):
     return render(request,"main/user_message.html" , {"messages" : messages})
 
 
+def delete_message (request:HttpRequest , msg_id):
+  #if not request.user.is_superuser:
+    #return render(request, "main/no_permission.html")
+  try:
+    contact=Contact.objects.get(pk=msg_id)
+    contact.delete()
+  except Contact.DoesNotExist:
+     contact=None
+  except Exception as e:
+    print(e)
+
+    
+  return redirect('main:user_message_page')
 
 
 def comments(request:HttpRequest , recipe_id):
@@ -172,14 +190,13 @@ def comments(request:HttpRequest , recipe_id):
 
 
 def search_food(request: HttpRequest):
- recipes = Recipe.objects.order_by("-fat")[0:3]
+ recipes = Recipe.objects.order_by("-quantity")[0:3]
  if request.method == "POST":
   query=request.POST['query']
   api_url = "https://api.api-ninjas.com/v1/nutrition?query="
   api_request = requests.get(api_url + query , headers={'X-Api-Key': "LieQDXn0BxDcZSrzyivcIg==KZ0HZTXbWwJgllHA"})
 
   try:
-   recipes = Recipe.objects.all()
    api_object=json.loads(api_request.content)
    print(api_request.content)
   except Exception as e:

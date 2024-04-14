@@ -21,10 +21,13 @@ def index_view(request: HttpRequest):
 def add_event_view(request: HttpRequest):
 
     #limit access to this view for only staff (club members)
-    
+    if not (request.user.is_staff and request.user.has_perm("main.add_event")):
+        return render(request, "main/no_permission.html")
+     
     if request.method == 'POST':
         try:
             new_event = Event(
+                user = request.user,
                 event_title = request.POST["event_title"],
                 event_description = request.POST["event_description"],
                 objective = request.POST["objective"],
@@ -49,6 +52,8 @@ def add_event_view(request: HttpRequest):
 def edit_event_view(request: HttpRequest, event_id):
     
     #limit access to this view for only staff (club members)
+    if not request.user.is_staff:
+        return render(request, "main/no_permission.html")
 
     #Object from Event
     event = Event.objects.get(pk=event_id)
@@ -95,6 +100,8 @@ def event_detail_view(request: HttpRequest, event_id):
 def delete_event_view(request:HttpRequest, event_id):
 
     #limit access to this view for only staff
+    if not request.user.is_staff:
+        return render(request, "main/no_permission.html")
    
     try:
         event = Event.objects.get(pk=event_id)
@@ -111,3 +118,17 @@ def all_events_view(request:HttpRequest):
     events = Event.objects.all()
 
     return render(request, "main/all_events.html", {"events" : events})
+
+
+def search_events_view(request:HttpRequest):
+    events=[]
+
+    if "search" in request.GET:
+        events = Event.objects.filter(event_title__contains=request.GET["search"])
+
+    if "date" in request.GET and len(request.GET["date"]) > 4:
+        first_date = date.fromisoformat(request.GET["date"])
+        end_date = first_date + timedelta(days=1)
+        events = events.filter(event_date__gte=first_date, event_date__lt=end_date)
+
+    return render(request, "main/search_events.html",{"events" : events} )

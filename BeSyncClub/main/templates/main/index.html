@@ -29,6 +29,10 @@
     <div class="container mt-5 mb-5">
         <div class="row gap-4">
             <h2>Upcoming Events</h2>
+            <form action="{% url 'main:search_events_view' %}"  method="get" class="d-flex gap-2">
+                <input class="form-control me-2 rounded-pill p-2" type="search" placeholder="Search" aria-label="Search" name="search" required>
+                <button class="btn btn-success rounded-pill" type="submit">Search</button>
+            </form>
             {% for event in events %}
                 <div class="col col-12 col-md-4">
                     <div class="item-container">
@@ -42,7 +46,7 @@
                             <div class="event-info">
                                 <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
                                 <div class="separator"></div>
-                                <p class="info">Bellmore, NY</p>
+                                <p class="info">{{event.user.first_name}}</p>
                                 <p class="price">{{ event.theme }}</p>
                 
                                 <div class="additional-info">
@@ -52,7 +56,8 @@
                                     </p>
                                     <p class="info">
                                         <i class="far fa-calendar-alt"></i>
-                                        {{ event.event_date }}                                    </p>
+                                        {{ event.event_date }}                                    
+                                    </p>
                 
                                     <p class="info description">
                                          We meet one Sunday evening <span>more...</span>
@@ -84,7 +89,7 @@
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 
-                                <div style=" display:flex; position: relative; left:20px;"">
+                                <div style=" display:flex; position: relative; left:20px;">
                                     <img src="{{ member.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="200">
                                     <div style="display:flex; position: relative; right: 50px; font-size: 50px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
 

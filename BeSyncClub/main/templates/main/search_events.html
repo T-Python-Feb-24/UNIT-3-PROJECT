@@ -1,0 +1,72 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Search Events {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-5 mb-5">
+        <div class="row gap-4">
+            <div class="d-flex flex-column gap-2">
+            
+                <h1>Search</h1>
+                <form action="{% url 'main:search_events_view' %}"  method="get" class="d-flex gap-2">
+                    <input type="search" class="form-control" name="search" value="{{request.GET.search}}"/>
+                    <input type="date" class="form-control" name="date" value="{{request.GET.date}}"/>
+                    <input type="submit" value="search" class="btn btn-primary" />
+                </form> 
+                <h2>Search results for {{ request.GET.search }} ({{ events.count }}) </h2>
+            </div>
+        </div>
+        <div class="row">
+            {% if events.count == 0 %}
+            <h3>No results for your search '{{request.GET.search}}' </h3>
+        {% endif %}
+
+        {% for event in events %}
+        <div class="col col-12 col-md-4">
+            <div class="item-container">
+                <div class="img-container">
+                    <img src="{{ event.event_img.url }}" alt="Event image">
+                </div>
+        
+                <div class="body-container">
+                    <div class="overlay"></div>
+        
+                    <div class="event-info">
+                        <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
+                        <div class="separator"></div>
+                        <p class="info">{{event.user.first_name}}</p>
+                        <p class="price">{{ event.theme }}</p>
+        
+                        <div class="additional-info">
+                            <p class="info">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Grand Central Terminal
+                            </p>
+                            <p class="info">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ event.event_date }}                                    
+                            </p>
+        
+                            <p class="info description">
+                                 We meet one Sunday evening <span>more...</span>
+                            </p>
+                        </div>
+                    </div>
+                        <button class="action">Book it</button>
+                        <button class="actionS">Book it</button>
+                 
+                </div>
+            </div>
+
+        </div>
+            
+        {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

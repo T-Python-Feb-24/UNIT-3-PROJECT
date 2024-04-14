@@ -4,21 +4,48 @@
 
 {% block content %}
 <section>
-    <div class="container mt-5 px-5">  
-        <div class="row g-5">
-            <div class="col">
-               {% for event in events %}
-                    <div class="col-4">
-                        <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
-                            <img src="{{ event.event_img.url }}"  class="w-100 rounded-4 card-poster "/>
-                            <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{event.theme}} ">{{ event.theme }}</h6>
-                            <h6 class="text-muted">{{ event.event_date }}</h6>
-                            <h2><a href="{% url 'main:event_detail_view' event.id  %}" class="text-decoration-none">{{event.event_title}}</a></h2>          
+    <div class="container mt-5 mb-5">
+        <div class="row gap-4">
+            <h2>Upcoming Events</h2>
+            {% for event in events %}
+                <div class="col col-12 col-md-4">
+                    <div class="item-container">
+                        <div class="img-container">
+                            <img src="{{ event.event_img.url }}" alt="Event image">
+                        </div>
+                
+                        <div class="body-container">
+                            <div class="overlay"></div>
+                
+                            <div class="event-info">
+                                <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
+                                <div class="separator"></div>
+                                <p class="info">{{event.user.first_name}}</p>
+                                <p class="price">{{ event.theme }}</p>
+                
+                                <div class="additional-info">
+                                    <p class="info">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Grand Central Terminal
+                                    </p>
+                                    <p class="info">
+                                        <i class="far fa-calendar-alt"></i>
+                                        {{ event.event_date }}                                    
+                                    </p>
+                
+                                    <p class="info description">
+                                         We meet one Sunday evening <span>more...</span>
+                                    </p>
+                                </div>
+                            </div>
+                                <button class="action">Book it</button>
+                                <button class="actionS">Book it</button>
+                         
                         </div>
                     </div>
-               {% endfor %}
-                 
-            </div>
+
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>

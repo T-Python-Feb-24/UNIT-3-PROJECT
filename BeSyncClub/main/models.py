@@ -15,11 +15,10 @@ class ContactClub(models.Model):
 class Event(models.Model):
 
     #themes choices
-    themes = models.TextChoices("Theme", ["DataScience", "NetWork", "CyberSecurity", "SoftwareEngineering", "ArtificialIntelligence"])
-    types = models.TextChoices("Type", ["Workshop", "Program", "Meeting", "Challenges"])
+    themes = models.TextChoices("Theme", ["Database", "Programming", "Cyber Security", "Software Engineering", "Artificial Intelligence", "Other", "General"])
+    types = models.TextChoices("Type", ["Workshop", "Program", "Meeting", "Challenges", "Other"])
     
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     event_title = models.CharField(max_length=30) 
     event_description = models.TextField()
     objective = models.TextField()

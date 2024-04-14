@@ -5,8 +5,23 @@
 {% block content %}
 <section>
     <div class="container mt-5 mb-5">
-        <div class="row gap-4">
-            <h2>Upcoming Events</h2>
+        <div class="row g-4 mb-5">
+
+            <div class="d-flex justify-content-between align-items-center flex-column">
+                <h1>{% if 'them' in request.GET %} {{request.GET.them}} {% else %} All {% endif %}Events ({{ events.count }}) </h1>
+    
+                <div class="d-flex gap-2 mt-5">
+                    <a href="{% url 'main:all_events_view' %}" class="text-dark py-2 px-3 bg-light rounded-pill text-decoration-none text-center {% if 'them' not in request.GET %} All  {% endif %}">All</a>
+                    
+                    {% for val, key in themes %}
+                        <a href="?them={{val}}" class=" text-light py-2 px-3 rounded-pill bg-dark text-decoration-none text-center {% if request.GET.them == val %} {{ val }}{% endif %}">{{val}}</a>
+                        
+                    {% endfor %}
+                </div>
+            </div>
+    
+        </div>
+        <div class="row gap-4 mb-5 justify-content-center">
             {% for event in events %}
                 <div class="col col-12 col-md-4">
                     <div class="item-container">
@@ -49,4 +64,5 @@
         </div>
     </div>
 </section>
+		
 {% endblock %}

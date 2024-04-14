@@ -12,7 +12,7 @@ from accounts.models import Student
 
 def index_view(request: HttpRequest):
 
-    events = Event.objects.all()
+    events = Event.objects.all().order_by('-event_date')[0:3]
     members = User.objects.filter(groups__name='members')
     return render(request, "main/index.html", {"events" : events, "members" : members})
 
@@ -114,10 +114,13 @@ def delete_event_view(request:HttpRequest, event_id):
 
 
 def all_events_view(request:HttpRequest):
+    
+    if "them" in request.GET:
+       events = Event.objects.filter(theme=request.GET["them"])
+    else:
+        events = Event.objects.all()    
 
-    events = Event.objects.all()
-
-    return render(request, "main/all_events.html", {"events" : events})
+    return render(request, "main/all_events.html", {"events" : events, "themes" : Event.themes.choices})
 
 
 def search_events_view(request:HttpRequest):

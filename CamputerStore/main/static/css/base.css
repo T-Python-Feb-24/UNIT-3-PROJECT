@@ -262,6 +262,12 @@ section {
   }
 }
 
+section {
+  padding-inline: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 footer {
   border: 1px solid rgba(0, 0, 0, 0.332);
   background-color: var(--dark-theme-body);

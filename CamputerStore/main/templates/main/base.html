@@ -52,7 +52,13 @@
                      <div class="d-flex my-3 justify-content-center">
                         <ul class="navbar-nav align-items-center flex-row gap-2 flex-row-reverse">
                            <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="#">
+                              <a class="nav-link active"
+                                 aria-current="page"
+                                 {% if request.user.is_authenticated %}
+                                    href="{% url "account:cart_view" request.user.username %}"
+                                 {% else %}
+                                    href="{% url "account:login_view" %}"
+                                 {% endif %}>
                                  <div class="d-flex flex-column border align-items-center header-user">
                                     <span class="material-symbols-outlined">
                                        <span class="material-symbols-outlined">shopping_cart</span>

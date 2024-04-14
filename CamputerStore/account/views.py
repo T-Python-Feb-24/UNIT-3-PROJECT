@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Profile
+
+from product.models import Product
+from .models import Cart, Profile
 from main.validator import validat
 from django.core.exceptions import ValidationError
 
@@ -112,4 +114,35 @@ def update_profile_view(request: HttpRequest, user_name):
                                                           "genders": Profile.gender_choices.choices, })
 
 
+def cart_view(request: HttpRequest, username):
+   try:
+      if not request.user.username == username:
+         return render(request, "main/no_permission.html")
+      total: float = 0.0
+      user = request.user
+      cart = Cart.objects.filter(user=user).order_by('-added_date')
+      for item in cart:
+         total = total + (item.product.price * item.quantity)
+      if request.method == 'POST':
+         product = Product.objects.get(id=request.POST.get('product_id'))
+         item = cart.get(product=product)
+         item.quantity = request.POST.get('quantity')
+         item.save()
 
+   except Exception as e:
+      print(e)
+   return render(request, "account/cart.html", {"cart": cart, "total": total})
+
+
+def delete_product_view(request: HttpRequest, username, cart_id):
+
+   try:
+      cart = Cart.objects.get(id=cart_id)
+      if request.user.is_authenticated and cart.user.username == request.user.username:
+         cart.delete()
+         return redirect("account:cart_view", username=request.user.username)
+      else:
+         return render(request, "main/no_permission.html")
+
+   except Exception as e:
+      print(e)

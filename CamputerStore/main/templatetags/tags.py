@@ -5,7 +5,7 @@ register = template.Library()
 
 @register.filter(name='range')
 def _range(_min, max):
-   return range(0, max)
+   return range(1, max + 1)
    # @register.filter(name='range')
    # def _range(_min, args=None):
    #    _max, _step = None, None

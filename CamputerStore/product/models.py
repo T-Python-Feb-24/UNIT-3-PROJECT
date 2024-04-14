@@ -24,6 +24,9 @@ class Product(models.Model):
    def __str__(self):
       return self.name[:30] + "..."
 
+   def __mul__(self):
+      return self.price
+
 
 def group_based_upload_to(instance, filename):
    ext = filename.split('.')[-1]

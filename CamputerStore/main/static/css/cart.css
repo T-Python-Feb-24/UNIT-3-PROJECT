@@ -1,0 +1,77 @@
+.cart-wrapper {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .total {
+    margin-inline: 1.8rem;
+
+    span {
+      font-size: medium;
+      font-weight: 700;
+    }
+  }
+}
+
+.cart-grid {
+  display: grid;
+  grid-template-columns: auto min(60%) 12%;
+  height: 15rem;
+  gap: 2rem;
+  margin-inline: 1.5rem;
+  background-color: var(--dark-theme-card);
+  border-radius: 8px;
+
+  >img {
+    height: 60%;
+    margin-right: 2rem;
+    width: calc(100% - 2rem);
+    place-self: center;
+  }
+
+  >a {
+    place-self: center start;
+  }
+
+  >.price-qauntity {
+    width: 100%;
+    place-self: center;
+    place-content: center;
+    align-items: center;
+    gap: 10px;
+
+    span.price-symbol {
+      font-size: .8rem !important;
+    }
+
+    >*:not(a) {
+      width: 80%;
+    }
+
+    #product-btn-update:hover {
+      background-color: #009688;
+      transition: background-color .2s ease-in-out;
+
+    }
+
+    #product-btn-update:not([disabled])::after {
+      content: "تعديل السلة";
+    }
+
+    #product-btn-update[disabled] {
+      background-color: gray;
+      cursor: none;
+    }
+
+    #product-btn-update[disabled]::after {
+      content: "غير متوفر";
+    }
+
+  }
+}

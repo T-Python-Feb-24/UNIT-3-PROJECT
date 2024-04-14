@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpRequest, QueryDict
 
 from favorites.models import Favorite
+from account.models import Cart
 from .models import Product, Product_image
 from main.validator import validat, ValidationError
 from django.core.paginator import Paginator
@@ -35,14 +36,30 @@ def add_product_view(request: HttpRequest):
 
 
 def product_detail_view(request: HttpRequest, product_id):
+   msg = None
    try:
       product = Product.objects.get(pk=product_id)
       is_favored = request.user.is_authenticated and Favorite.objects.filter(
          user=request.user, product=product).exists()
+      if request.method == "POST":
+         if request.user.is_authenticated:
+            user_cart = Cart.objects.filter(user=request.user)
+            if user_cart.filter(product=product).exists():
+               product_in_cart = user_cart.get(
+                  product=product)
+               product_in_cart.quantity = request.POST.get('quantity')
+               product_in_cart.save()
+            else:
+               user_cart.create(user=request.user, product=product,
+                                quantity=request.POST.get('quantity'))
+         else:
+            msg = "يجب تسجيل الدخول لإضافة منتج الى السلة"
+
    except Exception as e:
       print(e)
    return render(request, "product/product_detail.html", {"product": product,
-                                                          "is_favored": is_favored})
+                                                          "is_favored": is_favored,
+                                                          "msg": msg})
 
 
 def product_by_category(request: HttpRequest, category: str):

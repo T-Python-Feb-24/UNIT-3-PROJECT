@@ -96,8 +96,16 @@
                   <span class="text-danger ">غير متوفر</span>
                {% endif %}
             </div>
-            <form action="#" method="post">
+            <form action="{% url "product:product_detail_view" product.id %}"
+                  method="post">
                {% csrf_token %}
+               {% if msg %}
+                  <div class="d-flex w-100 justify-content-center">
+                     <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <span class="px-3 text-danger-emphasis">{{ msg }}</span>
+                     </div>
+                  </div>
+               {% endif %}
                <div class="d-flex add-btn">
                   <select name="quantity" tabindex="-1" aria-hidden="true">
                      {% for i in in_stock|range:product.in_stock %}

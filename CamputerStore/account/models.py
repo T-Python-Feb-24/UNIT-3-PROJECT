@@ -41,10 +41,14 @@ class Profile(models.Model):
       return f"{self.user.username} profile"
 
 
-
-
-
 class Cart(models.Model):
    user = models.ForeignKey(User, on_delete=models.CASCADE)
    product = models.ForeignKey(Product, on_delete=models.CASCADE)
    quantity = models.IntegerField()
+   added_date = models.DateTimeField(auto_now_add=True)
+
+   class Meta:
+      unique_together = ('user', 'product',)
+
+   def __mul__(self):
+      return self.quantity

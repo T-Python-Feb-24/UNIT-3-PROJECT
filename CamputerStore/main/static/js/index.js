@@ -5,6 +5,10 @@ function myconfirm() {
         return false;
     }
 }
+var submitForms = function () {
+    document.getElementById("get_form").submit();
+    document.getElementById("post_form").submit();
+}
 
 var check = function () {
     if (document.getElementById('password').value ==

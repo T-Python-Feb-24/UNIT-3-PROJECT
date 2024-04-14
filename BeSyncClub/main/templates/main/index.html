@@ -46,7 +46,7 @@
                             <div class="event-info">
                                 <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
                                 <div class="separator"></div>
-                                <p class="info">{{event.user.first_name}}</p>
+                                <p class="info">{{event.user.username}}</p>
                                 <p class="price">{{ event.theme }}</p>
                 
                                 <div class="additional-info">
@@ -65,7 +65,6 @@
                                 </div>
                             </div>
                                 <button class="action">Book it</button>
-                                <button class="actionS">Book it</button>
                          
                         </div>
                     </div>

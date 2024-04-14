@@ -47,9 +47,12 @@
                         </div>
                         <div class="row my-3">
                             <div class="col-12 d-flex gap-2">
-                                
-                                <a href="{% url 'main:edit_event_view' event.id %}" class="btn btn-warning w-100 ">Edit</a>
-                                <a href="{% url 'main:delete_event_view' event.id %}" class="btn btn-danger w-100 ">Delete</a>      
+
+                                {% if request.user.is_staff %}<!-- only presenter is more pro-->
+                                    <a href="{% url 'main:edit_event_view' event.id %}" class="btn btn-warning w-100 ">Edit</a>
+                                    <a href="{% url 'main:delete_event_view' event.id %}" class="btn btn-danger w-100 ">Delete</a>  
+                                {% endif %}  
+
                                 <a href="#" class="btn btn-success w-100 ">Reserve your seat</a>  <!--like favorits-->   
 
                             </div>

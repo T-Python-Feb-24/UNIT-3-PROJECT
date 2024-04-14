@@ -84,8 +84,7 @@ def logout_user_view(request:HttpRequest):
 def profile_view(request:HttpRequest, user_name):
 
     student = User.objects.get(username=user_name)
- 
-
+    
     return render(request, "accounts/profile.html", {"student" : student})
 
 

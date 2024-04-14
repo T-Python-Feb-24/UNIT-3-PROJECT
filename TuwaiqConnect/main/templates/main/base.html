@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,18 +9,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>{% block title %}{% endblock  %}</title>
     <style>{% block style %}{% endblock  %}</style>
-   <a href="{% url "main:home_page" %}">home</a>
-   {% if request.user.is_authenticated %}
-   <h3>welcome {{request.user}}</h3>
+   {% comment %} <a href="{% url "main:home_page" %}">home</a> {% endcomment %}
    <!---   هنا نسوي شروط اذا كان المستخدم طالب او جهه او ستاف يطلع له البروفايل حقه -->
-   <a href="{% url "student:student_profile" request.user.username %}">profile{{request.user}}</a>
-  <a href="{% url "accounts:user_logout" %}">user_logout</a>
-   {% endif %}
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+     <img src="{% static "/images/طويق لوقو.jpg" %}" style="width:45px">
+    <a href="" class="navbar-brand mt-2" style="color:rgb(138, 43, 226)">Tuwaiq Connect<a/>
+       
+     
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><span class="sr-only">(current)</span></a>
+        </li>
+        <div class="d-flex m-0 column-gap-0">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url "student:student_profile" request.user.username %}">{{request.user}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "accounts:user_logout" %}">Logout</a>
+        </li>
+      </div>
+        {% endif %} 
+      </ul>
+    </div>
+  </nav>
+  
 </head>
 <body>
     {% block content %}
     
     {% endblock  %}
+
+    <footer class="bg-light text-center text-lg-start mt-5 ">
+        <div class="text-center p-3 bg-light">
+            &copy; 2024 Tuwaiq Connect
+        </div>
+    </footer>
 </body>
 </html>
 

@@ -130,7 +130,7 @@ def organization_login(request :HttpRequest):
         
             if user is not None:
                 login(request,user) 
-                return redirect("main:home_page")
+                return redirect("orgnaization:organization_home_page")
         except Exception as e:
             print(e)
             

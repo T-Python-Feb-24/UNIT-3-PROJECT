@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpRequest,HttpResponse
-from.models import Bootcamp,Evaluation
+from.models import Bootcamp,Evaluation,Student
 
 
 # Create your views here.
@@ -25,15 +25,36 @@ def add_bootcamp(request : HttpRequest):
         bootcamp.save()
     return render(request,"bootcamp/new_bootcamp.html")
 
-def bootcamp_details(request :HttpRequest,bootcamp_id):
-    # staff,organization can access this page 
-    
+
+def bootcamp_details(request: HttpRequest, bootcamp_id):
     bootcamp = Bootcamp.objects.get(pk=bootcamp_id)
-    students = bootcamp.students.all()  
-    # students grades : 
-    evaluation = Evaluation.objects.filter(bootcamp_id = bootcamp_id)
+    evaluations = Evaluation.objects.filter(bootcamp_id=bootcamp_id)
+    students = bootcamp.students.all()
     
-    return render (request,"bootcamp/bootcamp_details.html",{"bootcamp":bootcamp,"students":students,"evaluation":evaluation})
+    student_evaluations = {student: evaluations.filter(student=student) for student in students}
+    
+    return render(request, "bootcamp/bootcamp_details.html", {"bootcamp": bootcamp,"student_evaluations": student_evaluations})
+
+
+# def students_evaluation(request :HttpRequest,bootcamp_id):
+    
+#     bootcamp = Bootcamp.objects.get(pk=bootcamp_id)
+#     students = bootcamp.students.all()
+    
+        
+        
+#     if request.method =="POST":  
+#         evaluation = Evaluation(
+#         student = Student,
+#         bootcamp = Bootcamp,
+#         attendance_rate = request.POST["attendance_rate"], 
+#         grades_rate =request.POST["grades_rate"]
+#         )
+#         evaluation.save()
+    
+        
+#     return render(request,"bootcamp/students_evaluation.html",{"bootcamp":bootcamp,"students":students,"evaluation":evaluation})
+
 
 
 def update_bootcamp ():
@@ -43,6 +64,3 @@ def delete_bootcamp():
     pass
 
 
-# def staff_home_page(request : HttpRequest):
-    
-#     return render()

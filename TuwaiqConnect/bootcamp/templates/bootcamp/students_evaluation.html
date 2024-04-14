@@ -1,0 +1,58 @@
+{% extends "main/base.html" %}
+
+{% block title %}students evaluation{% endblock  %}
+
+{% block style %}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+
+{% endblock  %}
+
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            
+                {{bootcamp.bootcamp_name}}
+                {{bootcamp.desc}}
+                <table >
+                    <tr>
+                      <th>Student Name</th>
+                      <th>Attendence Rate</th>
+                      <th>Grades</th>
+                      <th>Profile</th>
+                    </tr>
+                <form action="">
+                {% for student in students %}
+                  <tr>
+                  <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                    <td><input type="text" name="attendance_rate"></td>
+                    <td><input type="text" name="grades_rate"></td>
+                  <td><a href="{% url "student:student_profile" student.user.username%}" class=" button-56" id="profile">click</a> </td>
+                </tr>
+                {% endfor %}  
+                </form>  
+            </div>  
+        </div>
+    </div>
+  
+  </section>
+{% endblock  %}

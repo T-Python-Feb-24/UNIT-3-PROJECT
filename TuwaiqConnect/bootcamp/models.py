@@ -7,7 +7,6 @@ from accounts.models import Student
 class Bootcamp(models.Model):
     bootcamp_name = models.CharField(max_length=100)
     students = models.ManyToManyField(Student)
-    #  User هناابغى يطلع لي بس اسماء الستاف الي في مودل  
     staff = models.ManyToManyField(User)
     desc = models.TextField()
     objectives =models.TextField()

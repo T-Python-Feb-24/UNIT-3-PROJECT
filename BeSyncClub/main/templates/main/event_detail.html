@@ -63,4 +63,55 @@
         </div>
     </div>
 </section>
+
+
+
+<section>
+    {% if related_events.count > 0 %}
+        <div class="container mt-5 px-5">
+            <div class="row g-5">
+                <hr/>
+                <h2>Events with the same Theme</h2>
+                {% for event in related_events %}
+                <div class="col-12 col-md-4 my-3">
+                    <div class="item-container">
+                        <div class="img-container">
+                            <img src="{{ event.event_img.url }}" alt="Event image">
+                        </div>
+                
+                        <div class="body-container">
+                            <div class="overlay"></div>
+                
+                            <div class="event-info">
+                                <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
+                                <div class="separator"></div>
+                                <p class="info">{{event.user.username}}</p>
+                                <p class="price">{{ event.theme }}</p>
+                
+                                <div class="additional-info">
+                                    <p class="info">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Grand Central Terminal
+                                    </p>
+                                    <p class="info">
+                                        <i class="far fa-calendar-alt"></i>
+                                        {{ event.event_date }}                                    
+                                    </p>
+                
+                                    <p class="info description">
+                                         We meet one Sunday evening <span>more...</span>
+                                    </p>
+                                </div>
+                            </div>
+                                <button class="action">Book it</button>
+                         
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</section>
 {% endblock %}

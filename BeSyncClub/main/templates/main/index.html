@@ -13,8 +13,8 @@
 
             <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap</p>
     
-        <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5"> <a class="btn btn-primary btn-lg px-4 gap-3" href="#" role="button">Try it free</a>
-            <a class="btn btn-outline btn-lg px-4" href="#" role="button" style="background-color: #d0d0d0;">Learn more</a>
+        <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5 "> <a class="btn btn-primary btn-lg px-4 gap-3 rounded-5" href="#" role="button">Book a Ticket</a>
+            <a class="btn btn-outline btn-lg px-4 rounded-5" href="#" role="button" style="background-color: #d0d0d0;">Join to us</a>
         </div>
             </div>
             <div class="col-md-6 col-12">
@@ -27,17 +27,20 @@
 
 <section>
     <div class="container mt-5 mb-5 ">
-        <div class="row gap-4 justify-content-center">
+
+      
+        <div class="row ">
             <div class="d-flex align-items-center flex-column gap-4 mb-4">
                 <h1>Upcoming Events</h1>
                 <form action="{% url 'main:search_events_view' %}"  method="get" class="d-flex gap-2" style="width: 70%;">
-                    <input class="form-control me-2 rounded-pill p-2" type="search" placeholder="Search" aria-label="Search" name="search" required>
-                    <button class="btn btn-success rounded-pill" type="submit">Search</button>
+                    <input class="form-control me-2 rounded-pill p-2 shadow" type="search" placeholder="Search" aria-label="Search" name="search" required>
+                    <button class="btn btn-success rounded-pill shadow" type="submit">Search</button>
                 </form>
             </div>
+           
             
             {% for event in events %}
-                <div class="col col-12 col-md-4">
+                <div class="col-12 col-md-4 my-3">
                     <div class="item-container">
                         <div class="img-container">
                             <img src="{{ event.event_img.url }}" alt="Event image">
@@ -74,7 +77,6 @@
 
                 </div>
             {% endfor %}
-            <a class="btn btn-danger rounded-5 shadow"  style="width: 50%;" href="{% url 'main:all_events_view' %}">All Events</a>
         </div>
     </div>
 </section>

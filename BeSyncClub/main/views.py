@@ -87,13 +87,15 @@ def event_detail_view(request: HttpRequest, event_id):
         event = Event.objects.get(pk=event_id)
 
         #related events from the same club or the same theme 
+        related_events = Event.objects.filter(theme=event.theme).exclude(pk=event_id)[0:3]   
 
         #is_book or not 
 
     except Event.DoesNotExist:
-        return render(request, "main/not_found.html") #####
-
-    return render(request, "main/event_detail.html", {"event" : event})
+        return render(request, "main/not_found.html") 
+    except Exception as e:
+        print(e)
+    return render(request, "main/event_detail.html", {"event" : event, "related_events" : related_events})
 
 
 

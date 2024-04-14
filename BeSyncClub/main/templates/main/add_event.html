@@ -6,17 +6,15 @@
 <section>
     <div class="container mt-5">
        
-        <div class="row g-5">
-            <div class="col">
-                <h2>Add New Event</h2>
+        <div class="row g-5 ">
+            <div class="col d-flex flex-column justify-content-center bg-white py-4 mx-5 my-5 rounded-4">
+                <h1 class="text-center">Add New Event</h2>
                 <form action="{% url 'main:add_event_view' %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-2">
                     {% csrf_token %}
 
                     <div class="row my-3">
-                        <div class="col-md-4 mb-4">
-                            <img src="#" class=" w-100 h-100 object-fit-cover rounded-4" alt="event">
-                        </div>
-                        <div class="col-md-8">
+                        
+                        <div class="col-12">
                             <div class="row my-3">
                                 <div class="col-6">
                                     <label for="event_title" class="form-label">event title</label>
@@ -105,9 +103,9 @@
                                     <input name="event_img" type="file"  accept="Image/*" class="form-control" required />
                                 </div>
                             </div>
-                            <div class="row my-3">
-                                <div class="col-12 ">
-                                    <input type="submit" class="btn btn-success w-100 " value="Add Event" />
+                            <div class="row mt-4">
+                                <div class="col-12 d-flex justify-content-center mt-2">
+                                    <input type="submit" class="btn btn-success rounded-5" value="Add Event" />
                                 </div>
                             </div>
 

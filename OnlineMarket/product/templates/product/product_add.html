@@ -1,10 +1,17 @@
 {% extends 'product/base.html' %}
 {%block title%} Add product {%endblock%}
 {% block content %}
-    <div class="row m-3">
-        <h1 class="text-body-secondary">Add new product</h1>
-        <div class="col">
+<style>
+    body{
+        background-color: rgb(219, 218, 217);
 
+    }
+   
+</style>
+    <div class="row m-3">
+        <h1 class="p-3"  style="text-align: center; color: rgb(58, 52, 52);">Add New Product</h1>
+        <div class="col">
+            <div class="col-9  d-flex flex-column gap-2 border border-3 shadow p-5 rounded-4 h-100" style="text-align: center; background-color:  rgb(201, 199, 196);  margin-left: 150px;">
             <form action="{% url 'product:product_add_view' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
                 {% csrf_token %}
 

@@ -127,3 +127,13 @@ def update_profile(request:HttpRequest):
             print(e)
 
     return render(request, "accounts/update.html", {"msg" : msg})
+
+def delete_profile(request:HttpRequest,user_name):
+      
+    try:
+        user_object = User.objects.get(username=user_name)
+        user_object.delete()
+    except Exception as e:
+        print(e)
+    return redirect("accounts:login_user_view")
+    

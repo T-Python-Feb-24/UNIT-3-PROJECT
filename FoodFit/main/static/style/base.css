@@ -1079,11 +1079,13 @@ align-items: center;
 
 /**/
 .cardabout {
-    width: 900px;
-    height: 400px;
+    width: 1400px;
+    height: 600px;
     transition: all 0.2s;
     position: relative;
     cursor: pointer;
+    justify-content: center;
+    margin-left: 10vw;
   }
   
   .card-inner {
@@ -1497,6 +1499,29 @@ align-items: center;
     margin-left: 75px;
   }
 
+.like{
+    margin-top: 4px;
+    font-size: 35px;
+    margin-left: 3px;
+    color: #af062d;
+}
+.s-r-title-box3{
+    position: absolute;
+    background-color: rgb(233, 237, 235);
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+.d-chart{
+    margin-left: 15vw;
+}
 
-
- 
+.nutritions-recipe-box{
+    width: 1600px;
+    height: 900px;
+    border-radius: 30px;
+    background-color: rgba(244, 252, 248, 0.5);
+    margin-left: 2vw;
+    
+}

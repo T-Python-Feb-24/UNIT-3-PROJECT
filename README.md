@@ -22,8 +22,10 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 ## User Stories, Wireframes & UML links
 - User stories document link here:
+https://1drv.ms/w/c/7d7632475285e98c/AYs7ICjk2R5ClA9LBbFDUBo?e=YTPwBb
 
 - wireframe link here:
+https://drive.google.com/file/d/1elt34FUeOANMNNBeCx3vFQXGqpSOuW-Q/view?usp=drive_link
 
 - UML link here:
     https://drive.google.com/file/d/1q__cllOwRcqK1YfZsAIUk0b5zDXL7xX1/view

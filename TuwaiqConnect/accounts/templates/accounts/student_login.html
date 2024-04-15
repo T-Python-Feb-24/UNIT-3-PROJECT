@@ -159,7 +159,7 @@ body {
       <h2 class="animation a1">Student Service</h2>
       <h4 class="animation a2">Log in to your account </h4>
     </div>
-    <form action="{% url "accounts:organization_login" %}" method="POST">
+    <form action="{% url "accounts:student_login" %}" method="POST">
       {% csrf_token %}
       <div class="form">
         <input type="text" class="form-field animation a3" placeholder="User Name" name="username">

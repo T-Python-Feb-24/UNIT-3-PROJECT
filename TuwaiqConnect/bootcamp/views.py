@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpRequest,HttpResponse
 from.models import Bootcamp,Evaluation,Student
-
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -36,26 +36,34 @@ def bootcamp_details(request: HttpRequest, bootcamp_id):
     return render(request, "bootcamp/bootcamp_details.html", {"bootcamp": bootcamp,"student_evaluations": student_evaluations})
 
 
-# def students_evaluation(request :HttpRequest,bootcamp_id):
+def students_evaluation(request:HttpRequest,bootcamp_id,student_id):  
+    try:
+        evaluation = Evaluation.objects.get(bootcamp_id=bootcamp_id, student_id=student_id)
     
-#     bootcamp = Bootcamp.objects.get(pk=bootcamp_id)
-#     students = bootcamp.students.all()
+    except Evaluation.DoesNotExist:
+        evaluation = Evaluation(
+            bootcamp_id=bootcamp_id, 
+            student_id=student_id,
+            attendance_rate=request.POST.get("attendance_rate"), 
+            grades_rate=request.POST.get("grades_rate")  
+            )
     
+    if request.method =="POST":
         
+        evaluation.attendance_rate = request.POST["attendance_rate"]
+        evaluation.grades_rate = request.POST["grades_rate"]
+        evaluation.save()
         
-#     if request.method =="POST":  
-#         evaluation = Evaluation(
-#         student = Student,
-#         bootcamp = Bootcamp,
-#         attendance_rate = request.POST["attendance_rate"], 
-#         grades_rate =request.POST["grades_rate"]
-#         )
-#         evaluation.save()
+        return redirect("bootcamp:bootcamp_details",bootcamp_id )
     
-        
-#     return render(request,"bootcamp/students_evaluation.html",{"bootcamp":bootcamp,"students":students,"evaluation":evaluation})
+    return render(request,"bootcamp/student_evaluation.html",{"student_id":student_id,"bootcamp_id":bootcamp_id,"evaluation":evaluation})
 
-
+def staff_profile(request:HttpRequest,staff_username):
+    
+    staff =User.objects.get(username=staff_username)
+    bootcamps = Bootcamp.objects.filter(staff__id=staff.id)
+    
+    return render (request,"bootcamp/staff_profile.html",{"staff":staff,"bootcamps":bootcamps})
 
 def update_bootcamp ():
     pass 

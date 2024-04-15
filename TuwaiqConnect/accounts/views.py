@@ -138,7 +138,6 @@ def organization_login(request :HttpRequest):
 
 
 def student_login(request :HttpRequest):
-    # تودينه عالهوم بيج حقت الطلاب
     if request.method == "POST":
         try:
             user = authenticate(
@@ -148,7 +147,7 @@ def student_login(request :HttpRequest):
         
             if user is not None:
                 login(request,user) 
-                return redirect("main:home_page")
+                return redirect("student:student_profile",user.username)
         except Exception as e:
             print(e)
             
@@ -166,7 +165,7 @@ def staff_login(request :HttpRequest):
         
             if user is not None:
                 login(request,user) 
-                return redirect("main:home_page")
+                return redirect("bootcamp:staff_profile",user.username)
         except Exception as e:
             print(e)
             

@@ -25,7 +25,6 @@ table {
 
 
 {% block content  %}
-
 <section>
   <div class="container">
       <div class="row">
@@ -42,7 +41,16 @@ table {
                   </tr>
                   {% for student, evaluations in student_evaluations.items %}
                 <tr>
-                <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                  <!-- staff condition to add student evaluation-->
+                  {% if request.user.is_authenticated %}
+                  {% for group in request.user.groups.all %}
+                  {% if group.name == 'student' %}
+                <td><a href="{% url "bootcamp:student_evaluation" bootcamp_id=bootcamp.id student_id=student.id  %}">{{ student.user.first_name }} {{ student.user.last_name }}</a></td>
+                  {% else %}
+                  <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
                 {% if evaluations %}
                   {% for evaluation in evaluations %}
                     <td>{{ evaluation.attendance_rate }}%</td>
@@ -58,7 +66,5 @@ table {
           </div>  
       </div>
   </div>
-
 </section>
-
 {% endblock %}

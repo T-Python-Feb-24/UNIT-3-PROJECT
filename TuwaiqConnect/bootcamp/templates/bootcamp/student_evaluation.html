@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block title %}students evaluation{% endblock  %}
+
+
+{% block content %}
+<form action="{% url "bootcamp:student_evaluation" bootcamp_id student_id %}" method="post">
+    {% csrf_token %}
+
+    <label for="">attendance rate</label>
+    <input type="text" name="attendance_rate" value="{{evaluation.attendance_rate}}">
+    <label for="">grades rate</label>
+    <input type="text" name="grades_rate" value="{{evaluation.grades_rate}}" >
+    <input type="submit" class="btn btn-primary" value="save">
+
+</form>
+
+{% endblock  %}

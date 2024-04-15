@@ -11,7 +11,7 @@ def student_profile(request : HttpRequest,student_username):
     student = Student.objects.get(user__username=student_username)
     
     return render(request,"student/student_profile.html",{"student":student})
-
+    
 
 #new project 
 def new_project(request : HttpRequest):

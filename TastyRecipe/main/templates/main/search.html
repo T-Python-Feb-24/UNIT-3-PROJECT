@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+
+{% block title %} TASTY RECIPES | SEARCH RESULT {% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-top: 120px;">
+        <div class="d-flex flex-column gap-2">
+                
+            <h1>Search</h1>
+            <form action="{% url 'main:search' %}"  method="get" class="d-flex gap-2">
+                <input type="search" class="form-control" name="search" value="{{request.GET.search}}" placeholder="Search..."/>
+                <!-- <input type="date" class="form-control" style="width: 200px;" name="date" value="{{request.GET.date}}"/> -->
+                <input type="submit" value="Search" class="btn btn-outline-dark" />
+            </form> 
+    
+            <h2>Search results for {{ request.GET.search }} ({{ recipes.count }}) </h2>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for recipe in recipes %}
+        <div class="col-4" style="width: 25%;">
+            <main>
+                <div class = "card">
+                    <div id="corner-ribbon">
+                        <div>
+                        <div>
+                            <div>
+                              <h6 class="cat pt-1 pb-1 ps-2 pe-2 {{recipe.category}}">{{ recipe.category }}</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <img src="{{ recipe.image.url }}" />
+                    <div class="card-content">
+                        <h3>{{recipe.title}}</h3>
+                        <p>
+                            {{recipe.brief}}                                    
+                        </p>
+                        <a href="{% url 'main:recipe_detail' recipe.id %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);" class="button">
+                            Let's cook
+                            <span class="material-symbols-outlined">
+                                arrow_right_alt
+                            </span>
+                        </a>
+                        <!-- <h5 class="cat pt-1 pb-1 ps-2 pe-2 rounded-pill {{recipe.category}}">{{ recipe.category }}</h5> -->
+                    </div>
+                </div> <!--Images-->
+            </main>                        
+</div>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}

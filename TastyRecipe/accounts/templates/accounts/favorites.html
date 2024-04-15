@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title %} {{user.username}}'s Saved Recipes {% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row" style="margin-top: 120px;">
+        <h1>{{user.username }} Saved Recipes</h1>
+        <hr>
+            {% for saved in user.saved_set.all %}
+            <div class="col-4" style="width: 25%;">
+                <main>
+                    <div class = "card">
+                        <div id="corner-ribbon">
+                            <div>
+                            <div>
+                                <div>
+                                  <h6 class="cat pt-1 pb-1 ps-2 pe-2 {{saved.recipe.category}}">{{ saved.recipe.category }}</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <img src="{{ saved.recipe.image.url }}" />
+                        <div class="card-content">
+                            <h3>{{saved.recipe.title}}</h3>
+                            <p>
+                                {{saved.recipe.brief}}                                    
+                            </p>
+                            <a href="{% url 'main:recipe_detail' saved.recipe.id %}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.582);" class="button">
+                                Let's cook
+                                <span class="material-symbols-outlined">
+                                    arrow_right_alt
+                                </span>
+                            </a>
+                            <h6 class="text-muted">{{ saved.recipe.created_at }}</h6>
+                        </div>
+                    </div> <!--Images-->
+                </main>                        
+
+            </div>
+            
+        {% endfor %}
+    
+    </div>
+</div>
+
+{% endblock %}

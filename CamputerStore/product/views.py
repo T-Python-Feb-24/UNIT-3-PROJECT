@@ -10,7 +10,13 @@ from django.core.paginator import Paginator
 
 
 def search_product_view(request: HttpRequest):
-   return render(request, "product/search_product.html")
+   try:
+      if request.method == 'GET':
+         products = Product.objects.filter(
+            name__contains=request.GET.get('name'))
+   except Exception as e:
+      print(e)
+   return render(request, "product/search_product.html", {'products': products})
 
 
 def add_product_view(request: HttpRequest):
@@ -98,13 +104,14 @@ def update_product_view(request: HttpRequest, product_id):
             product.Images.objects.create(image=image)
          product.save()
          return redirect("product:product_detail_view", product_id)
-         
+
    except Product.DoesNotExist:
       return render(request, "404.html")
    except Exception as e:
       print(e)
    return render(request, 'product/update_product.html', {
        "product": product, "categories": Product.categories_choices.choices})
+
 
 def delete_product_view(request: HttpRequest, product_id):
    try:
@@ -113,13 +120,12 @@ def delete_product_view(request: HttpRequest, product_id):
       print("dsklfmsdlkmflkdsmkl")
       product = Product.objects.get(pk=product_id)
       product.delete()
-      
+
    except Product.DoesNotExist:
       return render(request, "404.html")
    except Exception as e:
       print(e)
    return redirect("main:index_view")
-      
 
    # def search(req: QueryDict):
    #    plants = Plant.objects.all()

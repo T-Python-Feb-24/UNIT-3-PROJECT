@@ -39,7 +39,7 @@
                       type="email"
                       minlength="3"
                       disabled
-                      value="{{ user.email }}" />
+                      value="{{ request.user.email }}" />
                <label class="form-label mb-0 ms-1 mt-2">الجوال</label>
                <input name="phone"
                       class="form-control"
@@ -50,24 +50,24 @@
                <label class="form-label mb-0 ms-1 mt-2">الجنس</label>
                <select id="gender" name="gender" class="form-select">
                   {% for val,key in genders %}
-                     <option {% if val == user.profile.gender %}selected{% endif %}
+                     <option {% if key == user.profile.gender %}selected{% endif %}
                              value="{{ key }}">{{ val }}</option>
                   {% endfor %}
                </select>
                <label class="form-label mb-0 ms-1 mt-2">العنوان</label>
-               <textarea name="address" class="form-control">{{ user.profile.address }}</textarea>
+               <textarea name="address" class="form-control">{{ request.user.profile.address }}</textarea>
                <label class="form-label mb-0 ms-1 mt-2">نبذة عنك</label>
-               <textarea name="about" class="form-control">{{ user.profile.about }}</textarea>
+               <textarea name="about" class="form-control">{{ request.user.profile.about }}</textarea>
                <div class="form-outline mb-4">
                   <label class="form-label mb-0 ms-1 mt-2">الجنسية</label>
                   <select id="nationality" name="nationality" class="form-select">
                      {% for val,n in nationality %}
-                        <option {% if val == user.profile.nationality %}selected{% endif %}
+                        <option {% if val == request.user.profile.nationality %}selected{% endif %}
                                 value="{{ val }}">{{ val }}</option>
                      {% endfor %}
                   </select>
                   <label class="form-label mb-0 ms-1 mt-2">رفع صورة شخصية:</label>
-                  <img src="{{ user.profile.avatar.url }}"
+                  <img src="{{ request.user.profile.avatar.url }}"
                        height="110px"
                        width="100px"
                        class="ms-3"

@@ -28,12 +28,12 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="https://microless.com/cdn/banners/reduced-shipping-pc.jpg"
+        <img src="https://images-eu.ssl-images-amazon.com/images/G/40/Electronics/Surface_4_Eng.JPG"
              class="d-block w-100"
              alt="...">
       </div>
       <div class="carousel-item">
-        <img src="https://microless.com/cdn/banners/reduced-shipping-pc.jpg"
+        <img src="https://m.media-amazon.com/images/I/61XK2Z1SFBL._AC_SL1253_.jpg"
              class="d-block w-100"
              alt="...">
       </div>
@@ -61,7 +61,7 @@
       <span class="material-symbols-outlined">arrow_left_alt</span>
     </div>
   </div>
-  <div class="cards index">
+  <div class="d-flex index">
     {% for product in products %}
       <a href="{% url "product:product_detail_view" product.id %}">
         <div class="card card-product">
@@ -74,7 +74,7 @@
           </div>
           <div class="card-body">
             <div class="product-card-info">
-              <h4>{{ product.name }}</h4>
+              <span>{{ product.name }}</span>
             </div>
           </div>
         </div>

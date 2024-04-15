@@ -87,7 +87,7 @@
                                           <span class="material-symbols-outlined">person</span>
                                           <span>
                                              {% if request.user.is_authenticated %}
-                                                Hello {{ request.user.username }}
+                                                مرحبا {{ request.user.username }}
                                              {% else %}
                                                 الحساب
                                              {% endif %}
@@ -128,11 +128,8 @@
                            </div>
                            <form class="input-group d-grid align-items-center"
                                  action="{% url "product:search_product_view" %}"
-                                 method="post">
-                              <input name="name"
-                                     type="search"
-                                     placeholder="عما تبحث"
-                                     id="example-search-input">
+                                 method="get">
+                              <input name="name" type="search" placeholder="عما تبحث" {% if request.GET.name %}value={{ request.GET.name }}{% endif %} id="example-search-input">
                               <button type="submit" value="submit" id="search">
                                  <span class="material-symbols-outlined">search</span>
                               </button>

@@ -5,10 +5,10 @@
 {% block content %}
 <div class="container">
 <div class="row mt-2 g-5">
-
+    <h4 style="font-size: 200%; font-family: cursive;">users messages:</h4>
     {% for c in con %}
     <div class="col-4">
-        <h4 style="font-size: 200%; font-family: cursive;">users messages:</h4>
+        
         <div class="d-flex flex-column gap-2 border border-1 p-3 mt-3 rounded-4 h-100" style="background-color: #f8f9fa; color: #212529;">
             <img src="{{ c.image.url }}" class="w-50 h-40 rounded-4"/>
             <h1 style="color: #000000;">{{ c.f_name }} {{ c.l_name }}</h1>

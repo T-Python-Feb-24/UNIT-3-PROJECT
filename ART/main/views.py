@@ -27,7 +27,8 @@ def add_images(request:HttpRequest):
         try:
             new_blog = Blog(user=request.user,name = request.POST["name"],about = request.POST["about"],
                             image = request.FILES.get("image", Blog.image.field.default),
-                            is_published = request.POST.get("is_published", False),category = request.POST['category'])
+                            # is_published = request.POST.get("is_published", False)
+                            category = request.POST['category'])
             
             new_blog.save()
             return redirect("main:detail_images",new_blog.id)
@@ -53,7 +54,7 @@ def all_images(request:HttpRequest):
         art = Blog.objects.all().order_by("-created_at") 
     
         #calculate the page content
-    limit = 8
+    limit = 9
     pages_count = [str(n) for n in range(1, round(art.count()/limit)+1)]
     start = (int(request.GET.get("page", 1))-1)*limit
     end = (start)+limit

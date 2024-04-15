@@ -3,7 +3,35 @@
 {% block title %} {{user.username }} favorites {% endblock %}
 
 {% block content %}
+<style>
+    .card-container {
+    width: 100%; 
+    background-color: #ffffff; /* لون الخلفية أبيض */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* تقليل المسافة بين العناصر الداخلية */
+}
 
+.card-image {
+    width: 100%; /* العرض الكامل للصورة */
+    object-fit: cover; 
+}
+
+.category-label {
+    padding: 5px 10px; 
+    margin: 0 15px; 
+    text-align: center; /* مركز النص داخل العلامة */
+}
+
+.date-posted {
+    margin: 0 15px; 
+}
+
+.blog-title {
+    margin: 0 15px; 
+
+}
+</style>
    
 <div class="container">
 <div class="row justify-content-center ">
@@ -15,13 +43,14 @@
             <div class="row">
                 {% for favorite in user.favorite_set.all %}
                 <div class="col-4">
-                    <div style="width: 53%; background-color: rgb(255, 255, 255);" class="d-flex flex-column gap-2  shadow p-3  h-100">
-                        <img src="{{ favorite.Blog.image.url }}" class="w-100  card-image" alt="{{ favorite.Blog.name }} image">
-                        <h6 class=" pt-1 pb-1 ps-3 pe-3 rounded-pill {{ favorite.Blog.category }}">{{ favorite.Blog.category }}</h6>
-                        <h6>{{ favorite.Blog.created_at }}</h6>
-                        <h2><a href="{% url 'main:detail_images' favorite.Blog.id %}" class="text-decoration-none">{{ favorite.Blog.name }}</a></h2>
+                    <div class="card-container shadow p-3 h-100">
+                        <img src="{{ favorite.Blog.image.url }}" class="card-image" alt="{{ favorite.Blog.name }} image">
+                        <h6 class="category-label rounded-pill">{{ favorite.Blog.category }}</h6>
+                        <h6 class="date-posted">{{ favorite.Blog.created_at }}</h6>
+                        <h2 class="blog-title"><a href="{% url 'main:detail_images' favorite.Blog.id %}" class="text-decoration-none">{{ favorite.Blog.name }}</a></h2>
                     </div>
                 </div>
+                
                 {% endfor %}
             </div>
         </div>

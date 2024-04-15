@@ -1,0 +1,31 @@
+{% extends 'main/S1.html' %}
+{% load static %}
+{% block title %} {{ user.username }} Profile {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div style="margin-top: 125px;" class="row">
+        <div class="col-2">
+            <img src="{{ user.profile.avatar.url }}" class="avatar w-100 rounded-4" />
+            <h5>@{{ user.username }}</h5>
+            <a href="{% url 'user_info:profile_update' %}" class="btn btn-primary mt-3">Update Profile</a>
+        </div>
+        <div class="col">
+            <div class="d-flex flex-column">
+                <h3>{{ user.get_full_name }}</h3>
+                <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+                <p class="mt-2">{{ user.profile.about }}</p>
+            </div>
+            <hr/>
+            <h2>{{ user.get_full_name }}'s Stories</h2>
+            <ul>
+                {% for story in stories %}
+                    <li><a href="{% url 'main:show_story' pk=story.pk %}">{{ story.name }}</a></li>
+                {% empty %}
+                    <p>No stories found.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

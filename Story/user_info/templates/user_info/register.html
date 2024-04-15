@@ -1,0 +1,32 @@
+{% extends 'main/S1.html' %}
+
+{% block title %} Register New User {% endblock %}
+
+{% block content %}
+
+    <h1>Register New User</h1>
+    {% if msg %}
+    <div class="alert alert-danger">{{ msg }}</div>
+    {% endif %}
+
+    <div class="row" style="padding: 125px;">
+        <div class="col">
+            <form action="{% url 'user_info:register_user' %}" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+                <h2>Register</h2>
+                <label for="exampleInputEmail1" class="form-label">User name </label>
+                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                <label for="exampleInputEmail1" class="form-label">First Name </label>
+                <input name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" />
+                <label for="exampleInputEmail1" class="form-label">Last Name </label>
+                <input name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
+                <label for="exampleInputEmail1" class="form-label">Email </label>
+                <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" />
+                <label for="exampleInputEmail1" class="form-label">Password </label>
+                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" /><br>
+                <input type="submit" class="btn btn-primary" value="Sign Up" />
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

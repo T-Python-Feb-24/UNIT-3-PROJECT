@@ -1,0 +1,35 @@
+{% extends 'main/S1.html' %}
+{% load static %}
+{% block title %} Add New Story {% endblock %}
+{% block content %}
+    <h1 style="padding: 20px;">Add New Story</h1>
+
+<div class="container card">
+    <form method="post" action="{% url 'main:add_story' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Enter description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select name="category" class="form-select" id="category">
+                {% for choice in CATEGORY_CHOICES %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Story Content</label>
+            <textarea class="form-control" id="content" name="content" placeholder="Enter story content or leave blank to generate automatically based on the description"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'main:home' %}" class="btn btn-secondary">Back to Home</a>
+    </form>
+</div>
+{% endblock %}

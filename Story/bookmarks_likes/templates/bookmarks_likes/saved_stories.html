@@ -1,0 +1,26 @@
+{% extends 'main/S1.html' %}
+{% block title %} Saved Stories {% endblock %}
+
+{% block content %}
+<div style="margin-top: 125px;" class="container">
+  <h2>Saved Stories</h2><br>
+  <div class="row">
+    {% for story in stories %}
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        {% if story.image %}
+        <img src="{{ story.image.url }}" class="card-img-top" alt="{{ story.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ story.name }}</h5>
+          <p class="card-text">{{ story.description}}</p> 
+          <a href="{% url 'main:show_story' pk=story.pk %}" class="btn btn-primary">Read Story</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No saved stories yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -19,7 +19,8 @@
                     
                     
                     <input name="name" type="text" placeholder="recipes name" class="form-control" required>
-                    <textarea name="content" type="text" placeholder="recipes .." class="form-control" required></textarea>
+                    <textarea name="content" type="text" placeholder="recipes .." class="form-control" required ></textarea>
+                    
                     <input name="time_coocking" type="text" placeholder="time coockin" class="form-control" required>
                     <input name="number_people" type="text" placeholder="Quantity serves people" class="form-control" required>
                     
@@ -49,6 +50,15 @@
             </div>
         </div>
     </div>
+    
 </section>
+<script>
+    document.getElementById('content').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // يمنع إدخال سطر جديد تلقائيًا
+            this.value += '\n'; // يضيف سطر جديد يدويًا
+        }
+    });
+</script>
 
 {% endblock %}

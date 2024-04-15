@@ -4,14 +4,14 @@
 
 {% block content %}
 
-    
+<section style="padding-left: 300px; margin-bottom: 200px;">
 
     {% if msg %}
-        <div class="alert alert-danger">{{msg}}</div>
+        <div class="alert alert-danger" style="margin-right: 320px; margin-top: 20px;">{{msg}}</div>
     {% endif %}
-    <div class="row" style=" margin-left: 20px; margin-bottom: 100px;" >
+    <div class="row"  >
         <h1 class="fw-light text-blak " style="margin-top: 50px;  margin-bottom: 20px; ">Update Account</h1>
-        <div class="col-6">
+        <div class="col-8">
             <form action="{% url 'accounts:update_profile' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
                 {% csrf_token %}
 
@@ -26,9 +26,11 @@
                 <img src="{{user.profile.avatar.url}}" class="avatar" />
                 <input type="file" class="form-control" name="avatar" />
 
-                <input type="submit" class="btn btn-primary" value="Update Profile" />
+                <input type="submit" class="btn btn-primary"  style="background-color: rgb(51, 150, 24);" value="Update Profile" />
 
             </form>
         </div>
+        
     </div>
+</section> 
 {% endblock %}

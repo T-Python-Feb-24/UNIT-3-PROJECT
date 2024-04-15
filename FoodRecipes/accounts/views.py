@@ -103,7 +103,7 @@ def update_profile(request:HttpRequest):
                 user.save()
                 
                 try:
-                    profile:ProfileUser= user.ProfileUser
+                    profile:ProfileUser= user.profileuser
                 except Exception as e:
                     profile =ProfileUser(user=user)
 

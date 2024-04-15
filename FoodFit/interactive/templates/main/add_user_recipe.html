@@ -1,0 +1,68 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+
+ {% block content %}
+
+ <div class=" contact-row row ">
+  <article class="ccard-form  ">
+  <div class="im">
+  <div class="card-img-form">
+    <img class="card-img-form " src="{% static 'images/add.jpg'%}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
+  
+ <form action="{% url 'interactive:add_user_recipe_page'%}"   method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-row ">
+    <div class="form-group ">
+      <label >Title</label>
+      <input type="text" class="form-control" name="title" placeholder="Title" required>
+    </div>
+    <div class="form-group ">
+      <label >Ingredients</label>
+      <textarea name="ingredients" placeholder="Ingredients" class="form-control" required >{{ recipe.ingredients }}</textarea>
+    </div>
+  
+    <div class="form-group ">
+      <label >How to prepare</label>
+      <textarea name="about" placeholder="How to prepare" class="form-control" required></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group ">
+      <label >Quantity (per grams)</label>
+      <input type="number" class="form-control" name="quantity" required>
+    </div>
+    <div class="form-group ">
+      <label for="inputCity">Calories</label>
+      <input type="number" class="form-control" name="calories" required>
+    </div>
+
+<label for="inputCity">Choose category:</label>
+<div class="form-group ">
+<select name ="category" class="form-select" aria-label="Default select example">
+{% for value, categories in category %}
+<option value ="{{value}}">{{categories}}</option>
+{% endfor %}
+</select>
+ </div>
+   
+  <h5>Choose Image:</h5>
+  <div class="form-group">
+     <input name="image"  type="file"  accept="image/*" class="form-control" required />
+      </div>
+<br>
+  <button type="submit" class="b btn btn-primary">Add Recipe</button>
+</form>
+      </div>
+</article>
+ 
+
+
+  </div>
+
+ {% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+
+ {% block content %}
+
+<div class=" row">
+<div class="col-md-4">
+<img class="hometitle-f" src=" {% static 'images/title.webp'%}">
+
+
+</div>
+
+  <div class="col-md-6">
+  <img class="food" src=" {% static 'images/foodhomeimg.webp'%}">
+
+
+  </div>
+  </div>
+
+
+
+<br><br><br><br>
+<div class="cardabout">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="card-inner">
+  <div class="about-b">
+  
+  <h1>About<h2>
+  <br><br>
+  <p><strong>Foodie </strong>is a website that about food, nutrition and sustainability <br> Our mission is to share Healthy flavor-packed recipes from around the world<br>
+  Also we would like to see our users Healthy recipes 
+  </p>
+  
+  
+
+ 
+  </div>
+  </div>
+</div>
+
+<!--end banner-->
+
+ 
+
+
+
+<!--end about continer-->
+<div class="continer">
+<div class="row mt-5">
+<div class="col">
+
+
+</div>
+</div>
+</div>
+
+
+<br>
+<div class="r-con">
+<div class="line2">
+  <div class="r-title-box2">
+  
+ </div>
+ </div>
+ </div>
+  <h1 class="d-flex justify-content-center align-items-center ">Foodie Recipes You May Like</h1>
+
+
+
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
+
+  <article class="ccard">
+  <div class="im">
+  <div class="card-img4">
+    <img class="card-img4 " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  </div>
+   </div>
+
+  <div class="project-info">
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'main:detail_recipe_page' recipe.id  %}">{{recipe.title}}</a>
+      </div>
+
+      <span class="tag">{{recipe.category}}</span>
+    </div>
+    <span class="lighter"
+      >Quantity: {{recipe.quantity}} <br>
+      Calories : {{recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
+  <br>
+<br><a href="{% url 'main:all_recipe_page'%}" class=" home-b btn ">See More</a>
+
+<br><br>
+<div class="r-con">
+<div class="line2">
+  <div class="s-r-title-box2">
+  
+ </div>
+ </div>
+ </div>
+
+
+<br><br>
+ <div class="cardabout2">
+  <div class="card-inner">
+   <img class="fit1"src="https://images.pexels.com/photos/1028599/pexels-photo-1028599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+  <div class="b-contant">
+ 
+<dive class="overly">
+  <div class="box2"> 
+  
+  <h1>Search food you like to find calories<h2>
+  <br><br>
+   <a href="{% url 'main:search_food_page'%}" class=" b btn ">Search Food</a>
+  </div>
+  </div>
+  </div>
+  
+  </div>
+</div>
+
+<br>
+
+ {% endblock %}

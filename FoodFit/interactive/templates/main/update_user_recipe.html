@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+
+ {% block content %}
+
+ 
+
+
+ <div class=" contact-row row ">
+  <article class="ccard-form2  ">
+  <div class="im">
+  <div class="card-img-form">
+    <img class="card-img-form " src="{% static 'images/updaterecipe.jpg'%}" class="card-img-top" alt="...">
+  </div>
+   </div>
+    
+  <div class="project-info">
+  <form action="{% url 'interactive:update_recipe_page' recipe.id %}"   method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-row ">
+    <div class="form-group ">
+      <label ><strong>Title</strong></label>
+      <input type="text" class="form-control" name="title" placeholder="Title" value="{{ recipe.title }}" >
+    </div>
+    <div class="form-group ">
+      <label ><strong>Ingredients</strong></label>
+      <textarea name="ingredients" placeholder="about" class="form-control" >{{ recipe.ingredients }}</textarea>
+    </div>
+    <div class="form-group ">
+      <label ><strong>How to prepare</strong></label>
+      <textarea name="about" placeholder="How to prepare" class="form-control" >{{ recipe.about }}</textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group ">
+      <label ><strong>Quantity </strong>(per grams)</label>
+      <input type="number" class="form-control" name="quantity" value="{{ recipe.quantity }}" >
+    </div>
+    </div>
+    <div class="form-group ">
+      <label for="inputCity"><strong>Calories</strong></label>
+      <input type="number" class="form-control" name="calories" value="{{ recipe.calories }}" >
+    </div>
+
+<label for="inputCity"><strong>Choose category:</strong></label>
+<div class="form-group ">
+<select name ="category" class="form-select" aria-label="Default select example">
+{% for value, categories in category %}
+<option value ="{{value}}" {% if recipe.category == value %} selected {% endif %}>{{categories}}</option>
+{% endfor %}
+</select>
+ </div>
+   
+  <h5>Choose An Image:</h5>
+  <div class="form-group ">
+  <img src="{{ recipe.image.url }}" class="update-img" />
+     <input name="image"  type="file"  accept="image/*" class="form-control"  />
+      </div>
+<br>
+  <button type="submit" class="b btn ">Update Recipe</button>
+</form>
+      </div>
+</article>
+ 
+
+
+  </div>
+ {% endblock %}

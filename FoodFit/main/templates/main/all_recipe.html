@@ -1,0 +1,83 @@
+{% extends 'main/base.html' %}
+
+
+
+
+ {% block content %}
+
+ <br><br>
+ <div class="cardabout">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="card-inner">
+   <img class="fit1"src="https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+  <div class="b-contant">
+ 
+<dive class="overly">
+  <div class="box1"> 
+  
+  <h1>Foodie Recipes<h2>
+  <br><br>
+  <p>Search in our recipe</p>
+  <form action="{% url 'main:search_recipe_page' %}"  method="get" class="d-flex gap-2" name='search'>
+      <input  type="search" class=" -search form-control me-2"  name="search" value="{{request.GET.search}}"/>
+        <input type="submit" value="search" class="btn btn-outline-success" />
+        </form>
+
+  </div>
+  </div>
+  </div>
+  
+  </div>
+</div>
+
+<br>
+    
+     <div class="row g-4 mt-5">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class=" cat d-flex gap-2">
+                <a href="{% url 'main:all_recipe_page' %}" class="p-2 ps-3 pe-3   text-decoration-none  {% if 'categories' not in request.GET %} All  {% endif %}">All</a>
+                {% for val, key in category %}
+                    <a href="?categories={{val}}" class=" p-2 ps-3 pe-3  {% if request.GET.categories == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+          
+
+   
+
+
+
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
+
+  <article class="ccard">
+  <div class="im">
+  <div class="card-img4">
+    <img class="card-img4 " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  </div>
+   </div>
+
+  <div class="project-info">
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'main:detail_recipe_page' recipe.id  %}">{{recipe.title}}</a>
+      </div>
+
+      <span class="tag">{{recipe.category}}</span>
+    </div>
+    <span class="lighter"
+      >Quantity: {{recipe.quantity}} <br>
+      Calories : {{recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
+
+  
+ {% endblock %}

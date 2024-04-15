@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+
+
+
+
+ {% block content %}
+ 
+ <div class="row g-4">
+
+        <div class="d-flex flex-column gap-2">
+            
+            <h1>Search</h1>
+            <form action="{% url 'main:search_recipe_page' %}"  method="get" class="d-flex gap-2" name='search'>
+                <input type="search" class="form-control" name="search" value="{{request.GET.search}}"/>
+                <input type="submit" value="search" class="btn btn-primary" />
+            </form> 
+
+            <h2>Search results for {{ request.GET.search }} ({{ recipes.count }}) </h2>
+        </div>
+
+    </div>
+
+
+
+ <div class=" row ">
+  {% for recipe in recipes %}
+    <div class="col-md-4 mt-5">
+
+  <article class="ccard">
+  <div class="im">
+  <div class="card-img4">
+    <img class="card-img4 " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  </div>
+   </div>
+
+  <div class="project-info">
+    <div class="flex">
+      <div class="project-title">
+      <a href="{% url 'main:detail_recipe_page' recipe.id  %}">{{recipe.title}}</a>
+      </div>
+
+      <span class="tag">{{recipe.category}}</span>
+    </div>
+    <span class="lighter"
+      >Quantity: {{recipe.quantity}} <br>
+      Calories : {{recipe.calories}}</span>
+  </div>
+</article>
+  </div>
+    {% endfor %}
+
+  </div>
+
+
+ {% endblock %}

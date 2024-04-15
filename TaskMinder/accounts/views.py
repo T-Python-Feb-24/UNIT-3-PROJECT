@@ -3,7 +3,6 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from main.models import Comment
 from .models import Profile
 from django.db import transaction, IntegrityError
 
@@ -37,6 +36,8 @@ def sign_up(request:HttpRequest):
     return render(request, "accounts/sign_up.html", {"msg" : msg})
 
 
+
+
 def sign_in(request:HttpRequest):
     msg = None
 
@@ -45,12 +46,15 @@ def sign_in(request:HttpRequest):
 
         if user:
             login(request, user)
-            return redirect("main:dashboard")
+            return redirect("main:home_page")
         else:
             msg = "Username or Password is wrong. Try again..."
     
 
     return render(request, "accounts/sign_in.html", {"msg" : msg})
+
+
+
 
 
 def logout_user(request:HttpRequest):

@@ -4,37 +4,37 @@
 
 {% block content %}
 
-<!-- Navbar  -->
 
-<nav class="navbar">
-    <div class="container-fluid">
-        <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
-            <div class="search-bar">
-            <input type="text" placeholder="Search...">
-            <button type="submit" class="px-3" style="background-color: #FFC008; ">Go</button>
-            </div>
+    <!-- Navbar  -->
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
+        </div>
+    </nav>
+
+    <!-- SideBar  -->
+
+    <div class="sidebar">
+        <ul>
+            <li>
+            {% if request.user.is_authenticated %} 
+              <a class="nav-link mt-5" href="#" style="color: rgb(149, 99, 69);text-transform: capitalize;">WELCOME<br>✦{{request.user.username }}✦</a>
+            {% endif %}
+            <li><button class="btn mt-3"><a href="{% url 'accounts:user_profile' request.user.username %}">MY PROFILE</a></button></li>
+
+            
+            </li>
+            <li><button class="btn"><a href="{% url 'main:dashboard' %}">TASKS</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:journal' %}">JOURNAL</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:reading_list' %}">READING LIST</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:notes' %}">NOTES</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:yearly_goals' %}">YEARLY GOALS</a></button></li>
+
+            <hr class="m-3">
+            <li><button class="btn logout"><a href="{% url 'accounts:logout_user' %}">LOGOUT</a></button></li>
+        </ul>
     </div>
-</nav>
-
-<!-- SideBar  -->
-
-
-<div class="sidebar">
-    <ul>
-        <li>
-        {% if request.user.is_authenticated %} 
-          <a class="nav-link mt-5" href="{% url 'accounts:user_profile' request.user.username %}" style="color: rgb(149, 99, 69);text-transform: capitalize;">WELCOME<br>✦{{request.user.username }}✦</a>
-        {% endif %}
-        </li>
-        <li><button class="btn mt-3"><a href="{% url 'main:home_page' %}">HOME</a></button></li>
-        <li><button class="btn"><a href="{% url 'main:dashboard' %}">DASHBOARD</a></button></li>
-        <li><button class="btn"><a href="#">PROJECTS</a></button></li>
-        <li><button class="btn"><a href="#">MY TASKS</a></button></li>
-        <li><button class="btn"><a href="#">CALENDAR</a></button></li>
-        <hr class="m-3">
-        <li><button class="btn logout"><a href="{% url 'accounts:logout_user' %}">LOGOUT</a></button></li>
-    </ul>
-</div>
 
 
 <!-- Profile Section  -->

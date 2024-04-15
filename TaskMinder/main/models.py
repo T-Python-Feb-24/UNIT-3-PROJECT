@@ -1,72 +1,59 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
 
 
+# Task  
 class Task(models.Model):
-
-    PRIORITY_CHOICES = [
-        ('high', 'High'),
-        ('medium', 'Medium'),
-        ('low', 'Low'),
-    ]
 
     title = models.CharField(max_length=200)
     description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateField()
-    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
+    deadline = models.DateField()
 
     def __str__(self):
         return self.title
 
 
-
-
-# class Project(models.Model):
-
-#     title = models.CharField(max_length=255)
-#     description = models.TextField()
-#     start_date = models.DateField()
-#     end_date = models.DateField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-
-#     def __str__(self):
-#         return self.title
-    
-
-
-
-class Comment(models.Model):
-
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    # project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    context = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return f"{self.user.username} - {self.task.title}"
-    
-
-
-
+# Notes 
 class Note(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
+    context = models.TextField()
+
+    def __str__(self) -> str:
+        return self.title
+    
+
+
+# Journal
+class Journal(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
     context = models.TextField()
 
     def __str__(self):
         return self.title
 
 
-# class SentEmail(models.Model):
+# Task  
+class ReadingList(models.Model):
+
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
     
-#     recipient_email = models.EmailField()
-#     subject = models.CharField(max_length=255)
-#     message = models.TextField()
-#     sent_timestamp = models.DateTimeField(auto_now_add=True)
+
+# Yearly Goals   
+class YearlyGoal(models.Model):
+
+    title = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
+    
+

@@ -1,108 +1,113 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Task List</h1>
-    <div id="taskList">
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Tasks {% endblock %}
+
+
+{% block content %}
+
+
+    <!-- Navbar  -->
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
+        </div>
+    </nav>
+
+
+
+    <!-- SideBar  -->
+
+    <div class="sidebar">
+        <ul>
+            <li>
+            {% if request.user.is_authenticated %} 
+              <a class="nav-link mt-5" href="#" style="color: rgb(149, 99, 69);text-transform: capitalize;">WELCOME<br>✦{{request.user.username }}✦</a>
+            {% endif %}
+            <li><button class="btn mt-3"><a href="{% url 'accounts:user_profile' request.user.username %}">MY PROFILE</a></button></li>
+
+            
+            </li>
+            <li><button class="btn"><a href="{% url 'main:dashboard' %}">TASKS</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:journal' %}">JOURNAL</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:reading_list' %}">READING LIST</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:notes' %}">NOTES</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:yearly_goals' %}">YEARLY GOALS</a></button></li>
+
+            <hr class="m-3">
+            <li><button class="btn logout"><a href="{% url 'accounts:logout_user' %}">LOGOUT</a></button></li>
+        </ul>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <div class="header-bar">
+        <div>
+            <h1>Hello {{request.user|title}}</h1>
+            <h3 style="margin:0">You have <i>{{count}}</i> incomplete task{{ count|pluralize:"s" }}</h3>
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'accounts:logout_user' %}">Logout</a> {% else %}
+        <a href="{% url 'accounts:sign_in' %}">Login</a> {% endif %}
+    </div>
+
+
+    <div id="search-add-wrapper">
+        <form method="GET" style="display: flex;">
+            <input type='text' name='search-area' placeholder="Search your task" value="{{search_input}}">
+            <input class="button" type="submit" value='Search'>
+        </form>
+        {% if tasks|length > 0 %}
+        <a id="add-link" href="{% url 'task-create' %}">&#x2b;</a>
+        {% endif %}
+    </div>
+
+
+    <div id="tasklist" class="task-items-wrapper">
         {% for task in tasks %}
-            <div class="task">
-                <h3>{{ task.title }}</h3>
-                <p>Due Date: {{ task.due_date }}</p>
-                <p>{{ task.description }}</p>
+        <div class="task-wrapper" data-position="{{task.pk}}">
+            <div class="task-title">
+                {% if task.complete %}
+                <div class="task-complete-icon"></div>
+                <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i> {% else %}
+                <div class="task-incomplete-icon"></div>
+                <a href="{% url 'task-update' task.id %}">{{task}}</a> {% endif %}
             </div>
+            <div class="task-controls">
+                <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+                <span class="handle">&nbsp;&#10247;</span>
+            </div>
+        </div>
         {% endfor %}
-    </div>
-</body>
-</html> -->
 
 
+    <script>
+        var taskList = document.getElementById("tasklist");
+        var reorderForm = document.getElementById("reorderForm");
+        var positionInput = document.getElementById("positionInput");
 
-{% extends 'main/dashboard.html' %} {% block content %}
+        let sortable = Sortable.create(taskList, {
+            handle: '.handle',
+            ghostClass: 'dropArea',
+            chosenClass: 'selectedTask',
 
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-<div class="header-bar">
-    <div>
-        <h1>Hello {{request.user|title}}</h1>
-        <h3 style="margin:0">You have <i>{{count}}</i> incomplete task{{ count|pluralize:"s" }}</h3>
-    </div>
+        });
 
-    {% if request.user.is_authenticated %}
-    <a href="{% url 'logout' %}">Logout</a> {% else %}
-    <a href="{% url 'login' %}">Login</a> {% endif %}
-</div>
-
-
-<div id="search-add-wrapper">
-    <form method="GET" style="display: flex;">
-        <input type='text' name='search-area' placeholder="Search your task" value="{{search_input}}">
-        <input class="button" type="submit" value='Search'>
-    </form>
-    {% if tasks|length > 0 %}
-    <a id="add-link" href="{% url 'task-create' %}">&#x2b;</a>
-    {% endif %}
-</div>
-
-
-<!-- Hidden form. Form submits new item positions -->
-<form style="display: none;" id="reorderForm" method="post" action="{% url 'task-reorder' %}">
-    {% csrf_token %}
-    <input type="hidden" id="positionInput" name="position">
-</form>
-
-
-<div id="tasklist" class="task-items-wrapper">
-    {% for task in tasks %}
-    <div class="task-wrapper" data-position="{{task.pk}}">
-        <div class="task-title">
-            {% if task.complete %}
-            <div class="task-complete-icon"></div>
-            <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i> {% else %}
-            <div class="task-incomplete-icon"></div>
-            <a href="{% url 'task-update' task.id %}">{{task}}</a> {% endif %}
-        </div>
-        <div class="task-controls">
-            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
-            <span class="handle">&nbsp;&#10247;</span>
-        </div>
-    </div>
-
-    {% empty %}
-    <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
-        <h3>No new tasks are created.</h3>
-        <h3>Create a <a style="text-decoration: none; color: #e53935;" href="{% url 'task-create' %}">New task</a> ! </h3>
-    </div>
-    {% endfor %}
-</div>
-
-<script>
-    var taskList = document.getElementById("tasklist");
-    var reorderForm = document.getElementById("reorderForm");
-    var positionInput = document.getElementById("positionInput");
-
-    let sortable = Sortable.create(taskList, {
-        handle: '.handle',
-        ghostClass: 'dropArea',
-        chosenClass: 'selectedTask',
-
-    });
-
-    function reordering() {
-        const rows = document.getElementsByClassName("task-wrapper");
-        let pos = [];
-        for (let row of rows) {
-            pos.push(row.dataset.position);
+        function reordering() {
+            const rows = document.getElementsByClassName("task-wrapper");
+            let pos = [];
+            for (let row of rows) {
+                pos.push(row.dataset.position);
+            }
+            console.log(pos.join(","))
+            positionInput.value = pos.join(',');
+            reorderForm.submit();
         }
-        console.log(pos.join(","))
-        positionInput.value = pos.join(',');
-        reorderForm.submit();
-    }
 
-    document.ondrop = reordering
-</script>
+        document.ondrop = reordering
+    </script>
 
-{% endblock content %}
+{% endblock %}

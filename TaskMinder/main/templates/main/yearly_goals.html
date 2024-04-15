@@ -1,23 +1,22 @@
 {% extends 'main/base.html' %}
-{% block title %} My Reading List {% endblock %}
+{% load static %}
+{% block title %} TaskMinder {% endblock %}
 
 
 {% block content %}
+
     <!-- Checkbox -->
 
-<section>
+<!-- <section>
 
-<h3>My Reading List</h3>
+checkbox 
 
         <label>
             <input type="checkbox" id="myCheckbox">
             <span id="myText">Text</span>
         </label>
 
-</section>
-
-
-
+</section> -->
 
     <!-- Navbar  -->
 
@@ -26,6 +25,7 @@
             <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
         </div>
     </nav>
+
 
     <!-- SideBar  -->
 
@@ -50,4 +50,8 @@
         </ul>
     </div>
 
-{% endblock %}
+
+
+
+    {% endblock %}
+

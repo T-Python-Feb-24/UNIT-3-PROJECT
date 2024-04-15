@@ -55,8 +55,8 @@
 							<div class="d-flex flex-column gap-4">
 								{% for event in student.event_set.all %}
 									<div class="d-flex flex-column gap-1 p-3 shadow">
-										<h5>{{event.user.username}}</h5>
-										<a href="{% url 'main:event_detail_view' event.id %}"><h6 class="text-muted">{{event.event_title}}</h6></a>
+										<h5>{{event.event_title}}</h5>
+										<a href="{% url 'main:event_detail_view' event.id %}"><h6 class="text-muted">{{event.event_description}}</h6></a>
 									</div>
 								{% endfor %}
 							</div>

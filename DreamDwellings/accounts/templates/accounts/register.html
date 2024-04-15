@@ -1,0 +1,140 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Register New User{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form {
+        max-width: 400px;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 100px;
+    }
+
+    .title {
+        font-size: 50px;
+        font-weight: 600;
+        color: royalblue;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .title::before, .title::after {
+        content: "";
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        background-color: royalblue;
+    }
+
+    .title::before {
+        left: -30px;
+    }
+
+    .title::after {
+        left: -30px;
+        animation: pulse 1s linear infinite;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+
+    .submit-btn {
+        background-color: royalblue;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .signin-link {
+        text-align: center;
+    }
+
+    .signin-link a {
+        color: royalblue;
+        text-decoration: none;
+    }
+
+    .signin-link a:hover {
+        text-decoration: underline;
+    }
+
+    @keyframes pulse {
+        from {
+            transform: scale(0.9);
+            opacity: 1;
+        }
+        to {
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
+</style>
+
+<div class="container">
+    <form class="form" action="{% url 'accounts:register' %}" method="post">
+        {% csrf_token %}
+        <p class="title">Register</p>
+
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="input-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required>
+        </div>
+
+        <div class="input-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" minlength="6" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Sign Up</button>
+
+        <p class="signin-link">Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a></p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Thank You - Planteer{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="jumbotron text-center">
+        <h2 class="display-4">Thank You for Contacting Us!</h2>
+        <p class="lead">Your message has been successfully sent. We will get back to you soon.</p>
+        <hr class="my-4">
+        <p>Want to browse more? Head back to our homepage .</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'main:index_view' %}" role="button">Home</a>
+
+        </p>
+    </div>
+</div>
+{% endblock %}
+{% block header %}
+{% endblock %}

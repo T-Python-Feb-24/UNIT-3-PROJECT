@@ -1,0 +1,124 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+}
+.sign_up_container {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/unit-3-project-d265e.appspot.com/o/signUp-bg.jpg?alt=media&token=e91f6af3-7e5f-4780-9c83-d7f89c638741');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+}
+.left-side {
+    width: 50%;
+    min-height: 100vh;
+    background: rgba(86, 86, 86, 0.3);
+    backdrop-filter: blur(15px);
+}
+.input-container {
+    position: relative;
+    margin: 50px auto;
+    width: 200px;
+  }
+  
+  .input-container input {
+    font-size: 20px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    padding: 5px 0;
+    background-color: transparent;
+    outline: none;
+  }
+  
+  .input-container .label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .input-container input:focus ~ .label,
+  .input-container input:valid ~ .label {
+    top: -20px;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .input-container .underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #333;
+    transform: scaleX(0);
+    transition: all 0.3s ease;
+  }
+  
+  .input-container input:focus ~ .underline,
+  .input-container input:valid ~ .underline {
+    transform: scaleX(1);
+  }
+  .button {
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #000000;
+    transition: all 1000ms;
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    outline: 2px solid #000000;
+  }
+  
+  button:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+    outline: 2px solid #000000;
+    box-shadow: 4px 5px 17px -4px #000000;
+  }
+  
+  button::before {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #000000;
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width 1000ms;
+  }
+  
+  button:hover::before {
+    width: 250%;
+  }
+  
+/*
+.img-gallery{
+
+    margin-top: 10rem;
+}*/
+.images_in_gallery {
+    width: 140px;
+    opacity: 0.5;
+}
+.arrow{
+    cursor: pointer;
+}
+.preview .active {
+    display: block;
+    border: 3px solid #000;
+    width: 160px;
+    opacity: 1;
+}

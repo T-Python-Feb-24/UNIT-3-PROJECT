@@ -1,0 +1,12 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Numans", sans-serif;
+    font-size: 20px;
+}
+.phrase-about {
+    font-size: 25px;
+}
+.phrase-about b {
+    font-size: 30px;
+}

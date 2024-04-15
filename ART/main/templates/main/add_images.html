@@ -19,27 +19,32 @@
                 <h1 style="font-family: cursive; text-align: center;">Add new image</h1>
                 <form style="width: 100%;" action="{% url 'main:add_images' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
                     {% csrf_token %}
+                    <h6 style="font-family: cursive; color: rgb(114, 109, 109);">Utilize the "Name" and "About" fields to provide unique identifiers and descriptions for your image.</h6>
                     <input name="name" type="text" placeholder="Name" class="form-control"  />
-                    <h6>This is an additional option for you</h6>
                     <textarea name="about" placeholder="About" class="form-control"></textarea>
-                    <div class="form-check form-switch">
-                        <input name="is_published" value="True" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">is published</label>
+                
+                    <div class="form-check form-switch gap-3">
+                        <input name="is_published" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="handlePublish(this)">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Is published?</label>
                     </div>
+                    
+                
                     <h5>Category:</h5>
                     <select name="category" class="form-select" aria-label="Default select example">
                         {% for val, cat in category %}
                             <option value={{val}}>{{cat}}</option>
                         {% endfor %}
                     </select>
+                    
                     <h5>Choose Image:</h5>
                     <input name="image" type="file" accept="image/*" class="form-control"/>
                     <input type="submit" class="btn btn-dark mt-3" value="Add Post" style="background-color: rgb(0, 0, 0);"/>
                 </form>
+                
             </div>
         </div>
     </div>
 </div>
->
+
 
 {% endblock %}

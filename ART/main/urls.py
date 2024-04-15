@@ -1,6 +1,7 @@
 from.import views
 from django.urls import path
 from django.contrib.auth.models import User
+from.views import about_view
 
 app_name  = "main"
 
@@ -14,5 +15,9 @@ urlpatterns=[
     path("comments/add/<blog_id>/", views.add_comment, name="add_comment"),
     path("images/contact/",views.contact_us,name="contact"),
     path("users/massage/",views.user_message,name="user_message"),
+    path('about/', about_view, name='about'),
+    
+
    
 ]
+

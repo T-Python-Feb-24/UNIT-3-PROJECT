@@ -8,7 +8,7 @@ class Blog(models.Model):
     about = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='images/', default='images/default_img.png')
     is_published = models.BooleanField()
-    Categories = models.TextChoices('Category', ["Nature","Arts", "Daily Life" ,"Food"]) 
+    Categories = models.TextChoices('Category', ["Nature","Arts", "Daily" ,"Food"]) 
     category = models.CharField(max_length = 64, choices = Categories.choices)
     created_at = models.DateTimeField(auto_now_add=True)
 

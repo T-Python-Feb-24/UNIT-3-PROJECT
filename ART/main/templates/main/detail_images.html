@@ -6,12 +6,13 @@
 <style>
     .art-image {
     height: 500px;
-    object-fit: cover;
+    object-fit:cover;
     object-position: center;
     float: left; 
     margin-right: 20px; 
     border-radius: 40px;
 }
+
 
     .art-footer {
         position: absolute;
@@ -81,6 +82,9 @@
 
     .comment-container {
         margin-top: 20px;
+        
+        font-size: 16px;
+        line-height: 1.5;
     }
 
     .comment-card {
@@ -103,13 +107,14 @@
     margin-top: -420px; 
     margin-left: 70px; 
 }
+
 </style>
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 mt-5">
             <div class="image-container">
-                <img src="{{ art.image.url }}" class="art-image w-100" />
+                <img src="{{ art.image.url }}"  style="width: 80%; border-radius: 30px; " class="art-images " />
             </div>
         </div>
         <div class="col-md-4 mt-5">
@@ -123,7 +128,7 @@
                 
 
 <div class="d-flex justify-content-between align-items-center mt-4">
-    <div class="d-flex align-items-center gap-3">
+    <div class="d-flex  align-items-center gap-3">
     <!-- Category -->
     <h3 style="color: white; font-size: 20px;">{{ category }}</h3>
     
@@ -149,6 +154,7 @@
 
 
 
+
 <!-- الشرط  -->
                 <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -169,46 +175,58 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container">
-
-        <div class="row mt-4">
-            {% if user.is_authenticated %}
-            <div class="col-12 col-md-6 order-2 order-md-2 d-flex gap-2 justify-content-end">
-                {% for comment in comments %}
-                <div class="d-flex flex-column border border-1 shadow p-3 rounded-4 w-100" style="color: aliceblue;">
-                    <div class="d-flex gap-2">
-                        <a href="{% url 'account:user_profile_view' comment.user.username %}" class="text-decoration-none"><h4 class="accounts">{{ comment.user.username }}</h4></a>
+       
+        <div  class="row mt-4">
+            <div  class="col-md-12 d-flex flex-column align-items-end gap-4">
+                <!-- Share Your Review Section -->
+                <div class="w-100 p-3" style="max-width: 500px; background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    {% if request.user.is_authenticated %}
+                    <h4 class="mb-3" style="color: #343a40; font-family: cursive;">Share Your Review</h4>
+                    <form action="{% url 'main:add_comment' art.id %}" method="post" class="d-flex flex-column gap-3">
+                        {% csrf_token %}
+                        <textarea id="content" name="content" class="form-control" placeholder="Write Your Review..." required style="min-height: 100px;"></textarea>
+                        <input type="submit" value="Add Review" class="btn btn-primary" style="background-color: #000000; color: white;border: none; ">
+                    </form>
+                    {% else %}
+                    <div class="alert alert-info" role="alert" style="font-family: 'Nunito', sans-serif; font-size: 16px;">
+                        You must <a href="{% url 'account:login_user_view' %}" class="alert-link">sign in</a> to write a review.
                     </div>
-                    <p>{{ comment.content }}</p>
-                    <h6 class="text-muted">{{ comment.created_at }}</h6>
+                    {% endif %}
                 </div>
-                {% endfor %}
-            </div>
-            {% endif %}
-            
-        
-            <div class="col col-md-6 order-1 order-md-1 d-flex justify-content-start">
-                <div class="d-flex flex-column " style="width: 500px; border-color: #000000;">
-                    <button style="background-color: #000000; border: 0;" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
-                        Share Your Review
+                
+                <!-- Comments Section -->
+                {% if user.is_authenticated %}
+                <div class="w-100" style="max-width: 500px;">
+                    <button style="font-family: cursive; color: #eeeeee; background-color: #3798b6; border: none; box-shadow: none;" class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#commentsSection" aria-expanded="false" aria-controls="commentsSection">
+                        View Comments
                     </button>
-                    <div class="collapse" id="collapseReview">
-                        {% if request.user.is_authenticated %}
-                        <form action="{% url 'main:add_comment' art.id %}" method="post" class="d-flex flex-column gap-2">
-                            {% csrf_token %}
-                            <textarea id="content" name="content" class="form-control" placeholder="Write Your Review..." required></textarea>
-                            <input type="submit" value=" Add Review" class="btn btn-dark" style="background-color: #bebee0; color: rgb(255, 255, 255);"/>
-                        </form>
-                        {% else %} 
-                        <div style="font-family: cursive; background-color: rgb(175, 175, 185); color: black;" class="alert ">You must<a href="{% url 'account:login_user_view' %}">Sign in</a> to write a review. </div>
-                        {% endif %}
+                    
+                    <div class="collapse" id="commentsSection">
+                        {% for comment in comments %}
+                        <div class="comment-container d-flex flex-column border border-1 shadow p-3 rounded-4 w-100 mb-3" style="background-color: #f8f9fa; color: #343a40;">
+                            <div class="d-flex gap-2 align-items-center">
+                                <a href="{% url 'account:user_profile_view' comment.user.username %}" class="text-decoration-none" style="color: #007bff;">
+                                    <h4 style="font-family: cursive; color: #000000;">{{ comment.user.username }}</h4>
+                                </a>
+                            </div>
+                            <p style="margin-top: 0.5rem;">{{ comment.content }}</p>
+                            <h6 class="text-muted">{{ comment.created_at|date:"M d, Y H:i" }}</h6>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+                
+                
+                
+                
+{% endif %}
+
             </div>
         </div>
-        
+    </div>
+
+    <div  class="container">
+
         
 
 

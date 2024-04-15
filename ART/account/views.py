@@ -26,7 +26,7 @@ def register_user_view(request:HttpRequest):
                 new_user.save()
 
                 #create profile for user
-                profile = Profile(user=new_user, about=request.POST["about"], instagram_link=request.POST["instagram_link"], avatar=request.FILES.get("avatar", Profile.default_avatar.field.get_default()))
+                profile = Profile(user=new_user, about=request.POST["about"], instagram_link=request.POST["instagram_link"], avatar=request.FILES.get("avatar", Profile.avatar.field.get_default()))
                 profile.save()
 
                 #redirect to login page

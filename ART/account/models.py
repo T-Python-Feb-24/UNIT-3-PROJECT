@@ -7,7 +7,7 @@ class Profile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     about = models.TextField()
-    avatar = models.ImageField(upload_to="images/", default="images/default_avatar.jpg")
+    avatar = models.ImageField(upload_to="images/", default="images/default_img12.jpg")
     instagram_link = models.URLField(blank=True)
     
     

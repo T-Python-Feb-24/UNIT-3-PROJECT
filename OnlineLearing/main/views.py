@@ -25,13 +25,19 @@ def add_courses_view(request: HttpRequest):
                               expirydate=request.POST["expirydate"], 
                               poster=request.FILES["poster"],
                               categories=request.POST["categories"],
-                              content=request.POST["content"])
+                              content=request.POST["content"]),
+
             new_post.save()
+            new_post.categories.set(request.POST.getlist("categories"))
+
             return redirect("main:base_view")
         except Exception as e:
             print(e)
 
     return render(request, "main/add_courses.html", {"categories" : Course.COURSE_CATEGORIES})
+
+
+
 
 
 def post_detail_view(request:HttpRequest, post_id):
@@ -52,7 +58,6 @@ def update_post_view( request:HttpRequest , post_id):
             try:
                 post.coursename=request.POST['coursename'], 
                 post. numberhours=request.POST['numberhours'], 
-                post. price=request.POST["price"], 
                 post.startdate= request.POST["startdate"], 
                 post. expirydate=request.POST["expirydate"], 
                 post. poster=request.FILES["poster"],
@@ -107,10 +112,29 @@ def posts_search_view(request:HttpRequest):
 
     return render(request, "main/search_page.html", {"courses" : courses})
 
+import smtplib
+from email.message import EmailMessage
 
+def send_zoom_link(receiver_email, zoom_link):
+    # تكوين الرسالة
+    msg = EmailMessage()
+    msg.set_content(f"Here is the Zoom link for your meeting: {zoom_link}")
+    msg['Subject'] = 'Zoom Meeting Link'
+    msg['From'] = 'your_email@example.com'  # تعديل: استبدلها ببريدك الإلكتروني
+    msg['To'] = receiver_email
 
-def user_courses_view(request):
+    # إرسال الرسالة
+    try:
+        smtp_obj = smtplib.SMTP('smtp.example.com', 587)  # تعديل: استبدلها ببيانات الخادم الخاص بك
+        smtp_obj.starttls()
+        smtp_obj.login('your_email@example.com', 'your_password')  # تعديل: استبدلها ببيانات البريد الإلكتروني الخاص بك
+        smtp_obj.send_message(msg)
+        smtp_obj.quit()
+        print("Email sent successfully!")
+    except Exception as e:
+        print(f"Error sending email: {e}")
 
-    user_courses = Course.objects.filter(user=request.user)
-    context = {'user_courses': user_courses}
-    return render(request, 'main/user_courses.html', context)
+# استخدام الدالة لإرسال رابط Zoom
+receiver_email = 'recipient@example.com'  # تعديل: استبدلها ببريد المستلم
+zoom_link = 'https://zoom.us/example-meeting'  # تعديل: استبدلها برابط Zoom الخاص بك
+send_zoom_link(receiver_email, zoom_link)

@@ -22,6 +22,11 @@ A distance learning platform that helps the beneficiary develop his creative and
 10- Achieving the slogan (the productive student). The student, whether an employee, worker, or otherwise, learns and develops in his position
 ## User Stories, Wireframes & UML links
 - User stories document link here.  sign in. Add courses. Follow up educational courses. Upon completion, receive a certificate
+ Create a user account and sign in
+- User profile
+- View courses
+- Send the courses link to the email
+- Add product to favorites
 - wireframe link here. https://www.figma.com/file/dCQydCQsdp9XoSPIuB4KcH/Untitled?type=design&node-id=0%3A1&mode=design&t=ooMGKklA6ef94hQd-1
 - UML link here.   https://ibb.co/748ZYb4
 

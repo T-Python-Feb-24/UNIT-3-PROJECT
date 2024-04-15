@@ -1,32 +1,49 @@
 {% extends 'main/base.html' %}
 
-{% block title %}update {{request.user.usernamae}} profile {% endblock %}
+{% block title %}Update {{ request.user.username }} Profile {% endblock %}
 
 {% block content %}
+    <div class="container mt-5">
+        <h1>Update Profile</h1>
 
-    <h1>Register New User</h1>
+        {% if msg %}
+            <div class="alert alert-danger mt-3">{{ msg }}</div>
+        {% endif %}
 
-    {% if msg %}
-        <div class="alert alert-danger mt-5">{{msg}}</div>
-    {% endif %}
-    <div class="row ">
-        <div class="col ">
-            <form action="{% url 'accounts:update_profile_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
-                {% csrf_token %}
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <form action="{% url 'accounts:update_profile_view' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
 
-                <input name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" value="{{user.first_name}}"/>
-                <input name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" value="{{user.last_name}}"/>
-                <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" value="{{user.email}}"/>
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input id="first_name" name="first_name" class="form-control" type="text" minlength="3" required value="{{ user.first_name }}">
+                    </div>
 
-                <textarea name="about" class="form-control" placeholder="about yourself">{{user.profile.about}}</textarea>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input id="last_name" name="last_name" class="form-control" type="text" minlength="3" required value="{{ user.last_name }}">
+                    </div>
 
-                <h4>Choose Avatar:</h4>
-                <img src="{{user.profile.avatar.url}}" class="avatar" />
-                <input type="file" class="form-control" name="avatar" />
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input id="email" name="email" class="form-control" type="email" minlength="3" required value="{{ user.email }}">
+                    </div>
 
-                <input type="submit" class="btn btn-primary" value="Update Profile" />
+                    <div class="mb-3">
+                        <label for="about" class="form-label">About</label>
+                        <textarea id="about" name="about" class="form-control" placeholder="About yourself">{{ user.profile.about }}</textarea>
+                    </div>
 
-            </form>
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Choose Avatar:</label>
+                        <img src="{{ user.profile.avatar.url }}" class="avatar" alt="Avatar" style="max-width: 200px; max-height: 200px;">
+                        <input id="avatar" type="file" class="form-control" name="avatar">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

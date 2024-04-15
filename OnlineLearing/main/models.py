@@ -22,13 +22,11 @@ class Course(models.Model):
 
     coursename = models.CharField(max_length=2048)
     numberhours = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
     startdate = models.DateTimeField(auto_now_add=True)
     expirydate = models.DateTimeField()
     poster = models.ImageField(upload_to="images/")
     categories = models.CharField(max_length=20, choices=COURSE_CATEGORIES)
     content = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 
@@ -36,6 +34,8 @@ class Course(models.Model):
         return self.coursename
 class Register(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    courses = models.ManyToManyField('Course', related_name='registrations')
+
 
     #course=
     #type=Doctor/student

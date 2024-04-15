@@ -1,11 +1,27 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-
-
-<div class="ratio ratio-16x9">
-  <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe>
-</div>
-
-
+    {% if request.user.is_authenticated %}
+  
+        <h1>Send Zoom Link</h1>
+        <form id="zoomForm">
+            <label for="recipientEmail">Recipient Email:</label>
+            <input type="email" id="recipientEmail" name="recipientEmail" required><br>
+            <label for="zoomLink">Zoom Link:</label>
+            <input type="text" id="zoomLink" name="zoomLink" required><br>
+            <button type="submit">Send</button>
+        </form>
+    
+        <script>
+            document.getElementById("zoomForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const recipientEmail = document.getElementById("recipientEmail").value;
+                const zoomLink = document.getElementById("zoomLink").value;
+    
+                const url = `mailto:${recipientEmail}?subject=Zoom Meeting Link&body=Here is the Zoom link for your meeting: ${zoomLink}`;
+                window.open(url);
+            });
+        </script>
+    
+    {% endif %}
 {% endblock %}

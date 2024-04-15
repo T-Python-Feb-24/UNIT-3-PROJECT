@@ -278,12 +278,13 @@ body {
 
 
 
+{% if request.user.is_authenticated %}
 
 
 
 <form action="{% url 'main:posts_search_view' %}" class="d-flex" role="search" method="get">
     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" >
-    <button class="btn btn-outline-success" type="submit">Search</button>
+    <button class="btn btn-light" type="submit">Search</button>
   </form>
 
 <div class="row mt-5">
@@ -299,7 +300,6 @@ body {
                         <div>
                             <i class="bi bi-book"></i>
                             <i class="bi bi-bar-chart-fill"></i>
-                            <i class="bi bi-cart2 btn btn-outline-success"></i>
                         </div>
                     </div>
                 </div>
@@ -411,6 +411,7 @@ body {
         margin-bottom: 5px;
     }
 </style>
+{% endif %}
 
 
 {% endblock %}

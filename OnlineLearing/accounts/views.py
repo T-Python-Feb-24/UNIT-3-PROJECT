@@ -106,3 +106,5 @@ def update_profile_view(request:HttpRequest):
     return render(request,"accounts/update.html")
 
 
+
+

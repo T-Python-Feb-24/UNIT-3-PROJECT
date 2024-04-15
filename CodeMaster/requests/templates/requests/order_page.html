@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Subject</label>
+            <input name="subject" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg. BlogWebsite" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description of the required service:</label>
+            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+        </div>
+        {% if request.user.is_staff %}   
+        <div class="mb-3">
+            <label for="exampleFormControlSelect1" class="form-label">State</label>
+
+            <select name="state" class="form-select" id="exampleFormControlSelect1">
+                <option value="Under review">Under review</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+        {% endif %}
+        <div class="mb-3">
+            <label for="formFile" class="form-label">File input</label>
+            <input name="file" class="form-control" type="file" id="formFile">
+        </div>
+        <div class="mb-3">
+            <button class="btn bg-dark text-white" type="submit">Send</button>
+        </div>
+        {% if  msg1 %}
+        <div id="form-message-success">
+            <p class="text-success">{{ msg1 }}</p>
+        </div>
+        {% endif %}
+    </form>
+</div>
+<br> <br> <br><br><br><br><br><br><br><br>
+{% endblock %}

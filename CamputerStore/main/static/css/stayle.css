@@ -10,6 +10,16 @@
   direction: unset;
 }
 
+cards.index {
+  overflow-x: scroll;
+}
+
+.more-btn {
+  a {
+    color: var(--text);
+  }
+}
+
 /* banner */
 .carousel-item img {
   height: 430px !important;

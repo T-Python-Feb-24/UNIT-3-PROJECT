@@ -1,13 +1,18 @@
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, QueryDict
 from .models import Contactus, Comments
+from product.models import Product
 from main.validator import validat, ValidationError
 from django.core.paginator import Paginator
 
 
 def index_view(request: HttpRequest):
+   try:
+      products = Product.objects.all()[:6]
 
-   return render(request, "main/index.html")
+   except Exception as e:
+      print(e)
+   return render(request, "main/index.html", {'products': products})
 
 
 def about_view(request: HttpRequest):

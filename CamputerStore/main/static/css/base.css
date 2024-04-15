@@ -11,8 +11,10 @@
   --algin-right: right;
   --bg-dark: 30, 30, 30;
   --text: rgba(255, 255, 255);
-  --dark-theme-body: rgb(48, 48, 48);
-  --dark-theme-card: rgb(38, 38, 38);
+  --dark-theme-body-op: 48, 48, 48;
+  --dark-theme-body: rgba(var(--dark-theme-body-op), 1);
+  --dark-theme-card-op: 38, 38, 38;
+  --dark-theme-card: rgba(var(--dark-theme-card-op), 1);
 }
 
 body {

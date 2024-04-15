@@ -48,9 +48,15 @@
                <label class="form-label mb-0 ms-1 mt-2">السعر</label>
                <input name="price"
                       class="form-control"
-                      type="number"
+                      type="text"
                       required
                       placeholder="1750" />
+               <label class="form-label mb-0 ms-1 mt-2">الموجود في المخزن</label>
+               <input name="in_stock"
+                      class="form-control"
+                      type="number"
+                      required
+                      placeholder="5" />
                <label class="form-label mb-0 ms-1 mt-2">نوع المنتج</label>
                <select name="category" id="category" class="form-select">
                   {% for val,key in categories %}<option value="{{ key }}">{{ val }}</option>{% endfor %}

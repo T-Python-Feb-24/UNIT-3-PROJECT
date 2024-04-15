@@ -18,19 +18,18 @@ def add_product_view(request: HttpRequest):
       return render(request, "main/no_permission.html")
    if request.method == "POST":
       images = request.FILES.getlist("images")
-      print(images)
       new_product = Product.objects.create(
           name=request.POST.get("name"),
           model=request.POST.get("model"),
           category=request.POST.get("category"),
           price=request.POST.get("price"),
-          in_stock=request.POST.get("in_stock", False),
+          in_stock=request.POST.get("in_stock")
       )
 
       for image in images:
          Product_image.objects.create(product=new_product, image=image)
 
-      return redirect("product:product_detail_view", product_name=new_product.name)
+      return redirect("product:product_detail_view", product_id=new_product.pk)
 
    return render(request, "product/add_product.html", {"categories": Product.categories_choices.choices})
 
@@ -81,40 +80,46 @@ def product_by_category(request: HttpRequest, category: str):
       msg = "لا يوجد منتجات حاليا"
       return render(request, "product/product_by_category.html", {"msg": msg})
 
-   # def update_plant_view(request: HttpRequest, plant_id):
-   #    try:
-   #       if not request.user.is_staff or request.user.is_superuser:
-   #          return render(request, "main/no_permission.html")
-   #       plant = Plant.objects.get(pk=plant_id)
-   #       if request.method == "POST":
-   #          plant.name = request.POST.get("name")
-   #          plant.about = request.POST.get("about")
-   #          plant.used_for = request.POST.get("used_for")
-   #          plant.image = request.FILES.get("image", plant.image)
-   #          plant.category = request.POST.get("category")
-   #          plant.is_edible = request.POST.get("is_edible", False)
-   #          plant.save()
-   #          return redirect("main:plant_detail_view", plant_id)
 
-   #    except Plant.DoesNotExist:
-   #       return render(request, "404.html")
-   #    except Exception as e:
-   #       print(e)
-   #    return render(request, 'main/update_plant.html', {
-   #        "plant": plant, "categories": Plant.category_choices.choices})
+def update_product_view(request: HttpRequest, product_id):
+   try:
+      product = Product.objects.get(pk=product_id)
+      images = request.FILES.getlist("images")
+      if not (request.user.has_perm("product.change_product") or request.user.is_superuser):
+         return render(request, "main/no_permission.html")
+      if request.method == "POST":
+         product.name = request.POST.get("name")
+         product.model = request.POST.get("model")
+         product.category = request.POST.get("category")
+         product.price = request.POST.get("price")
+         product.in_stock = request.POST.get("in_stock")
+         Product_image.delete(product=product)
+         for image in images:
+            product.Images.objects.create(image=image)
+         product.save()
+         return redirect("product:product_detail_view", product_id)
+         
+   except Product.DoesNotExist:
+      return render(request, "404.html")
+   except Exception as e:
+      print(e)
+   return render(request, 'product/update_product.html', {
+       "product": product, "categories": Product.categories_choices.choices})
 
-   # def delete_plant_view(request: HttpRequest, plant_id):
-   #    try:
-   #       if not request.user.is_staff or request.user.is_superuser:
-   #          return render(request, "main/no_permission.html")
-   #       plant = Plant.objects.get(pk=plant_id)
-   #       plant.delete()
-   #    except Plant.DoesNotExist:
-   #       return render(request, "404.html")
-   #    except Exception as e:
-   #       print(e)
-
-   #    return redirect("main:index_view")
+def delete_product_view(request: HttpRequest, product_id):
+   try:
+      if not (request.user.has_perm("product.delete_product") or request.user.is_superuser):
+         return render(request, "main/no_permission.html")
+      print("dsklfmsdlkmflkdsmkl")
+      product = Product.objects.get(pk=product_id)
+      product.delete()
+      
+   except Product.DoesNotExist:
+      return render(request, "404.html")
+   except Exception as e:
+      print(e)
+   return redirect("main:index_view")
+      
 
    # def search(req: QueryDict):
    #    plants = Plant.objects.all()

@@ -1,42 +1,84 @@
 {# djlint:off H013,H006,H021 #}
 {% extends "main/base.html" %}
 {% load static %}
+{% load tags %}
 {% block title %}
-Computer Store
+  Computer Store
 {% endblock title %}
 {% block content %}
-{% comment %} banner {% endcomment %}
- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  {% comment %} banner {% endcomment %}
+  <div id="carouselExampleIndicators"
+       class="carousel slide"
+       data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-        aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-        aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-        aria-label="Slide 3"></button>
+      <button type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"></button>
+      <button type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+      <button type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="https://microless.com/cdn/banners/reduced-shipping-pc.jpg" class="d-block w-100" alt="...">
+        <img src="https://microless.com/cdn/banners/reduced-shipping-pc.jpg"
+             class="d-block w-100"
+             alt="...">
       </div>
       <div class="carousel-item">
-        <img src="https://microless.com/cdn/banners/reduced-shipping-pc.jpg" class="d-block w-100" alt="...">
+        <img src="https://microless.com/cdn/banners/reduced-shipping-pc.jpg"
+             class="d-block w-100"
+             alt="...">
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="prev">
+    <button class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="next">
+    <button class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas quisquam iste nesciunt reiciendis! Ratione deserunt molestiae provident asperiores praesentium accusamus saepe voluptatum quia aspernatur ipsa? Provident corrupti repellat fuga nam!
-Laboriosam dolorum dolores iure totam vero. Et, voluptatem perferendis. Quisquam cumque, aliquam culpa in facere recusandae sit ipsa ullam explicabo incidunt vero id, ipsum eum. Ut dignissimos recusandae pariatur vel.
-Vitae cupiditate dolores voluptas soluta ex id? Modi rem architecto, similique inventore fuga doloremque expedita eveniet ducimus vitae exercitationem aliquid saepe consectetur magnam officia voluptate, tempore non numquam aut. Explicabo!
-Exercitationem dignissimos consectetur ratione recusandae deserunt distinctio excepturi nobis iure dolorum quibusdam doloribus, itaque incidunt animi, sequi molestiae quidem nihil. Cumque quibusdam rem nisi numquam consectetur repellendus dolorem a delectus.
-Voluptatem modi nisi non dicta. Obcaecati facere natus vitae incidunt quasi, nisi at alias illum ex! Earum maxime nostrum, quos corrupti eos quibusdam. Labore, nisi dicta. Quis cumque voluptatem minima.</p>
+  <div class="d-flex align-content-center justify-content-between py-2 more-btn">
+    <h3>منتجات مختارة</h3>
+    <div class="d-flex align-content-center">
+      <a class="text-decoration-none"
+         href="{% url 'product:search_product_view' %}">المزيد</a>
+      <span class="material-symbols-outlined">arrow_left_alt</span>
+    </div>
+  </div>
+  <div class="cards index">
+    {% for product in products %}
+      <a href="{% url "product:product_detail_view" product.id %}">
+        <div class="card card-product">
+          <div class="product-card-img">
+            <img src="{{ product.Images.first.image.url }}"
+                 class="card-img-top"
+                 height="100%"
+                 width="100%"
+                 alt="{{ product.Images.first.image.name|image_name }}">
+          </div>
+          <div class="card-body">
+            <div class="product-card-info">
+              <h4>{{ product.name }}</h4>
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 {% endblock content %}

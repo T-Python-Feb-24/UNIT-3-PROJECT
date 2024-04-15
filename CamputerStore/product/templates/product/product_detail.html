@@ -5,6 +5,20 @@
    {{ product.name }}
 {% endblock title %}
 {% block content %}
+   
+      <div class="d-flex justify-content-end h-80 gap-2">
+         {% if request.user.is_superuser or perms.product.change_product %}
+            <a href="{% url 'product:update_product_view' product.id %}"
+               class="btn btn-dark">update</a>
+         {% endif %}
+         {% if request.user.is_superuser or perms.product.delete_product %}
+            <button class="btn btn-danger" onclick="myconfirm()">Delete</button>
+            <a id="delete"
+               hidden
+               href="{% url 'product:delete_product_view' product.id %}"
+               class="btn btn-danger">Delete</a>
+         {% endif %}
+      </div>
    <div class="product-detail-wrapper mb-4">
       <div class="product_image_gallery me-4">
          <div class="product-img">

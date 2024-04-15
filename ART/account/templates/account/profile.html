@@ -3,11 +3,7 @@
 {% block title %} {{user.username}} profile{% endblock %}
 {% load static %}
 {% block content%}
-<style>
-    body{
-        background-color: white;
-    }
-</style>
+<body style="font-family: cursive; background-color: rgb(255, 255, 255);"></body>
 
 <div class="container">
   <div class="row mt-4">
@@ -15,13 +11,13 @@
           <div class="col-md-4">
               <div class="text-center mt-5">
                   <h2 style="font-family: cursive;">@{{ user_object.username }}</h2>
-                  <img src="{{ user_object.profile.avatar.url }}" style="width: 80%; border-radius: 100%;" alt="User Avatar">
+                  <img src="{{ user_object.profile.avatar.url }}" style="width: 80%; border-radius: 100%; object-fit: cover;" alt="User Avatar">
               </div>
           </div>
           <div class="col-md-8 mt-5">
               <div class="card shadow " style="width: 100%; background-color: #f8f9fa; border-radius: 50px;">
                   <div class="card-body ">
-                      <h5 class="card-title text-center mb-4">Profile</h5>
+                      <h1 style="font-family: cursive;" class="card-title text-center mb-4">Profile</h1>
                       <div class="row mb-3">
                           <div class="col">
                               <h6 class="card-subtitle mb-2 text-muted">User Information:</h6>
@@ -59,7 +55,7 @@
         <div class="row gap-3 justify-content-center">
             <div class="col">
                 {% if user.is_authenticated %}
-                <button style="background-color: #007BFF; width: 50%; font-family: cursive; border-color: #0056b3;" class="btn btn-primary mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse" aria-expanded="false" aria-controls="commentsCollapse">
+                <button style="background-color: #ffffff; width: 50%; font-family: cursive; border-color: #ffffff;color: #000000;" class="btn btn-primary mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse" aria-expanded="false" aria-controls="commentsCollapse">
                     Comments
                 </button>
                 <div class="collapse" id="commentsCollapse">
@@ -86,7 +82,7 @@
         <div class="row gap-3 justify-content-center">
             <div class="col">
                 {% if user.is_authenticated %}
-                <button style="background-color: #007BFF; width: 50%; font-family: cursive; border-color: #0056b3;" class="btn btn-primary mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#favoritesCollapse" aria-expanded="false" aria-controls="favoritesCollapse">
+                <button style="background-color: #dce4e9; width: 50%; font-family: cursive; border-color: #ffffff; color: #000000;" class="btn btn-primary mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#favoritesCollapse" aria-expanded="false" aria-controls="favoritesCollapse">
                     Favorites
                 </button>
                 <div class="collapse" id="favoritesCollapse">

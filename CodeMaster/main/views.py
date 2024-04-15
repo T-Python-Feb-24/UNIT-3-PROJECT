@@ -14,7 +14,9 @@ def index_page(request:HttpRequest):
 
     count=User.objects.count()
     order_count=Order.objects.count()
-    
+    average_rating=round(average_rating,2)
+    print(average_rating,count,order_count)
+    print("kkk")
 
     return render(request,"main/index_page.html",{'average_rating': average_rating,"count":count,"order_count":order_count})
 

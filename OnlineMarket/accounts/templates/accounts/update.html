@@ -1,0 +1,36 @@
+{% extends 'product/base.html' %}
+
+{% block title %}update {{request.user.username}} profile {% endblock %}
+
+{% block content %}
+
+   
+    {% if msg %}
+        <div class="alert alert-danger">{{msg}}</div>
+    {% endif %}
+    <div class="container">
+        <h1 class="p-3"  style="text-align: center; color: rgb(58, 52, 52);">Register New User</h1>
+ 
+    <div class="row">
+        <div class="col-9  d-flex flex-column gap-2 border border-3 shadow p-5 rounded-4 h-100" style="text-align: center; background-color:  rgb(201, 199, 196);  margin-left: 150px;">
+        <div class="col">
+            <form action="{% url 'accounts:update_profile' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input name="first_name" class="form-control" type="text" minlength="3"  placeholder="First Name" value="{{user.first_name}}"/>
+                <input name="last_name" class="form-control" type="text" minlength="3" placeholder="Last Name" value="{{user.last_name}}"/>
+                <input name="email" class="form-control" type="email" minlength="3"  placeholder="Email" value="{{user.email}}"/>
+
+                <textarea name="about" class="form-control" placeholder="about yourself">{{user.profile.about}}</textarea>
+                
+                <h4>Choose Avatar:</h4>
+                <img src="{{user.profile.avatar.url}}" class="avatar w-25" />
+                <input type="file" class="form-control" name="avatar" />
+
+                <input type="submit" class="btn" style="background-color: rgb(58, 52, 52); color: rgb(254, 254, 252);" value="Update Profile" />
+
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

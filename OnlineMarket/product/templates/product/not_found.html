@@ -1,0 +1,22 @@
+{% extends 'product/base.html' %}
+
+{% block title %} Not Found Page {% endblock %}
+
+{% block content %}
+    <div class="row m-3">
+        <div class="col ">
+
+            <h1 class="alert alert-danger text-align-center " style="padding-left: 330px;">You don't have permission</h1>
+            
+        </div>
+        </div>
+        <div class="row m-5 ">
+            <div class="col-12 ">
+                <img class="w-100 h-50" src="/static/images/404.jpg" />
+                <a href="{% url 'product:home_view'%}" class="text-decoration-none text-black m-5" style="padding-left: 450px; ">Go back to Home Page</a>
+            </div>
+            
+        </div>
+        
+    
+{% endblock %}

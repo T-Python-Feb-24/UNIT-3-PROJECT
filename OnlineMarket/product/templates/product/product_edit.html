@@ -1,0 +1,35 @@
+{% extends 'product/base.html' %}
+{% block title %}edit product{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1>Update product</h1>
+        <div class="col">
+
+            <form action="{% url 'product:product_edit_view' product.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+                {% csrf_token %}
+    
+                    <input name="name" type="text" placeholder="name the product" class="form-control" value="{{product.name}}" />
+                    <textarea name="description" placeholder="descripe the product" class="form-control" >{{product.description}}</textarea>
+    
+                    <h5>Image The Product:</h5>
+                    <img src="{{ product.image.url }}" style="width: 150px;"/>
+                    <input name="image"  type="file"  accept="image/*" class="form-control"  />
+    
+                    <h5>Category</h5>
+                    <select name="category" class="form-select" >
+                        {% for val, cat in categories %}
+                            <option value="{{val}}"{% if product.category == val %} selected {% endif %}>{{cat}}</option>
+                        {% endfor %}
+                    </select>
+                    <input name="price" type="number" placeholder="Price" class="form-control" value="{{product.price}}" />
+                    <input name="quantity" type="number" placeholder="Quantity" class="form-control" value="{{product.quantity}}"/>
+                    <input type="submit" class="btn" value="Update Product"  style="background-color: rgb(101, 100, 99);"/>
+                </form>
+    
+            </div>
+    
+    
+        </div>
+</div>
+{% endblock %}

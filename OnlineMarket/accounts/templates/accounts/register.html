@@ -1,0 +1,44 @@
+{% extends 'product/base.html' %}
+
+{% block title %}Register New User{% endblock %}
+
+{% block content %}
+<style>
+    body{
+        background-color: rgb(219, 218, 217);
+
+    }
+   
+</style>
+    
+
+    {% if msg %}
+        <div class="alert alert-danger">{{msg}}</div>
+    {% endif %}
+    <div class="container">
+        <h1 class="p-3"  style="text-align: center; color: rgb(58, 52, 52);">Register New User</h1>
+    <div class="row">
+        <div class="col-9  d-flex flex-column gap-2 border border-3 shadow p-5 rounded-4 h-100" style="text-align: center; background-color:  rgb(201, 199, 196);  margin-left: 150px;">
+            
+            <form action="{% url 'accounts:register_user_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                <input name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" />
+                <input name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
+                <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" />
+
+                <textarea name="about" class="form-control" placeholder="about yourself"></textarea>
+                
+                <h4>Choose Avatar:</h4>
+                <input type="file" class="form-control" name="avatar" />
+
+                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+
+                <input type="submit" class="btn" style="background-color: rgb(58, 52, 52); color: rgb(254, 254, 252);" value="Sign Up" />
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

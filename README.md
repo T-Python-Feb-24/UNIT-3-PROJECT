@@ -6,15 +6,24 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 
 ## Project Name here
-project description here.
+online market.
 
 ## Features List here
-- list of features
+- user account creation and login
+- user profile
+- adding comment 
+- product display
+- adding product to the cart
+- cart management
+- product management
+- adding product to the the favorite
+
 
 ## User Stories, Wireframes & UML links
-- User stories document link here.
-- wireframe link here.
-- UML link here.
+- User stories document link here.https://docs.google.com/document/d/1EkNJ_GfVx4Co-7cvqxsM9CkSYn1gxB1S/edit?usp=drive_link&ouid=111201605446564028321&rtpof=true&sd=true
+
+- wireframe link here https://www.figma.com/file/CenmLmuWIlwnoQa83z99FS/Untitled?type=design&node-id=0%3A1&mode=design&t=l4xL0qML9k7FTlL9-1
+- UML link here https://drawsql.app/teams/lama-5/diagrams/e-commerce .
 
 
 ## Minimum Requirements

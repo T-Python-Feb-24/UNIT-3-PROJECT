@@ -1,0 +1,162 @@
+{% extends 'product/base.html' %}
+{% block title %} detail {% endblock %}
+{% load static %}
+{% block content %}
+ <div class="container">
+    <div class="row m-5">
+        <div class="col ">
+            <div class="d-flex flex-column gap-2 mt-5" style="text-align: center;">
+                <h1>{{ product.name  }}</h1>
+                <h3 class="cat  rounded-pill {{plant.category}}">{{ product.category }}</h6>
+                    <h6 class="text-muted">{{ product.published_at }}</h6>
+                    <p class="">{{ product.price }} sr</p>
+                   
+                        
+                    <a href="{% url 'purchases:product_cart_view' product.id %}" class="btn btn-dark text-decoration-none add-to-cart-btn" id="addToCartModal">ADD TO CART<i class="bi cart material-symbols-outlined shopping_cart"></i></a>
+                       
+                  
+                     <a href="{% url 'product:product_list_view'  %}" class="btn btn-dark">SEARCH ON THE STORE</a>
+            </div>
+        </div>
+    
+        <div class="col ">
+            <div class="d-flex flex-column gap-2 ">
+                <img src="{{ product.image.url }}"  class="w-100 rounded-4" style="height: 400px;"/>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex gap-2 p-2" style="margin-left: 130px;">
+                            
+                            {% if request.user.is_staff %}
+                            <a href="{% url 'favorites:add_remove_favorites_view' product.id %}" class="text-decoration-none p-2"><i class="bi {% if is_favored %} bi-heart-fill text-danger {% else %} bi-heart {% endif %} favorite"></i></a>
+                                <a href="{% url 'product:product_edit_view' product.id %}" class="btn btn-dark">update</a>
+                                <a href="{% url 'product:product_delete_view' product.id %}" class="btn btn-dark">Delete</a>
+                            {%endif%}
+                            
+                            
+                        </div>
+                    </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <hr>
+    <br>
+    <h5> product details</h5>
+    <h6>describe:</h6>
+    <p class="">{{ product.description }}</p>
+    <br>
+    <hr>
+    <div class="container">
+        <!-- زر التقييم -->
+        <button id="rating-button" class="btn btn-dark">Rate the product</button>
+        
+        <!-- زر التعليق -->
+        <button id="comment-button" class="btn btn-dark">Leave a comment</button>
+        
+        <!-- نموذج التقييم (الذي يكون مخفيًا في البداية) -->
+       <!-- نموذج التقييم (الذي يكون مخفيًا في البداية) -->
+<div id="rating-form" style="display: none;">
+    <form action="{% url 'product:add_rating_view' product.id %}" method="post">
+        {% csrf_token %}
+        <h4>Rate the product:</h4>
+        <!-- استخدام العلامات label لعرض الأرقام -->
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="rating1" name="rating" value="1">
+            <label class="form-check-label" for="rating1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="rating2" name="rating" value="2">
+            <label class="form-check-label" for="rating2">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="rating3" name="rating" value="3">
+            <label class="form-check-label" for="rating3">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="rating4" name="rating" value="4">
+            <label class="form-check-label" for="rating4">4</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="rating5" name="rating" value="5">
+            <label class="form-check-label" for="rating5">5</label>
+        </div>
+        <!-- نهاية التعديل -->
+        <input type="submit" value="Submit Rating" class="btn btn-dark"/>
+    </form>
+</div>
+        
+        <!-- نموذج التعليق ( يكون مخفيً في البداية) -->
+        <div id="comment-form" style="display: none;">
+            <form action="{% url 'product:add_comment_view' product.id %}" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+                <h4>To send comments: </h4>
+                <textarea name="content" class="form-control"></textarea>
+                <input type="submit" value="Add Comment" class="btn btn-dark"/>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript
+        // عرض نموذج التقييم  وإخفاء نموذج التعليق
+        document.getElementById("rating-button").addEventListener("click", function() {
+            document.getElementById("rating-form").style.display = "block";
+            document.getElementById("comment-form").style.display = "none";
+        });
+        
+        // عرض نموذج التعليق وإخفاء نموذج التقييم
+        document.getElementById("comment-button").addEventListener("click", function() {
+            document.getElementById("rating-form").style.display = "none";
+            document.getElementById("comment-form").style.display = "block";
+        });
+    </script>
+    <!-- هنا التعليقات والتقييمات تظهر -->
+    <hr>
+    <div class="row m-5">
+        <div class="col d-flex flex-column gap-2" >
+            <h4>Review: {{rev.count}}</h4>
+            {% for rev in reviews %}
+                <div class="d-flex flex-column gap-2 border border-1 p-3 rounded-3">
+                    <a href="{% url 'accounts:user_profile_view' rev.user.username %}" class="text-decoration-none"><h4>{{ rev.user.username }}</h4></a>
+                    <p id="review">{{ rev.rating }}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <hr>
+    <div class="row m-5">
+     <div class="col d-flex flex-column gap-2"  >
+            
+      <h4>comments: {{comment.count}}</h4>
+         {% for comment in comments %}
+            <div class="d-flex flex-column gap-2 border border-1 p-3 rounded-3" id="comments">
+                <a href="{% url 'accounts:user_profile_view' comment.user.username %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
+                <p id="comments">{{ comment.content }}</p>
+            </div>
+         {% endfor %}
+
+     </div>
+    </div>
+
+    
+       
+    <hr>
+    {% if related.count > 0 %}
+    <div class="row g-5">
+   
+        <h4>Related Plants:</h4>
+        {% for rel in related %}
+            <div class="col-4">
+                <div class="d-flex flex-column gap-2 border border-1 shadow p-2 rounded-3 h-100">
+                    <img src="{{ rel.image.url }}"  class="w-100 h-50 rounded-4"/>
+                    <h3><a href="{% url 'product:product_list_view' %}" class="text-decoration-none text-dark">{{ rel.name }}</a></h3>
+                    <p>{{ rel.price }}</p>
+                    <h6 class="cat align-items-center {{ rel.category }}">{{ rel.category }}</h6>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+   {% endif%}
+
+{% endblock %}

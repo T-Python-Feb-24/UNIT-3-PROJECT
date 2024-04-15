@@ -137,6 +137,8 @@ def delete_story(request, pk):
 def all_stories(request):
     query = request.GET.get('q')
     category = request.GET.get('category')
+    order = request.GET.get('order', 'newest')  
+
     stories = Story.objects.all()
 
     if query:
@@ -145,9 +147,16 @@ def all_stories(request):
     if category:
         stories = stories.filter(category=category)
 
+    if order == 'oldest':
+        stories = stories.order_by('created_at')
+    else: 
+        stories = stories.order_by('-created_at')
+
     return render(request, 'main/all_stories.html', {
         'stories': stories,
-        'category_query': category,  
+        'search_query': query,  
+        'category_query': category, 
+        'order': order, 
         'category_choices': Story.CATEGORY_CHOICES  
     })
 

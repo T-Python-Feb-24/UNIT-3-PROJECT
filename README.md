@@ -3,7 +3,8 @@
 
 ## StoryHub ##
 StoryHub is a web platform designed for storytellers and readers alike, enabling a community-driven experience where users can publish, share, and interact with stories across various genres.
-the application emphasizes user engagement through features like story bookmarking, liking, and commenting, alongside a robust user profile system. Story Hub caters to a wide array of literary enthusiasts, providing tools for both amateur and seasoned writers to express their narratives and receive feedback from a vibrant community.
+the application emphasizes user engagement through features like story bookmarking, liking, and commenting, alongside a robust user profile system. 
+Story Hub caters to a wide array of literary enthusiasts, providing tools for both amateur and seasoned writers to express their narratives and receive feedback from a vibrant community.
 
 ## Features List here
 1.	User Authentication and Profiles:

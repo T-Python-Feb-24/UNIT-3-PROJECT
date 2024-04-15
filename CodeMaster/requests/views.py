@@ -4,6 +4,8 @@ from .models import Order,Rating
 # Create your views here.
 
 def order_page(request: HttpRequest):
+    msg1=None
+
     if not request.user.is_authenticated:
         return redirect("accounts:login_page")
 
@@ -17,11 +19,12 @@ def order_page(request: HttpRequest):
                 file=request.FILES.get("file")
             )
             new_order.save()
-            return redirect("main:index_view")
+            msg1="Your Order was sent"
+
         except Exception as e:
             print(e)
 
-    return render(request, "requests/order_page.html")
+    return render(request, "requests/order_page.html",{"msg1":msg1})
 
 
 

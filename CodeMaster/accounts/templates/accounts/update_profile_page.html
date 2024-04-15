@@ -2,19 +2,18 @@
 
 {% block content %}
 
-    <h1>Update profile</h1>
+    <h1 class="mt-5 ms-3">Update profile</h1>
 
     {% if msg %}
         <div class="alert alert-danger">{{msg}}</div>
     {% endif %}
-    <div class="row">
         <div class="col d-flex justify-content-center mt-5">
             <form action="{% url 'accounts:update_profile_page' %}" method="post" class="d-flex flex-column gap-2 w-50 " enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <input name="username" class="form-control" type="text" minlength="3" required placeholder="username" value="{{user.username}}"/>
                 <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" value="{{user.email}}"/>
-                <input name="phone" class="form-control" type="phone" minlength="3" required placeholder="phone number" value="{{user.profile.phone }}"/>
+                <input name="phone" class="form-control" type="phone" minlength="10"  placeholder="phone number" value="{{user.profile.phone }}"/>
 
                 <textarea name="info" class="form-control" placeholder="info">{{user.profile.info}}</textarea>
                 <input name="instagram" class="form-control" type="text"   placeholder="@instagram" value="{{user.profile.instagram}}" />
@@ -24,5 +23,10 @@
 
             </form>
         </div>
-    </div>
+{% endblock %}
+
+
+
+{% block footer %}
+
 {% endblock %}

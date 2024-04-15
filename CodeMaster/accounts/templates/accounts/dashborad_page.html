@@ -32,7 +32,7 @@
    
        
         {% else %}
-        <h2 class="ms-2 mt-4">My Orders ({{count }})</h2>
+        <h2 class="ms-2 mt-4">My Orders ({{ count }})</h2>
         {% endif %}
 
         {% if orders %}
@@ -63,7 +63,7 @@
                             
                             <td>{{ order.ordered_at }}</td>
                             <td class="text-center">#{{ order.id }}</td>
-                            <td><a href="{% url 'requests:order_details' order.id %}">{% if request.user.is_staff %} details {% else %} <span class="material-symbols-outlined text-black">edit</span> {% endif %}</a></td>
+                            <td><a href="{% url 'requests:order_details' order.id %}">more</a></td>
                             
                             <td><a href="{% url 'requests:delete_order' order.id %}"><span class="material-symbols-outlined text-danger">delete</span></a></td>
                         </tr>
@@ -158,4 +158,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+
+{% block footer %}
+
 {% endblock %}

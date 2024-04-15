@@ -1,16 +1,16 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Subject</label>
-            <input name="subject" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg. BlogWebsite">
+            <input name="subject" type="text" class="form-control" id="exampleFormControlInput1" placeholder="eg. BlogWebsite" required>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Description of the required service:</label>
-            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
         </div>
         {% if request.user.is_staff %}   
         <div class="mb-3">
@@ -30,6 +30,12 @@
         <div class="mb-3">
             <button class="btn bg-dark text-white" type="submit">Send</button>
         </div>
+        {% if  msg1 %}
+        <div id="form-message-success">
+            <p class="text-success">{{ msg1 }}</p>
+        </div>
+        {% endif %}
     </form>
 </div>
+<br> <br> <br><br><br><br><br><br><br><br>
 {% endblock %}

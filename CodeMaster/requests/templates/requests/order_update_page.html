@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="container mt-5">
+    {% if not request.user.is_staff %}
     <h1 class="fs-1">Update</h1>
+    {% endif %}
     <br>
     <form action="{% url 'requests:order_update_page' order.id %}"  method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -53,4 +55,9 @@
     </form>
     
 </div>
+{% endblock %}
+
+
+{% block footer %}
+
 {% endblock %}

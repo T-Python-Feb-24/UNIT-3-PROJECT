@@ -2,7 +2,15 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="fs-1">Details</h1>
+    <div class="d-flex align-items-center gap-1">
+
+        <h1 class="fs-1">Details</h1>
+        {% if request.user.is_staff %}
+        <a href="{% url 'requests:order_update_page' order.id %}"> Change State </a>
+        {% else %}
+        <a href="{% url 'requests:order_update_page' order.id %}"><span class="material-symbols-outlined     fs-3">edit</span></a>
+        {% endif %}
+    </div>
     <br>
         {% csrf_token %}
 
@@ -15,12 +23,18 @@
         <br>
         <h5 style="font-size: 17px;">Description of the required service:</h5><p>{{ order.description }}</p>
 
+        {% if  order.rating %}
+
         <h4>Rate</h4>
         <h5>{{ order.rating.rate}}</h5>
         <h4>Comment</h4>
         <h5>{{ order.rating.comment}}</h5>
+        
+        {% endif %}
 
     {% if not request.user.is_staff%}
+        {% if not order.rating and order.state != "Rejected" and order.state != "Under review"%}
+
     <div class="container mt-5">
         <h2>Leave a Review</h2>
         <form method="POST" action="{% url 'requests:order_details' order.id %}">
@@ -40,12 +54,14 @@
                 </div>
             </div>
             <span style="cursor: default;"><div class="rating-symbol" style="display: inline-block; position: relative;"><div class="rating-symbol-background glyphicon glyphicon-star-empty" style="visibility: hidden;"></div><div class="rating-symbol-foreground" style="display: inline-block; position: absolute; overflow: hidden; left: 0px; right: 0px; width: auto;"><span class="glyphicon glyphicon-star"></span></div></div><div class="rating-symbol" style="display: inline-block; position: relative;"><div class="rating-symbol-background glyphicon glyphicon-star-empty" style="visibility: hidden;"></div><div class="rating-symbol-foreground" style="display: inline-block; position: absolute; overflow: hidden; left: 0px; right: 0px; width: auto;"><span class="glyphicon glyphicon-star"></span></div></div><div class="rating-symbol" style="display: inline-block; position: relative;"><div class="rating-symbol-background glyphicon glyphicon-star-empty" style="visibility: hidden;"></div><div class="rating-symbol-foreground" style="display: inline-block; position: absolute; overflow: hidden; left: 0px; right: 0px; width: auto;"><span class="glyphicon glyphicon-star"></span></div></div><div class="rating-symbol" style="display: inline-block; position: relative;"><div class="rating-symbol-background glyphicon glyphicon-star-empty" style="visibility: hidden;"></div><div class="rating-symbol-foreground" style="display: inline-block; position: absolute; overflow: hidden; left: 0px; right: 0px; width: auto;"><span class="glyphicon glyphicon-star"></span></div></div><div class="rating-symbol" style="display: inline-block; position: relative;"><div class="rating-symbol-background glyphicon glyphicon-star-empty" style="visibility: hidden;"></div><div class="rating-symbol-foreground" style="display: inline-block; position: absolute; overflow: hidden; left: 0px; right: 0px; width: auto;"><span class="glyphicon glyphicon-star"></span></div></div></span>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-dark">Send</button>
         </form>
 
     </div>
     {% endif %}
-    <a href="{% url 'requests:order_update_page' order.id %}">{% if request.user.is_staff %} details {% else %} <span class="material-symbols-outlined text-black">edit</span> {% endif %}</a>
+    {% endif %}
+
+
 
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -65,4 +81,8 @@
     </script>
     
 </div>
+{% endblock %}
+
+{% block footer %}
+
 {% endblock %}

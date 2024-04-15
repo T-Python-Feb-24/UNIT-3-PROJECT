@@ -72,7 +72,7 @@
                         <h3><a style="color: white;font-size: 20px;" href="{% url 'account:user_profile_view' art.user.id %}">{{art.user.username}}</a></h3>
                         <div class="col-2 d-flex gap-3 ">
                         <!-- عدليه -->
-                                <a href="{% url 'favorites:add_remove_favorites_view' art.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %}" style="color: blue; font-size: 20px;"></i></a>
+                            <a href="{% url 'favorites:add_remove_favorites_view' art.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %}" style="color: blue; font-size: 20px;"></i></a>
                             
                             <a style="color: #ffffff; font-size: 25px;" href="{{ art.image.url }}" class="mr-3 rounded-circle bi bi-download" alt="Generic placeholder image" download></a>
                             <div>

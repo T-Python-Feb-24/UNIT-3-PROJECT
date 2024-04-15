@@ -42,7 +42,7 @@
         <div class="collapse show" id="favoritesCollapse">
             <div class="row">
                 {% for favorite in user.favorite_set.all %}
-                <div class="col-4">
+                <div class="col-4 mt-5">
                     <div class="card-container shadow p-3 h-100">
                         <img src="{{ favorite.Blog.image.url }}" class="card-image" alt="{{ favorite.Blog.name }} image">
                         <h6 class="category-label rounded-pill">{{ favorite.Blog.category }}</h6>

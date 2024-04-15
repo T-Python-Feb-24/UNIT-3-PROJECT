@@ -159,16 +159,17 @@
                 <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">To like a shot, please create an account. <a style="width: 30%;background-color: #000000;color: white;border-radius: 30px; padding: 10px; text-align: center;" href="{% url 'account:register_user_view' %}">Register</a></h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header ">
+                                <h1 class="modal-title fs-5 mt-5" id="exampleModalLabel">To like a shot, please create an account.</h1> <a style="width: 30%;background-color: #000000;color: white;border-radius: 30px; padding: 10px; text-align: center;  margin-top: 40px;" href="{% url 'account:register_user_view' %}">Register</a>
+                                <button style="margin-top: -100px;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             
                             <span class="material-symbols-outlined"> 
-                                <div>Already have an account? <a href="{% url 'account:login_user_view' %}">Sign in</a> </div>
+                                <h1 class="modal-title fs-5 mt-4" id="exampleModalLabel"> Already have an account?  <a style="width: 20%;background-color: #000000;color: white;border-radius: 30px; padding: 10px; text-align: center;  margin-top: 40px; font-size: 15px;" href="{% url 'account:login_user_view' %}">Sign in</a> </h1>
+                                <br>
                             </span>
                             <div class="modal-footer">
-                                <button style="background-color: #5b3ddd;border: 0; color: white;" type="button" class="btn " data-bs-dismiss="modal">OK</button>
+                                <button style="background-color: #370feb;border: 0; color: white; width: 20%;" type="button" class="btn " data-bs-dismiss="modal">OK</button>
                             </div>
                         </div>
                     </div>

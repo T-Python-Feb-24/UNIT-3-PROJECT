@@ -75,6 +75,8 @@ def all_images(request:HttpRequest):
 def detail_images(request:HttpRequest,blog_id):
     comments=[]
     related_posts=[]
+    art=[]
+    is_favored=[]
 
     try:
         #getting a  post detail
@@ -172,14 +174,5 @@ def about_view(request):
     return render(request, 'main:About.html')
        
   
-from django.urls import reverse
 
-def handle_publish(request):
-    if request.method == 'POST':
-        is_published = request.POST.get('is_published', False)
-        if not is_published:
-            return HttpResponseRedirect(reverse('my_posts'))
-        # إجراءات النشر هنا
-        return HttpResponseRedirect(reverse('success_page'))
-    return HttpResponseRedirect(reverse('error_page'))
      

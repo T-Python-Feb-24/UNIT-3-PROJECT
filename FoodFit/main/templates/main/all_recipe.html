@@ -4,21 +4,22 @@
 
 
  {% block content %}
+
+ <br><br>
+ <div class="cardabout">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="card-inner">
+   <img class="fit1"src="https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+  <div class="b-contant">
  
-
-  <div class="row mt-5">
-<div class="-continer col col-md-12 order-1 order-md-2 justify-content-center ">
-  <img class="-img" src="/static/images/searchimg.jpg" />
- </div>
-</div>
-
- <div class="row mt-5">
- <div class="col col-md-6 order-2 order-md-2 justify-content-center flex-column d-flex  ">
-  <dive class="overly">
-  <div class="box"> 
-  <p class="title">Food Recipes </p>
-  <h1 class="">Search in our recipe  </h1>
-    <form action="{% url 'main:search_recipe_page' %}"  method="get" class="d-flex gap-2" name='search'>
+<dive class="overly">
+  <div class="box1"> 
+  
+  <h1>Foodie Recipes<h2>
+  <br><br>
+  <p>Search in our recipe</p>
+  <form action="{% url 'main:search_recipe_page' %}"  method="get" class="d-flex gap-2" name='search'>
       <input  type="search" class=" -search form-control me-2"  name="search" value="{{request.GET.search}}"/>
         <input type="submit" value="search" class="btn btn-outline-success" />
         </form>
@@ -26,10 +27,13 @@
   </div>
   </div>
   </div>
-    </div>
+  
+  </div>
+</div>
 
+<br>
     
-     <div class="row g-4">
+     <div class="row g-4 mt-5">
         <div class="d-flex justify-content-center align-items-center">
             <div class=" cat d-flex gap-2">
                 <a href="{% url 'main:all_recipe_page' %}" class="p-2 ps-3 pe-3   text-decoration-none  {% if 'categories' not in request.GET %} All  {% endif %}">All</a>

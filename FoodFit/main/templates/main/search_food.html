@@ -6,27 +6,40 @@
 
  {% block content %}
 
-
-  <div class="row mt-5">
-<div class="-continer col col-md-12 order-1 order-md-2 justify-content-center ">
-  <img class="-img" src="/static/images/searchimg.jpg" />
- </div>
+ <br><br>
+ <div class="cardabout">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="card-inner">
+   <img class="fit1"src="https://images.pexels.com/photos/1028599/pexels-photo-1028599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+  <div class="b-contant">
+ 
+<dive class="overly">
+  <div class="box1"> 
+  
+  <h1>Calories Finder<h2>
+  <br><br>
+  <p>Search food you like to find calorie</p>
+  
+  </div>
+  </div>
+  </div>
+  
+  </div>
 </div>
 
- <div class="row mt-5">
- <div class="col col-md-6 order-2 order-md-2 justify-content-center flex-column d-flex  ">
-  <dive class="overly">
-  <div class="box"> 
-  <p class="title">Food Calorie Counter </p>
-  <h1 class="">Search by food name  </h1>
-
-  </div>
-  </div>
-  </div>
-    </div>
 <br>
 
-<hr>
+<br>
+
+<div class="r-con">
+<div class="line2">
+  <div class="s-r-title-box2">
+  
+ </div>
+ </div>
+ </div>
+
  <div class=" calories-box row mt-5">
    <h1 class="api-title">Search by food name  </h1>
     <form method="POST" actions= "{% url 'main:search_food_page'%}" class="d-flex" role="search">
@@ -190,15 +203,21 @@
 
 
 
-
+<div class="r-con">
+<div class="line2">
+  <div class="r-title-box2">
+  
+ </div>
+ </div>
+ </div>
   <h1 class="api-title">Check Our Recipes</h1>
 
 
-<div class="con">
-<div class="more">
-<a href="{% url 'main:all_recipe_page'%}" class=" home-b btn ">See More</a>
-</div>
-</div>
+
+
+
+
+
 
  <div class=" row ">
   {% for recipe in recipes %}
@@ -206,8 +225,8 @@
 
   <article class="ccard">
   <div class="im">
-  <div class="card-img">
-    <img class="card-img " src="{{recipe.image.url}}" class="card-img-top" alt="...">
+  <div class="card-img4">
+    <img class="card-img4 " src="{{recipe.image.url}}" class="card-img-top" alt="...">
   </div>
    </div>
 
@@ -228,7 +247,8 @@
     {% endfor %}
 
   </div>
-
+  <br>
+<a href="{% url 'main:all_recipe_page'%}" class=" home-b btn ">See More</a>
 <br><br><br>
 
  {% endblock %}

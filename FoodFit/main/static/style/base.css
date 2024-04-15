@@ -146,7 +146,6 @@ button:hover{
 }
 
 .overly p{
-    font-family: "Great Vibes";
     color: #181818;
 }
 
@@ -159,24 +158,31 @@ button:hover{
 }
 
 .overly h1{
-    color: #181818;
-    font-size: 60px;
-    margin-left: 30vw;
+    margin-top: 10px;
+    color: #ffffff;
+    font-size: 70px;
+    font-weight: 500;
+    
 }
 
-.box{
-    background-color: rgba(222, 222, 222, 0.5);
-    width: 100%;
-    height:400px;
-    margin-left: 5vw;
+.box1{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(239, 237, 237, 0.5);
+    width: 1400px;
+    height:300px;
+    margin-left: 1vw;
     margin-top: 10vw;
-    border-radius: 10%;
+    border-radius: 30px;
+    
     
 }
 
 .-search{
-    width: 600px;
-    margin-left: 28vw;
+    width: 500px;
+    margin-left: 26vw;
+    
 
 }
 .-search2{
@@ -1079,13 +1085,13 @@ align-items: center;
 
 /**/
 .cardabout {
-    width: 1400px;
+    width: 1500px;
     height: 600px;
     transition: all 0.2s;
     position: relative;
     cursor: pointer;
     justify-content: center;
-    margin-left: 10vw;
+    margin-left: 5vw;
   }
   
   .card-inner {
@@ -1096,12 +1102,20 @@ align-items: center;
     backdrop-filter: blur(10px);
     border-radius: 8px;
   }
+  .fit1{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    position: absolute;
+    
+  }
   
  
   .circle {
-    width: 200px;
-    height: 200px;
-    background: repeating-linear-gradient(48deg, #3023ae 0%, #ff0099 100%);
+    width: 300px;
+    height: 300px;
+    background: repeating-linear-gradient(48deg, #1de137 0%, #6d86a3 100%);
     border-radius: 35% 30% 75% 30% / 49% 30% 70% 51%;
     position: absolute;
     animation: move-up6 2s ease-in infinite alternate-reverse;
@@ -1138,6 +1152,25 @@ align-items: center;
     align-items: center;
     text-align: center;
     color: #30344c;
+}
+
+.b-contant{
+    justify-content: center;
+    text-align: center;
+    padding-top: 4vw;
+    position: relative;
+    color: #e7ecf1;
+    
+}
+
+.about-b{
+    padding-top: 4vw;
+    justify-content: center;
+    text-align: center;
+    color: #131212;
+}
+.about-b h1{
+    font-size: 60px;
 }
 .v a{
     color: #30344c;
@@ -1477,6 +1510,8 @@ align-items: center;
 
 /*login*/
 .ccard-login {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     margin-top: 5vw;
     margin-left: 1vw;
     background-color: white;
@@ -1484,6 +1519,7 @@ align-items: center;
     width: 1000px;
     max-height: 480px;
     border-radius: 30px;
+    
     
   }
 

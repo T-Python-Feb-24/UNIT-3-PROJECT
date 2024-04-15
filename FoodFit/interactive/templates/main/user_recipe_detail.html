@@ -20,13 +20,19 @@
  <div class="col-md-12 ">
 <img class="user-recipe-img"src="{{ recipe.image.url }}" />
 
+
+</div>
+</div>
+
 <br>
-<a href="{% url 'favorites:add_remove_favorites_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" 
+<div class="r-con">
+<div class="line2">
+  <div class="s-r-title-box3">
+  <a class="like" href="{% url 'favorites:add_remove_favorites_view' recipe.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" 
 {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
-
-</div>
-</div>
-
+ </div>
+ </div>
+ </div>
 <div class="row mt-5">
 <div class="user-recipe-box">
 <div class=" user-recipe-detial col mt-1 md-10 ">

@@ -11,9 +11,10 @@
                
             <h2 class="display-2 fw-bold">Academic to <span class="text-primary">the Real World </span>Club</h2>
 
-            <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap</p>
+            <p class="lead fw-normal">We prepare you to face the professional world.
+                Our club provides courses and programs for students to bridge the gap between academic subjects and professional requirements, preparing them to overcome work challenges.</p>
     
-        <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5 "> <a class="btn btn-primary btn-lg px-4 gap-3 rounded-5" href="#" role="button">Book a Ticket</a>
+        <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5 "> <a class="btn btn-primary btn-lg px-4 gap-3 rounded-5" href="{% url 'main:all_events_view' %}" role="button">Book a Ticket</a>
             <a class="btn btn-outline btn-lg px-4 rounded-5" href="#" role="button" style="background-color: #d0d0d0;">Join to us</a>
         </div>
             </div>
@@ -51,32 +52,43 @@
                 
                             <div class="event-info">
                                 <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
-                                <div class="separator"></div>
-                                <p class="info">{{event.user.username}}</p>
+                                <div class="d-flex justify-content-center align-items-center gap-2" >
+                                    <div style=" display:flex; position: relative; left:8px;">
+                                        <img src="{{ event.user.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="60">
+                                        <div style="display:flex; position: relative; right: 20px; font-size: 20px; right:15px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
+                                    </div>
+                                    <p class="info">{{event.user.first_name}} {{event.user.last_name}}</p>
+ 
+                                </div>
                                 <p class="price">{{ event.theme }}</p>
                 
                                 <div class="additional-info">
                                     <p class="info">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Grand Central Terminal
+                                        <i class="{% if event.on_site == True %} fas fa-map-marker-alt{% else %}far fa-zoom {% endif %} "></i>
+                                        {% if event.on_site == True %} University of Jeddah {% else %}Zoom{% endif %}
+                                        
                                     </p>
-                                    <p class="info">
+                                    <p class="info d-flex gap-2">
                                         <i class="far fa-calendar-alt"></i>
-                                        {{ event.event_date }}                                    
+                                        {{ event.event_date }}   
+                                        <i class="far fa-time"></i>
+                                        {{ event.time_start }} - {{ event.time_end }}                                 
                                     </p>
                 
                                     <p class="info description">
-                                         We meet one Sunday evening <span>more...</span>
+                                        <a class="text-secondary" href="{% url 'main:event_detail_view' event.id  %}">More..</a>
                                     </p>
                                 </div>
                             </div>
-                                <button class="action">Book it</button>
+                                <a class="action" href="{% url 'main:event_detail_view' event.id  %}" >Book it</a>
                          
                         </div>
                     </div>
 
                 </div>
             {% endfor %}
+            <a class="btn btn-danger rounded-5 shadow " href="{% url 'main:all_events_view' %}">More Events</a>
+
         </div>
     </div>
 </section>

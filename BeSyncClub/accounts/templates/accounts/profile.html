@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block title %} base {% endblock %}
+{% block title %} {{student.username}} Profile {% endblock %}
 
 
 {% block content %}
@@ -60,16 +60,40 @@
 									</div>
 								{% endfor %}
 							</div>
-						{% else %}
+
 							<h2 class="m-3">My Events</h2>
 							<div class="d-flex flex-column gap-4">
-								{% for event in student.event_set.all %}
-									<div class="d-flex flex-column gap-1 p-3 shadow">
-										<h5>{{event.user.username}}</h5>
-										<a href="{% url 'main:event_detail_view' event.id %}"><h6 class="text-muted">{{event.event_title}}</h6></a>
-									</div>
-								{% endfor %}
+								{% for ticket in user.booking_set.all %}
+                                <div class="row g-4">
+                                    <div class="col-6">
+                                        <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100 align-items-center text-center">
+                                            <img src="{{ ticket.event.event_img.url }}"  class="w-100 rounded-4 card-body"/>
+											<h2><a href="{% url 'main:event_detail_view' ticket.event.id  %}" class="title align-items-center">{{ticket.event.event_title}}</a></h2>   
+                                            <h6 class=" pt-1 pb-1 ps-3 pe-3 rounded-pill">{{ ticket.event.theme }}</h6>
+                                            <h6 class="text-muted">{{ ticket.event.event_date }}</h6>
+                                        </div>
+                                    </div>
+                                </div>   
+                                {% endfor %}
 							</div>
+
+
+						{% else %}
+						<h2 class="m-3">My Events</h2>
+						<div class="d-flex flex-column gap-4">
+							{% for ticket in user.booking_set.all %}
+							<div class="row g-4">
+								<div class="col-6">
+									<div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100 align-items-center text-center">
+										<img src="{{ ticket.event.event_img.url }}"  class="w-100 rounded-4 card-body"/>
+										<h2><a href="{% url 'main:event_detail_view' ticket.event.id  %}" class="title align-items-center">{{ticket.event.event_title}}</a></h2>   
+										<h6 class=" pt-1 pb-1 ps-3 pe-3 rounded-pill">{{ ticket.event.theme }}</h6>
+										<h6 class="text-muted">{{ ticket.event.event_date }}</h6>
+									</div>
+								</div>
+							</div>   
+							{% endfor %}
+						</div>
 						{% endif %}
 
 							

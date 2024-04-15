@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #28384d;
+    color: #323e4e;
 }
 
 /* log */
@@ -28,14 +28,14 @@
 
 
 .item-container {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-    background-color: #fff;
-    box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
-    cursor: pointer;
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .img-container,
@@ -81,8 +81,8 @@
 
 .title,
 .price {
-    color: #18537a;
-    font-size: 28px;
+  color: #323e4e;
+  font-size: 28px;
     font-weight: bold;
     letter-spacing: 1px;
     margin: 12px;
@@ -92,7 +92,7 @@
 }
 
 .title:hover{
-    color: #f9245c;
+    color: #4299c1;
 }
 
 .info {
@@ -103,7 +103,7 @@
 .separator {
     width: 20%;
     height: 6px;
-    background-color: #17537a;
+    background-color:#323e4e;
     margin-bottom: 16px;
 }
 
@@ -121,14 +121,14 @@
 }
 
 .info i {
-    color: #18537a;
-    font-size: 1.1em;
+  color: #323e4e;
+  font-size: 1.1em;
     margin-right: 4px;
 }
 
 .info span {
-    color: #18537a;
-    font-weight: bolder;
+  color: #323e4e;
+  font-weight: bolder;
 }
 
 .action {
@@ -148,6 +148,8 @@
     font-weight: bold;
     letter-spacing: 2px;
     transition: background-color 0.4s, top 0.4s;
+    text-decoration: none;
+    text-align: center;
 }
 
 .item-container:hover .action {
@@ -246,3 +248,17 @@
   margin-bottom:0;
 }
 
+.presenter-pic{
+  display: inline-block;
+  vertical-align: middle;
+   width: 120px;
+   height: 120px;
+   overflow: hidden;
+  border-radius: 50%;
+}
+
+.presenter-pic img{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

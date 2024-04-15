@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from datetime import date, timedelta
 from django.contrib.auth.models import User
+from booking.models import Booking
+
 
 import math
 
@@ -90,12 +92,13 @@ def event_detail_view(request: HttpRequest, event_id):
         related_events = Event.objects.filter(theme=event.theme).exclude(pk=event_id)[0:3]   
 
         #is_book or not 
+        is_booked = request.user.is_authenticated and Booking.objects.filter(user=request.user, event=event).exists()
 
     except Event.DoesNotExist:
         return render(request, "main/not_found.html") 
     except Exception as e:
         print(e)
-    return render(request, "main/event_detail.html", {"event" : event, "related_events" : related_events})
+    return render(request, "main/event_detail.html", {"event" : event, "related_events" : related_events, "is_booked" : is_booked})
 
 
 

@@ -4,57 +4,90 @@
 
 {% block content %}
 <section>
-    <div class="container mt-5 px-5">  
-        <div class="row g-5">
-            <div class="col">
-                <h2>{{ event.event_title }} Detail</h2>
-                <div class="row my-3">
-                    <div class="col-md-4 mb-4">
-                        <img src="{{ event.event_img.url }}" class=" w-100 h-100 object-fit-cover rounded-4" alt="event img">
+    <div class="container mt-5 ">
+        <div class="row g-5 ">
+            <div class="col d-flex flex-column justify-content-center bg-white py-4 mx-5 my-5 rounded-4">
+                <h1 class="text-center">Event Detail</h2>
+                <div class="row my-4">
+                    <div class="col d-flex justify-content-center bg-white mx-5 px-0 rounded-4">
+                        <img src="{{ event.event_img.url }}" style="width: 100%; height:350px; object-fit: cover;" alt="event" class="shadow-sm rounded-4">
                     </div>
-                    <div class="col-md-8">
-                        <h2>{{ event.event_title }}</h2>
-                        <p class="form-label">{{ event.event_date }}</p>
-                        <p class="form-label">{{ event.time_start }} - {{ event.time_end}}</p>
+                </div>
+                
+                <div class="row my-3 ">
+                   
+                    <div class="col-12 d-flex justify-content-center text-center flex-column">
+                        <div class="d-flex justify-content-center align-items-center  gap-4">
+                        <h2>{{ event.event_title }}</h2> 
+                        <a href="{% url 'booking:book_ticket_view' event.id %}"
+                            {% if not request.user.is_authenticated %}  
+                                data-bs-toggle="modal" data-bs-target="#bookingModal" 
+                            {% endif %}
+                            class="text-decoration-none">
+                            <i class="bi {% if is_booked %} bi-ticket-perforated-fill {% else %} bi-ticket-perforated {% endif %} " style="font-size: 50px; color: rgb(53, 171, 92);"></i>
+                        </a>  <!--like--> 
+                </div>
 
+                       
+                
+                        <div class="row my-3 mx-5">
+                            <h6>Present by </h6>
+                            <span>
+                                 <div style=" display:flex; position: relative; justify-content: center; left:20px; margin-top: 10px; margin-bottom: 10px;">
+                                        <img src="{{ event.user.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="120">
+                                        <div style="display:flex; position: relative; right: 40px; font-size: 40px; right:32px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
+                                    </div>
+                            </span>
+                            <h3>{{event.user.first_name}} {{event.user.last_name}} </h3>
+                        </div>
+                        <div class="row my-3 mx-5">
+                            <div class="col-12 d-flex gap-2 justify-content-center">
 
-                        <div class="row my-3">
-                            <div class="col-4">
-                                <label class="form-label">Event Theme:</label>
-                                <span style="font-size: 20px; padding-left: 5px;">{{ event.theme }}</span>
+                                {% if request.user.is_staff %}<!-- only presenter is more pro-->
+                                    <a href="{% url 'main:edit_event_view' event.id %}" class="btn btn-warning rounded-5 shadow">Edit</a>
+                                    <a href="{% url 'main:delete_event_view' event.id %}" class="btn btn-danger rounded-5 shadow">Delete</a>  
+                                {% endif %}  
                             </div>
-                            <div class="col-4">
-                                <label class="form-label">on site: </label>
-                                <span style="font-size: 20px; padding-left: 5px;">{% if event.on_site == True %} On site {% else %} Online {% endif %}</span>
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label">Event type:</label>
-                                <span style="font-size: 20px; padding-left: 5px;">{{ event.event_type }}</span>
+                             
+                        </div>
+                        <div class="row my-3 mx-5">
+                            <div class="col-12 d-flex justify-content-center gap-5">
+                                <p class="form-label">{{ event.event_date }}</p>
+                                <p class="form-label">{{ event.time_start }} - {{ event.time_end}}</p>
                             </div>
                         </div>
-                        <div class="row my-3">
+
+                        <div class="row my-3 mx-5">
+                            <div class="col-12 d-flex justify-content-center gap-5">
+                                <div>
+                                    <label class="form-label">Event Theme:</label>
+                                    <span style="font-size: 20px; padding-left: 5px;">{{ event.theme }}</span>
+                                </div>
+
+                                <div>
+                                    <label class="form-label">on site: </label>
+                                    <span style="font-size: 20px; padding-left: 5px;">{% if event.on_site == True %} On site {% else %} Online {% endif %}</span>
+                                </div>
+                                <div>
+                                    <label class="form-label">Event type:</label>
+                                    <span style="font-size: 20px; padding-left: 5px;">{{ event.event_type }}</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                     
+                        <div class="row my-3 mx-5">
                             <div class="col-12">
                                 <label class="form-label">Description:</label>
                                 <p style="font-size: 20px; padding-left: 5px;">{{ event.event_description }}</p>
                             </div>
                         </div>
     
-                        <div class="row my-3">
+                        <div class="row my-3 mx-5">
                             <div class="col-12">
                                 <label class="form-label">Objective:</label>
                                 <p style="font-size: 20px; padding-left: 5px;">{{ event.objective }}</p>
-                            </div>
-                        </div>
-                        <div class="row my-3">
-                            <div class="col-12 d-flex gap-2">
-
-                                {% if request.user.is_staff %}<!-- only presenter is more pro-->
-                                    <a href="{% url 'main:edit_event_view' event.id %}" class="btn btn-warning w-100 ">Edit</a>
-                                    <a href="{% url 'main:delete_event_view' event.id %}" class="btn btn-danger w-100 ">Delete</a>  
-                                {% endif %}  
-
-                                <a href="#" class="btn btn-success w-100 ">Reserve your seat</a>  <!--like favorits-->   
-
                             </div>
                         </div>
                     </div>
@@ -68,7 +101,7 @@
 
 <section>
     {% if related_events.count > 0 %}
-        <div class="container mt-5 px-5">
+        <div class="container mb-5 px-5">
             <div class="row g-5">
                 <hr/>
                 <h2>Events with the same Theme</h2>
@@ -84,30 +117,39 @@
                 
                             <div class="event-info">
                                 <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
-                                <div class="separator"></div>
-                                <p class="info">{{event.user.username}}</p>
+                                <div class="d-flex justify-content-center align-items-center gap-2" >
+                                    <div style=" display:flex; position: relative; left:8px;">
+                                        <img src="{{ event.user.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="60">
+                                        <div style="display:flex; position: relative; right: 20px; font-size: 20px; right:15px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
+                                    </div>
+                                    <p class="info">{{event.user.first_name}} {{event.user.last_name}}</p>
+    
+                                </div>
                                 <p class="price">{{ event.theme }}</p>
                 
                                 <div class="additional-info">
                                     <p class="info">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        Grand Central Terminal
+                                        <i class="{% if event.on_site == True %} fas fa-map-marker-alt{% else %}far fa-zoom {% endif %} "></i>
+                                        {% if event.on_site == True %} University of Jeddah {% else %}Zoom{% endif %}
+                                        
                                     </p>
-                                    <p class="info">
+                                    <p class="info d-flex gap-2">
                                         <i class="far fa-calendar-alt"></i>
-                                        {{ event.event_date }}                                    
+                                        {{ event.event_date }}   
+                                        <i class="far fa-time"></i>
+                                        {{ event.time_start }} - {{ event.time_end }}                                 
                                     </p>
                 
                                     <p class="info description">
-                                         We meet one Sunday evening <span>more...</span>
+                                        <a class="text-secondary" href="{% url 'main:event_detail_view' event.id  %}">More..</a>
                                     </p>
                                 </div>
                             </div>
-                                <button class="action">Book it</button>
+                                <a class="action" href="{% url 'main:event_detail_view' event.id  %}" >Book it</a>
                          
                         </div>
                     </div>
-
+    
                 </div>
             {% endfor %}
             </div>

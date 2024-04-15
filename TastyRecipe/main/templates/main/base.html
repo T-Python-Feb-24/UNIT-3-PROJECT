@@ -316,11 +316,14 @@
 
           <a class="navbar-brand d-flex flex-column justify-content-center align-items-center" href="{% url 'main:home' %}">
             <img src="{% static 'Images/logo.png' %}" alt="logo" width="30px" height="30px">
-            <h6 class="diplomata-regular" style="font-size: x-small; text-align: center;">TASTY <br>RECIPES</h6></a>
+            <h6 class="diplomata-regular fa-fade" style="font-size: x-small; text-align: center;">TASTY <br>RECIPES</h6></a>
 
           <div class="d-flex gap-3 align-items-center">
-            <a class="nav-link" href="{% url 'main:search' %}"><img src="{% static 'images/search recipe.png' %}" alt="search icon" width="30px" height="30px"></a>
-            <a href="{% url 'main:contact' %}"><img src="{% static 'images/contact-mail.png' %}" alt="contact icon" width="30px" height="30px"></a>
+            <!-- <a class="btn " href="{% url 'main:add_recipe' %}" style="padding: 5px;">
+              <img src="{% static 'Images/recipe.png' %}" alt="recipe book" width="30px" height="30px">Add Recipe</a> -->
+
+            <a class="nav-link" href="{% url 'main:search' %}"><img src="{% static 'images/search recipe.png' %}" alt="search icon" width="30px" height="30px" style="opacity: 0.8;"></a>
+            <!-- <a href="{% url 'main:contact' %}"><img src="{% static 'images/contact-mail.png' %}" alt="contact icon" width="30px" height="30px"></a> -->
             
             {% if request.user.is_authenticated %} 
             <div class="d-flex gap-2">
@@ -370,20 +373,20 @@
       <hr style="margin-top: 2rem;">
       <div class="container py-3 py-md-3 px-3 px-md-3 text-body-secondary">
         <div class="row">
-          <div class="col-lg-3 mb-3">
+          <div class="col-4 col-lg-3 mb-3">
 
             <a class="navbar-brand d-flex flex-column align-items-center" href="{% url 'main:home' %}">
               <img src="{% static 'Images/logo.png' %}" alt="logo" width="40px" height="40px">
-              <h6 class="diplomata-regular" style="font-size: medium; text-align: center;">TASTY <br>RECIPES</h6></a>
-              <ul class="list-unstyled d-flex flex-row justify-content-center gap-5 mt-4">
+              <h6 class="diplomata-regular fa-fade" style="font-size: medium; text-align: center;">TASTY <br>RECIPES</h6></a>
+              <!-- <ul class="list-unstyled d-flex flex-row justify-content-center gap-5 mt-4">
               <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-facebook"></i></a></li>
               <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-instagram"></i></a></li>
               <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-x-twitter"></i></a></li>
               <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-youtube"></i></a></li>
-            </ul>
+            </ul> -->
           </div>
 
-          <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+          <div class="col-4 col-lg-2 offset-lg-1 mb-3">
             <h5>Explore</h5>
             <ul class="list-unstyled">
               <li class="mb-2"><a href="/" style="color: #080822; text-decoration: none;">Home</a></li>
@@ -392,13 +395,17 @@
             </ul>
           </div>
 
-          <!-- <div class="col-6 col-lg-2 mb-3">
-            <h5>Legal</h5>
-            <ul class="list-unstyled">
-              <li class="mb-2"><a href="#" style="color: #080822; text-decoration: none;">Term Policy</a></li>
-              <li class="mb-2"><a href="#" style="color: #080822; text-decoration: none;">Accessibility</a></li>
+          <div class="col-6 mb-3">
+            <div class="d-flex justify-content-center">
+              <h5>Join us</h5>
+            </div>
+            <ul class="list-unstyled d-flex flex-row justify-content-center gap-5 mt-4">
+              <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-facebook"></i></a></li>
+              <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-x-twitter"></i></a></li>
+              <li><a href="#" style="color: #02020b; font-size: larger;"><i class="fa-brands fa-youtube"></i></a></li>
             </ul>
-          </div> -->
+          </div>
         </div>
 
         <div class="row">

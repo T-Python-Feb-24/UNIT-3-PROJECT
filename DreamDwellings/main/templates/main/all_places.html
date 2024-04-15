@@ -114,6 +114,7 @@
                     <p class="card-text">Neighborhood: {{ filtered_place.neighborhood }}</p>
                     <p class="card-text">Category: {{ filtered_place.category }}</p>
                     <p class="card-text">Price: {{ filtered_place.price }}</p>
+                 
                     <a href="{% url 'main:place_detail' filtered_place.id %}" class="btn btn-primary">View Details <span aria-hidden="true">→</span></a>
                 </div>
             </div>

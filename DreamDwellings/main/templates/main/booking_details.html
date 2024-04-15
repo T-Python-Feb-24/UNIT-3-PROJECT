@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Booking Details</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>User:</th>
+                <td>{{ booking.user }}</td>
+            </tr>
+            <tr>
+                <th>Place:</th>
+                <td>{{ booking.place }}</td>
+            </tr>
+            <tr>
+                <th>Check in date:</th>
+                <td>{{ booking.check_in_date }}</td>
+            </tr>
+            <tr>
+                <th>Check out date:</th>
+                <td>{{ booking.check_out_date }}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>{{ booking.status }}</td>
+            </tr>
+            <tr>
+                <th>Full name:</th>
+                <td>{{ booking.full_name }}</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>{{ booking.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone number:</th>
+                <td>{{ booking.phone_number }}</td>
+            </tr>
+            <tr>
+                <th>Address:</th>
+                <td>{{ booking.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

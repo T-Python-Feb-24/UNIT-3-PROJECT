@@ -3,87 +3,138 @@
 {% block title %}Register New User{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1>Register New User</h1>
-    {% if msg %}
-    <div class="alert alert-danger">{{msg}}</div>
-    {% endif %}
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <form action="{% url 'accounts:register' %}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
-                {% csrf_token %}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-                <style>
-                    .container {
-                        margin-top: 150px;
-                        width: 2000px;
-                    }
+    .form {
+        max-width: 400px;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 100px;
+    }
 
-                    .form-label {
-                        font-weight: bold;
-                    }
+    .title {
+        font-size: 50px;
+        font-weight: 600;
+        color: royalblue;
+        margin-bottom: 20px;
+        position: relative;
+    }
 
-                    .form-control {
-                        margin-bottom: 15px;
-                    }
+    .title::before, .title::after {
+        content: "";
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        background-color: royalblue;
+    }
 
-                    .btn-primary {
-                        background-color: #000000;
-                        border-color: #010f1d;
-                    }
+    .title::before {
+        left: -30px;
+    }
 
-                    .btn-primary:hover {
-                        background-color: #0056b3;
-                        border-color: #0056b3;
-                    }
-                </style>
+    .title::after {
+        left: -30px;
+        animation: pulse 1s linear infinite;
+    }
 
-                <div class="mb-0">
-                    <label for="username" class="form-label">Username</label>
-                    <input id="username" name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
-                    <div class="invalid-feedback">
-                        Please enter a valid username (minimum 3 characters).
-                    </div>
-                </div>
+    .input-group {
+        margin-bottom: 20px;
+    }
 
-                <div class="mb-3">
-                    <label for="first_name" class="form-label">First Name</label>
-                    <input id="first_name" name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" />
-                    <div class="invalid-feedback">
-                        Please enter a valid first name (minimum 3 characters).
-                    </div>
-                </div>
+    .input-group label {
+        font-size: 14px;
+        color: #555;
+    }
 
-                <div class="mb-3">
-                    <label for="last_name" class="form-label">Last Name</label>
-                    <input id="last_name" name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
-                    <div class="invalid-feedback">
-                        Please enter a valid last name (minimum 3 characters).
-                    </div>
-                </div>
+    .input-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input id="email" name="email" class="form-control" type="email" required placeholder="Email" />
-                    <div class="invalid-feedback">
-                        Please enter a valid email address.
-                    </div>
-                </div>
+    .submit-btn {
+        background-color: royalblue;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input id="password" name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
-                    <div class="invalid-feedback">
-                        Please enter a valid password (minimum 6 characters).
-                    </div>
-                </div>
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
 
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </form>
+    .signin-link {
+        text-align: center;
+    }
+
+    .signin-link a {
+        color: royalblue;
+        text-decoration: none;
+    }
+
+    .signin-link a:hover {
+        text-decoration: underline;
+    }
+
+    @keyframes pulse {
+        from {
+            transform: scale(0.9);
+            opacity: 1;
+        }
+        to {
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
+</style>
+
+<div class="container">
+    <form class="form" action="{% url 'accounts:register' %}" method="post">
+        {% csrf_token %}
+        <p class="title">Register</p>
+
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
         </div>
-    </div>
+
+        <div class="input-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required>
+        </div>
+
+        <div class="input-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" minlength="6" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Sign Up</button>
+
+        <p class="signin-link">Already have an account? <a href="{% url 'accounts:login' %}">Sign in</a></p>
+    </form>
 </div>
-{% block footer %}
-   
-    {% endblock %}
 {% endblock %}

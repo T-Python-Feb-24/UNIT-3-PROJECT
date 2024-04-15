@@ -5,50 +5,165 @@
 {% block content %}
 <style>
     .container {
-        margin-top: 150px;
-        max-width: 1000px;
-        margin-left: auto; 
-        margin-right: auto; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
     }
-    .image-column {
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 500px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        font-size: 100px;
+        color: royalblue;
+        font-weight: 600px;
+        letter-spacing: -1px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding-left: 30px;
+    }
+
+    .title::before,
+    .title::after {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        left: 0px;
+        background-color: royalblue;
+    }
+
+    .title::before {
+        width: 18px;
+        height: 18px;
+        background-color: royalblue;
+    }
+
+    .title::after {
+        width: 18px;
+        height: 18px;
+        animation: pulse 1s linear infinite;
+    }
+
+    .form .message,
+    .form .signin {
+        color: rgba(88, 87, 87, 0.822);
+        font-size: 14px;
+    }
+
+    .form .signin {
         text-align: center;
     }
-    .form-column {
-        padding-left: 20px;
+
+    .form .signin a {
+        color: royalblue;
+    }
+
+    .form .signin a:hover {
+        text-decoration: underline royalblue;
+    }
+
+    .form .flex {
+        display: flex;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .form label {
+        position: relative;
+    }
+
+    .form label .input {
+        width: 100%;
+        padding: 10px;
+        outline: 0;
+        border: 1px solid rgba(105, 105, 105, 0.397);
+        border-radius: 10px;
+    }
+
+    .form label .input + span {
+        position: absolute;
+        left: 10px;
+        top: 15px;
+        color: grey;
+        font-size: 0.9em;
+        cursor: text;
+        transition: 0.3s ease;
+    }
+
+    .form label .input:placeholder-shown + span {
+        top: 15px;
+        font-size: 0.9em;
+    }
+
+    .form label .input:focus + span,
+    .form label .input:valid + span {
+        top: 30px;
+        font-size: 0.7em;
+        font-weight: 600;
+    }
+
+    .form label .input:valid + span {
+        color: green;
+    }
+
+    .form .submit {
+        border: none;
+        outline: none;
+        background-color: royalblue;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form .submit:hover {
+        background-color: rgb(56, 90, 194);
+    }
+
+    @keyframes pulse {
+        from {
+            transform: scale(0.9);
+            opacity: 1;
+        }
+
+        to {
+            transform: scale(1.8);
+            opacity: 0;
+        }
     }
 </style>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-6 image-column">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/dream-dwellings.appspot.com/o/pexels-charlotte-may-5825417.jpg?alt=media&token=31dfc1f4-b323-40f2-a406-5277ce542588" class="img-fluid" alt="Image">
-                </div>
-                <div class="col-md-6 form-column">
-                    {% if msg %}
-                    <div class="alert alert-danger">{{msg}}</div>
-                    {% endif %}
-                    <form action="{% url 'accounts:login' %}" method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" id="username">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" id="password">
-                        </div>
-                        <div class="d-grid">
-                            <input type="submit" class="btn btn-primary" value="Login">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <form action="{% url 'accounts:login' %}" method="post" class="form">
+        {% csrf_token %}
+        <p class="title">Login</p>
+        {% if msg %}
+            <div class="alert alert-danger">{{msg}}</div>
+        {% endif %}
+        <label>
+            <input name="username" class="input" type="text" minlength="3" required placeholder="">
+            <span>Username</span>
+        </label>
+        <label>
+            <input name="password" class="input" type="password" minlength="6" required placeholder="">
+            <span>Password</span>
+        </label>
+        <button type="submit" class="submit">Login</button>
+        <p class="signin">Don't have an account? <a href="{% url 'accounts:register' %}">Sign Up</a></p>
+    </form>
 </div>
-{% block footer %}
-   
-    {% endblock %}
 {% endblock %}

@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.db import transaction, IntegrityError
 from django.contrib.auth import authenticate, login, logout
 from .models import User
+
 def register_view(request:HttpRequest):
     msg = None
     if request.method == "POST":

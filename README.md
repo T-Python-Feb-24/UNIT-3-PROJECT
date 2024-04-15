@@ -9,14 +9,32 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 My project briefly talks about DreamDwellings, which deals with real estate such as apartments, villas, lands, offices for sale or rent, and it depends on a client and a merchant. The merchant adds advertisements, while the client browses and bids.
 
 ## Features List here
-- list of features
+- User Authentication:
+
+Registration: Users can register an account with their username, email, and password.
+Login: Registered users can log in to their accounts using their credentials.
+Place Listings:
+
+View Places: Users can view a list of places available for sale or rent.
+Filter Places: Users can filter places by neighborhood and category to find properties of interest.
+View Place Details: Users can view detailed information about a specific place, including description, location, price, and images.
+Contact Owner:
+
+Send Message: Users can contact the owner of a place by sending them a message with their name and email address.
+Reviews:
+
+Leave Review: Users can leave a review for a place they have visited, including a rating and comment.
+Booking:
+
+Book Place: Users can book a place for a specific check-in and check-out date, providing their full name, email, phone number, and address.
+View Bookings: Users can view their bookings, including details such as the booked place, check-in and check-out dates, and contact information.
 
 ## User Stories, Wireframes & UML links
-- User stories document link here.
+- User stories document link here: https://docs.google.com/spreadsheets/d/1_48p_axqXtb4iO_Izx36T7ADpBoScaLPNvHJBfN1zSc/edit?usp=sharing
 
 - wireframe: https://drive.google.com/file/d/1-H-L3lT2c8kqJdyDFwqQRPjY_9lYM0eU/view?usp=sharing.
 
-- UML:  https://lucid.app/lucidchart/171df5c2-e9fd-46ea-914e-f162f0a7018c/edit?    viewport_loc=-1242%2C-870%2C2232%2C1227%2C0_0&invitationId=inv_14c8a245-4db5-4563-a94e-76e78ecce452.
+- UML:  https://lucid.app/lucidchart/171df5c2-e9fd-46ea-914e-f162f0a7018c/edit?viewport_loc=-1313%2C-917%2C2232%2C1227%2C0_0&invitationId=inv_14c8a245-4db5-4563-a94e-76e78ecce452  viewport_loc=-1242%2C-870%2C2232%2C1227%2C0_0&invitationId=inv_14c8a245-4db5-4563-a94e-76e78ecce452.
 
 
 ## Minimum Requirements

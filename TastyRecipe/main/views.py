@@ -178,7 +178,8 @@ def add_review(request:HttpRequest, recipe_id):
             new_review = Review(
             recipe=review,
             user = request.user,
-            content=request.POST["content"]
+            content=request.POST["content"],
+            evaluation=request.POST["evaluation"]
             )
             new_review.save()
 

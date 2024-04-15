@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <h1>Update post</h1>
+        <div class="col">
+
+            <form action="{% url 'main:update_post_view' post.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input name="coursename" type="text" placeholder="Title" class="form-control" required minlength="2" />
+                        <textarea name="content" class="form-control" required minlength="2"></textarea>
+                        <input name="poster" type="file" accept="image/*" class="form-control" required />
+                        <input name="numberhours" type="number" placeholder="Number of hours" class="form-control" />
+                        <input name="price" type="number" placeholder="Price" class="form-control" />
+                        <input name="startdate" type="date" placeholder="Start date" class="form-control" />
+                        <input name="expirydate" type="date" placeholder="Expiry date" class="form-control" />
+
+             
+
+                <input type="submit" class="btn btn-primary" value="Update" />
+            </form>
+
+        </div>
+
+
+    </div>
+{% endblock %}

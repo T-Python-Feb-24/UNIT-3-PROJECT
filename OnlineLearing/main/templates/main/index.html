@@ -1,0 +1,417 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Online Learning{% endblock %}
+
+{% block content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row justify-content-center mt-5 ">
+    <div class="col-md-6 text-center">
+        <div class="image-container position-relative  ">
+            <img src="/static/images/pexels-photo-4050319.jpeg" alt="E-Learning Management System" class="image" style="max-width: 100%;">
+            <div class="overlay">
+                <h3 class="text-white">E-learning Programs and Courses</h3>
+                <p class="text-white">We offer local & global courses and professional certificates to enable institutions to build their employees' skills</p>
+                {% if not request.user.is_authenticated %} 
+                <a class="btn btn-danger-gradiant btn-md border-0 text-white mt-7 text-uppercase" href="{% url 'accounts:register_user_view' %}">
+                    <span>Sign Up</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container-fluid px-2 px-md-4 py-5 mx-auto col-md-19 ">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-20 col-lg-15 col-xl-18">
+            <div class="card card-main border-0 text-center">
+                <h5 class="font-weight-bold mb-4">E-Learning Management System</h5>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-item active ">
+                            <div class="card border-0 card-0">
+                                <div class="card profile py-3 px-4">
+                                    <div class="text-center">
+                                        <img src="/static/images/pexels-photo-3184459.webp" class="img-fluid profile-pic">
+                                    </div>
+                                </div>
+                                <img class="img-fluid open-quotes" src="https://i.imgur.com/Hp91vdT.png" width="20" height="20">
+                                <p class="content mb-0">E-Learning Management System ELMS The Blackboard ELMS allows the student and faculty member to access an e-copy of the enlisted courses and to follow up on the efficiency of the educational process. It offers various course tools such as lessons, assignments and tests, besides viewing and managin</p>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<style>
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.card-main {
+    padding: 50px;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.card-0 {
+    color: #fff;
+    background-color: #dcdbc8;
+    position: relative;
+    margin-left: 70px;
+    border-radius: 10px;
+    min-height: 312px;
+}
+
+
+.profile {
+    color: #000;
+    position: absolute;
+    left: -70px;
+    top: 17%;
+    border-radius: 10px;
+    border-top-left-radius: 0px; 
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.open-quotes {
+    margin-left: 130px;
+    margin-top: 100px;
+}
+
+.content {
+    margin-left: 150px;
+    margin-right: 80px;
+}
+
+.close-quotes {
+    margin-bottom: 100px;
+    margin-right: 60px
+}
+
+@media screen and (max-width: 600px) {
+    .card-main {
+        padding: 50px 10px;
+    }
+
+    .card-0 {
+        min-height: 432px;
+    }
+
+    .profile {
+        top: 24%;
+    }
+
+    .profile-pic {
+        width: 90px;
+        height: 90px;
+    }
+
+    .open-quotes {
+        margin-left: 100px;
+    }
+
+    .content {
+        margin-left: 120px;
+        margin-right: 50px;
+    }
+
+    .close-quotes {
+        margin-right: 30px
+    }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hero {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: #CCC;
+  position: relative;
+  text-transform: uppercase;
+  font-family: 'Amatic SC', sans-serif;
+  letter-spacing: 17.5px;
+}
+
+.hero-one {
+  top: 0;
+  position: absolute;
+  width: 60%;
+  background-color: black;
+  height: 100vh;
+  clip-path: polygon(0 0, 60vw 0, 40vw 100vh, 0 100vh);
+  z-index: 1;
+    background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.hero-two {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  background-color: green;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.header-title {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header-primary {
+  font-size: 2em;
+  display: block;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+    .image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    max-width: 1000px; /* تعديل حجم الصورة هنا */
+
+
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 50px;
+}
+
+.overlay h3,
+.overlay p {
+    margin-bottom: 15px;
+}
+
+.overlay a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.overlay a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+</style>
+
+
+
+    <div class="col-md-8 text-end ">
+        {% if request.user.is_staff and perms.main.add_post %}
+        <a class="btn btn-light" href="{% url 'main:add_courses_view' %}">Add Post</a>
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% if request.user.is_authenticated %}
+
+
+
+<form action="{% url 'main:posts_search_view' %}" class="d-flex" role="search" method="get">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" >
+    <button class="btn btn-light" type="submit">Search</button>
+  </form>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="row row-cols-2 row-cols-md-4 g-3">
+            {% for post in courses %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ post.poster.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'main:post_detail_view' post.id %}" class="text-decoration-none text-dark">{{ post.coursename }}</a></h5>
+                        <p class="card-text">{{ post.description }}</p>
+                        <div>
+                            <i class="bi bi-book"></i>
+                            <i class="bi bi-bar-chart-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-5">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<div class="row mt-5 mb-5">
+    <div class="col-md-4">
+        <div class="card p-3 text-center px-4">
+            <div class="user-image">
+                <img src="https://i.imgur.com/PKHvlRS.jpg" class="rounded-circle" width="80">
+            </div>
+            <div class="user-content">
+                <h5 class="mb-0">Bruce Hardy</h5>
+                <span>Software Developer</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 text-center px-4">
+            <div class="user-image">
+                <img src="https://i.imgur.com/w2CKRB9.jpg" class="rounded-circle" width="80">
+            </div>
+            <div class="user-content">
+                <h5 class="mb-0">Mark Smith</h5>
+                <span>Web Developer</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 text-center px-4">
+            <div class="user-image">
+                <img src="https://i.imgur.com/ACeArwY.jpg" class="rounded-circle" width="80">
+            </div>
+            <div class="user-content">
+                <h5 class="mb-0">Veera Duncan</h5>
+                <span>Software Architect</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="ratings">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer class="footer mt-auto">
+    <div class="container text-center">
+        <span class="text-muted">Contact us:</span><br>
+        <p class="mb-4">Our male and female students, we are pleased to communicate with you and receive your inquiries through the communication system</p>
+        <div class="contact-info">
+            <p>Email: example@example.com</p>
+            <p>Phone: +1 123-456-7890</p>
+            <p>Fax: +1 987-654-3210</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        padding: 20px 0;
+    }
+
+    .contact-info {
+        margin-top: 20px;
+    }
+
+    .contact-info p {
+        margin-bottom: 5px;
+    }
+</style>
+{% endif %}
+
+
+{% endblock %}

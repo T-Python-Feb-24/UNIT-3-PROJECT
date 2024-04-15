@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Login User{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col">
+        <h1>Login</h1>
+        {% if msg %}
+        <div class="alert alert-danger">{{msg}}</div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+        <form action="{% url 'accounts:login_user_view' %}" method="post" class="d-flex flex-column gap-2">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input name="username" id="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input name="password" id="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock %}

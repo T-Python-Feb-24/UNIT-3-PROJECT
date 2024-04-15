@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Courses List{% endblock %}
+
+{% block content %}
+<div class="container mt-5 ">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1 class="mb-4">Courses List</h1>
+            <div class="row row-cols-2 row-cols-md-4 g-3">
+                {% for course in courses %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{{ course.poster.url }}" class="card-img-top" alt="{{ course.coursename }}">
+                        <div class="card-body">
+                            <h2 class="card-title"><a href="{% url 'main:post_detail_view' course.id  %}" class="text-decoration-none">{{ course.coursename }}</a></h2>
+                            <p class="card-text">Number of Hours: {{ course.numberhours }}</p>
+                            <p class="card-text">Start Date: {{ course.startdate }}</p>
+                            <p class="card-text">Expiry Date: {{ course.expirydate }}</p>
+                            <!-- Uncomment below line if you want to display categories -->
+                            <!-- <p class="card-text">Categories: {{ course.get_categories_display }}</p> -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

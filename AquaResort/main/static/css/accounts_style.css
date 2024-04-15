@@ -1,8 +1,8 @@
 * {
     padding: 0px;
     margin: 0px;
-    font-family: "Numans", sans-serif;
-    font-size: 20px;
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
 }
 .sign_up_container {
     background-image: url('https://firebasestorage.googleapis.com/v0/b/unit-3-project-d265e.appspot.com/o/signUp-bg.jpg?alt=media&token=e91f6af3-7e5f-4780-9c83-d7f89c638741');
@@ -45,7 +45,7 @@
   .input-container input:focus ~ .label,
   .input-container input:valid ~ .label {
     top: -20px;
-    font-size: 16px;
+    font-size: 20px;
     color: #333;
   }
   

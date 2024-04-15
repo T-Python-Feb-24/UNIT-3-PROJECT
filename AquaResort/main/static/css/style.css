@@ -1,8 +1,8 @@
 * {
   padding: 0px;
   margin: 0px;
-  font-family: "Numans", sans-serif;
-  font-size: 20px;
+  font-family: "Playfair Display", serif;
+  font-size: 25px;
 }
 
 body {
@@ -38,11 +38,7 @@ body {
 }
 
 .booking_rooms_form label {
-  font-size: 15px;
-}
-
-.booking_rooms_form h6 {
-  font-size: 15px;
+  font-size: 20px;
 }
 .room-card{
   background-color: #F8F9FA;

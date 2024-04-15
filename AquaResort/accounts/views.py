@@ -70,6 +70,9 @@ def logout_view(request:HttpRequest):
         logout(request)
     return redirect('main:index_view')
 
-def profile_view(request:HttpRequest):
-
-    return render(request, 'accounts/profile.html')
+def profile_view(request:HttpRequest, user_name):
+    try:
+        user_object = User.objects.get(username=user_name)
+    except:
+        return render(request, "main/not_found.html")
+    return render(request, 'accounts/profile.html',{"user_object":user_object})

@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<main class="main_container">
+<main>
     <div class="row first_page_bg">
         <div class="col text-white">
             <div class="phrases rounded-2">
@@ -49,7 +49,7 @@
             <h4>Our Rooms</h4>
             {% for room in rooms %}
                 <div class="col-4 mt-1">
-                    <div class="shadow room-card">
+                    <div class="shadow room-card h-100">
                         <img src="{{room.room_img.url}}" class="w-100">
                         <div class="p-3">
                             <h6>{{room.room_type}}</h6>

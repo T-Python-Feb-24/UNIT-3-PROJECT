@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+
+{% block title %}All Rooms{% endblock title %}
+
+{% block content %}
+<main class="m-5">
+    <div class="row">
+        <div class="col m-1 d-flex justify-content-between align-items-center">
+            <h6>
+                {% if selected_type %}
+                {{selected_type|title}} Rooms
+                {% else %}
+                All Rooms   
+                {% endif %}
+                ( {{rooms.count}} )
+            </h6>
+            <div class="d-flex gap-2">
+                <a href="?type=" class="p-2 ps-3 pe-3 text-dark text-decoration-none">All</a>
+                {% for val, key in rooms_type %}
+                    <a href="?type={{ val }}" class="p-2 ps-3 pe-3 text-dark text-decoration-none {% if selected_type == val %}active{% endif %}">{{ key }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for room in rooms %}
+            <div class="col-4 mt-1">
+                <div class="shadow room-card h-100">
+                    <img src="{{room.room_img.url}}" class="w-100">
+                    <div class="p-3">
+                        <h6>{{room.room_type}}</h6>
+                        <p class="text-muted">Amenities: {{room.amenities}}</p>
+                        <div class="d-flex flex-column align-items-center gap-1">
+                            <a class="btn btn-outline-success w-100" href="">Book Now</a>
+                            <p>{{room.price}}$ Per Night</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock content %}

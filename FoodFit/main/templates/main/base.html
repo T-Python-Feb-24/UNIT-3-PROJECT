@@ -47,8 +47,8 @@
 
 {% if request.user.is_superuser %}
 <a href="{% url 'main:user_message_page' %}"  class="gap2">Messages</a>
-<a href="{% url 'main:contact_us_page' %}"  class="gap2">Contact us</a>
 {% endif %}
+<a href="{% url 'main:contact_us_page' %}"  class="gap2">Contact us</a>
 </nav> 
 
 <div class="btn-group shadow-0">

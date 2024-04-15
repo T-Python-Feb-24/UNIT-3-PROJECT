@@ -37,7 +37,7 @@ body{
 
 .logo-text{
     font-size: 40px;
-    color: rgb(40, 24, 46);
+    color: rgb(45, 110, 30);
 }
 
 .navbar a{
@@ -177,6 +177,20 @@ button:hover{
     border-radius: 30px;
     
     
+}
+
+.box2{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(239, 237, 237, 0.5);
+  width: 1000px;
+  height:300px;
+  margin-right: 17vw;
+  margin-top: 10vw;
+  border-radius: 30px;
+  
+  
 }
 
 .-search{
@@ -1084,6 +1098,15 @@ align-items: center;
 }
 
 /**/
+.cardabout2 {
+  width: 1200px;
+  height: 600px;
+  transition: all 0.2s;
+  position: relative;
+  cursor: pointer;
+  justify-content: center;
+  margin-left: 16vw;
+}
 .cardabout {
     width: 1500px;
     height: 600px;
@@ -1102,6 +1125,8 @@ align-items: center;
     backdrop-filter: blur(10px);
     border-radius: 8px;
   }
+
+  
   .fit1{
     width: 100%;
     height: 100%;
@@ -1581,12 +1606,16 @@ align-items: center;
 }
 
 .food{
-  height: 800px;
-  width: 1200px;
-  margin-left: 14vw;
+  height: 900px;
+  width: 100%;
+  margin-left: 17vw;
+  
  
 }
-
+.hometitle-f{
+  margin-left: 3vw;
+  width: 800px;
+}
 
 .titl-head{
   text-align: center;

@@ -20,6 +20,7 @@
         <form class="d-flex" role="search">
             {% if request.user.is_authenticated %} 
             <a class="nav-link mt-3 px-3" href="{% url 'accounts:user_profile' request.user.username %}" style="color: rgb(149, 99, 69);text-transform: capitalize;">WELCOME ✦{{request.user.username }}✦ </a>
+
              {% endif %}
             <button class="btn"><a href="#section1" class="d-flex btn btn-outline-warning">About Us</a></button>
             <button class="btn"><a href="{% url 'accounts:sign_in' %}" class="d-flex btn btn-outline-warning">Sign In</a></button>

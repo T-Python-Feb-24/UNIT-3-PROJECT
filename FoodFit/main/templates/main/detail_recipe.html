@@ -27,13 +27,14 @@
  </div>
  </div>
 
+{% if request.user.is_staff %}
 <div class="row">
 <div class="col-md-4 d-flex justify-content-center align-items-center">
 <a href="{% url 'main:update_recipe_page' recipe.id %}" class="btn btn-primary">update</a>
 <a href="{% url 'main:delete_recipe_view' recipe.id %}" class="btn btn-danger">Delete</a>
 </div>
 </div>
-
+{% endif %}
 
 <div class="row ml-5 mt-5">
 <div class="user-recipe-box">

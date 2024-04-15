@@ -37,10 +37,10 @@
 <div class="user-recipe-box">
 <div class=" user-recipe-detial col mt-1 md-10 ">
 
-        
+        {% if request.user.id == recipe.user.id %}
         <a href="{% url 'interactive:update_recipe_page' recipe.id %}" class="btn btn-primary">update</a>
         <a href="{% url 'interactive:delete_recipe_view' recipe.id %}" class="btn btn-danger">Delete</a>
-        
+        {% endif %}
         
         <h4 class=" nut mt-5"><strong>{{recipe.title}}</strong></h4>
         
@@ -114,6 +114,8 @@
     <div class="cr">
       <dd class="dd">{{ comment.created_at}}</dd>
     </div>
+    <br>
+     
   </dl>
 </div>
 </div>

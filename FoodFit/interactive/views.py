@@ -13,8 +13,10 @@ def users_recipe(request: HttpRequest):
 
 
 def add_user_recipe(request: HttpRequest ):
+  if not request.user.is_authenticated:
+    return redirect('accounts:login_user_view')
 
-    if request.method =="POST":
+  if request.method =="POST":
         try:
             new_recipe=UserRecipe(
             user=request.user,
@@ -34,11 +36,13 @@ def add_user_recipe(request: HttpRequest ):
             print(e)
         return redirect('main:home')
 
-    return render(request ,"main/add_user_recipe.html" , { "category" : UserRecipe.categories.choices})
+  return render(request ,"main/add_user_recipe.html" , { "category" : UserRecipe.categories.choices})
 
 
 
 def user_recipe_detail(request: HttpRequest , recipe_id):
+    if not request.user.is_authenticated:
+     return redirect('accounts:login_user_view')
  
     try:
         recipe=UserRecipe.objects.get(pk=recipe_id)
@@ -56,8 +60,8 @@ def user_recipe_detail(request: HttpRequest , recipe_id):
 
 
 def delete_recipe (request:HttpRequest , recipe_id):
-  #if not request.user.is_staff:
-    #return render(request, "main/no_permission.html")
+  if not request.user.is_authenticated:
+    return redirect('accounts:login_user_view')
   try:
     recipe=UserRecipe.objects.get(pk=recipe_id)
     recipe.delete()
@@ -71,6 +75,8 @@ def delete_recipe (request:HttpRequest , recipe_id):
 
 
 def update_recipe (request:HttpRequest,recipe_id):
+    if not request.user.is_authenticated:
+     return redirect('accounts:login_user_view')
     recipe=UserRecipe.objects.get(pk=recipe_id)
 
     if request.method == "POST":
@@ -93,10 +99,10 @@ def update_recipe (request:HttpRequest,recipe_id):
 
 
 def comments(request:HttpRequest , recipe_id):
-  #if not request.user.is_authenticated:
-        #return redirect('accounts/login_user_view')
+  if not request.user.is_authenticated:
+    return redirect('accounts:login_user_view')
 
-    if request.method == "POST":
+  if request.method == "POST":
         recipe_comment=UserRecipe.objects.get(pk=recipe_id)
         comments=UserComment(recipe=recipe_comment,
         user=request.user,
@@ -104,4 +110,13 @@ def comments(request:HttpRequest , recipe_id):
         )
         comments.save()
 
-    return redirect('interactive:user_recipe_detail_page' , recipe_id=recipe_comment.id)
+  return redirect('interactive:user_recipe_detail_page' , recipe_id=recipe_comment.id)
+
+def delte_comment (request:HttpRequest ,com_id):
+   try:
+     comment=UserComment.objects.get(pk=com_id)
+     comment.delete()
+   except Exception as e:
+    print(e)
+
+   return redirect('interactive:users_recipe_page')

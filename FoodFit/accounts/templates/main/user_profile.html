@@ -100,12 +100,12 @@
         
 
 
-
+<h4 class="titl-head2" >{{user.username }}'s Favorites </h4>
 
 <div class="row">
-<h4>{{user.username }}'s Favorites Users Recipes</h4>
+
 <div class="col-md-6 order-1">
-    
+    <h4 class="titl-head"> Users Recipes</h4>
     <div class=" row profile-box2">
         {% for favorite in user.favorite_set.all %}
         <div class=" v col-4">
@@ -120,6 +120,7 @@
     </div>
 
     <div class="col-md-6 order-2">
+    <h4 class="titl-head"> Foodie Recipes</h4>
     <div class="row profile-box2">
         {% for favorite in user.recipefavorite_set.all %}
         <div class=" v col-2">
@@ -136,20 +137,35 @@
 
 
 
+<h4 class="titl-head2" >{{user.username }}'s Activities </h4>
+<div class="row">
 
+<div class="col-md-6 order-1">
+    <h4 class="titl-head">{{user.username }}'s Shared Recipes</h4>
+    <div class=" row profile-box2">
+        {% for recipe in recipes %}
+        <div class=" v col-4">
+            <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
+                <img class="card-fav-img "src="{{ recipe.image.url }}"  class="w-100 rounded-4  "/>
+                <h6 class="">{{ recipe.category }}</h6>
+                <h2><a href="{% url 'interactive:user_recipe_detail_page' recipe.id  %}" class="text-decoration-none">{{recipe.title}}</a></h2>   
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
 
-
-
-
+    <div class="col-md-6 order-2">
 
 <div class="row md-6">
-<h1>{{user.username }} comments</h1>
-<div class="profile-box">
+<h4 class="titl-head">{{user.username }} comments</h4>
+<div class="profile-box2">
 
 
 {% for comment in user.usercomment_set.all %}
 <div class="col mt-2">
 <div class="p-card22">
+
   <div class="header11">
     <div>
       <h5 class="title11"><a href="{% url 'interactive:user_recipe_detail_page' comment.recipe.id  %}" class="text-decoration-none">{{comment.recipe.title}}</a></h5>
@@ -161,7 +177,10 @@
   <dl class="post-info">
     <div class="cr">
       <dd class="dd">{{ comment.created_at}}</dd>
-    </div>
+    </div><br>
+    {% if request.user.id == comment.user.id %}
+        <a href="{% url 'interactive:delete_comment_view' comment.id %}" class="btn btn-danger">Delete</a>
+        {% endif %}
   </dl>
 </div>
 </div>
@@ -169,6 +188,12 @@
 
 
 </div>
+
+    
+ </div>
+    </div>
+   
+
 
 
     </div><!---->

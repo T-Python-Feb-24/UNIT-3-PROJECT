@@ -16,7 +16,7 @@ urlpatterns  = [
    path("user/message/",views.user_message,name="user_message_page"),
    path("delete/<msg_id>/message/",views.delete_message,name="delete_message_view"),
    path("comments/<recipe_id>/",views.comments,name="comments_view"),
-
+   path("not/allowed/",views.allowed,name="not_allowed_page"),
    path("search/food/",views.search_food,name="search_food_page"),
 
 

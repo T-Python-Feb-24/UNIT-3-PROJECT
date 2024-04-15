@@ -1,11 +1,17 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 
 
 
  {% block content %}
 
+<div class="food row">
+<div class="col-md-12">
+<img class="food" src=" {% static 'images/home.webp'%}">
+</div>
+</div>
 
+<br><br><br><br>
 <div class="cardabout">
   <div class="circle"></div>
   <div class="circle"></div>
@@ -102,7 +108,7 @@
 <dive class="overly">
   <div class="box1"> 
   
-  <h1>Search food you like to find calorie<h2>
+  <h1>Search food you like to find calories<h2>
   <br><br>
    <a href="{% url 'main:search_food_page'%}" class=" b btn ">Search Food</a>
   </div>

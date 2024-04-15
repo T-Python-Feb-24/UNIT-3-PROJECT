@@ -10,5 +10,6 @@ urlpatterns = [
     path("user/<recipe_id>/comment",views.comments,name="comments_view"),
     path("update/<recipe_id>/recipe/",views.update_recipe,name="update_recipe_page"),
     path("delete/<recipe_id>/recipe/",views.delete_recipe,name="delete_recipe_view"),
+    path("delete/<com_id>/comment/",views.delte_comment,name="delete_comment_view"),
 
 ]

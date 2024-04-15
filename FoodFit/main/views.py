@@ -10,8 +10,6 @@ from django.contrib import messages
 
 def home(request:HttpRequest):
 
-  #if request.user.is_authenticated:
-     #print(request.user.first_name)
   recipes = Recipe.objects.order_by("-quantity")[0:3]
   return render(request,"main/Home.html",{"recipes":recipes})
 
@@ -28,8 +26,8 @@ def all_recipe(request: HttpRequest):
 
 
 def add_recipe (request:HttpRequest):
-  #if not request.user.is_staff:
-      #return None
+  if not request.user.is_staff:
+      return redirect('main:not_allowed_page')
     
   if request.method =="POST":
         try:
@@ -39,6 +37,9 @@ def add_recipe (request:HttpRequest):
             ingredients=request.POST["ingredients"],
             quantity=request.POST["quantity"],
             fat=request.POST["fat"],
+            sugar=request.POST["sugar"],
+            sodium=request.POST["sodium"],
+            potassium=request.POST["potassium"],
             protien=request.POST["protien"],
             carb=request.POST["carb"],
             calories=request.POST["calories"],
@@ -47,6 +48,7 @@ def add_recipe (request:HttpRequest):
             )
 
             new_recipe.save()
+            return redirect('main:all_recipe_page')
 
         except Exception as e:
             print(e)
@@ -58,6 +60,8 @@ def add_recipe (request:HttpRequest):
 
 
 def update_recipe (request:HttpRequest,recipe_id):
+    if not request.user.is_staff:
+      return redirect('main:not_allowed_page')
     recipe=Recipe.objects.get(pk=recipe_id)
 
     if request.method == "POST":
@@ -67,6 +71,9 @@ def update_recipe (request:HttpRequest,recipe_id):
          recipe.ingredients=request.POST["ingredients"]
          recipe.quantity=request.POST["quantity"]
          recipe.fat=request.POST["fat"]
+         recipe.sugar=request.POST["sugar"]
+         recipe.sodium=request.POST["sodium"]
+         recipe.potassium=request.POST["potassium"]
          recipe.protien=request.POST["protien"]
          recipe.carb=request.POST["carb"]
          recipe.calories=request.POST["calories"]
@@ -86,8 +93,8 @@ def update_recipe (request:HttpRequest,recipe_id):
 
 
 def delete_recipe (request:HttpRequest , recipe_id):
-  #if not request.user.is_staff:
-    #return render(request, "main/no_permission.html")
+  if not request.user.is_staff:
+      return redirect('main:not_allowed_page')
   try:
     recipe=Recipe.objects.get(pk=recipe_id)
     recipe.delete()
@@ -148,16 +155,16 @@ def contact_us (request:HttpRequest):
 
 
 def user_message (request:HttpRequest):
-  #if not request.user.is_superuser:
-    #return render(request, "main/no_permission.html")
+  if not request.user.is_superuser:
+    return redirect('main:not_allowed_page')
     
-    messages=Contact.objects.all()
-    return render(request,"main/user_message.html" , {"messages" : messages})
+  messages=Contact.objects.all()
+  return render(request,"main/user_message.html" , {"messages" : messages})
 
 
 def delete_message (request:HttpRequest , msg_id):
-  #if not request.user.is_superuser:
-    #return render(request, "main/no_permission.html")
+  if not request.user.is_superuser:
+    return redirect('main:not_allowed_page')
   try:
     contact=Contact.objects.get(pk=msg_id)
     contact.delete()
@@ -171,10 +178,10 @@ def delete_message (request:HttpRequest , msg_id):
 
 
 def comments(request:HttpRequest , recipe_id):
-  #if not request.user.is_authenticated:
-        #return redirect('accounts/login_user_view')
+  if not request.user.is_authenticated:
+    return redirect('accounts:login_user_view')
 
-    if request.method == "POST":
+  if request.method == "POST":
         recipe_comment=Recipe.objects.get(pk=recipe_id)
         comments=Comment(recipe=recipe_comment,
         user=request.user,
@@ -182,7 +189,7 @@ def comments(request:HttpRequest , recipe_id):
         )
         comments.save()
 
-    return redirect('main:detail_recipe_page' , recipe_id=recipe_comment.id)
+  return redirect('main:detail_recipe_page' , recipe_id=recipe_comment.id)
 
 
 
@@ -190,6 +197,8 @@ def comments(request:HttpRequest , recipe_id):
 
 
 def search_food(request: HttpRequest):
+ if not request.user.is_authenticated:
+    return redirect('accounts:login_user_view')
  recipes = Recipe.objects.order_by("-quantity")[0:3]
  if request.method == "POST":
   query=request.POST['query']
@@ -206,3 +215,7 @@ def search_food(request: HttpRequest):
  else:
   return render(request,"main/search_food.html" ,{"query" :"enter vaild input" , "recipes":recipes })
  
+
+
+def allowed(request: HttpRequest):
+   return render(request,"main/allow.html")

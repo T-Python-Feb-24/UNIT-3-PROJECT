@@ -6,7 +6,7 @@
  {% block content %}
 
   <div class=" contact-row row ">
-  <article class="ccard-form3  ">
+  <article class="ccard-form5">
   <div class="im">
   <div class="card-img-form">
     <img class="card-img-form " src="{% static 'images/updaterecipe.jpg'%}" class="card-img-top" alt="...">
@@ -38,6 +38,18 @@
     <div class="form-group ">
       <label >Fat</label>
       <input type="number" class="form-control" name="fat" value="{{ recipe.fat }}">
+    </div>
+    <div class="form-group ">
+      <label >sugar</label>
+      <input type="number" class="form-control" name="sugar" value="{{ recipe.sugar }}">
+    </div>
+    <div class="form-group ">
+      <label >sodium</label>
+      <input type="number" class="form-control" name="sodium" value="{{ recipe.sodium }}" >
+    </div>
+    <div class="form-group ">
+      <label >potassium</label>
+      <input type="number" class="form-control" name="potassium" value="{{ recipe.potassium }}" >
     </div>
     <div class="form-group ">
       <label >Protien</label>

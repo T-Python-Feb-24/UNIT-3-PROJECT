@@ -4,10 +4,10 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.models import User
 #import login, logout, authenticate
 from django.contrib.auth import authenticate, login, logout 
-from main.models import Comment 
 from .models import Profile
 from django.db import transaction
 from django.contrib import messages
+from interactive.models import UserRecipe
 
 # Create your views here.
 
@@ -69,12 +69,16 @@ def logout_user_view(request:HttpRequest ):
 
 
 def user_profile(request:HttpRequest , user_id):
+    if not request.user.is_authenticated:
+     return redirect('accounts:login_user_view')
     try:
         user=User.objects.get(id=user_id)
+        recipes=UserRecipe.objects.filter(user=user_id).exclude(id=user_id)
+        
     except:
         user=None
 
-    return render(request, "main/user_profile.html", {"user":user})
+    return render(request, "main/user_profile.html", {"user":user , "recipes":recipes})
 
 
 

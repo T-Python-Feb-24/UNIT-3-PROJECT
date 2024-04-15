@@ -782,7 +782,7 @@ align-items: center;
     margin-top: 1vw;
     margin-left: 84vw;
     display: flex;
-    background-color: #30344c;
+    background-color: #308050;
     justify-content: center;
     align-items: center;
     color: #fdf0ea;
@@ -1115,7 +1115,7 @@ align-items: center;
   .circle {
     width: 300px;
     height: 300px;
-    background: repeating-linear-gradient(48deg, #1de137 0%, #6d86a3 100%);
+    background: repeating-linear-gradient(48deg, #1de137 0%, #ffc990 100%);
     border-radius: 35% 30% 75% 30% / 49% 30% 70% 51%;
     position: absolute;
     animation: move-up6 2s ease-in infinite alternate-reverse;
@@ -1251,7 +1251,7 @@ align-items: center;
     margin-left: 3vw;
     margin-bottom: 1vw;
     max-width: 950px;
-    height: 130px;
+    height: 150px;
     position: relative;
     display: block;
     overflow: hidden;
@@ -1366,6 +1366,17 @@ align-items: center;
     color: black;
     width: 1000px;
     max-height: 1200px;
+    border-radius: 30px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+  .ccard-form5 {
+    margin-top: 3vw;
+    margin-left: 5vw;
+    background-color: white;
+    color: black;
+    width: 1000px;
+    max-height: 1400px;
     border-radius: 30px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
       rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
@@ -1560,4 +1571,34 @@ align-items: center;
     background-color: rgba(244, 252, 248, 0.5);
     margin-left: 2vw;
     
+}
+
+.food{
+    height: 1000px;
+    width: 1500px;
+    margin-left: 6vw;
+}
+
+.titl-head{
+  text-align: center;
+  background-color: #c3a076;
+  width: 400px;
+  height: 60px;
+  margin-top: 2vw;
+  padding-top: 1vw;
+  color: #f3f3f4;
+  border-radius: 50px;
+  margin-left: 6vw;
+}
+
+.titl-head2{
+  text-align: center;
+  background-color: #241e14;
+  width: 400px;
+  height: 60px;
+  margin-top: 2vw;
+  padding-top: 1vw;
+  color: #f3f3f4;
+  border-radius: 10px;
+  margin-left: 25vw;
 }

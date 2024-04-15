@@ -24,7 +24,7 @@
 
 <div class="logo">
 
-    <span><p class="logo-text"href="/" >logo</p></span></div>
+    <span><p class="logo-text"href="/" ><strong>Foodie</strong></p></span></div>
 
 <nav class="navbar">
 
@@ -41,8 +41,14 @@
     <li><a href="{% url 'interactive:add_user_recipe_page' %}" class="dropdown-item" >Add your recipe</a></li>
   </ul>
 </div>
-<a href="{% url 'main:contact_us_page' %}"  class="gap2">Contact us</a>
+{% if request.user.is_staff %}
+<a href="{% url 'main:add_recipe_page' %}"  class="gap2">Add Recipe</a>
+{% endif %}
 
+{% if request.user.is_superuser %}
+<a href="{% url 'main:user_message_page' %}"  class="gap2">Messages</a>
+<a href="{% url 'main:contact_us_page' %}"  class="gap2">Contact us</a>
+{% endif %}
 </nav> 
 
 <div class="btn-group shadow-0">
@@ -76,9 +82,37 @@ account_circle</span> </button>
 {% block content %}
 
 {% endblock %}
+<br><br><br><br><br><br>
+<hr>
+<section class="mt-5">
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #0000;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: CTA -->
+      <section class="">
+        <p class="d-flex justify-content-center align-items-center">
+        {% if not request.user.is_authenticated %} 
+          <span class="nut3 me-3">Register for free</span>
+          <button data-mdb-ripple-init type="button" class="b btn btn-outline-light btn-rounded">
+            <a href="{% url 'accounts:register_user_view' %}" >Sign up!</a>
+          </button>
+        </p>
+        {% endif %}
+      </section>
+      <!-- Section: CTA -->
+    </div>
+    <!-- Grid container -->
 
-
-
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2024 All Copyright Saved By: 
+      <a class="text-white" href="/">Foodie.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</section>
 
 
 

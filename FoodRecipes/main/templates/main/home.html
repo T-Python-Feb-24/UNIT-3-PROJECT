@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% block title %}Food Recipes{% endblock %}
+
+{% block style %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="home ">
+        <div class="row" style="text-align: center; margin-top: 200px;  background-color: rgba(249, 249, 255, 0.7); padding: 33px; margin-left: 250px; margin-right: 250px;">
+            <div class="col" >
+                <h1>Flavors of the World</h1>
+                <h3>Exploring Culinary Diversity Through Food Recipes</h3>
+            </div>
+        </div>
+</div>
+<section>
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center mt-5" style="padding-left: 450px;">
+        <div class="col-11 ">
+          <h1 class="fw-light text-blak mb-0 ">About</h1>
+          
+        </div>
+        
+      </div>
+      <h2 class="lead text-blak mt-3 ">Food recipes offer a window into the fascinating world of culinary arts, reflecting the diversity,creativity,and cultural richness of various cuisines worldwide.Whether it's exploring traditional dishes passed down through generations or experimenting with modern fusion recipes, food recipes serve as a gateway to discovering new flavors, ingredients, and cooking techniques.They provide an opportunity to explore different cultures,traditions,and culinary histories while inviting individuals to express their creativity and share their love for food with others.In essence, food recipes embody the joy of cooking,the pleasure of sharing meals, and the endless possibilities of culinary exploration.</h2>
+      <div class="d-flex justify-content-between align-items-center ">
+        <div class="col-10 mt-5 ">
+          <h2 class="fw-light text-blak mb-0 " style="padding-left: 450px;">Explore recipes</h2>
+          
+        </div>
+        
+      </div>
+      
+          
+    </div>
+</section>
+<section>
+  <div class="container mt-5">
+    <div class="row g-5">
+
+      {% for rec in recipes %}
+          <div class="col-4">
+              <div class="d-flex flex-column gap-2 border border-1 shadow p-3  h-100">
+                  <img src="{{ rec.image.url }}"  class="w-100 "/>
+                  <h2><a href="{% url 'main:detail_recipes' rec.id  %}" class="text-decoration-none text-black">{{rec.name }}</a></h2>
+                  <h3><a href="{% url 'accounts:user_profile' rec.user.id %}" class="text-decoration-none text-black"> {{rec.user.username}}</a></h3>
+                  <h6 class="cat pt-1 pb-1 rounded-pill {{ rec.category }}" style="width: 100px; background-color: rgb(116, 233, 174); text-align: center;">{{ rec.category }}</h6>
+                  <h6 class="text-muted">{{ rec.published_at }}</h6>
+              </div>
+          </div>
+          
+      {% endfor %}
+    </div>
+    <div class="col-12 mt-5">
+      <a href="{% url 'main:all_recipes' %}" style="text-decoration: none; color: #000; padding-left: 1000px;"  class="d-inline-block ">View Recipes<span class="material-symbols-outlined align-middle">
+        arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

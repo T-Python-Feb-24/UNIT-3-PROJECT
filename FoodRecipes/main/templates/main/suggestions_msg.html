@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% block title %}{% endblock %}
+
+{% block style %}
+<style>
+    
+</style>
+{% endblock %}
+
+
+{% block content %}
+<section style="margin-left: 180px;">
+    <div class="container ">
+        <h1 class="fw-light text-blak mb-5 mt-5 ">Suggestions from users</h1>
+        <div class="row gap-2">
+            {% for sug in msg %}
+            <div class="col-5 justify-content-between d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100 mb-5 " style="background-color: rgb(176, 228, 158); ">
+                <h4>{{sug.user.username}}</h4>
+                <p>{{sug.Recipes.name}}</p>
+                <p> {{sug.content}}</p>
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

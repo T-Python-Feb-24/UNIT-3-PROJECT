@@ -1,0 +1,170 @@
+{% extends 'main/base.html' %}
+{% block title %}Ditail Recipes{% endblock %}
+
+{% block style %}
+<style>
+    .checked {
+      color: orange;
+    }
+    .favorite {
+    font-size: 1.6rem;
+    color: red;
+    
+
+}
+
+</style>
+{% endblock %}
+{% block content  %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="{{ recipes.image.url }}"  class="mp-5" style="width: 500px; margin-top: 100px; margin-left: 20px; margin-bottom: 20px;"/>
+                
+
+            </div>
+            <div class="col">
+                <div class="d-flex flex-column gap-2 mt-4">
+                    
+                    <h1>{{ recipes.name  }}</h1>
+                    <h6 class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{recipes.categroy}}" style="width: 100px; text-align: center; background-color: rgb(116, 233, 174);">{{ recipes.category}}</h6>
+                    <p style="white-space: pre-line;">{{ recipes.content }}</p>
+                    <p>{{recipes.time_coocking}}</p>
+                    <p>{{recipes.number_people}}</p>
+                    <h6>{{recipes.published_at}}</h6>
+                    
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'favorites:add_remove_favorites' recipes.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %} favorite"></i></a>
+                        {% if request.user.is_staff %} 
+                            <a href="{% url 'main:update_recipes' recipes.id %}" class="btn btn mt-3 mp-5" style="background-color: rgb(51, 150, 24);">update</a>
+                            <a href="{% url 'main:delete_recipes' recipes.id %}" class="btn btn mt-3 mp-5"  style="background-color: rgb(51, 150, 24);">Delete</a>
+
+                        {% endif %}
+                       
+                    </div>
+                    
+                    <div class=" modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+            
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Favorite</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Please Login to add a Favorite
+                              </div>
+                            
+                            <div class="modal-footer ">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                    
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+
+        </div>   
+            
+    
+       
+
+    <div class="row mt-4">
+        <div class="col-6">
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'main:add_comment' recipes.id %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <label for="content mt-5">Enter your comment:</label><br>
+
+                <div class="star-rating">
+                    <input class="radio-input" type="radio" id="star5" name="evaluation" value="5" />
+                    <label class="radio-label" class for="star5" title="5 stars">5 stars</label>
+
+                    <input class="radio-input" type="radio" id="star4" name="evaluation" value="4" />
+                    <label class="radio-label" for="star4" title="4 stars">4 stars</label>
+
+                    <input class="radio-input" type="radio" id="star3" name="evaluation" value="3" />
+                    <label class="radio-label" for="star3" title="3 stars">3 stars</label>
+
+                    <input class="radio-input" type="radio" id="star2" name="evaluation" value="2" />
+                    <label class="radio-label" for="star2" title="2 stars">2 stars</label>
+
+                    <input class="radio-input" type="radio" id="star1" name="evaluation" value="1" />
+                    <label class="radio-label" for="star1" title="1 star">1 star</label>
+
+                </div>
+                <input type="text" name="content" class="form-control" placeholder="comment">
+
+                <input type="submit" value="Add Comment" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
+            </form>
+            {% else %}
+            <div class="alert alert-warning">You must <a href="{% url 'accounts:login_user' %}">Sign in</a></div>
+            {% endif %}
+            
+            
+            
+        </div>
+
+        <div class="col-6  mt-5" id="commentDetail">
+
+            {% for comment in comments %}
+
+                    <div class="border rounded-4 mt-2 mb-3 d-flex flex-column p-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <!-- <img src="" alt="" width="40" height="40"> -->
+                            <h4 class="pt-3">{{ comment.user.username}}</h4>
+                        </div>
+                        <p class="com-date">{{comment.comment_date}}</p>
+                        
+                        <div>
+                            <span class="fa fa-star {% if comment.evaluation >= 1 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 2 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 3 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 4 %} checked {% endif %}"></span>
+                            <span class="fa fa-star {% if comment.evaluation >= 5 %} checked {% endif %}"></span>
+                        </div>
+                        <p class="com-p">{{ comment.content }}</p>
+                    </div>
+
+            {% endfor %}
+    </div>
+
+        <!-- <div class="col-6 d-flex flex-column gap-4 mt-5 "  style="padding-right: 100px; justify-content: space-between;" id="comments">
+        
+                    
+            {% for comment in comments %} 
+                <div class="d-flex flex-column gap-2 shadow p-3 ">
+                    <a href="{% url 'accounts:user_profile' comment.user.id %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+
+        </div> -->
+    </div>
+
+    
+
+
+    <div class="row mt-4">
+        <div class="col-6">
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'main:suggestions' recipes.id %}" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+                <label for="content mt-5">Add your suggestion for the chef:</label><br>
+                <input type="text" name="content" class="form-control" placeholder="suggestions" />
+
+                <input type="submit" value="Add suggestion" class="btn btn" style="background-color: rgb(161, 215, 145);"/>
+            </form>
+            {% else %}
+            
+            {% endif %}
+
+        </div>
+    </div>
+    </div>
+</section>
+{% endblock content %}

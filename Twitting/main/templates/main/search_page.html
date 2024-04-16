@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Blogger Website {% endblock %}
+
+
+{% block content %}
+
+    <div class="row g-4">
+
+        <div class="d-flex flex-column gap-2">
+            
+            <h1>Search</h1>
+            <form action="{% url 'main:posts_search_view' %}"  method="get" class="d-flex gap-2">
+                <input type="search" class="form-control" name="search" value="{{request.GET.search}}"/>
+                <input type="date" class="form-control" name="date" value="{{request.GET.date}}"/>
+                <input type="submit" value="search" class="btn btn-primary" />
+            </form> 
+
+            <h2>Search results for {{ request.GET.search }} ({{ posts.count }}) </h2>
+        </div>
+
+    </div>
+
+    <div class="row mt-2 g-5">
+
+        {% if posts.count == 0 %}
+            <h3>No results for your search '{{request.GET.search}}' </h3>
+        {% endif %}
+
+        {% for post in posts %}
+            <div class="col-4">
+                <div class="d-flex flex-column gap-2 border border-1 shadow p-3 rounded-4 h-100">
+                    <h5><a href="{% url 'main:post_detail_view' post.id  %}" class="text-decoration-none">{{post.content}}</a></h5>
+                    <img src="{{ post.poster.url }}"  class="w-100 rounded-4 card-poster "/>
+                    <h6 class="text-muted">{{ post.published_at }}</h6>
+                    
+                </div>
+            </div>
+            
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

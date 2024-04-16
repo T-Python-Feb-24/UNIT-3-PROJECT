@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <h1>Add new post</h1>
+        <div class="col">
+
+            <form action="{% url 'main:add_post_view' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+
+                <textarea name="content" class="form-control" ></textarea>
+
+                <h5>Choose Image:</h5>
+                <input name="poster"  type="file"  accept="image/*" class="form-control"/>
+
+                <input type="submit" class="btn btn-primary" value="Add Post" />
+            </form>
+
+        </div>
+
+
+    </div>
+{% endblock %}

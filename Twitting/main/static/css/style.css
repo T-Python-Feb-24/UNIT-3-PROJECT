@@ -1,0 +1,62 @@
+
+.main {
+  min-height: 80vh;
+}
+.hero {
+  height: 200px;
+  object-fit: cover;
+}
+
+p {
+  white-space: pre-line;
+}
+
+.cat {
+  background-color: rgb(135, 135, 135);
+  color:white;
+  align-self: flex-start;
+}
+
+.All {
+  background-color: rgb(39, 38, 39);
+}
+
+.General {
+  background-color: rgb(21, 124, 155);
+}
+
+.Tech {
+  background-color: orangered;
+}
+
+.Fashion {
+  background-color: purple;
+}
+
+.Science {
+  background-color: darkolivegreen;
+}
+
+.thumb {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.card-poster {
+  height: 250px;
+  object-fit: cover;
+}
+
+
+.avatar {
+  height: 200px;
+  max-width: 200px;
+  object-fit: cover;
+}
+
+.favorite {
+  font-size: 1.6rem;
+  color: red;
+}

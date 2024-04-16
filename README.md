@@ -5,20 +5,19 @@
 Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
 
 
-## barbar shop
-a platform for claints to make appointments.
+## Twitting
+a platform for users to make posts about anything.
 
 ## Features List here
-- claint can make personal account.
-- barber can make accounts.
+- user can make personal account..
 - manager can manage accounts.
-- clint can choose a service.
-- clint can choose a barber.
+- user can make a post.
+- user can make a comment.
 
 ## User Stories, Wireframes & UML links
-- User stories document link here.
+- User stories document link here:https://docs.google.com/document/d/1TBOV1yS3RjNb-QZpYHw2oiAYzLkJE55YW0M4nHXrMIo/edit?usp=sharing
 
-- wireframe link here: https://www.figma.com/file/XSCX0ysWYgy4EwM6RbofOH/Wireframing-(Copy)?type=design&node-id=0-1&mode=design&t=wZsKJhbinb7YbunS-0
+- wireframe link here: https://docs.google.com/document/d/16ShrW2OXfiG8oZhNnZeHTxE-1bmjwBJ1Fknpxt6PEaU/edit?usp=sharing
 
 - UML link here: https://lucid.app/lucidchart/3c2cb493-189e-4bbe-9436-93c84f98c25c/edit?beaconFlowId=A84703D4815EB80C&invitationId=inv_81be11d2-c4e1-443e-8c4b-554e988961d8&page=HWEp-vi-RSFO#
 

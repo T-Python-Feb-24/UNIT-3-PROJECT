@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <div class="row">
+        
+        <div class="col">
+            <div class="d-flex flex-column gap-2">
+                <p>{{ post.content }}</p>
+                <img src="{{ post.poster.url }}"  class="w-100 rounded-4"/>
+                <div class="d-flex justify-content-between">
+                    
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'main:update_post_view' post.id %}" class="btn btn-primary">update</a>
+                        <a href="{% url 'main:delete_post_view' post.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                    
+                </div>
+                <h6>{{post.published_at}}</h6>
+            </div>
+        </div>
+
+
+    </div>
+
+    <hr/>
+
+    <h2>Comments ({{ comments.count }}):</h2>
+
+    <div class="row" id="commentsDiv">
+        <div class="col d-flex flex-column gap-4">
+
+            {% for comment in comments %}
+                <div class="d-flex flex-column gap-2 shadow p-3 ">
+                    <a href="{% url 'accounts:user_profile_view' comment.user.username %}" class="text-decoration-none"><h4>{{ comment.user.username }}</h4></a>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col">
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'main:add_comment_view' post.id %}" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+                <textarea name="content" class="form-control" placeholder="comment"></textarea>
+
+                <input type="submit" value="Add Comment" class="btn btn-primary"/>
+            </form>
+            {% else %}
+            <div class="alert alert-warning">You must <a href="{% url 'accounts:login_user_view' %}">Sign in</a> to comment.</div>
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

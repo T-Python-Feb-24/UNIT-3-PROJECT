@@ -1,0 +1,154 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} TaskMinder {% endblock %}
+
+
+{% block content %}
+
+    <!-- Checkbox -->
+
+<!-- <section>
+
+checkbox 
+
+        <label>
+            <input type="checkbox" id="myCheckbox">
+            <span id="myText">Text</span>
+        </label>
+
+</section> -->
+
+
+
+
+    <!-- Navbar  -->
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
+        </div>
+    </nav>
+
+
+
+    <!-- SideBar  -->
+
+    <div class="sidebar">
+        <ul>
+            <li>
+            {% if request.user.is_authenticated %} 
+              <a class="nav-link mt-5" href="#" style="color: rgb(149, 99, 69);text-transform: capitalize;">WELCOME<br>✦{{request.user.username }}✦</a>
+            {% endif %}
+            <li><button class="btn mt-3"><a href="{% url 'accounts:user_profile' request.user.username %}">MY PROFILE</a></button></li>
+
+            
+            </li>
+            <li><button class="btn"><a href="{% url 'main:dashboard' %}">TASKS</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:journal' %}">JOURNAL</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:reading_list' %}">READING LIST</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:notes' %}">NOTES</a></button></li>
+            <li><button class="btn"><a href="{% url 'main:yearly_goals' %}">YEARLY GOALS</a></button></li>
+
+            <hr class="m-3">
+            <li><button class="btn logout"><a href="{% url 'accounts:logout_user' %}">LOGOUT</a></button></li>
+        </ul>
+    </div>
+
+
+    <!-- Add Tasks  -->
+
+
+    <section style="display: flex; justify-content: center; text-align: center; ">
+        <div>
+            <h1>Task Manager</h1><br>
+                <hr><br>
+
+                <form id="taskForm" method="POST" action="{% url 'main:tasks' %}">
+                    {% csrf_token %}
+                <label for="taskTitle">Task Title</label>
+                <input type="text" id="taskTitle" style="border-radius: 20px; padding: 5px 20px;" name="title" required>
+
+                <label for="taskDeadline">Deadline</label>
+                <input type="date" id="taskDeadline" style="border-radius: 20px; padding: 5px 20px;" name="due_date" required>
+
+                <label for="taskDescription">Description</label>
+                <textarea id="taskDescription" style="border-radius: 20px; text-align: center;" name="description"></textarea>
+
+                <input type="submit" class="btn btn-warning" value="Add Task" >
+                </form>
+        </div>
+    </section> 
+
+    <section style="display: flex; justify-content: center; text-align: center;">
+        <ul class="task-list">
+
+        </ul>
+    </section> 
+
+
+
+
+    <section style="display: flex; justify-content: center; text-align: center;">
+      <script>
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        tasks.forEach(function(task) {
+        var taskItem = document.createElement("li");
+        taskItem.classList.add("task-item");
+
+        var taskText = document.createTextNode(task.title + " ( Deadline: " + task.deadline + " )  ");
+        taskItem.appendChild(taskText);
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.classList.add("btn", "btn-warning");
+        deleteButton.addEventListener("click", function() {
+            this.parentNode.remove();
+            tasks = tasks.filter(function(t) {
+            return t.title !== task.title;
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        });
+        taskItem.appendChild(deleteButton);
+
+        document.querySelector(".task-list").appendChild(taskItem);
+        });
+
+        // Add a new task
+        document.getElementById("taskForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var taskTitle = document.getElementById("taskTitle").value;
+        var taskDeadline = document.getElementById("taskDeadline").value;
+
+        var taskItem = document.createElement("li");
+        taskItem.classList.add("task-item");
+
+        var taskText = document.createTextNode(taskTitle + " ( Deadline: " + taskDeadline + " )  ");
+        taskItem.appendChild(taskText);
+
+        var deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.classList.add("btn", "btn-warning");
+        deleteButton.addEventListener("click", function() {
+            this.parentNode.remove();
+            tasks = tasks.filter(function(t) {
+            return t.title !== taskTitle;
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        });
+        taskItem.appendChild(deleteButton);
+
+        document.querySelector(".task-list").appendChild(taskItem);
+
+        tasks.push({ title: taskTitle, deadline: taskDeadline });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        document.getElementById("taskTitle").value = "";
+        document.getElementById("taskDeadline").value = "";
+        });
+      </script>
+    </section>
+    
+
+{% endblock %}

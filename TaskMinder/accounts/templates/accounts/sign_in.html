@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<!-- navbar  -->
+
+<nav class="navbar">
+    <div class="container-fluid">
+        <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
+        <form class="d-flex" role="search">
+            <button class="btn"><a href="{% url 'accounts:sign_up' %}" class="d-flex btn btn-outline-warning">Sign Up</a></button>
+        </form>
+    </div>
+</nav>
+<section>
+    {% if msg %}
+    <div class="alert alert-danger">{{msg}}</div>
+    {% endif %}
+    <div class="row">
+        <div class="col-6 d-flex align-items-center justify-content-center">
+            <img src="{% static 'images/sign_in.jpeg' %}" alt="" class="w-100 px-5">
+        </div>
+        <div class="col-5">
+
+            <h1 class="text-center mb-5">Sign In</h1>
+            <form action="{% url 'accounts:sign_in' %}" method="post" class="d-flex flex-column gap-2">
+                {% csrf_token %}
+
+                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+                <hr>
+                <input type="submit" class="btn btn-warning" value="Sign in"/>
+            </form>   
+        </div>
+    </div>
+</section>
+{% endblock %}

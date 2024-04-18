@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<!-- navbar  -->
+
+<nav class="navbar">
+    <div class="container-fluid">
+        <a href="{% url 'main:home_page' %}" class="navbar-brand">TaskMinder</a>
+        <form class="d-flex" role="search">
+            <button class="btn"><a href="{% url 'accounts:sign_in' %}" class="d-flex btn btn-outline-warning">Sign In</a></button>
+        </form>
+    </div>
+</nav>
+
+<!-- Sign Up  -->
+<section>
+
+    {% if msg %}
+        <div class="alert alert-danger">{{msg}}</div>
+    {% endif %}
+    <div class="row">
+        <div class="col-6 d-flex align-items-center ">
+            <img src="{% static 'images/sign_up.jpeg' %}" alt="" class="w-100 p-5 ">
+        </div>
+        <div class="col-5">
+            <h1 class="text-center mb-5">Sign Up</h1>
+            <form action="{% url 'accounts:sign_up' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input name="username" class="form-control" type="text" minlength="3" required placeholder="Username" />
+                <input name="first_name" class="form-control" type="text" minlength="3" required placeholder="First Name" />
+                <input name="last_name" class="form-control" type="text" minlength="3" required placeholder="Last Name" />
+                <input name="email" class="form-control" type="email" minlength="3" required placeholder="Email" />
+                <textarea name="about" class="form-control" placeholder="about yourself"></textarea>
+
+                <h4 class="text-center mb-2 mt-2">Choose Avatar</h4>
+                <input type="file" class="form-control" name="avatar" />
+
+                <input name="password" class="form-control" type="password" minlength="6" required placeholder="Password" />
+
+                <input type="submit" class="btn btn-warning" value="Sign Up" /> 
+                <p>Already have an account? <a href="{% url 'main:sign_in' %" style="text-decoration: none;">Sign in</a></p>
+
+            </form>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

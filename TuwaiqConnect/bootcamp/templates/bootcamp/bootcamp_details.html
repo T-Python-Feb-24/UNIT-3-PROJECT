@@ -1,0 +1,70 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{bootcamp.bootcamp_name}}{% endblock  %}
+
+{% block style %}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+
+{% endblock  %}
+
+
+{% block content  %}
+<section>
+  <div class="container">
+      <div class="row">
+          <div class="col">
+          
+              {{bootcamp.bootcamp_name}}
+              {{bootcamp.desc}}
+              <table >
+                  <tr>
+                    <th>Student Name</th>
+                    <th>Attendence Rate</th>
+                    <th>Grades</th>
+                    <th>Profile</th>
+                  </tr>
+                  {% for student, evaluations in student_evaluations.items %}
+                <tr>
+                  <!-- staff condition to add student evaluation-->
+                  {% if request.user.is_authenticated %}
+                  {% for group in request.user.groups.all %}
+                  {% if group.name == 'student' %}
+                <td><a href="{% url "bootcamp:student_evaluation" bootcamp_id=bootcamp.id student_id=student.id  %}">{{ student.user.first_name }} {{ student.user.last_name }}</a></td>
+                  {% else %}
+                  <td>{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                  {% endif %}
+                  {% endfor %}
+                  {% endif %}
+                {% if evaluations %}
+                  {% for evaluation in evaluations %}
+                    <td>{{ evaluation.attendance_rate }}%</td>
+                    <td>{{ evaluation.grades_rate }}</td>
+                  {% endfor %}
+                {% else %}
+                  <td></td>
+                  <td></td>
+                {% endif %}
+                <td><a href="{% url "student:student_profile" student.user.username%}" class=" button-56" id="profile">click</a> </td>
+              </tr>
+    {% endfor %}    
+          </div>  
+      </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{orgnaization.user.first_name}}{% endblock  %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row">
+                <div class="col">
+                    <img src="{{organization.logo.url}}" class="w-50 border rounded-circle">
+                </div>
+
+                <div class="col-md-6">
+                    {{orgnaization.user.first_name}}
+                    {{organization.about}}
+                </div>  
+        </div>
+    </div>
+
+</section>
+
+{% endblock  %}
+

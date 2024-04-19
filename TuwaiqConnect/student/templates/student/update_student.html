@@ -1,0 +1,63 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %} profile{% endblock  %}
+{% block style %}
+.screenshot{
+    width:300px;
+    hight :300px;
+}
+{% endblock  %}
+
+
+{% block content %}
+<section class="pb-5 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="{% static "images/profile-picture.png" %}" class="w-50 border rounded-circle">
+            </div>
+            <div class="col-md-6">
+                <form  action="{% url "student:update_student" student.user.username %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h2>Update Profile</h2>
+                    <p><strong>College Name:</strong> <input type="text" name="college_name" value="{{ student.collage_name }}"></p>
+                    <p><strong>Graduation Year:</strong> <input type="number" name="graduation_year" value="{{ student.graduation_year }}"></p>
+                    <p><strong>Major:</strong> <input type="text" name="major" value="{{ student.major }}"></p>
+                    <p><strong>GPA:</strong> <input type="text" name="GPA" value="{{ student.GPA }}"></p>
+                    <p><strong>Email:</strong><input type="email" name ="email" value="{{student.user.email}}">
+                    <p><strong>CV:</strong> <input type="file" name="cv"></p>
+                    <button type="submit">Update Profile</button>
+                    {% if msg %}
+                    <h6 class="altr altr-danger">{{msg}}</h6>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>    
+</section>
+
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+                <div class="d-flex border border-1 p-3">
+                     <div class="col d-flex flex-row justify-content-between">
+                    {% for project in student.project_set.all %}
+                            <div>
+                            <h3>{{ project.name }}</h3>
+                            <p>{{ project.desc }}</p>
+                            <p class="text-muted"> project type: {{ project.project_type }}</p>
+                        <div class="col">
+                            <img src="{{ project.screenshot.url }}" class="screenshot">
+                        </div>
+                        <p><strong>source code <i class="bi bi-github"></i></a>:</strong> <a href="{{ project.link }}">{{ project.link }}</a></p
+                    </div>
+                </div>  
+                        <hr >
+                    {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock  %}
+
+

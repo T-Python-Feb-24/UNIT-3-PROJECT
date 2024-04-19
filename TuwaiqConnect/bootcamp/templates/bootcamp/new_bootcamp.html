@@ -1,0 +1,39 @@
+{% extends "main/base.html" %}
+
+{% block title %}Add New Bootcamp{% endblock  %}
+
+{% block content %}
+
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="{% url "bootcamp:add_bootcamp" %}" method="POST">
+                    {% csrf_token %}
+                    <label for="bootcamp_name">Bootcamp Name:</label><br>
+                    <input type="text" name="bootcamp_name" required><br>
+                    
+                    <label for="desc">Description:</label><br>
+                    <textarea id="desc" name="desc" rows="4" cols="50"></textarea><br>
+                    
+                    <label for="objectives">Objectives:</label><br>
+                    <textarea name="objectives" rows="4" cols="50"></textarea><br>
+                    
+                    <label for="location">Location:</label><br>
+                    <input type="text" name="location" required><br>
+        
+                    <label for="start_date">Start Date:</label><br>
+                    <input type="date" name="start_date" required><br>
+                    
+                    <label for="end_date">End Date:</label><br>
+                    <input type="date" name="end_date" required><br>
+                    
+                    <button type="submit">Submit</button>
+        
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock  %}

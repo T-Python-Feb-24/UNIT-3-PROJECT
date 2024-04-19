@@ -1,0 +1,83 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %} profile{% endblock  %}
+{% block style %}
+.screenshot{
+    width:300px;
+    hight :300px;
+}
+{% endblock  %}
+
+
+{% block content %}
+<section class="pb-5 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="{% static "images/profile-picture.png" %}" class="w-50 border rounded-circle">
+            </div>
+            <div class="col-md-6">
+                <h2>{{ student.user.first_name|capfirst }} {{ student.user.last_name|capfirst }}</h2>
+                <p><strong>College Name:</strong> {{ student.collage_name }}</p>
+                <p><strong>Graduation Year:</strong> {{ student.graduation_year }}</p>
+                <p><strong>Major:</strong> {{ student.major }}</p>
+                <p><strong>GPA:</strong> {{ student.GPA }}/5</p>
+                <p><strong>CV:</strong> <a href="{{ student.CV }}" download="CV">View CV (PDF)</a></p>
+               <h6 class="text-success">Contact {{student.user.first_name|capfirst}}:</h6>
+                <p><strong>Email:</strong> {{ student.user.email }}</p>
+                {% if request.user.is_authenticated and request.user == student.user %}
+                <a href="{% url "student:update_student" student.user.username %}"class="btn btn-primary">Update Your Profile</a>
+                {% endif %}
+            </div>  
+        </div>
+    </div>    
+</section>
+
+<section class="p-5 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-between">
+                    <h1>{{student.user.first_name|capfirst}}'s Projects:</h1>
+                    {% if request.user.is_authenticated and request.user == student.user %}
+                    <h6>Add new project <a href="{% url "student:new_project" %}" class="text-dark"><i class="bi bi-plus-square"></i></a></h6>
+                    {% endif %}
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+                <div class="d-flex border border-1 p-3">
+                     <div class="col d-flex flex-row justify-content-between">
+                    {% for project in student.project_set.all %}
+                            <div>
+                            <h3>{{ project.name }}</h3>
+                            <p>{{ project.desc }}</p>
+                            <p class="text-muted"> project type: {{ project.project_type }}</p>
+                        <div class="col">
+                            
+                            <img src="{{ project.screenshot.url }}" class="screenshot">
+                          
+                        </div>
+                        <p><strong>source code <i class="bi bi-github"></i></a>:</strong><a href="{{ project.link }}">{{ project.link }}</a></p>
+
+                        {% if request.user.is_authenticated and request.user == student.user %}
+                        <a href="{% url "student:update_project" project.id %}"class="btn btn-primary">update</a>
+                        <a href=""class="btn btn-danger">Delete</a>
+                        {% endif %} 
+                         {% endfor %}
+                    </div>   
+                <hr >
+        </div>
+    </div>
+</section>
+
+
+{% endblock  %}
+
+

@@ -1,0 +1,81 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Search Events {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-5 mb-5">
+        <div class="row gap-4">
+            <div class="d-flex flex-column gap-2 align-items-center justify-content-center mb-4">
+            
+                <h1 class="d-flex justify-content-center mb-5 ">Search</h1>
+                <form action="{% url 'main:search_events_view' %}"  method="get" class="d-flex gap-2 align-items-center mb-4" style="width: 80%;">
+                    <input type="search" class="form-control rounded-5 w-50" name="search" placeholder="Search.." value="{{request.GET.search}}"/>
+                    <input type="date" class="form-control rounded-5 w-50" name="date" value="{{request.GET.date}}"/>
+                    <input type="submit" value="search" class="btn btn-primary rounded-5" />
+                </form> 
+                <h2>Search results for {{ request.GET.search }} ({{ events.count }}) </h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {% if events.count == 0 %}
+            <h3>No results for your search '{{request.GET.search}}' </h3>
+        {% endif %}
+
+        {% for event in events %}
+        <div class="col-12 col-md-4 my-3">
+            <div class="item-container">
+                <div class="img-container">
+                    <img src="{{ event.event_img.url }}" alt="Event image">
+                </div>
+        
+                <div class="body-container">
+                    <div class="overlay"></div>
+        
+                    <div class="event-info">
+                        <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
+                        <div class="d-flex justify-content-center align-items-center gap-2" >
+                            <div style=" display:flex; position: relative; left:8px;">
+                                <img src="{{ event.user.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="60">
+                                <div style="display:flex; position: relative; right: 20px; font-size: 20px; right:15px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
+                            </div>
+                            <p class="info">{{event.user.first_name}} {{event.user.last_name}}</p>
+
+                        </div>
+                        <p class="price">{{ event.theme }}</p>
+        
+                        <div class="additional-info">
+                            <p class="info">
+                                <i class="{% if event.on_site == True %} fas fa-map-marker-alt{% else %}far fa-zoom {% endif %} "></i>
+                                {% if event.on_site == True %} University of Jeddah {% else %}Zoom{% endif %}
+                                
+                            </p>
+                            <p class="info d-flex gap-2">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ event.event_date }}   
+                                <i class="far fa-time"></i>
+                                {{ event.time_start }} - {{ event.time_end }}                                 
+                            </p>
+        
+                            <p class="info description">
+                                <a class="text-secondary" href="{% url 'main:event_detail_view' event.id  %}">More..</a>
+                            </p>
+                        </div>
+                    </div>
+                        <a class="action" href="{% url 'main:event_detail_view' event.id  %}" >Book it</a>
+                 
+                </div>
+            </div>
+
+        </div>
+                
+            
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

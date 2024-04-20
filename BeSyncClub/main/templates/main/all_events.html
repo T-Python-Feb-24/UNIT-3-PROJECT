@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} All Events {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-5 mb-5">
+        <div class="row g-4 mb-5">
+
+            <div class="d-flex justify-content-between align-items-center flex-column">
+                <h1>{% if 'them' in request.GET %} {{request.GET.them}} {% else %} All {% endif %}Events ({{ events.count }}) </h1>
+    
+                <div class="d-flex gap-2 mt-5">
+                    <a href="{% url 'main:all_events_view' %}" class="text-dark py-2 px-3 bg-light rounded-pill text-decoration-none text-center {% if 'them' not in request.GET %} All  {% endif %}">All</a>
+                    
+                    {% for val, key in themes %}
+                        <a href="?them={{val}}" class=" text-light py-2 px-3 rounded-pill bg-dark text-decoration-none text-center {% if request.GET.them == val %} {{ val }}{% endif %}">{{val}}</a>
+                        
+                    {% endfor %}
+                </div>
+            </div>
+    
+        </div>
+        <div class="row mb-5 justify-content-center">
+            {% for event in events %}
+            <div class="col-12 col-md-4 my-3">
+                <div class="item-container">
+                    <div class="img-container">
+                        <img src="{{ event.event_img.url }}" alt="Event image">
+                    </div>
+            
+                    <div class="body-container">
+                        <div class="overlay"></div>
+            
+                        <div class="event-info">
+                            <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
+                            <div class="d-flex justify-content-center align-items-center gap-2" >
+                                <div style=" display:flex; position: relative; left:8px;">
+                                    <img src="{{ event.user.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="60">
+                                    <div style="display:flex; position: relative; right: 20px; font-size: 20px; right:15px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
+                                </div>
+                                <p class="info">{{event.user.first_name}} {{event.user.last_name}}</p>
+
+                            </div>
+                            <p class="price">{{ event.theme }}</p>
+            
+                            <div class="additional-info">
+                                <p class="info">
+                                    <i class="{% if event.on_site == True %} fas fa-map-marker-alt{% else %}far fa-zoom {% endif %} "></i>
+                                    {% if event.on_site == True %} University of Jeddah {% else %}Zoom{% endif %}
+                                    
+                                </p>
+                                <p class="info d-flex gap-2">
+                                    <i class="far fa-calendar-alt"></i>
+                                    {{ event.event_date }}   
+                                    <i class="far fa-time"></i>
+                                    {{ event.time_start }} - {{ event.time_end }}                                 
+                                </p>
+            
+                                <p class="info description">
+                                    <a class="text-secondary" href="{% url 'main:event_detail_view' event.id  %}">More..</a>
+                                </p>
+                            </div>
+                        </div>
+                            <a class="action" href="{% url 'main:event_detail_view' event.id  %}" >Book it</a>
+                     
+                    </div>
+                </div>
+
+            </div>
+
+        {% endfor %}
+        </div>
+    </div>
+</section>
+		
+{% endblock %}

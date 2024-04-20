@@ -1,0 +1,144 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Academic To the RealWord Club {% endblock %}
+
+{% block content %}
+
+<section class="hero-section ">
+    <div class="container my-2 text-center">
+        <div class="row my-5">
+            <div class="col-md-6 col-12 mt-2 pt-5">
+               
+            <h2 class="display-2 fw-bold">Academic to <span class="text-primary">the Real World </span>Club</h2>
+
+            <p class="lead fw-normal">We prepare you to face the professional world.
+                Our club provides courses and programs for students to bridge the gap between academic subjects and professional requirements, preparing them to overcome work challenges.</p>
+    
+        <div class="lc-block d-grid gap-2 d-sm-flex justify-content-sm-center mb-5 "> <a class="btn btn-primary btn-lg px-4 gap-3 rounded-5" href="{% url 'main:all_events_view' %}" role="button">Book a Ticket</a>
+            <a class="btn btn-outline btn-lg px-4 rounded-5" href="#" role="button" style="background-color: #d0d0d0;">Join to us</a>
+        </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <img src="{% static 'images/s.png'%}" alt="img" style="width: 90%;">
+            </div>
+        </div>     
+    </div>
+</section>
+
+
+<section>
+    <div class="container mt-5 mb-5 ">
+
+      
+        <div class="row ">
+            <div class="d-flex align-items-center flex-column gap-4 mb-4">
+                <h1>Upcoming Events</h1>
+                <form action="{% url 'main:search_events_view' %}"  method="get" class="d-flex gap-2" style="width: 70%;">
+                    <input class="form-control me-2 rounded-pill p-2 shadow" type="search" placeholder="Search" aria-label="Search" name="search" required>
+                    <button class="btn btn-success rounded-pill shadow" type="submit">Search</button>
+                </form>
+            </div>
+           
+            
+            {% for event in events %}
+                <div class="col-12 col-md-4 my-3">
+                    <div class="item-container">
+                        <div class="img-container">
+                            <img src="{{ event.event_img.url }}" alt="Event image">
+                        </div>
+                
+                        <div class="body-container">
+                            <div class="overlay"></div>
+                
+                            <div class="event-info">
+                                <p><a href="{% url 'main:event_detail_view' event.id  %}" class="title">{{event.event_title}}</a></p>
+                                <div class="d-flex justify-content-center align-items-center gap-2" >
+                                    <div style=" display:flex; position: relative; left:8px;">
+                                        <img src="{{ event.user.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="60">
+                                        <div style="display:flex; position: relative; right: 20px; font-size: 20px; right:15px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
+                                    </div>
+                                    <p class="info">{{event.user.first_name}} {{event.user.last_name}}</p>
+ 
+                                </div>
+                                <p class="price">{{ event.theme }}</p>
+                
+                                <div class="additional-info">
+                                    <p class="info">
+                                        <i class="{% if event.on_site == True %} fas fa-map-marker-alt{% else %}far fa-zoom {% endif %} "></i>
+                                        {% if event.on_site == True %} University of Jeddah {% else %}Zoom{% endif %}
+                                        
+                                    </p>
+                                    <p class="info d-flex gap-2">
+                                        <i class="far fa-calendar-alt"></i>
+                                        {{ event.event_date }}   
+                                        <i class="far fa-time"></i>
+                                        {{ event.time_start }} - {{ event.time_end }}                                 
+                                    </p>
+                
+                                    <p class="info description">
+                                        <a class="text-secondary" href="{% url 'main:event_detail_view' event.id  %}">More..</a>
+                                    </p>
+                                </div>
+                            </div>
+                                <a class="action" href="{% url 'main:event_detail_view' event.id  %}" >Book it</a>
+                         
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+            <a class="btn btn-danger rounded-5 shadow " href="{% url 'main:all_events_view' %}">More Events</a>
+
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <hr/>
+
+        <div class="row mt-5 justify-content-center">
+            <div class="d-flex align-items-center flex-column gap-4 mb-5">
+                <h1 >Our Organizers</h1>
+            </div>
+            {% for member in members %}
+                <div class="col-md-4 ">
+                    <div class=" mb-4 py-4">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                
+                                <div style=" display:flex; position: relative; left:20px;">
+                                    <img src="{{ member.profile.avatar.url }}" class="rounded-circle p-1 img-thumbnail shadow" width="200">
+                                    <div style="display:flex; position: relative; right: 50px; font-size: 50px;"><i class="bi bi-patch-check-fill" style="color: rgb(53, 171, 92);"></i></div>
+
+                                </div>
+
+                                <div class="mt-3 align-items-center">
+                                    <h4>{{ member.first_name }} {{ member.last_name }} </h4>
+                                    <p class="text-secondary mb-1">{{member.student.major}}</p>
+
+                                </div>
+                                <div class="d-flex justify-content-center gap-3 mb-3">
+                                    <h4><a href="{{member.profile.github_link}}" target="_blank"><i class="bi bi-github  "></i></a></h4>
+                                    <h4><a href="{{member.profile.linkedin_link}}" target="_blank"><i class="bi bi-linkedin  "></i></a></h4>
+                                    <h4><a href="mailto:{{member.email}}" target="_blank"><i class="bi bi-envelope-at-fill"></i></a></h4>
+                                </div>
+                                
+                                <a class="btn btn-info rounded-5 shadow" href="{% url 'accounts:profile_view' member.username %}">Visit profile</a>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+   
+
+   
+
+{% endblock %}

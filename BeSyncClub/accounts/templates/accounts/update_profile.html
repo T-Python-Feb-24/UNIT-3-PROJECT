@@ -1,0 +1,125 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Update Profile {% endblock %}
+
+
+
+{% block content %}
+<section class="pt-2">
+    <div class="container mt-5 mb-5">
+		<div class="main-body">       
+			
+				<form action="{% url 'accounts:update_profile_view' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="row g-4">
+					<div class="col-md-4">	
+						<div class="text-center d-flex justify-content-center align-items-center flex-column gap-2 p-4 rounded-3 shadow-sm" style="background-color: #ffffff;">
+							<img src="{{ user.profile.avatar.url }}" class=" rounded-circle img-thumbnail shadow-sm" style="width: 300px; " alt="avatar">
+							<h6>Upload a different avatar...</h6>
+							<input type="file" class="form-control" name="avatar" />
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="card mb-4 px-4 py-4 rounded-3 border-0 shadow-sm">
+							<h2 class="m-3">Account Details</h2>
+							<div class="card-body">
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">First name</h6>
+									</div>
+									<div class="col-10">
+										<input name="first_name" class="form-control" type="text" minlength="3" value="{{user.first_name}}"/>
+									</div>
+								</div>
+
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">Last name</h6>
+									</div>
+									<div class="col-10">
+										<input name="last_name" class="form-control" type="text" minlength="3" value="{{user.last_name}}"/>
+									</div>
+								</div>
+
+
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">City</h6>
+									</div>
+									<div class="col-10">
+										<input name="city" class="form-control" type="text" minlength="3" value="{{user.student.city}}"/>
+									</div>
+								</div>
+
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">Major</h6>
+									</div>
+									<div class="col-10">
+										<select name="major" class="form-select">
+											{% for val, major in majors %}
+												<option value="{{val}}" {% if user.student.major == val %} selected {% endif %}>{{major}}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">Your birthdate</h6>
+									</div>
+									<div class="col-10">
+										<input type="date" name="birthdate"
+											value="{{user.profile.birthdate|date:'Y-m-d' }}"
+											style="padding: 5px; border-radius: 5px; 
+											border: 1px solid #ccc; margin-bottom: 10px;"
+										/>
+									</div>
+								</div>
+
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">Bio</h6>
+									</div>
+									<div class="col-10">
+										<textarea name="bio" class="form-control" placeholder="Bio">{{user.profile.bio}}</textarea>
+									</div>
+								</div>
+
+
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">Linkedin link</h6>
+									</div>
+									<div class="col-10">
+										<input name="linkedin_link" class="form-control" type="text"  placeholder="@linkedin link" value="{{user.profile.linkedin_link}}"/>
+									</div>
+								</div>
+
+								<div class="row mb-3 align-items-center">
+									<div class="col-2">
+										<h6 class="mb-0">Github link</h6>
+									</div>
+									<div class="col-10">
+										<input name="github_link" class="form-control" type="text"   placeholder="@github link" value="{{user.profile.github_link}}" />
+									</div>
+								</div>
+
+								<div class="d-flex gap-4 justify-content-center my-4">
+									<input type="submit" class="btn btn-primary rounded-5 px-3" value="Save Changes" />
+									<a class="btn btn-secondary rounded-5 px-3" href="{% url 'accounts:profile_view' user.username %}">Cancel</a>
+
+								</div>
+									
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			</form>
+	</div>
+</section>
+
+{% endblock %}

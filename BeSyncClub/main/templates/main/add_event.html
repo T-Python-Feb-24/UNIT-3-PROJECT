@@ -1,0 +1,123 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Add New Event {% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-5">
+       
+        <div class="row g-5 ">
+            <div class="col d-flex flex-column justify-content-center bg-white py-4 mx-5 my-5 rounded-4">
+                <h1 class="text-center">Add New Event</h2>
+                <form action="{% url 'main:add_event_view' %}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+                    {% csrf_token %}
+
+                    <div class="row my-3">
+                        
+                        <div class="col-12">
+                            <div class="row my-3">
+                                <div class="col-6">
+                                    <label for="event_title" class="form-label">event title</label>
+                                    <input name="event_title" type="text" placeholder="event_title" class="form-control" minlength="5" required/>
+        
+                                </div>
+                                <div class="col-6">
+                                    <label for="theme" class="form-label">Theme</label>
+                                    <select name="theme" class="form-select" required>
+                                        {% for val, th in themes %}
+                                            <option value="{{val}}">{{th}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="event_description" class="form-label">Event Description</label>
+                                    <textarea name="event_description" class="form-control" minlength="20" required></textarea>
+                                </div>
+                            </div>
+        
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="objective" class="form-label">Objective</label>
+                                    <textarea name="objective" class="form-control" minlength="20" required></textarea>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-6">
+                                    <label for="event_type" class="form-label">Event type</label>
+                                    <select name="event_type" class="form-select" required>
+                                        {% for val, t in types %}
+                                            <option value="{{val}}">{{t}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label for="flexSwitchCheckDefault" class="form-label">on_site</label>
+                                    <div class="form-check form-switch">
+                                        <input name="on_site" value="True" class="form-check-input pt-3 pb-2 px-4" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="date"
+                                            style="display: block; margin-bottom: 10px;">
+        
+                                            Date (YYYY-MM-DD):
+                                        </label>
+                                        <input type="date" name="event_date" id="date"
+                                            placeholder="YYYY-MM-DD" required
+                                            style="padding: 5px; border-radius: 5px; 
+                                            border: 1px solid #ccc; margin-bottom: 10px;"
+                                        />
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="time"
+                                            style="display: block; margin-bottom: 10px;">
+                                            From:
+                                        </label>
+                                        <input type="time" name="time_start" id="time"
+                                            placeholder="YYYY-MM-DD" required
+                                            style="padding: 5px; border-radius: 5px; 
+                                            border: 1px solid #ccc; margin-bottom: 10px;"
+                                        />
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="time"
+                                        style="display: block; margin-bottom: 10px;">
+                                        To:
+                                    </label>
+                                    <input type="time" name="time_end" id="time"
+                                        placeholder="YYYY-MM-DD" required
+                                        style="padding: 5px; border-radius: 5px; 
+                                        border: 1px solid #ccc; margin-bottom: 10px;"
+                                    />
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <label for="event_img" class="form-label">Upload Image:</label>
+                                    <input name="event_img" type="file"  accept="Image/*" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12 d-flex justify-content-center mt-2">
+                                    <input type="submit" class="btn btn-success rounded-5" value="Add Event" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+{% endblock %}

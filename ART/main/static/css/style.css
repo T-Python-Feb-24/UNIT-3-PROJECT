@@ -1,0 +1,83 @@
+*{
+    font-family:cursive;
+    
+  }
+  
+  
+  /* مهمه */
+    .main{
+      margin-top: 1vw;
+      display: flex;
+      align-items: center;
+      font-family: "Angkor" , sans-serif;
+      color: #f1f1f1;
+      background-color: rgb(60, 18, 18);
+      background: url("/static/images/photo.jpg") no-repeat;
+      /* opacity: 85%; */
+      flex-direction: row;
+      height: 80vh;
+      row-gap: 1px;
+      background-size: cover;
+      background-position: center;
+      /* effect for the main section image to be fixid  */
+      background-attachment: fixed;
+      padding: 200px;
+    
+    }
+  
+  .hero {
+      height: 400px;
+      object-fit: flex;
+  }
+  
+  p {
+      white-space: pre-line;
+  }
+ 
+
+  .thumb {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 15px;
+  }
+  /* حقت السيرش */
+  body {
+      margin-top: 5rem;
+    }
+    
+    ul {
+      list-style-type: none;
+    }
+    /* test */
+    .con{
+      display: flex;
+      justify-content: center;
+      
+    }
+    /* الصوره  */
+    .logo2{
+      display:flex;
+      background-size:contain;
+      position: relative;
+      width: 70vw;
+      height: 70vh;
+      
+    }
+    .logo12{
+     position:relative; 
+     display:flex;
+     justify-content: center;
+     flex-direction: column;
+     margin-bottom: 17vw;
+     background-color:rgba(255, 255, 255, 0);
+     color: #f1f1f1;
+     margin-top: -400px;
+     margin-left: 150px;
+     margin-right: 150px;
+    }
+    
+    
+    
+    
+  

@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{% block title %} ADD IMAGES {% endblock %}
+
+
+{% block content %} 
+<div class="container">
+    <div class="row  ">
+        <div class="col-md-6">
+            <div class="row justify-content-center align-items-center mt-5">
+                <div class="col">
+                    <img style="margin-top: 10%; " src="/static/images/image5.jpg" class="w-100 hero rounded-4 " />
+                </div>
+                
+            </div>
+        </div>
+        <div  class="col-md-6">
+            <div class="row justify-content-center mt-5">
+                <h1 style="font-family: cursive; text-align: center;">Add new image</h1>
+                <form style="width: 100%;" action="{% url 'main:add_images' %}" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+                    {% csrf_token %}
+                    <h6 style="font-family: cursive; color: rgb(114, 109, 109);">Utilize the "Name" and "About" fields to provide unique identifiers and descriptions for your image.</h6>
+                    <input style="font-family: cursive;" name="name" type="text" placeholder="Name" class="form-control"  />
+                    <textarea style="font-family: cursive;" name="about" placeholder="About" class="form-control"></textarea>
+                
+                    <!-- <div class="form-check form-switch gap-3">
+                        <input style="font-size: 20px; background-color: rgb(172, 165, 165);" name="is_published" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onclick="handlePublish(this)">
+                        <label style="font-family: cursive;" class="form-check-label" for="flexSwitchCheckDefault">Is published</label>
+                    </div> -->
+                    
+                
+                    <h5 style="font-family: cursive;">Category:</h5>
+                    <select name="category" class="form-select" aria-label="Default select example">
+                        {% for val, cat in category %}
+                            <option value={{val}}>{{cat}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <h5 style="font-family: cursive;">Choose Image:</h5>
+                    <input name="image" type="file" accept="image/*" class="form-control"/>
+                    <input style="font-family: cursive;" type="submit" class="btn btn-dark mt-3" value="Add Post" style="background-color: rgb(0, 0, 0);"/>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

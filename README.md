@@ -6,15 +6,29 @@ Base on what you’ve learned until now , create a project of your choosing. Imp
 
 
 ## Project Name here
-project description here.
+project description here
+name:RandomSnaps
+description:RandomSnaps is a unique website that offers a service allowing users to receive random images from a variety of topics and categories. Users can specify their preferences for the types of images they wish to receive, such as nature, arts, food, or Daily life, and then the site sends a collection of random images that match these preferences. This service is ideal for people looking for inspiration or wanting to discover new visual content in a convenient and enjoyable way. The site also provides the ability to share favorite images via social media platforms or save them in a private gallery for later reference.
 
 ## Features List here
-- list of features
+- list of features:
+-User accounts with his own published post
+-post creation and deletion
+-Search and categorization of posts
+-user authentication and role access control
+-User abilty to like a post and send it to the favorite list
+-User is able to download posts easly
 
 ## User Stories, Wireframes & UML links
-- User stories document link here.
-- wireframe link here.
-- UML link here.
+- User stories document link here:
+https://1drv.ms/w/s!AmLkjMApMNK3glErinmV2nKN5CG1
+- wireframe link here:
+https://www.figma.com/file/wropAs8kNC27hPjBa7W5YA/Untitled?type=whiteboard&node-id=0%3A1&t=MJiPqm49YOB5UxoH-1
+- UML link here:
+https://drawsql.app/teams/rahaf-2/diagrams/art
+
+
+
 
 
 ## Minimum Requirements

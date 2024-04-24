@@ -1,0 +1,261 @@
+{% extends 'main/base.html' %}
+
+{% block title %} DETAILE {% endblock %}
+
+{% block content %}
+<style>
+    .art-image {
+    height: 500px;
+    object-fit:cover;
+    object-position: center;
+    float: left; 
+    margin-right: 20px; 
+    border-radius: 40px;
+}
+
+
+    .art-footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
+
+    .back_footer {
+        background-color: rgba(0, 0, 0, 0.877);
+    }
+
+    /* .image-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 20px;
+    } */
+
+
+/* خلف الحذف والتحميل */
+.details-container {
+    margin-top: 100px;
+    padding: 20px;
+    background-color: transparent; /* تعيين لون خلفية شفاف */
+    border-radius: 10px;
+    border: 2px solid #000000; /* إضافة حدود بلون محدد */
+}
+
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        border-color: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    .btn-download {
+        font-size: 20px;
+        color: #212529;
+    }
+
+    .btn-download:hover {
+        color: #212529;
+    }
+
+    .comment-form {
+        margin-top: 20px;
+    }
+
+    .comment-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn-comment {
+        background-color: #000000;
+        color: #fff;
+    }
+
+    .btn-comment:hover {
+        background-color: #8e9790;
+        color: #fff;
+    }
+
+    .comment-container {
+        margin-top: 20px;
+        
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .comment-card {
+        padding: 15px;
+        color: #eeeeee;
+        background-color: #465f8f;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .accounts{
+        color: #000000;
+        font-family: cursive;
+    }
+    .accounts:hover{
+        color: #ffffff;
+    }
+    .cat{
+    color: #000000; 
+    background-color: rgb(255, 255, 255);
+    margin-top: -420px; 
+    margin-left: 70px; 
+}
+
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-5">
+            <div class="image-container">
+                <img src="{{ art.image.url }}"  style="width: 80%; border-radius: 30px; " class="art-images " />
+            </div>
+        </div>
+        <div class="col-md-4 mt-5">
+
+            <h1 style="font-family: cursive;">{{ art.name}}</h1>
+            <p >{{ art.about}}</p>
+            <div class="details-container">
+              
+                <h3 class=" pt-2 pb-2 ps-4 pe-4 rounded-pill {{art.category}}" style="font-family: cursive;">{{ art.category }}</h3>
+                <h5 class="text-muted">{{ art.created_at}}</h5>
+                
+
+<div class="d-flex justify-content-between align-items-center mt-4">
+    <div class="d-flex  align-items-center gap-3">
+    <!-- Category -->
+    <h3 style="color: white; font-size: 20px;">{{ category }}</h3>
+    
+    <!-- User information -->
+    <div class="d-flex align-items-center gap-2">
+        <img class="mr-3 rounded-circle" src="{{ art.user.profile.avatar.url }}" alt="User Avatar" style="max-width: 50px;">
+        <h3><a style="color: white; font-size: 20px;" href="{% url 'account:user_profile_view' art.user.id %}">{{ art.user.username }}</a></h3>
+    </div>
+    
+    <!-- Favorite and Download buttons -->
+    <div class="col-2 d-flex gap-3">
+        <a href="{% url 'favorites:add_remove_favorites_view' art.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %}" style="color: blue; font-size: 20px;"></i></a>
+        <a href="{{ art.image.url }}" class="rounded-circle bi bi-download btn-download"></a>
+    </div>
+    
+    <!-- Delete button (if authenticated user is the owner or superuser) -->
+    <div style="margin-left: 30px;">
+    {% if request.user.is_authenticated and request.user.username == art.user.username or request.user.is_superuser %}
+        <a href="{% url 'main:delete_images' art.id %}" class="btn btn-delete">Delete</a>
+    {% endif %}
+</div>
+</div>
+
+
+
+
+<!-- الشرط  -->
+                <div class="modal fade" id="favoriteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header ">
+                                <h1 class="modal-title fs-5 mt-5" id="exampleModalLabel">To like a shot, please create an account.</h1> <a style="width: 30%;background-color: #000000;color: white;border-radius: 30px; padding: 10px; text-align: center;  margin-top: 40px;" href="{% url 'account:register_user_view' %}">Register</a>
+                                <button style="margin-top: -100px;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            
+                            <span class="material-symbols-outlined"> 
+                                <h1 class="modal-title fs-5 mt-4" id="exampleModalLabel"> Already have an account?  <a style="width: 20%;background-color: #000000;color: white;border-radius: 30px; padding: 10px; text-align: center;  margin-top: 40px; font-size: 15px;" href="{% url 'account:login_user_view' %}">Sign in</a> </h1>
+                                <br>
+                            </span>
+                            <div class="modal-footer">
+                                <button style="background-color: #370feb;border: 0; color: white; width: 20%;" type="button" class="btn " data-bs-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div  class="row mt-4">
+            <div  class="col-md-12 d-flex flex-column align-items-end gap-4">
+                <!-- Share Your Review Section -->
+                <div class="w-100 p-3" style="max-width: 500px; background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    {% if request.user.is_authenticated %}
+                    <h4 class="mb-3" style="color: #343a40; font-family: cursive;">Share Your Review</h4>
+                    <form action="{% url 'main:add_comment' art.id %}" method="post" class="d-flex flex-column gap-3">
+                        {% csrf_token %}
+                        <textarea id="content" name="content" class="form-control" placeholder="Write Your Review..." required style="min-height: 100px;"></textarea>
+                        <input type="submit" value="Add Review" class="btn btn-primary" style="background-color: #000000; color: white;border: none; ">
+                    </form>
+                    {% else %}
+                    <div class="alert alert-info" role="alert" style="font-family: 'Nunito', sans-serif; font-size: 16px;">
+                        You must <a href="{% url 'account:login_user_view' %}" class="alert-link">sign in</a> to write a review.
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Comments Section -->
+                {% if user.is_authenticated %}
+                <div class="w-100" style="max-width: 500px;">
+                    <button style="font-family: cursive; color: #eeeeee; background-color: #3798b6; border: none; box-shadow: none;" class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#commentsSection" aria-expanded="false" aria-controls="commentsSection">
+                        View Comments
+                    </button>
+                    
+                    <div class="collapse" id="commentsSection">
+                        {% for comment in comments %}
+                        <div class="comment-container d-flex flex-column border border-1 shadow p-3 rounded-4 w-100 mb-3" style="background-color: #f8f9fa; color: #343a40;">
+                            <div class="d-flex gap-2 align-items-center">
+                                <a href="{% url 'account:user_profile_view' comment.user.username %}" class="text-decoration-none" style="color: #007bff;">
+                                    <h4 style="font-family: cursive; color: #000000;">{{ comment.user.username }}</h4>
+                                </a>
+                            </div>
+                            <p style="margin-top: 0.5rem;">{{ comment.content }}</p>
+                            <h6 class="text-muted">{{ comment.created_at|date:"M d, Y H:i" }}</h6>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                
+                
+                
+{% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <div  class="container">
+
+        
+
+
+   
+    <div class="row p-4 mt-5">
+        <hr>
+        <h1 style="font-family: cursive;">Related image</h1>
+        {% for rel in related %}
+        <div class="col-4">
+            <a href="{% url 'main:detail_images' rel.id %}">
+                <div class="position-relative rounded-4 overflow-hidden">
+                    <img src="{{ rel.image.url }}" class="art-image w-100" />
+                    <div class="art-footer w-100 p-3 d-flex gap-3 back_footer">
+                        <div class="col-2 ">
+                            <img class="mr-3 rounded-circle" src="{{rel.user.profile.avatar.url}}" alt="Generic placeholder image" style="max-width:50px">
+                        </div>
+                        <h3><a style="color: white;font-size: 20px;" href="{% url 'account:user_profile_view' rel.user.id %}">{{rel.user.username}}</a></h3>
+                        <div class="col-2 d-flex gap-3 ">
+                            <strong><a style="color: #2f00ff; font-size: 25px;" href="#" class="mr-3 rounded-circle bi bi-heart" alt="Generic placeholder image"></a></strong>
+                            <div>
+                                <h6  class=" cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}} ">{{ art.category }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

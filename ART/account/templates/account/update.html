@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}update {{request.user.username}} profile {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>update</h1>
+
+    {% if msg %}
+
+
+        <div class="alert alert-danger">{{msg}}</div>
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <form action="{% url 'account:update_profile' %}" method="post" class="d-flex flex-column gap-2" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <input name="first_name" class="form-control" type="text" minlength="3"  placeholder="First Name" value="{{user.first_name}}"/>
+                <input name="last_name" class="form-control" type="text" minlength="3" placeholder="Last Name" value="{{user.last_name}}"/>
+                <input name="email" class="form-control" type="email" minlength="3"  placeholder="Email" value="{{user.email}}"/>
+
+                <textarea name="about" class="form-control" placeholder="about yourself">{{user.profile.about}}</textarea>
+                
+                <h4>Choose Avatar:</h4>
+                <img src="{{user.profile.avatar.url}}" class="avatar" style="width: 100px;"/>
+                <input type="file" class="form-control" name="avatar" />
+
+                <input type="submit" class="btn btn-dark" value="Update Profile" />
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

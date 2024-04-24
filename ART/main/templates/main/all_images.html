@@ -1,0 +1,98 @@
+{% extends 'main/base.html' %}
+
+{% block title %} ALL IMAGES {% endblock %}
+
+{% block content %}
+<style>
+   
+.art-image {
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.art-footer {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+.back_footer{
+    background-color: #161616c9;
+}
+.cata{
+    background-color: rgba(0, 0, 0, 0.534);
+    width: 100%;
+    font-size: larger;
+   
+    border-radius: 10px;
+}
+
+.cat{
+    color: #000000; 
+    background-color: rgb(255, 255, 255);
+    margin-top: -420px; 
+    margin-left: 70px; 
+}
+</style>
+
+
+
+
+<div class="container">
+    <div class="container">
+        <div class="row g-4 mt-5">
+        </div>
+        <div class="col">
+            <div class="d-flex gap-2 justify-content-center cata mt-5">
+                <a style="color: antiquewhite;" href="{% url 'main:all_images' %}" class="p-2 ps-3 pe-3 text-decoration-none">All</a>
+                {% for val, key in category %}
+                <a style="color: white;" href="?cat={{val}}" class="p-2 ps-3 pe-3 {% if request.GET.cat == val %} {{ val }} {% endif %} text-decoration-none">{{val}}</a>
+                {% endfor %}
+                {% if request.user.is_authenticated %}
+                <a style="color:white;" href="?user={{request.user.id}}" class="p-2 ps-3 pe-3 text-decoration-none">My Posts</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
+            <h2 style="font-family:cursive;">{% if 'cat' in request.GET %} {{request.GET.cat}} {% else %} All {% endif %}images({{ art.count }}) </h2>
+        </div>
+        {% for art in art %}
+        <div class="col-4">
+            
+            <a href="{% url 'main:detail_images' art.id %}">
+                <div class="position-relative rounded-4 overflow-hidden">
+                    <img src="{{ art.image.url}}"  class="art-image w-100"/>
+                    <div class="art-footer w-100 p-3 d-flex gap-3 back_footer">
+                        <div class="col-2 ">
+                            <img class="mr-3 rounded-circle" src="{{art.user.profile.avatar.url}}" alt="Generic placeholder image" style="max-width:50px">
+                        </div>
+                        <h3><a style="color: white;font-size: 20px;" href="{% url 'account:user_profile_view' art.user.id %}">{{art.user.username}}</a></h3>
+                        <div class="col-2 d-flex gap-3 ">
+                        <!-- عدليه -->
+                            <a href="{% url 'favorites:add_remove_favorites_view' art.id %}" {% if not request.user.is_authenticated %} data-bs-toggle="modal" data-bs-target="#favoriteModal" {% endif %} class="text-decoration-none"><i class="bi {% if is_favored %} bi-heart-fill {% else %} bi-heart {% endif %}" style="color: blue; font-size: 20px;"></i></a>
+                            
+                            <a style="color: #ffffff; font-size: 25px;" href="{{ art.image.url }}" class="mr-3 rounded-circle bi bi-download" alt="Generic placeholder image" download></a>
+                            <div>
+                            <h6  class=" cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}} ">{{ art.category }}</h6>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="row mt-5">
+    <div class="col d-flex gap-2 justify-content-center">
+        {% for page in pages_count %}
+        <a href="?page={{page}}{% if 'cat' in request.GET %}&cat={{request.GET.cat}}{% endif %}" class="btn border {% if request.GET.page == page %} btn-primary {% elif page == '1' and 'page' not in request.GET %} btn-outline-dark {% endif %}">{{page}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

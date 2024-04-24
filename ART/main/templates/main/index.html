@@ -1,0 +1,109 @@
+{% extends 'main/base.html' %}
+
+{% block title %} RandomSnaps {% endblock %}
+
+{% block content %}
+<style>
+ .main{
+      margin-top: 7vw;
+      display: flex;
+      align-items: center;
+      font-family: "Angkor" , sans-serif;
+      color: #000000;
+      background-color: rgb(60, 18, 18);
+      background: rgba(255, 255, 255, 0.623);
+      /* opacity: 85%; */
+      flex-direction: row;
+      height: 80vh;
+      row-gap: 1px;
+      background-size: cover;
+      background-position: center;
+      /* effect for the main section image to be fixid  */
+      background-attachment: fixed;
+      padding: 200px;
+    
+    }
+    .video-container {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+    }
+
+    video {
+      object-fit: cover;
+    }
+</style>
+
+<div class="video-container">
+  <video autoplay muted loop>
+    <source src="/static/images/sea.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div class="main justify-content-center">
+    <div>
+        <h2><span style="font-size:50px; font-family:cursive;">Discover Stories Worth Sharing</span><br></h2>
+        <br>
+        <a href="{% url 'main:all_images' %}" class="btn btn-secondary text-center" style="color: rgb(255, 255, 255); background: rgba(0, 0, 0, 0.719); width: 150px; height: 50px; border-radius: 10px;  margin-left: 40%; font-size: 25px;" role="button" >Get Start</a>
+    </div>
+</div>
+
+<div class="container mt-5 pt-5">
+    <hr />
+    <div class="d-flex flex-column justify-content-between ">
+        <h1 style="color: rgb(255, 255, 255);">RandomSnaps</h1>
+        <div class="d-flex  justify-content-end mb-3 ">
+            <a class="navbar-brand btn btn-" href="{% url 'main:all_images'%}">All</a>
+        </div>
+    </div>
+    <div class="row g-5">
+        <div class="masonry-rows">
+            <style>
+                .masonry-rows {
+                    --row-height: 250px;
+                    --min-item-width: 200px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+
+                    > * {
+                        min-width: min(var(--min-item-width), 100%);
+                        height: var(--row-height);
+                        flex: auto;
+                        object-fit: cover;
+                    }
+                }
+            
+
+    </style>
+    <img src="https://picsum.photos/581/378">
+    <img src="https://picsum.photos/467/450">
+    <img src="https://picsum.photos/439/376">
+    <img src="https://picsum.photos/235/333">
+    <img src="https://picsum.photos/392/442">
+    <img src="https://picsum.photos/505/369">
+    <img src="https://picsum.photos/600/359">
+    <img src="https://picsum.photos/215/323">
+    <img src="https://picsum.photos/286/238">
+    <img src="https://picsum.photos/534/476">
+    <img src="https://picsum.photos/483/500">
+    <img src="https://picsum.photos/534/596">
+    <img src="https://picsum.photos/207/337">
+    <img src="https://picsum.photos/443/289">
+    <img src="https://picsum.photos/419/496">
+    <img src="https://picsum.photos/269/385">
+    <img src="https://picsum.photos/374/410">
+    <img src="https://picsum.photos/424/553">
+    <img src="https://picsum.photos/548/548">
+    <img src="https://picsum.photos/200/369">
+  </div>
+  
+
+
+</div>
+</div>
+{% endblock %}

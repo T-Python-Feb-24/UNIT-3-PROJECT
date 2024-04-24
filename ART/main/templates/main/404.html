@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Not Found Page {% endblock %}
+
+{% block content %}
+   
+
+
+
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="text-center">
+            <img class="img-fluid mb-3" src="/static/images/error-404.webp" style="max-width: 80%;" alt="No Permission Image">
+            <h1 class="mb-3">Oops! Page Not Found</h1>
+            <p class="mb-4">We couldn't find the page you were looking for.</p>
+            <a href="{% url 'main:home' %}" class="btn btn-primary">Go back to Home</a>
+
+        </div>
+    </div>
+
+   
+
+
+
+
+{% endblock %}

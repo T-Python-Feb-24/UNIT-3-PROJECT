@@ -1,0 +1,64 @@
+{% extends 'main/base.html' %}
+
+{% block title %} SEARCH {% endblock %}
+
+{% block content %}
+<style>
+    .art-image {
+        height: 500px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .art-footer {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+    }
+
+    .back_footer {
+        background-color: rgba(0, 0, 0, 0.877);
+    }
+
+    /* تحديد حجم أيقونة البحث */
+    .search-icon {
+        font-size: 1rem; /* تغيير حجم أيقونة البحث */
+    }
+</style>
+
+<div class="container">
+    <div class="row ">
+        <div class="d-flex flex-column gap-2 mt-5">
+            <h1 style="font-family: cursive;">Search</h1>
+            <form action="{% url 'main:search' %}" method="get" class="d-flex gap-2 align-items-center" style="width: 50%"> 
+                <input type="search" class="form-control" name="search" value="{{request.GET.search}}" placeholder="Search..." />
+                <input type="submit" value="Search" class="btn btn-outline-dark search-icon" /> 
+            </form>
+            <h2 style="font-family: cursive;">Search results for {{ request.GET.search }} ({{ art.count }}) </h2>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for art in art %}
+        <div class="col-4">
+            <a href="{% url 'main:detail_images' art.id %}">
+                <div class="position-relative rounded-4 overflow-hidden mt-4">
+                    <img src="{{ art.image.url}}"  class="art-image w-100"/>
+                    <div class="art-footer w-100 p-3 d-flex gap-3 back_footer">
+                        <div class="col-2 ">
+                            <img class="mr-3 rounded-circle" src="{{art.user.profile.avatar.url}}" alt="Generic placeholder image" style="max-width:50px">
+                        </div>
+                        <h3><a style="color: white;font-size: 20px;" href="{% url 'account:user_profile_view' art.user.id %}">{{art.user.username}}</a></h3>
+                        <div class="col-2 d-flex gap-3 ">
+                            <strong><a style="color: #2f00ff; font-size: 25px;" href="#" class="mr-3 rounded-circle bi bi-heart" alt="Generic placeholder image"></a></strong>
+                            <h6 style="background-color:black ;color: #eeeeee;" class="cat pt-1 pb-1 ps-3 pe-3 rounded-pill {{art.category}} ">{{ art.category }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

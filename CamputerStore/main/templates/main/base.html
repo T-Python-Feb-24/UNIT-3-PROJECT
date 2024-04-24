@@ -1,0 +1,168 @@
+{# djlint:off H030,H031 #}
+{% load static %}
+{% load tags %}
+<!DOCTYPE html>
+<html lang="ar">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>
+         {% block title %}
+         {% endblock title %}
+      </title>
+      <link href="{% static "css/bootstrap.css" %}" rel="stylesheet" />
+      <link href="{% static "css/stayle.css" %}" rel="stylesheet" />
+      {% block css %}
+      {% endblock css %}
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Noto+Kufi+Arabic:wght@100..900&display=swap"
+            rel="stylesheet">
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <script src="{% static "js/index.js" %}"></script>
+      {% block js %}
+      {% endblock js %}
+      <link rel="icon" href="{% static "icon/computer_icon.svg" %}" sizes="any" type="image/svg+xml">
+   </head>
+   <body>
+      <main>
+         <header>
+            <div class="d-flex gap-3 top-nav-bar">
+               <select class="form-select select" aria-label="currncy">
+                  <option value="العربية" selected>SAR-ريال</option>
+                  <option value="English">USD-دولار</option>
+               </select>
+            </div>
+            <nav class="navbar navbar-expand-sm flex-row-reverse">
+               <div class="container-fluid d-flex">
+                  <a class="ps-4 title text-decoration-none"
+                     href="{% url "main:index_view" %}">متجر الحاسب</a>
+                  <button class="navbar-toggler"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#navbarNavDropdown"
+                          aria-controls="navbarNavDropdown"
+                          aria-expanded="false"
+                          aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse gap-4 navbar-collapse flex-row-reverse"
+                       id="navbarNavDropdown">
+                     <div class="d-flex my-3 justify-content-center">
+                        <ul class="navbar-nav align-items-center flex-row gap-2 flex-row-reverse">
+                           <li class="nav-item">
+                              <a class="nav-link active"
+                                 aria-current="page"
+                                 {% if request.user.is_authenticated %}
+                                    href="{% url "account:cart_view" request.user.username %}"
+                                 {% else %}
+                                    href="{% url "account:login_view" %}"
+                                 {% endif %}>
+                                 <div class="d-flex flex-column border align-items-center header-user">
+                                    <span class="material-symbols-outlined">
+                                       <span class="material-symbols-outlined">shopping_cart</span>
+                                       </span><span>السلة</span>
+                                    </div>
+                                 </a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link active" aria-current="page" href="#">
+                                    <div class="d-flex flex-column border align-items-center header-user">
+                                       <span class="material-symbols-outlined">
+                                          <span class="material-symbols-outlined">favorite</span>
+                                          </span><span>الرغبات</span>
+                                       </div>
+                                    </a>
+                                 </li>
+                                 <li class="nav-item account">
+                                    <a class="nav-link active"
+                                       aria-current="page"
+                                       {% if request.user.is_authenticated %}
+                                          href="{% url "account:user_profile_view" request.user.username %}"
+                                       {% else %}
+                                          herf="{% url "account:login_view" %}"
+                                       {% endif %}>
+                                       <div class="d-flex flex-column border align-items-center header-user">
+                                          <span class="material-symbols-outlined">person</span>
+                                          <span>
+                                             {% if request.user.is_authenticated %}
+                                                مرحبا {{ request.user.username }}
+                                             {% else %}
+                                                الحساب
+                                             {% endif %}
+                                          </span>
+                                       </div>
+                                    </a>
+                                    <div class="popover_bottom">
+                                       <div class="popover-content">
+                                          <ul>
+                                             {% if not request.user.is_authenticated %}
+                                                <li>
+                                                   <a href="{% url "account:login_view" %}">الدخول</a>
+                                                </li>
+                                                <li>
+                                                   <a href="{% url "account:sign_up_view" %}">التسجيل</a>
+                                                </li>
+                                             {% endif %}
+                                             {% if request.user.is_superuser or perms.product.add_product %}
+                                                <li>
+                                                   <a href="{% url "product:add_product_view" %}">اضف منتج</a>
+                                                </li>
+                                             {% endif %}
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </li>
+                                 {% if request.user.is_authenticated %}
+                                    <li class="nav-item">
+                                       <a class="nav-link active" href="{% url "account:logout_view" %}">
+                                          <div class="d-flex flex-column border align-items-center header-user">
+                                             <span class="material-symbols-outlined">logout</span>
+                                             <span>تسجيل الخروج</span>
+                                          </div>
+                                       </a>
+                                    </li>
+                                 {% endif %}
+                              </ul>
+                           </div>
+                           <form class="input-group d-grid align-items-center"
+                                 action="{% url "product:search_product_view" %}"
+                                 method="get">
+                              <input name="name" type="search" placeholder="عما تبحث" {% if request.GET.name %}value={{ request.GET.name }}{% endif %} id="example-search-input">
+                              <button type="submit" value="submit" id="search">
+                                 <span class="material-symbols-outlined">search</span>
+                              </button>
+                           </form>
+                        </div>
+                     </div>
+                  </nav>
+                  <div class="d-flex px-3 justify-content-start gap-3 top-nav-bar">
+                     {% for val,key in categories|base_category %}
+                        <a class="nav-link" href="{% url "product:product_by_category" key %}">{{ val }}</a>
+                     {% endfor %}
+                  </div>
+               </header>
+               <section>
+                  {% block content %}
+                  {% endblock content %}
+               </section>
+               <footer class="py-0 my-0">
+                  <ul class="nav justify-content-center border-bottom pb-1 mb-1">
+                     <li class="nav-item">
+                        <a href="{% url "main:index_view" %}" class="nav-link px-2">الرئيسية</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{% url "main:contactus_view" %}" class="nav-link px-2">اتصل بنا</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="{% url "main:about_view" %}" class="nav-link px-2">حول الموقع</a>
+                     </li>
+                  </ul>
+                  <p class="text-center">© 2024 متجر الحاسب, Inc</p>
+               </footer>
+            </main>
+            <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+            <script src="{% static "js/index.js" %}"></script>
+         </body>
+      </html>

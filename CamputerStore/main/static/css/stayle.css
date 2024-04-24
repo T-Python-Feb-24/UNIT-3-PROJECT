@@ -1,0 +1,40 @@
+@import url("base.css");
+
+@import url("product.css");
+
+@import url("contactus.css");
+
+@import url("cart.css");
+
+.direction-none {
+  direction: unset;
+}
+
+.index {
+  overflow-x: scroll;
+
+  a {
+    text-decoration: none;
+  }
+
+  span {
+    font-size: 1.5ch;
+  }
+
+  .card-product {
+    max-width: 15rem !important;
+    height: 26rem;
+    overflow-y: hidden;
+  }
+}
+
+.more-btn {
+  a {
+    color: var(--text);
+  }
+}
+
+/* banner */
+.carousel-item img {
+  height: 430px !important;
+}

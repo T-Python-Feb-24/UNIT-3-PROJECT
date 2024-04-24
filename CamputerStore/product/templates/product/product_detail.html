@@ -1,0 +1,140 @@
+{# djlint:off H023 H006 #}
+{% extends "main/base.html" %}
+{% load tags %}
+{% block title %}
+   {{ product.name }}
+{% endblock title %}
+{% block content %}
+   <div class="d-flex justify-content-between h-80 gap-2">
+      <h3>{{ product.category }}</h3>
+      <div class="d-flex">
+         {% if request.user.is_superuser or perms.product.change_product %}
+            <a href="{% url 'product:update_product_view' product.id %}"
+               class="btn btn-dark">update</a>
+         {% endif %}
+         {% if request.user.is_superuser or perms.product.delete_product %}
+            <button class="btn btn-danger" onclick="myconfirm()">Delete</button>
+            <a id="delete"
+               hidden
+               href="{% url 'product:delete_product_view' product.id %}"
+               class="btn btn-danger">Delete</a>
+         {% endif %}
+      </div>
+   </div>
+   <div class="product-detail-wrapper mb-4">
+      <div class="product_image_gallery me-4">
+         <div class="product-img">
+            <img src="{{ product.Images.first.image.url }}"
+                 alt="Product Image"
+                 class="product-main-img"
+                 data-index="1" />
+         </div>
+         <div class="product-thumbnail-container">
+            <div class="product-thumbnail active">
+               <img src="{{ product.Images.first.image.url }}"
+                    alt="thumbnail Image"
+                    data-index="1" />
+            </div>
+            {% for img in product.Images.all|slice:"1:" %}
+               <div class="product-thumbnail">
+                  <img src="{{ img.image.url }}" alt="thumbnail Image" data-index="2" />
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+      <div class="product-info">
+         <div class="product-title--items-wrap">
+            <h1 class="product-title-h1">
+               <span>{{ product.name }}</span>
+            </h1>
+            <div class="d-flex gap-5">
+               <div class="product-model-wrp">
+                  <span class="label">الموديل:</span>
+                  <span class="value">{{ product.model }}</span>
+               </div>
+               <div class="product-sku-wrp">
+                  <span class="label">كود التخزين:</span>
+                  <span class="value">{{ product.id }}</span>
+               </div>
+            </div>
+            <hr>
+            <!-- /.product-badges -->
+            <div class="product-additional-info">
+               <div class="warranty-informations">
+                  <ul>
+                     <li class="warranty-item">
+                        <div class="warranty clearfix">
+                           <div class="warranty-label">الضمان:</div>
+                           <!-- /.warranty-label -->
+                           <div class="no-ext-warranty">
+                              <strong>1 سنة</strong>
+                              &nbsp;&nbsp;<span>خدمة ضمان خالية من المتاعب مع تغطية عالمية تكاليف الشحن علينا.</span>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <!-- warranty-informations -->
+               <div class="product-brand-wishlist">
+                  <div class="product-wishlist-wrapper">
+                     <!-- /.product-wishlist -->
+                     <div class="d-block">
+                        <a href="{% url 'favorites:add_remove_favorites_view' product.id %}"
+                           {% if not request.user.is_authenticated %}data-bs-toggle="modal" data-bs-target="#favoriteModal"{% endif %}
+                           class="d-flex text-decoration-none text-color-inherit align-items-center">
+                           <i class="material-symbols-outlined fs-2 px-2
+                                     {% if is_favored %}fav{% endif %}">
+                              favorite
+                           </i>
+                           اضافة الى قائمة الرغبات
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="product-price">
+         <div class="product-price-wrapper">
+            <div class="discounts">
+               <div class="prices">
+                  <div class="product-main-price priceFormat">
+                     <span class="price-amount">{{ product.price }}</span><span class="price-symbol">ريال</span>
+                  </div>
+                  <!-- /.right -->
+               </div>
+            </div>
+            <hr>
+            <div class="instock-lable">
+               {% if product.in_stock > 0 %}
+                  <span class="text-success">متوفر</span>
+               {% else %}
+                  <span class="text-danger ">غير متوفر</span>
+               {% endif %}
+            </div>
+            <form action="{% url "product:product_detail_view" product.id %}"
+                  method="post">
+               {% csrf_token %}
+               {% if msg %}
+                  <div class="d-flex w-100 justify-content-center">
+                     <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <span class="px-3 text-danger-emphasis">{{ msg }}</span>
+                     </div>
+                  </div>
+               {% endif %}
+               <div class="d-flex add-btn">
+                  <select name="quantity" tabindex="-1" aria-hidden="true">
+                     {% for i in in_stock|range:product.in_stock %}
+                        <option value="{{ i }}" {% if i == 1 %}selected{% endif %}>{{ i }}</option>
+                     {% endfor %}
+                  </select>
+                  <!-- /.quantity-selector -->
+                  <button type="submit"
+                          class="product-btn-add-to-cart"
+                          {% if not product.in_stock > 0 %}disabled{% endif %}></button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+{% endblock content %}

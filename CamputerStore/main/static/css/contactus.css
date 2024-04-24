@@ -1,0 +1,39 @@
+.contactus {
+  width: 40%;
+
+  h1 {
+    padding-right: 2rem;
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.contact-table {
+
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  background-color: var(--dark-theme-card);
+  border-spacing: 0;
+  border-radius: 20px;
+  border-collapse: collapse;
+  outline: 0;
+
+  tr:first-child td {
+    border-top: none;
+  }
+
+
+  td {
+    border-color: var(--border-color-primary);
+    padding: 40px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+  }
+}

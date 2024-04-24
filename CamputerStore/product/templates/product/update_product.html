@@ -1,0 +1,81 @@
+{# djlint:off H023 H006 #}
+{% extends "main/base.html" %}
+{% load tags %}
+{% block title %}
+   تعديل المنتج
+{% endblock title %}
+{% block content %}
+   <div class="d-flex mb-5 justify-content-center">
+      <div class="signup w-50">
+         <h1 class="text-center text-end pt-4">اضف منتج</h1>
+         {% if msg %}
+            <svg xmlns="http://www.w3.org/2000/svg" class="d-none h-100">
+               <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+               <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+               </symbol>
+            </svg>
+            <div class="d-flex w-100 justify-content-center myalart">
+               <div class="alert alert-danger d-flex align-items-center w-75"
+                    role="alert">
+                  <svg class="bi flex-shrink-0 me-2 danger-svg"
+                       role="img"
+                       aria-label="Danger:">
+                     <use xlink:href="#exclamation-triangle-fill" />
+                  </svg>
+                  <span class="px-3 text-danger-emphasis">{{ msg }}</span>
+               </div>
+            </div>
+         {% endif %}
+         <div class="form-grid">
+            <form action="{% url 'product:add_product_view' %}"
+                  method="post"
+                  class="d-flex flex-column gap-2 w-75"
+                  enctype="multipart/form-data">
+               {% csrf_token %}
+               <label class="form-label mb-0 ms-1 mt-2">اسم المنتج</label>
+               <input name="name"
+                      class="form-control"
+                      type="text"
+                      minlength="3"
+                      required
+                      value="{{ product.name }}" />
+               <label class="form-label mb-0 ms-1 mt-2">الموديل</label>
+               <input name="model"
+                      class="form-control"
+                      type="text"
+                      required
+                      value="{{ product.model }}" />
+               <label class="form-label mb-0 ms-1 mt-2">السعر</label>
+               <input name="price"
+                      class="form-control"
+                      type="text"
+                      required
+                      value="{{ product.price }}" />
+               <label class="form-label mb-0 ms-1 mt-2">الموجود في المخزن</label>
+               <input name="in_stock"
+                      class="form-control"
+                      type="text"
+                      required
+                      value="{{ product.in_stock }}" />
+               <label class="form-label mb-0 ms-1 mt-2">نوع المنتج</label>
+               <select name="category" id="category" class="form-select">
+                  {% for val,key in categories %}
+                     <option value="{{ key }}" {% if key == product.category %}selected{% endif %}>{{ val }}</option>
+                  {% endfor %}
+               </select>
+               <label class="form-label mb-0 ms-1 mt-2">رفع صور للمنتج</label>
+               <div class="d-flex">
+                  {% for img in product.Images.all %}<img src="{{ img.image.url }}" height="80px" width="80px" alt="">{% endfor %}
+               </div>
+               <input name="images"
+                      type="file"
+                      accept="image/png,image/jpg,image/jpeg"
+                      class="form-control"
+                      multiple
+                      required />
+               <input type="submit" class="btn btn-dark mt-3" value="تعديل" />
+            </form>
+         </div>
+      </div>
+   </div>
+{% endblock content %}

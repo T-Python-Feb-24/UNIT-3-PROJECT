@@ -1,0 +1,28 @@
+{# djlint:off H023 #}
+{% extends "main/base.html" %}
+{% load tags %}
+{% block title %}
+   Search Plant
+{% endblock title %}
+{% block content %}
+   <div class="cards">
+      {% for product in products %}
+         <a href="{% url "product:product_detail_view" product.id %}">
+            <div class="card card-product">
+               <div class="product-card-img">
+                  <img src="{{ product.Images.first.image.url }}"
+                       class="card-img-top"
+                       height="100%"
+                       width="100%"
+                       alt="{{ product.Images.first.image.name|image_name }}">
+               </div>
+               <div class="card-body">
+                  <div class="product-card-info">
+                     <span>{{ product.name }}</span>
+                  </div>
+               </div>
+            </div>
+         </a>
+      {% endfor %}
+   </div>
+{% endblock content %}

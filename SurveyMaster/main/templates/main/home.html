@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<div class="home-content text-center">
+    <div class="jumbotron p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div class="col-md-6 px-0 mx-auto">
+            <h1 class="display-4 font-italic">Welcome to SurveyMaster</h1>
+            <p class="lead my-3">Your go-to platform for creating and participating in surveys. Navigate to <a href="{% url 'main:survey_list' %}" class="survey-link text-light">Surveys</a> to view available surveys.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-lg-4 mb-4 d-flex">
+                <div class="info-section p-4 bg-light border rounded flex-fill d-flex flex-column">
+                    <h5 class="section-title">Participate in Surveys</h5>
+                    <p class="flex-grow-1">Browse through a variety of surveys and share your opinions on different topics.</p>
+                    <a href="{% url 'main:survey_list' %}" class="btn btn-primary mt-auto align-self-start">View Surveys</a>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4 d-flex">
+                <div class="info-section p-4 bg-light border rounded flex-fill d-flex flex-column">
+                    <h5 class="section-title">Create Your Own Surveys</h5>
+                    <p class="flex-grow-1">Want to gather data? Create your own surveys and reach out to people.</p>
+                    <a href="{% url 'main:create_survey' %}" class="btn btn-primary mt-auto align-self-start">Create Survey</a>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4 d-flex">
+                <div class="info-section p-4 bg-light border rounded flex-fill d-flex flex-column">
+                    <h5 class="section-title">Learn More About Us</h5>
+                    <p class="flex-grow-1">Discover more about our mission, values, and the team behind SurveyMaster.</p>
+                    <a href="{% url 'main:learn_more' %}" class="btn btn-primary mt-auto align-self-start">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
